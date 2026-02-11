@@ -1,0 +1,18 @@
+{
+  "leadCreate": [
+    {
+      "firstName": "John",
+      "lastName": "Doe",
+      "company": "Acme Inc",
+      "email": "john.doe@example.com",
+      "phone": "1234567890"
+    }
+  ],
+  "leadConvert": [
+    {
+      "leadName": "John Doe",
+      "accountName": "Acme Inc",
+      "opportunityName": "Acme Opportunity"
+    }
+  ]
+}
