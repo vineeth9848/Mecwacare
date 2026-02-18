@@ -1,0 +1,8 @@
+{
+  "objects": [
+    "Planner",
+    "Accounts",
+    "Leads",
+    "Opportunities"
+  ]
+}

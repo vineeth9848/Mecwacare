@@ -27,7 +27,7 @@ switch (rawBrowser) {
 export default defineConfig({
   testDir: './tests',
   timeout: 60000,
-  retries: 1,
+  retries: 0,
   workers: 1,
   reporter: [
     ['html', { outputFolder: 'reports/playwright-html', open: 'never' }],
