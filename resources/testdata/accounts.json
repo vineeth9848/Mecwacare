@@ -1,0 +1,14 @@
+{
+  "accountCreate": [
+    {
+      "firstName": "John",
+      "lastName": "Doe",
+      "phone": "9876543210",
+      "dob": "01/01/1990",
+      "categoryOption": "Individual",
+      "serviceDelivery": "80 Almond",
+      "email": "john.doe@example.com",
+      "successMessage": "Account created successfully"
+    }
+  ]
+}

@@ -3,9 +3,18 @@
     {
       "firstName": "John",
       "lastName": "Doe",
-      "company": "Acme Inc",
+      "dob": "01/01/1990",
+      "leadSource": "Website",
+      "serviceRequest": "Home Care",
+      "additionalInfo": "Automation lead creation",
       "email": "john.doe@example.com",
-      "phone": "1234567890"
+      "phone": "1234567890",
+      "leadScore": "Warm",
+      "searchAddress": "80 Almond",
+      "leadOption": "Medium",
+      "serviceOption": "Home Care",
+      "verifySearchAddress": "80 A'beckett",
+      "verifyExpectedAddress": "A'beckett"
     }
   ],
   "leadConvert": [
