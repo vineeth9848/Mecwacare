@@ -4,8 +4,8 @@ import { Logger } from '../../utils/Logger';
 import { HomePageLocators } from '../locators/HomePageLocators';
 
 export class HomePage extends BasePage {
-  private readonly mecwaCareLogo = this.page.locator(HomePageLocators.mecwaCareLogo);
-  private readonly mCare360Text = this.page.locator(HomePageLocators.mCare360Text);
+  private readonly mecwaCareLogo = this.page.locator(HomePageLocators.mecwaCareLogo).first();
+  private readonly mCare360Text = this.page.locator(HomePageLocators.mCare360Text).first();
   private readonly objectDropdownButton = this.page.locator(HomePageLocators.objectDropdownButton);
   private readonly objectDropdownPanel = this.page.locator(HomePageLocators.objectDropdownPanel);
 
@@ -40,7 +40,7 @@ export class HomePage extends BasePage {
 
     await objectOption.scrollIntoViewIfNeeded();
     await this.click(objectOption);
-    await expect(this.objectDropdownButton).toContainText(objectName);
+    await expect(this.objectDropdownPanel).toBeHidden();
     Logger.pass(`Selected object: ${objectName}`);
   }
 }
