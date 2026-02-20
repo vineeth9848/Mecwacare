@@ -28,6 +28,7 @@ export default defineConfig({
   testDir: './tests',
   timeout: 60000,
   retries: 0,
+  maxFailures: 1,
   workers: 1,
   reporter: [
     ['html', { outputFolder: 'reports/playwright-html', open: 'never' }],

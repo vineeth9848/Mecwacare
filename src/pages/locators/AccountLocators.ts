@@ -1,5 +1,5 @@
 export const AccountLocators = {
-  newButton: "button[name='New']",
+  newButton: "button[name='New'], a[title='New'], button:has-text('New')",
   saveButton: 'Save',
   successToast: '',
   detailsTab: "a[title='Details']",

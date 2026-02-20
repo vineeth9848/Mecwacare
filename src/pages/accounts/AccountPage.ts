@@ -12,8 +12,9 @@ export class AccountPage extends BasePage {
 
   async clickNewButton(): Promise<void> {
     Logger.step('Click New button in Accounts page');
-    await expect(this.newButton).toBeVisible();
-    await this.click(this.newButton);
+    await expect(this.page.getByText('Accounts', { exact: true }).first()).toBeVisible();
+    await expect(this.newButton.first()).toBeVisible();
+    await this.click(this.newButton.first());
     Logger.pass('Clicked New button in Accounts page');
   }
 
@@ -32,11 +33,11 @@ export class AccountPage extends BasePage {
   async createAccount(firstName: string, lastName: string, phone: string, dob: string, category_option: string, service_delivery: string, email: string, success_msg: string): Promise<void> {
       Logger.step('Create account');
       await this.page.waitForTimeout(10000);
-      await this.page.getByLabel(AccountLocators.first_name).fill(firstName);
+      await this.page.getByLabel(AccountLocators.first_name, { exact: true }).first().fill(firstName);
       
-      await this.page.getByLabel(AccountLocators.last_name).fill(lastName);
+      await this.page.getByLabel(AccountLocators.last_name, { exact: true }).first().fill(lastName);
 
-      const dobField = this.page.getByLabel(AccountLocators.dob);
+      const dobField = this.page.getByLabel(AccountLocators.dob, { exact: true }).first();
       await dobField.scrollIntoViewIfNeeded();
       await dobField.fill(dob);
       await dobField.press('Tab');
@@ -52,15 +53,15 @@ export class AccountPage extends BasePage {
       });
       await individualOption.click();
       
-      const emailField = this.page.getByLabel(AccountLocators.email);
+      const emailField = this.page.getByLabel(AccountLocators.email, { exact: true }).first();
       await emailField.scrollIntoViewIfNeeded();
       await emailField.fill(email);
 
-      await this.page.getByLabel(AccountLocators.phone)
+      await this.page.getByLabel(AccountLocators.phone, { exact: true }).first()
         .scrollIntoViewIfNeeded();
-      await this.page.getByLabel(AccountLocators.phone)
+      await this.page.getByLabel(AccountLocators.phone, { exact: true }).first()
         .fill(phone);
-      await this.page.getByLabel(AccountLocators.dob).fill(dob);
+      await this.page.getByLabel(AccountLocators.dob, { exact: true }).first().fill(dob);
 
       await this.searchServiceDeliveryAddress(service_delivery);
 
