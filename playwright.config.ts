@@ -5,23 +5,28 @@ const rawBrowser = (PropertyReader.getProperty('browser') || 'chromium').toLower
 
 let browserName: 'chromium' | 'firefox' | 'webkit' = 'chromium';
 let channel: 'chrome' | 'msedge' | undefined;
+let projectName: 'chromium' | 'firefox' | 'webkit' | 'chrome' | 'edge' = 'chromium';
 
 switch (rawBrowser) {
   case 'firefox':
   case 'webkit':
     browserName = rawBrowser;
+    projectName = rawBrowser;
     break;
   case 'chrome':
     browserName = 'chromium';
     channel = 'chrome';
+    projectName = 'chrome';
     break;
   case 'edge':
   case 'msedge':
     browserName = 'chromium';
     channel = 'msedge';
+    projectName = 'edge';
     break;
   default:
     browserName = 'chromium';
+    projectName = 'chromium';
 }
 
 export default defineConfig({
@@ -43,7 +48,7 @@ export default defineConfig({
   },
   projects: [
     {
-      name: rawBrowser,
+      name: projectName,
       use: {
         browserName,
         ...(channel ? { channel } : {}),
