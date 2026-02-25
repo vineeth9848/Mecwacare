@@ -4,3 +4,4 @@ reports/playwright-html/
 reports/junit/
 reports/allure-results/
 .env
+auth.json
