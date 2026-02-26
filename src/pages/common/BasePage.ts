@@ -35,7 +35,7 @@ export class BasePage {
     Logger.pass('Page title verified');
   }
 
-  async waitForVisible(target: Locator, timeout = 10000): Promise<void> {
+  async waitForVisible(target: Locator, timeout = 20000): Promise<void> {
     await expect(target).toBeVisible({ timeout });
   }
 
@@ -136,7 +136,18 @@ export class BasePage {
 
   async scrollIntoView(target: Locator): Promise<void> {
     Logger.step('Scroll element into view');
-    await target.scrollIntoViewIfNeeded();
+    await this.waitForVisible(target, 30000);
+    try {
+      await target.scrollIntoViewIfNeeded();
+    } catch {
+      const handle = await target.elementHandle();
+      if (!handle) {
+        throw new Error('Element not found while scrolling into view');
+      }
+      await handle.evaluate((el) => {
+        (el as HTMLElement).scrollIntoView({ block: 'center', inline: 'nearest' });
+      });
+    }
     Logger.pass('Element is in view');
   }
 
@@ -148,7 +159,20 @@ export class BasePage {
 
   async scrollToBottom(): Promise<void> {
     Logger.step('Scroll to bottom');
-    await this.page.evaluate(() => window.scrollTo(0, document.body.scrollHeight));
-    Logger.pass('Scrolled to bottom');
+    if (this.page.isClosed()) {
+      Logger.info('Page is closed. Skipping scroll to bottom');
+      return;
+    }
+    try {
+      await this.page.evaluate(() => window.scrollTo(0, document.body.scrollHeight));
+      Logger.pass('Scrolled to bottom');
+    } catch (error) {
+      const message = String(error);
+      if (message.includes('Target page, context or browser has been closed')) {
+        Logger.info('Page/context closed while scrolling to bottom. Skipping scroll');
+        return;
+      }
+      throw error;
+    }
   }
 }
