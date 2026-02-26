@@ -32,13 +32,14 @@ test('create lead from leads page', async ({ page }) => {
   );
 });
 
-test.only('verify lead validations', async ({ page }) => {
+test('verify lead validations', async ({ page }) => {
   const homePage = new HomePage(page);
   const leadPage = new LeadPage(page);
   const { leadCreate } = TestDataHelper.readJsonFile<{ leadCreate: Array<Record<string, string>> }>('leads.json');
   const lead = leadCreate[0];
 
   Logger.info('Starting lead validation test');
+  await leadPage.staticWait(10000);
   await leadPage.refreshPage();
   await homePage.verifyHomePage();
   await homePage.selectObjectFromDropdown('Leads');

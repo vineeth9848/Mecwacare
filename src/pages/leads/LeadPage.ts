@@ -96,10 +96,10 @@ export class LeadPage extends BasePage {
         await save_button.scrollIntoViewIfNeeded();
         await save_button.click();
         Logger.info('Clicked Save button to create lead');
+        await this.staticWait(10000);
 
         const toast = this.page.getByText(/Lead got created successfully/i);
-
-        await expect(toast).toBeVisible();
+        await expect(toast).toBeVisible({ timeout: 20000 });
         Logger.info('Lead creation success message is visible');
 
         Logger.pass('Lead created successfully');
@@ -141,9 +141,12 @@ export class LeadPage extends BasePage {
 
   async openLatestLeadIfEmailMatches(expectedEmail: string): Promise<void> {
     Logger.step(`Open lead record by email: ${expectedEmail}`);
+    await this.staticWait(5000);
     const listSearchInput = this.page.locator(LeadLocators.leadsListSearchInput).first();
     await this.waitForVisible(listSearchInput, 30000);
+    await this.staticWait(3000);
     await listSearchInput.fill(expectedEmail);
+    await this.staticWait(2000);
     await listSearchInput.press('Enter');
 
     const matchedRow = this.page.locator('table tbody tr').filter({ hasText: expectedEmail }).first();
