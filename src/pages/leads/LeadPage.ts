@@ -42,13 +42,27 @@ export class LeadPage extends BasePage {
         const leadSourceDropdown = this.page.getByRole('combobox', {
         name: LeadLocators.lead_source
         });
+        await leadSourceDropdown.scrollIntoViewIfNeeded();
+        await this.waitForVisible(leadSourceDropdown, 30000);
         await leadSourceDropdown.click();
+        await this.staticWait(1500);
         Logger.info(`Selected lead source dropdown`);
 
-        const leadSourceOption = this.page.getByRole('option', {
-          name: lead_source
-        });
-        await leadSourceOption.click();
+        const leadSourceOption = this.page.getByRole('option', { name: lead_source }).first();
+        const leadSourceFallbackOption = this.page
+          .locator('[role="listbox"] [role="option"], [role="listbox"] li')
+          .filter({ hasText: lead_source })
+          .first();
+
+        if (await leadSourceOption.isVisible().catch(() => false)) {
+          await leadSourceOption.scrollIntoViewIfNeeded().catch(() => {});
+          await leadSourceOption.click({ force: true });
+        } else {
+          await this.waitForVisible(leadSourceFallbackOption, 30000);
+          await leadSourceFallbackOption.scrollIntoViewIfNeeded().catch(() => {});
+          await leadSourceFallbackOption.click({ force: true });
+        }
+        await this.staticWait(1000);
         Logger.info(`Selected lead source option: ${lead_source}`);
         
         const emailField = this.page.locator(LeadLocators.leadEmailInput).first();
