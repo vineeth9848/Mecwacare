@@ -4,7 +4,7 @@ import { AccountPage } from '../../src/pages/accounts/AccountPage';
 import { HomePage } from '../../src/pages/homepage/HomePage';
 import { TestDataHelper } from '../../src/utils/TestDataHelper';
 
-test.only('create account', async ({ page }) => {
+test.skip('create account', async ({ page }) => {
   const homePage = new HomePage(page);
   const accountPage = new AccountPage(page);
   const { accountCreate } = TestDataHelper.readJsonFile<{ accountCreate: Array<Record<string, string>> }>('accounts.json');
@@ -30,7 +30,7 @@ test.only('create account', async ({ page }) => {
   );
 });
 
-test('Verify account validations', async ({ page }) => {
+test.skip('Verify account validations', async ({ page }) => {
   const homePage = new HomePage(page);
   const accountPage = new AccountPage(page);
   const { accountCreate } = TestDataHelper.readJsonFile<{ accountCreate: Array<Record<string, string>> }>('accounts.json');

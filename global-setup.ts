@@ -9,13 +9,26 @@ function getValue(envName: string, fallback?: string): string {
 }
 
 async function globalSetup(): Promise<void> {
-  if (existsSync('auth.json')) {
-    return;
-  }
-
   const loginUrl = getValue('SF_LOGIN_URL', PropertyReader.getBaseUrl());
   const username = getValue('SF_USERNAME', PropertyReader.getProperty('username'));
   const password = getValue('SF_PASSWORD', PropertyReader.getProperty('password'));
+
+  if (existsSync('auth.json')) {
+    const browser = await chromium.launch({ headless: false });
+    const context = await browser.newContext({ storageState: 'auth.json' });
+    const page = await context.newPage();
+
+    await page.goto(loginUrl, { waitUntil: 'domcontentloaded' });
+    const sessionIsValid = await page
+      .waitForURL(/(lightning\.force\.com|\/one\/one\.app)/, { timeout: 15000 })
+      .then(() => true)
+      .catch(() => false);
+
+    await browser.close();
+    if (sessionIsValid) {
+      return;
+    }
+  }
 
   const browser = await chromium.launch({ headless: false });
   const context = await browser.newContext();

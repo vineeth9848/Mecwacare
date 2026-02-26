@@ -5,14 +5,30 @@ class PropertyReader {
   private properties: Record<string, string> = {};
 
   constructor() {
-    const baseDir = process.cwd();
-    const commonConfigPath = path.join(baseDir, 'resources', 'config.properties');
-    this.loadFromFile(commonConfigPath);
+    const projectRoot = path.resolve(__dirname, '..', '..');
+    const cwd = process.cwd();
+
+    const commonConfigCandidates = [
+      path.join(cwd, 'resources', 'config.properties'),
+      path.join(cwd, 'MecwaCare_Automation', 'resources', 'config.properties'),
+      path.join(projectRoot, 'resources', 'config.properties'),
+    ];
+
+    for (const configPath of commonConfigCandidates) {
+      this.loadFromFile(configPath);
+    }
 
     const envName = (process.env.TEST_ENV || process.env.ENV || '').trim().toLowerCase();
     if (envName) {
-      const envConfigPath = path.join(baseDir, 'resources', 'configfiles', `${envName}.properties`);
-      this.loadFromFile(envConfigPath);
+      const envConfigCandidates = [
+        path.join(cwd, 'resources', 'configfiles', `${envName}.properties`),
+        path.join(cwd, 'MecwaCare_Automation', 'resources', 'configfiles', `${envName}.properties`),
+        path.join(projectRoot, 'resources', 'configfiles', `${envName}.properties`),
+      ];
+
+      for (const envConfigPath of envConfigCandidates) {
+        this.loadFromFile(envConfigPath);
+      }
     }
 
     if (!this.properties.baseurl) {

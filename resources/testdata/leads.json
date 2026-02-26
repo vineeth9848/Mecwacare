@@ -13,8 +13,8 @@
       "searchAddress": "80 Almond",
       "leadOption": "Medium",
       "serviceOption": "Home Care",
-      "verifySearchAddress": "80 A'beckett",
-      "verifyExpectedAddress": "A'beckett"
+      "verifySearchAddress": "80 Alma Rd CLAYFIELD",
+      "verifyExpectedAddress": "80 Alma Rd CLAYFIELD"
     }
   ],
   "leadConvert": [
