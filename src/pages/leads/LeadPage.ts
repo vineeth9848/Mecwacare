@@ -48,19 +48,36 @@ export class LeadPage extends BasePage {
         await this.staticWait(1500);
         Logger.info(`Selected lead source dropdown`);
 
-        const leadSourceOption = this.page.getByRole('option', { name: lead_source }).first();
-        const leadSourceFallbackOption = this.page
-          .locator('[role="listbox"] [role="option"], [role="listbox"] li')
+        const listboxId = await leadSourceDropdown.getAttribute('aria-controls');
+        let leadSourceOption = this.page.getByRole('option', { name: lead_source }).first();
+
+        if (listboxId) {
+          leadSourceOption = this.page
+            .locator(`#${listboxId} [role="option"], #${listboxId} li, #${listboxId} span[title]`)
+            .filter({ hasText: lead_source })
+            .first();
+        }
+
+        const optionVisible = await leadSourceOption.isVisible().catch(() => false);
+        if (!optionVisible) {
+          await leadSourceDropdown.type(lead_source, { delay: 40 }).catch(() => {});
+          await this.staticWait(1000);
+        }
+
+        const matchingOption = this.page
+          .locator('[role="listbox"] [role="option"], [role="listbox"] li, [role="listbox"] span[title]')
           .filter({ hasText: lead_source })
           .first();
 
-        if (await leadSourceOption.isVisible().catch(() => false)) {
+        if (await matchingOption.isVisible().catch(() => false)) {
+          await matchingOption.scrollIntoViewIfNeeded().catch(() => {});
+          await matchingOption.click({ force: true });
+        } else if (await leadSourceOption.isVisible().catch(() => false)) {
           await leadSourceOption.scrollIntoViewIfNeeded().catch(() => {});
           await leadSourceOption.click({ force: true });
         } else {
-          await this.waitForVisible(leadSourceFallbackOption, 30000);
-          await leadSourceFallbackOption.scrollIntoViewIfNeeded().catch(() => {});
-          await leadSourceFallbackOption.click({ force: true });
+          await leadSourceDropdown.press('ArrowDown');
+          await leadSourceDropdown.press('Enter');
         }
         await this.staticWait(1000);
         Logger.info(`Selected lead source option: ${lead_source}`);
@@ -512,8 +529,10 @@ export class LeadPage extends BasePage {
     await this.waitForVisible(targetDobField, 30000);
     await targetDobField.scrollIntoViewIfNeeded();
 
-    const [day, month, year] = dobValue.replace(/-/g, '/').split('/');
-    const normalizedDob = `${Number(day)}/${Number(month)}/${year}`;
+    const [rawDay, rawMonth, year] = dobValue.replace(/-/g, '/').split('/');
+    const day = rawDay.padStart(2, '0');
+    const month = rawMonth.padStart(2, '0');
+    const normalizedDob = `${day}/${month}/${year}`;
 
     const isAccepted = async (): Promise<boolean> => {
       const value = await targetDobField.inputValue().catch(() => '');
@@ -521,22 +540,30 @@ export class LeadPage extends BasePage {
       return value.includes(year) && !invalid;
     };
 
-    await targetDobField.click();
-    await targetDobField.fill('');
-    await targetDobField.type(normalizedDob, { delay: 40 });
+    await targetDobField.click({ clickCount: 3 });
+    await targetDobField.press('Control+A').catch(async () => {
+      await targetDobField.press('Meta+A');
+    });
+    await targetDobField.press('Backspace').catch(() => {});
+    await targetDobField.fill(normalizedDob);
     await targetDobField.press('Enter').catch(() => {});
     await targetDobField.press('Tab');
-    await this.page.waitForTimeout(600);
+    await this.page.waitForTimeout(1000);
     if (await isAccepted()) {
+      const ageInput = this.page.locator('input[aria-label="Age"]').first();
+      await ageInput.waitFor({ state: 'visible', timeout: 5000 }).catch(() => {});
       return;
     }
 
-    await targetDobField.click();
-    await targetDobField.fill('');
-    await targetDobField.type(dobValue, { delay: 40 });
+    await targetDobField.click({ clickCount: 3 });
+    await targetDobField.press('Control+A').catch(async () => {
+      await targetDobField.press('Meta+A');
+    });
+    await targetDobField.press('Backspace').catch(() => {});
+    await targetDobField.fill(dobValue.replace(/-/g, '/'));
     await targetDobField.press('Enter').catch(() => {});
     await targetDobField.press('Tab');
-    await this.page.waitForTimeout(600);
+    await this.page.waitForTimeout(1000);
     if (await isAccepted()) {
       return;
     }
