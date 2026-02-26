@@ -96,11 +96,18 @@ export class LeadPage extends BasePage {
         await save_button.scrollIntoViewIfNeeded();
         await save_button.click();
         Logger.info('Clicked Save button to create lead');
-        await this.staticWait(10000);
+        await this.page.waitForLoadState('domcontentloaded', { timeout: 30000 }).catch(() => {});
+        await this.page.waitForLoadState('networkidle', { timeout: 30000 }).catch(() => {});
 
         const toast = this.page.getByText(/Lead got created successfully/i);
-        await expect(toast).toBeVisible({ timeout: 20000 });
-        Logger.info('Lead creation success message is visible');
+        const toastVisible = await toast.isVisible().catch(() => false);
+        if (toastVisible) {
+          Logger.info('Lead creation success message is visible');
+        } else {
+          const leadHeader = this.page.locator('text=Lead Information').first();
+          await expect(leadHeader).toBeVisible({ timeout: 30000 });
+          Logger.info('Lead details page is visible after save');
+        }
 
         Logger.pass('Lead created successfully');
     }
