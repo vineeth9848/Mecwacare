@@ -32,14 +32,28 @@ export class HomePage extends BasePage {
 
   async selectObjectFromDropdown(objectName: string): Promise<void> {
     Logger.step(`Select object from dropdown: ${objectName}`);
-    await this.openObjectDropdown();
+    for (let attempt = 1; attempt <= 3; attempt++) {
+      await this.openObjectDropdown();
 
-    const objectOption = this.objectDropdownPanel.locator(
-      `xpath=.//*[normalize-space(text())='${objectName}']`,
-    );
+      const objectOption = this.objectDropdownPanel.locator(
+        `xpath=.//*[normalize-space(text())='${objectName}']`,
+      ).first();
 
-    await objectOption.scrollIntoViewIfNeeded();
-    await this.click(objectOption);
+      await objectOption.scrollIntoViewIfNeeded().catch(() => {});
+      try {
+        await objectOption.click();
+      } catch {
+        await objectOption.click({ force: true });
+      }
+
+      if (await this.objectDropdownPanel.isHidden().catch(() => false)) {
+        Logger.pass(`Selected object: ${objectName}`);
+        return;
+      }
+
+      Logger.info(`Retry object selection for ${objectName}. Attempt: ${attempt}`);
+    }
+
     await expect(this.objectDropdownPanel).toBeHidden();
     Logger.pass(`Selected object: ${objectName}`);
   }
