@@ -1,6 +1,7 @@
 export const serialTests = [
   'tests/ui/lead-create.spec.ts',
   'tests/ui/lead-convert.spec.ts',
+  'tests/ui/opportunity.spec.ts',
 ];
 
 export const parallelTests = [

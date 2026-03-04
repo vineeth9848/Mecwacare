@@ -1,5 +1,6 @@
 import { defineConfig } from '@playwright/test';
 import PropertyReader from './src/utils/PropertyReader';
+import { serialTests, parallelTests } from './test-groups';
 
 const rawBrowser = (PropertyReader.getProperty('browser') || 'chromium').toLowerCase();
 
@@ -35,9 +36,8 @@ export default defineConfig({
   timeout: 60000,
   retries: 0,
   maxFailures: 1,
-  workers: 1,
   reporter: [
-    ['html', { outputFolder: 'reports/playwright-html', open: 'never' }],
+    ['html', { outputFolder: 'playwright-report', open: 'never' }],
     ['junit', { outputFile: 'reports/junit/results.xml' }],
   ],
   use: {
@@ -50,7 +50,19 @@ export default defineConfig({
   },
   projects: [
     {
-      name: projectName,
+      name: `${projectName}-serial`,
+      testMatch: serialTests,
+      workers: 1,
+      fullyParallel: false,
+      use: {
+        browserName,
+        ...(channel ? { channel } : {}),
+      },
+    },
+    {
+      name: `${projectName}-parallel`,
+      testMatch: parallelTests,
+      fullyParallel: true,
       use: {
         browserName,
         ...(channel ? { channel } : {}),

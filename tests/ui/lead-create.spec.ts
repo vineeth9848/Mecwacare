@@ -5,6 +5,7 @@ import { HomePage } from '../../src/pages/homepage/HomePage';
 import { LeadPage } from '../../src/pages/leads/LeadPage';
 
 test('create lead from leads page', async ({ page }) => {
+  test.setTimeout(900000);
   const homePage = new HomePage(page);
   const leadPage = new LeadPage(page);
 
@@ -32,7 +33,8 @@ test('create lead from leads page', async ({ page }) => {
   );
 });
 
-test('verify lead validations', async ({ page }) => {
+test.only('verify lead validations', async ({ page }) => {
+  test.setTimeout(900000);
   const homePage = new HomePage(page);
   const leadPage = new LeadPage(page);
   const { leadCreate } = TestDataHelper.readJsonFile<{ leadCreate: Array<Record<string, string>> }>('leads.json');

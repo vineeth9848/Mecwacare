@@ -3,10 +3,9 @@ import { BasePage } from '../common/BasePage';
 import { Logger } from '../../utils/Logger';
 import { LeadLocators } from '../locators/LeadLocators';
 import PropertyReader from '../../utils/PropertyReader';
+import { HomePage } from '../homepage/HomePage';
 
 export class LeadPage extends BasePage {
-  private readonly newButton = this.page.locator(LeadLocators.newButton);
-
   constructor(page: Page) {
     super(page);
   }
@@ -14,8 +13,9 @@ export class LeadPage extends BasePage {
   async clickNewButton(): Promise<void> {
     Logger.step('Click New button in Leads page');
     await expect(this.page.locator(LeadLocators.leadsHeader).first()).toBeVisible();
-    await expect(this.newButton.first()).toBeVisible();
-    await this.click(this.newButton.first());
+    const newButton = this.page.getByRole('button', { name: 'New' }).first();
+    await this.waitForVisible(newButton, 30000);
+    await newButton.click({ force: true });
     Logger.pass('Clicked New button in Leads page');
   }
 
@@ -23,18 +23,19 @@ export class LeadPage extends BasePage {
         Logger.step('Create lead');
         await this.waitForVisible(this.page.locator(LeadLocators.createLeadTitle).first(), 20000);
 
-        const firstNameField = this.page.locator(LeadLocators.firstNameInput).first();
+        const firstNameField = this.page.getByRole('textbox', { name: 'First Name' }).first();
         await this.waitForVisible(firstNameField, 30000);
         await firstNameField.scrollIntoViewIfNeeded();
         await firstNameField.fill(firstName);
         Logger.info(`Filled first name: ${firstName}`);
         
-        const lastNameField = this.page.locator(LeadLocators.lastNameInput).first();
+        const lastNameField = this.page.getByRole('textbox', { name: 'Last Name' }).first();
         await this.waitForVisible(lastNameField, 30000);
-        await lastNameField.fill(lastName);
-        Logger.info(`Filled last name: ${lastName}`);
+        const lastNameWithRunNumber = this.buildLastNameWithRunNumber(lastName);
+        await lastNameField.fill(lastNameWithRunNumber);
+        Logger.info(`Filled last name: ${lastNameWithRunNumber}`);
 
-        const dobField = this.page.locator(LeadLocators.leadDobInput).first();
+        const dobField = this.page.getByRole('textbox', { name: /Date Of Birth|Date of Birth/i }).first();
         const targetDob = (dob || '01/01/2001').replace(/-/g, '/');
         await this.setDobValue(dobField, targetDob);
         Logger.info(`Filled DOB: ${targetDob}`);
@@ -65,7 +66,7 @@ export class LeadPage extends BasePage {
         }
 
         const matchingOption = this.page
-          .locator('[role="listbox"] [role="option"], [role="listbox"] li, [role="listbox"] span[title]')
+          .locator(LeadLocators.listboxOptionsWithTitle)
           .filter({ hasText: lead_source })
           .first();
 
@@ -82,12 +83,12 @@ export class LeadPage extends BasePage {
         await this.staticWait(1000);
         Logger.info(`Selected lead source option: ${lead_source}`);
         
-        const emailField = this.page.locator(LeadLocators.leadEmailInput).first();
+        const emailField = this.page.getByRole('textbox', { name: 'Email' }).first();
         await emailField.scrollIntoViewIfNeeded();
         await emailField.fill(this.buildEmailWithRunNumber(email));
         Logger.info(`Filled email: ${this.buildEmailWithRunNumber(email)}`);
 
-        const phoneField = this.page.locator(LeadLocators.leadPhoneInput).first();
+        const phoneField = this.page.getByRole('textbox', { name: 'Phone' }).first();
         await phoneField.scrollIntoViewIfNeeded();
         await phoneField.fill(phone);
         Logger.info(`Filled phone: ${phone}`);
@@ -135,7 +136,7 @@ export class LeadPage extends BasePage {
         if (toastVisible) {
           Logger.info('Lead creation success message is visible');
         } else {
-          const leadHeader = this.page.locator('text=Lead Information').first();
+          const leadHeader = this.page.locator(LeadLocators.leadInfoHeader).first();
           await expect(leadHeader).toBeVisible({ timeout: 30000 });
           Logger.info('Lead details page is visible after save');
         }
@@ -186,11 +187,16 @@ export class LeadPage extends BasePage {
     await listSearchInput.fill(expectedEmail);
     await this.staticWait(2000);
     await listSearchInput.press('Enter');
+    await this.staticWait(10000);
+    await listSearchInput.fill(expectedEmail);
+    await listSearchInput.press('Enter');
+    await this.staticWait(5000);
 
-    const matchedRow = this.page.locator('table tbody tr').filter({ hasText: expectedEmail }).first();
+    const matchedRow = this.page.locator(LeadLocators.leadTableRows).filter({ hasText: expectedEmail }).first();
     await this.waitForVisible(matchedRow, 30000);
+    Logger.pass('Lead created successfully - record is present in list');
 
-    const leadLink = matchedRow.locator('th a, a').first();
+    const leadLink = matchedRow.locator(LeadLocators.leadRowLink).first();
     await this.click(leadLink);
     await this.page.waitForURL(/\/Lead\//, { timeout: 30000 }).catch(() => {});
     Logger.pass('Lead record opened using email match');
@@ -198,21 +204,15 @@ export class LeadPage extends BasePage {
 
   async selectLeadsListView(viewName: string): Promise<void> {
     Logger.step(`Select leads list view: ${viewName}`);
-    const listViewPicker = this.page.locator(LeadLocators.leadsListViewPicker).first();
-    await this.waitForVisible(listViewPicker, 30000);
-    await listViewPicker.click({ force: true });
+    const listViewDropdown = this.page.getByRole('button', { name: /Select a List View/i });
+    await this.waitForVisible(listViewDropdown, 30000);
+    await listViewDropdown.click();
+    await this.page.waitForSelector('[role="listbox"]', { timeout: 30000 });
 
-    const viewOption = this.page
-      .locator('[role="listbox"] [role="option"], [role="listbox"] li')
-      .filter({ hasText: viewName })
-      .first();
+    const viewOption = this.page.getByRole('option', { name: viewName }).first();
     await this.waitForVisible(viewOption, 20000);
     await viewOption.scrollIntoViewIfNeeded().catch(() => {});
-    try {
-      await viewOption.click();
-    } catch {
-      await viewOption.click({ force: true });
-    }
+    await viewOption.click({ force: true });
 
     const selectedView = this.page.locator(`text=${viewName}`).first();
     await this.waitForVisible(selectedView, 20000);
@@ -221,39 +221,80 @@ export class LeadPage extends BasePage {
 
   async clickConvertButton(): Promise<void> {
     Logger.step('Click Convert button on lead record');
-    const convertButton = this.page.getByRole('button', { name: 'Convert', exact: true }).first();
-    await this.click(convertButton);
+    let convertButton = this.page.locator(LeadLocators.convertButtonPrimary).first();
+    if (!(await convertButton.isVisible().catch(() => false))) {
+      convertButton = this.page.locator(LeadLocators.convertButtonFallback).first();
+    }
+    await this.waitForVisible(convertButton, 30000);
+    await expect(convertButton).toBeEnabled({ timeout: 30000 });
+    await this.staticWait(300);
+    await convertButton.click({ force: true });
+    const convertPageMarker = this.page.getByRole('textbox', { name: 'First Name' }).first();
+    await this.waitForVisible(convertPageMarker, 30000);
     Logger.pass('Convert screen opened');
   }
 
-  async verifyConvertDataPopulated(firstName: string, lastName: string): Promise<void> {
+  async verifyConvertDataPopulated(expectedFirstName: string, expectedLastName: string, expectedOpportunityName: string): Promise<void> {
     Logger.step('Verify convert screen data is populated');
-    const firstNameInput = this.page.locator(LeadLocators.convertFirstNameInput).first();
-    const lastNameInput = this.page.locator(LeadLocators.convertLastNameInput).first();
-    const opportunityNameInput = this.page.locator(LeadLocators.convertOpportunityNameInput).first();
-
+    const firstNameInput = this.page.getByRole('textbox', { name: 'First Name' }).first();
+    const lastNameInput = this.page.getByRole('textbox', { name: 'Last Name' }).first();
     await this.waitForVisible(firstNameInput);
     await this.waitForVisible(lastNameInput);
-    await this.waitForVisible(opportunityNameInput);
 
     const firstNameValue = (await firstNameInput.inputValue()).trim();
     const lastNameValue = (await lastNameInput.inputValue()).trim();
-    const opportunityNameValue = (await opportunityNameInput.inputValue()).trim().toLowerCase();
+    const expectedLastNameWithRunNumber = this.buildLastNameWithRunNumber(expectedLastName);
+    const expectedOpportunityWithRunNumber = expectedOpportunityName.includes(expectedLastName)
+      ? expectedOpportunityName.replace(expectedLastName, expectedLastNameWithRunNumber)
+      : expectedOpportunityName;
+    const expectedOpportunityNormalized = expectedOpportunityWithRunNumber.replace(/-+$/g, '').trim();
+    const opportunityTitles = await this.page
+      .locator('div.createPanelCollapsed button[title]')
+      .evaluateAll((buttons) => buttons.map((button) => button.getAttribute('title') || '').filter(Boolean));
+    const opportunityNameValue =
+      opportunityTitles.find((title) => title.includes(expectedFirstName) && title.includes(expectedLastNameWithRunNumber)) || '';
 
-    expect(firstNameValue).not.toBe('');
-    expect(lastNameValue).not.toBe('');
-    expect(firstNameValue.toLowerCase()).toContain(firstName.toLowerCase());
-    expect(lastNameValue.toLowerCase()).toContain(lastName.toLowerCase());
-    expect(opportunityNameValue).toContain(firstName.toLowerCase());
-    expect(opportunityNameValue).toContain(lastName.toLowerCase());
+    expect(firstNameValue).toBe(expectedFirstName);
+    expect(lastNameValue).toBe(expectedLastNameWithRunNumber);
+    expect(opportunityNameValue.replace(/-+$/g, '').trim()).toBe(expectedOpportunityNormalized);
+    Logger.info(`Convert values -> First Name: ${firstNameValue}, Last Name: ${lastNameValue}, Opportunity: ${opportunityNameValue}`);
     Logger.pass('Convert screen values are populated correctly');
+
+    let bottomConvertButton = this.page
+      .locator(LeadLocators.modalContainer)
+      .getByRole('button', { name: 'Convert' })
+      .last();
+    if (!(await bottomConvertButton.isVisible().catch(() => false))) {
+      bottomConvertButton = this.page.getByRole('button', { name: 'Convert' }).last();
+    }
+    await this.waitForVisible(bottomConvertButton, 30000);
+    await expect(bottomConvertButton).toBeEnabled({ timeout: 30000 });
+    await bottomConvertButton.scrollIntoViewIfNeeded();
+    await bottomConvertButton.click({ force: true });
+    Logger.pass('Clicked bottom Convert button');
   }
 
-  async clickConvertAndVerifySuccess(): Promise<void> {
+  async clickConvertAndVerifySuccess(expectedFullName: string): Promise<void> {
     Logger.step('Click Convert and verify conversion success');
-    const convertConfirmButton = this.page.getByRole('button', { name: 'Convert', exact: true }).last();
-    await this.click(convertConfirmButton);
-    await expect(this.page.locator(LeadLocators.conversionSuccessMessage)).toBeVisible();
+    await this.staticWait(60000);
+    await this.page.waitForLoadState('domcontentloaded', { timeout: 60000 }).catch(() => {});
+
+    const conversionDialog = this.page.locator(LeadLocators.conversionDialog).last();
+    await expect(
+      conversionDialog.getByRole('heading', { name: /Your lead has been converted/i }),
+    ).toBeVisible({ timeout: 60000 });
+
+    await expect
+      .poll(async () => (await conversionDialog.innerText()).replace(/\s+/g, ' ').trim(), { timeout: 60000 })
+      .toContain('PERSON ACCOUNT');
+    await expect
+      .poll(async () => (await conversionDialog.innerText()).replace(/\s+/g, ' ').trim(), { timeout: 60000 })
+      .toContain('OPPORTUNITY');
+    await expect
+      .poll(async () => (await conversionDialog.innerText()).replace(/\s+/g, ' ').trim(), { timeout: 60000 })
+      .toContain(expectedFullName);
+
+    await conversionDialog.getByRole('button', { name: 'Go to Leads' }).click();
     Logger.pass('Lead conversion success message verified');
   }
 
@@ -264,14 +305,22 @@ export class LeadPage extends BasePage {
     Logger.pass('Navigated to Leads list');
   }
 
-  async verifyLeadNotPresentInList(leadName: string): Promise<void> {
-    Logger.step(`Verify converted lead is not present in Leads list: ${leadName}`);
-    const searchInput = this.page.locator(LeadLocators.leadsListSearchInput).first();
-    await this.waitForVisible(searchInput);
-    await searchInput.fill(leadName);
+  async verifyLeadNotPresentInList(leadEmail: string): Promise<void> {
+    const homePage = new HomePage(this.page);
+    Logger.step('Verify converted lead is not present in Leads list');
+    await homePage.selectObjectFromDropdown('Leads');
+    await this.selectLeadsListView("Today's Leads");
+    await this.staticWait(3000);
 
-    const leadLink = this.page.getByRole('link', { name: leadName, exact: true });
-    await expect(leadLink).toHaveCount(0);
+    const expectedEmail = this.getEmailWithRunNumber(leadEmail);
+    const searchInput = this.page.locator(LeadLocators.leadsListSearchInput).first();
+    await this.waitForVisible(searchInput, 30000);
+    await searchInput.fill(expectedEmail);
+    await searchInput.press('Enter');
+    await this.staticWait(3000);
+
+    const matchingRow = this.page.locator(LeadLocators.leadTableRows).filter({ hasText: expectedEmail });
+    await expect(matchingRow).toHaveCount(0);
     Logger.pass('Converted lead is not present in Leads list');
   }
 
@@ -315,7 +364,7 @@ export class LeadPage extends BasePage {
     const currentYear = new Date().getFullYear();
     const expectedAge = currentYear - enteredYear;
 
-    const ageInput = this.page.locator('input[aria-label="Age"]').first();
+    const ageInput = this.page.locator(LeadLocators.ageInput).first();
     let actualAge: number;
 
     if (await ageInput.isVisible().catch(() => false)) {
@@ -364,7 +413,7 @@ export class LeadPage extends BasePage {
     }
 
     const expected = expectedEmail.toLowerCase();
-    const pageText = (await this.page.locator('body').innerText()).toLowerCase();
+    const pageText = (await this.page.locator(LeadLocators.body).innerText()).toLowerCase();
     expect(pageText).toContain(expected);
 
     const emailMatch = pageText.match(/[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}/);
@@ -385,7 +434,7 @@ export class LeadPage extends BasePage {
     await this.page.waitForLoadState('domcontentloaded').catch(() => {});
     await this.page.waitForTimeout(1500);
 
-    await this.page.locator('text=Address Information').scrollIntoViewIfNeeded();
+    await this.page.locator(LeadLocators.addressInformationText).scrollIntoViewIfNeeded();
     const launchVerifyLink = this.page.locator(LeadLocators.launchAddressVerifyLink).first();
     await launchVerifyLink.waitFor({ state: 'visible', timeout: 60000 }).catch(() => {});
     const launchLinkVisible = await launchVerifyLink.isVisible().catch(() => false);
@@ -469,7 +518,7 @@ export class LeadPage extends BasePage {
     const verifyAndSaveButton = this.page.locator(LeadLocators.verifyAndSaveButton).first();
     await this.click(verifyAndSaveButton);
 
-    const saveToast = this.page.locator("text=Address verified and saved, text=Saved, [role='alert']").first();
+    const saveToast = this.page.locator(LeadLocators.saveToast).first();
     await saveToast.waitFor({ state: 'visible', timeout: 15000 }).catch(() => {});
 
     await searchInput.waitFor({ state: 'hidden', timeout: 30000 }).catch(() => {});
@@ -484,7 +533,7 @@ export class LeadPage extends BasePage {
       await detailsTabAfterSave.click();
     }
 
-    const addressSection = this.page.locator('text=Address Information').first();
+    const addressSection = this.page.locator(LeadLocators.addressInformationText).first();
     await addressSection.waitFor({ state: 'visible', timeout: 30000 });
     await addressSection.scrollIntoViewIfNeeded();
 
@@ -518,9 +567,14 @@ export class LeadPage extends BasePage {
     return this.buildEmailWithRunNumber(email);
   }
 
+  private buildLastNameWithRunNumber(lastName: string): string {
+    const runNumber = PropertyReader.getRunNumber(1);
+    return `${lastName}${runNumber}`;
+  }
+
   private async setDobValue(dobField: Locator, dobValue: string): Promise<void> {
     let targetDobField = this.page
-      .locator('input[aria-label="Date Of Birth"]:visible, input[aria-label="Date of Birth"]:visible')
+      .locator(LeadLocators.dobInputVisible)
       .first();
     if (!(await targetDobField.isVisible().catch(() => false))) {
       targetDobField = dobField.first();
@@ -550,7 +604,7 @@ export class LeadPage extends BasePage {
     await targetDobField.press('Tab');
     await this.page.waitForTimeout(1000);
     if (await isAccepted()) {
-      const ageInput = this.page.locator('input[aria-label="Age"]').first();
+      const ageInput = this.page.locator(LeadLocators.ageInput).first();
       await ageInput.waitFor({ state: 'visible', timeout: 5000 }).catch(() => {});
       return;
     }

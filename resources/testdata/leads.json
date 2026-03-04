@@ -19,9 +19,9 @@
   ],
   "leadConvert": [
     {
-      "leadName": "John Doe",
-      "accountName": "Acme Inc",
-      "opportunityName": "Acme Opportunity"
+      "expectedFirstName": "John",
+      "expectedLastName": "Doe",
+      "expectedOpportunityName": "John Doe-"
     }
   ]
 }

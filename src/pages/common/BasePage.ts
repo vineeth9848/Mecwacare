@@ -36,7 +36,18 @@ export class BasePage {
   }
 
   async waitForVisible(target: Locator, timeout = 20000): Promise<void> {
-    await expect(target).toBeVisible({ timeout });
+    if (this.page.isClosed()) {
+      throw new Error('Page is already closed before waiting for element visibility');
+    }
+    try {
+      await expect(target).toBeVisible({ timeout });
+    } catch (error) {
+      const message = String(error);
+      if (message.includes('Target page, context or browser has been closed')) {
+        throw new Error('Page got closed while waiting for element visibility');
+      }
+      throw error;
+    }
   }
 
   async click(target: Locator): Promise<void> {

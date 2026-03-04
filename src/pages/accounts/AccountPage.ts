@@ -4,8 +4,6 @@ import { Logger } from '../../utils/Logger';
 import { AccountLocators } from '../locators/AccountLocators';
 
 export class AccountPage extends BasePage {
-  private readonly newButton = this.page.locator(AccountLocators.newButton);
-
   constructor(page: Page) {
     super(page);
   }
@@ -13,8 +11,9 @@ export class AccountPage extends BasePage {
   async clickNewButton(): Promise<void> {
     Logger.step('Click New button in Accounts page');
     await expect(this.page.getByText('Accounts', { exact: true }).first()).toBeVisible();
-    await expect(this.newButton.first()).toBeVisible();
-    await this.click(this.newButton.first());
+    const newButton = this.page.getByRole('button', { name: 'New' }).first();
+    await this.waitForVisible(newButton, 30000);
+    await newButton.click({ force: true });
     Logger.pass('Clicked New button in Accounts page');
   }
 

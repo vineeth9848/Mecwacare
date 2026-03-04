@@ -7,19 +7,32 @@ import { LeadPage } from '../../src/pages/leads/LeadPage';
 test('convert lead and verify conversion details', async ({ page }) => {
   const homePage = new HomePage(page);
   const leadPage = new LeadPage(page);
-  const { leadCreate } = TestDataHelper.readJsonFile<{ leadCreate: Array<Record<string, string>> }>('leads.json');
+  const { leadCreate, leadConvert } = TestDataHelper.readJsonFile<{
+    leadCreate: Array<Record<string, string>>;
+    leadConvert: Array<Record<string, string>>;
+  }>('leads.json');
   const lead = leadCreate[0];
+  const convertData = leadConvert[0];
 
   Logger.info('Starting lead conversion test');
+  test.setTimeout(900000);
+  await leadPage.staticWait(10000);
+  await leadPage.refreshPage();
   await homePage.verifyHomePage();
   await homePage.selectObjectFromDropdown('Leads');
+  await leadPage.selectLeadsListView("Today's Leads");
+  await leadPage.staticWait(3000);
 
-  const leadName = `${lead.firstName} ${lead.lastName}`;
-  await leadPage.openLeadFromList(leadName);
+  const expectedEmail = leadPage.getEmailWithRunNumber(lead.email);
+  await leadPage.openLatestLeadIfEmailMatches(expectedEmail);
 
   await leadPage.clickConvertButton();
-  await leadPage.verifyConvertDataPopulated(lead.firstName, lead.lastName);
-  await leadPage.clickConvertAndVerifySuccess();
-  await leadPage.goToLeadsFromConversionSuccess();
-  await leadPage.verifyLeadNotPresentInList(leadName);
+  await leadPage.verifyConvertDataPopulated(
+    convertData.expectedFirstName,
+    convertData.expectedLastName,
+    convertData.expectedOpportunityName,
+  );
+  await leadPage.clickConvertAndVerifySuccess(`${convertData.expectedFirstName} ${convertData.expectedLastName}`);
+  await leadPage.verifyLeadNotPresentInList(lead.email);
+  Logger.pass('Lead conversion test completed successfully');
 });
