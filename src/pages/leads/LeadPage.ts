@@ -133,13 +133,14 @@ export class LeadPage extends BasePage {
 
         const toast = this.page.getByText(/Lead got created successfully/i);
         const toastVisible = await toast.isVisible().catch(() => false);
+        const expectedEmail = this.buildEmailWithRunNumber(email);
+        const emailOnDetails = this.page.locator(`(//a[contains(text(),'${expectedEmail}')])[2]`);
+
         if (toastVisible) {
           Logger.info('Lead creation success message is visible');
-        } else {
-          const leadHeader = this.page.locator(LeadLocators.leadInfoHeader).first();
-          await expect(leadHeader).toBeVisible({ timeout: 30000 });
-          Logger.info('Lead details page is visible after save');
         }
+        await expect(emailOnDetails).toBeVisible({ timeout: 50000 });
+        Logger.info(`Lead details page email is visible: ${expectedEmail}`);
 
         Logger.pass('Lead created successfully');
     }
@@ -322,39 +323,6 @@ export class LeadPage extends BasePage {
     const matchingRow = this.page.locator(LeadLocators.leadTableRows).filter({ hasText: expectedEmail });
     await expect(matchingRow).toHaveCount(0);
     Logger.pass('Converted lead is not present in Leads list');
-  }
-
-  async verifyDobValue(expectedDob: string): Promise<void> {
-    Logger.step('Verify DOB value in lead details');
-    await this.scrollToTop();
-    const detailsTab = this.page.locator(LeadLocators.detailsTab).first();
-    if (await detailsTab.isVisible().catch(() => false)) {
-      await this.click(detailsTab);
-    }
-    const dobRow = this.page.locator(LeadLocators.dobRow).first();
-    await this.scrollIntoView(dobRow);
-    const dobValueLocator = this.page.locator(LeadLocators.dobValue).first();
-    const dobValueText = (await dobValueLocator.innerText().catch(() => '')).trim();
-    const dobRowText = (await dobRow.innerText()).trim();
-    const combinedDobText = `${dobValueText} ${dobRowText}`.replace(/\s+/g, ' ').trim();
-    const normalizedExpected = expectedDob.replace(/-/g, '/');
-    const [day, month, year] = normalizedExpected.split('/');
-    const dayValue = String(Number(day));
-    const monthValue = String(Number(month));
-    const expectedYear = year;
-
-    expect(combinedDobText).toContain(expectedYear);
-
-    const numericDateMatch = combinedDobText.match(/(\d{1,2}[\/-]\d{1,2}[\/-]\d{4})/);
-    if (numericDateMatch) {
-      const actualDob = numericDateMatch[1].replace(/-/g, '/');
-      const normalizedDob = `${dayValue}/${monthValue}/${expectedYear}`;
-      expect(actualDob).toContain(normalizedDob);
-      Logger.pass(`DOB verified. Expected: ${normalizedDob}, Actual: ${actualDob}`);
-      return;
-    }
-
-    Logger.pass(`DOB year verified in details: ${expectedYear}`);
   }
 
   async verifyAgeValueFromDob(dob: string): Promise<void> {
