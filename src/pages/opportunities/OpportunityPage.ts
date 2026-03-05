@@ -50,12 +50,12 @@ export class OpportunityPage extends BasePage {
           .filter({ hasText: new RegExp(`^\\s*${optionText}\\s*$`, 'i') })
           .first()
       : this.page
-          .locator("[role='listbox'] [role='option'], [role='listbox'] li, [role='listbox'] span[title]")
+          .locator(OpportunityLocators.listboxOptions)
           .filter({ hasText: new RegExp(`^\\s*${optionText}\\s*$`, 'i') })
           .first();
 
     const optionInAnyListbox = this.page
-      .locator("[role='listbox'] [role='option'], [role='listbox'] li, [role='listbox'] span[title]")
+      .locator(OpportunityLocators.listboxOptions)
       .filter({ hasText: new RegExp(`^\\s*${optionText}\\s*$`, 'i') })
       .first();
 
@@ -148,7 +148,7 @@ export class OpportunityPage extends BasePage {
     await this.staticWait(1500);
 
     const fundingSourceLabelVisible = await this.page
-      .locator("span.test-id__field-label:has-text('Funding Source'):visible")
+      .locator(OpportunityLocators.fundingSourceVisibleLabel)
       .first()
       .isVisible()
       .catch(() => false);
@@ -161,7 +161,7 @@ export class OpportunityPage extends BasePage {
     const detailsTabCandidates = [
       this.page.getByRole('tab', { name: 'Details' }).first(),
       this.page.getByRole('link', { name: 'Details' }).first(),
-      this.page.locator("a[title='Details']").first(),
+      this.page.locator(OpportunityLocators.detailsTabByTitle).first(),
     ];
 
     for (const tab of detailsTabCandidates) {
@@ -180,14 +180,14 @@ export class OpportunityPage extends BasePage {
     Logger.step('Update Funding Source to Support at Home');
 
     const fundingDetailsSection = this.page
-      .locator("button:has-text('Funding Details'):visible, span[title='Funding Details']:visible")
+      .locator(OpportunityLocators.fundingDetailsSection)
       .first();
     await this.waitForVisible(fundingDetailsSection, 30000);
     await fundingDetailsSection.scrollIntoViewIfNeeded();
     await this.staticWait(1000);
 
     const fundingSourceLabelCandidates = this.page
-      .locator('span.test-id__field-label')
+      .locator(OpportunityLocators.fundingSourceLabels)
       .filter({ hasText: /^Funding Source$/ });
 
     let visibleFundingSourceLabel: Locator | null = null;
@@ -207,7 +207,7 @@ export class OpportunityPage extends BasePage {
     await visibleFundingSourceLabel.scrollIntoViewIfNeeded();
 
     const fundingSourceEditButton = visibleFundingSourceLabel
-      .locator("xpath=ancestor::record_flexipage-record-field[1]//button[contains(@title,'Edit Funding Source')]")
+      .locator(OpportunityLocators.fundingSourceEditInField)
       .first();
     await this.waitForVisible(fundingSourceEditButton, 30000);
     await fundingSourceEditButton.click({ force: true });
@@ -236,7 +236,7 @@ export class OpportunityPage extends BasePage {
     }
 
     const matchingOption = this.page
-      .locator("[role='listbox'] [role='option'], [role='listbox'] li, [role='listbox'] span[title]")
+      .locator(OpportunityLocators.listboxOptions)
       .filter({ hasText: 'Support at Home' })
       .first();
 
@@ -251,8 +251,8 @@ export class OpportunityPage extends BasePage {
       await fundingSourceDropdown.press('Enter');
     }
 
-    const fundingTypeButton = this.page.locator("button[role='combobox'][aria-label*='Funding Type']").first();
-    const fundingTypeInput = this.page.locator("input[role='combobox'][aria-label*='Funding Type']").first();
+    const fundingTypeButton = this.page.locator(OpportunityLocators.fundingTypeComboboxButton).first();
+    const fundingTypeInput = this.page.locator(OpportunityLocators.fundingTypeComboboxInput).first();
     const fundingTypeButtonVisible = await fundingTypeButton.isVisible().catch(() => false);
 
     if (fundingTypeButtonVisible) {
@@ -282,12 +282,12 @@ export class OpportunityPage extends BasePage {
           .filter({ hasText: /^\s*New Funding\s*$/ })
           .first()
       : this.page
-          .locator("[role='listbox'] [role='option'], [role='listbox'] li, [role='listbox'] span[title]")
+          .locator(OpportunityLocators.listboxOptions)
           .filter({ hasText: /^\s*New Funding\s*$/ })
           .first();
 
     const newFundingRowGlobal = this.page
-      .locator("[role='listbox'] [role='option'], [role='listbox'] li, [role='listbox'] span[title]")
+      .locator(OpportunityLocators.listboxOptions)
       .filter({ hasText: /^\s*New Funding\s*$/ })
       .first();
 
@@ -313,7 +313,7 @@ export class OpportunityPage extends BasePage {
     const participantName = `${firstName} ${lastName}${runNumber}`;
 
     Logger.step(`Select participant in New Funding: ${participantName}`);
-    const participantInput = this.page.getByPlaceholder('Search Contacts...').first();
+    const participantInput = this.page.locator(OpportunityLocators.participantSearchInput).first();
     await this.waitForVisible(participantInput, 30000);
     await this.scrollIntoView(participantInput);
     await participantInput.fill(participantName);
@@ -323,12 +323,12 @@ export class OpportunityPage extends BasePage {
     await this.staticWait(1000);
 
     const anyListboxOption = this.page
-      .locator("[role='listbox'] [role='option'], [role='listbox'] li, [role='listbox'] span[title]")
+      .locator(OpportunityLocators.listboxOptions)
       .first();
     const optionsVisible = await anyListboxOption.isVisible().catch(() => false);
     if (!optionsVisible) {
       const searchIconButton = participantInput
-        .locator("xpath=ancestor::div[contains(@class,'slds-combobox')]//button[contains(@title,'Search') or contains(@aria-label,'Search')]")
+        .locator(OpportunityLocators.searchIconInCombobox)
         .first();
       if (await searchIconButton.isVisible().catch(() => false)) {
         await searchIconButton.click({ force: true });
@@ -337,7 +337,7 @@ export class OpportunityPage extends BasePage {
     }
 
     const showMoreResults = this.page
-      .locator("[role='listbox'] [role='option'], [role='listbox'] li")
+      .locator(OpportunityLocators.listboxOptions)
       .filter({ hasText: `Show more results for \"${participantName}\"` })
       .first();
 
@@ -348,17 +348,17 @@ export class OpportunityPage extends BasePage {
       const advancedSearchHeading = this.page.getByRole('heading', { name: 'Advanced Search' }).first();
       await expect(advancedSearchHeading).toBeVisible({ timeout: 30000 });
 
-      const advancedSearchParticipant = this.page.locator("input[aria-label='Participant']").first();
+      const advancedSearchParticipant = this.page.locator(OpportunityLocators.advancedSearchParticipantInput).first();
       await this.waitForVisible(advancedSearchParticipant, 30000);
       await advancedSearchParticipant.fill(participantName);
       await this.staticWait(1200);
 
-      const firstRadioLabel = this.page.locator('table tbody tr label.slds-radio__label').first();
+      const firstRadioLabel = this.page.locator(OpportunityLocators.advancedSearchFirstRowRadio).first();
       await this.waitForVisible(firstRadioLabel, 30000);
       await firstRadioLabel.click({ force: true });
 
       const selectButton = this.page
-        .locator("lightning-modal-footer button.slds-button_brand:has-text('Select'), button.slds-button_brand:has-text('Select')")
+        .locator(OpportunityLocators.advancedSearchSelectButton)
         .first();
       await this.waitForVisible(selectButton, 30000);
       await expect.poll(async () => selectButton.isEnabled(), { timeout: 30000 }).toBeTruthy();
@@ -374,7 +374,7 @@ export class OpportunityPage extends BasePage {
             .filter({ hasText: new RegExp(`^\\s*${escapedName}(\\s|$)`, 'i') })
             .first()
         : this.page
-            .locator("[role='listbox'] [role='option'], [role='listbox'] li")
+            .locator(OpportunityLocators.listboxOptions)
             .filter({ hasText: new RegExp(`^\\s*${escapedName}(\\s|$)`, 'i') })
             .first();
 
@@ -398,7 +398,7 @@ export class OpportunityPage extends BasePage {
 
   async selectNewFundingSourceAndTypeSupportAtHomeAndSave(): Promise<void> {
     Logger.step('Select New Funding Source as Support at Home');
-    const fundingSourceDropdown = this.page.locator("xpath=(//button[@aria-label='Funding Source'])[2]");
+    const fundingSourceDropdown = this.page.locator(OpportunityLocators.newFundingSourceDropdownInModal);
     await this.waitForVisible(fundingSourceDropdown, 30000);
     await fundingSourceDropdown.click({ force: true });
     const fundingSourceListboxId = await fundingSourceDropdown.getAttribute('aria-controls');
@@ -410,7 +410,7 @@ export class OpportunityPage extends BasePage {
           .filter({ hasText: /^Support at Home$/ })
           .first()
       : this.page
-          .locator("[role='listbox'] [data-value='Support at Home'], [role='listbox'] [role='option'], [role='listbox'] li")
+          .locator(OpportunityLocators.listboxOptions)
           .filter({ hasText: /^Support at Home$/ })
           .first();
     await this.waitForVisible(fundingSourceOption, 30000);
@@ -420,7 +420,7 @@ export class OpportunityPage extends BasePage {
     Logger.pass('New Funding Source selected as Support at Home');
 
     Logger.step('Select New Funding Type as Support at Home');
-    const fundingTypeDropdown = this.page.locator("xpath=(//button[@aria-label='Funding Type'])[2]");
+    const fundingTypeDropdown = this.page.locator(OpportunityLocators.newFundingTypeDropdownInModal);
     await this.waitForVisible(fundingTypeDropdown, 30000);
     await fundingTypeDropdown.click({ force: true });
     const fundingTypeListboxId = await fundingTypeDropdown.getAttribute('aria-controls');
@@ -432,7 +432,7 @@ export class OpportunityPage extends BasePage {
           .filter({ hasText: /^Support at Home$/ })
           .first()
       : this.page
-          .locator("[role='listbox'] [data-value='Support at Home'], [role='listbox'] [role='option'], [role='listbox'] li")
+          .locator(OpportunityLocators.listboxOptions)
           .filter({ hasText: /^Support at Home$/ })
           .first();
     await this.waitForVisible(fundingTypeOption, 30000);
@@ -442,7 +442,7 @@ export class OpportunityPage extends BasePage {
     Logger.pass('New Funding Type selected as Support at Home');
 
     Logger.step('Save New Funding');
-    const saveButton = this.page.locator("xpath=(//button[text()='Save'])[2]");
+    const saveButton = this.page.locator(OpportunityLocators.newFundingSaveButtonInModal);
     await this.waitForVisible(saveButton, 30000);
     await saveButton.click({ force: true });
     Logger.pass('New Funding saved');
@@ -451,15 +451,13 @@ export class OpportunityPage extends BasePage {
 
   async selectAssessmentVisitPreferenceInPerson(): Promise<void> {
     Logger.step('Select Assessment visit preference as In-Person');
-    const assessmentDropdown = this.page.locator(
-    "button[aria-label='Assessment visit preference?']"
-);
+    const assessmentDropdown = this.page.locator(OpportunityLocators.assessmentVisitPreferenceDropdownByAria);
 
     await assessmentDropdown.scrollIntoViewIfNeeded();
 
     await assessmentDropdown.click();
 
-    await this.page.getByText('In-Person', { exact: true }).click();
+    await this.page.getByText(OpportunityLocators.inPersonOptionText, { exact: true }).click();
 
     await this.page.waitForTimeout(5000);
 
@@ -470,15 +468,15 @@ export class OpportunityPage extends BasePage {
 
   async selectServiceAgreementStatus(): Promise<void> {
     Logger.step('Select Service Agreement Status as Active');
-    const serviceAgreementStatus = this.page.locator("button[aria-label='Service Agreement Status']");
+    const serviceAgreementStatus = this.page.locator(OpportunityLocators.serviceAgreementStatusDropdown);
     
     await serviceAgreementStatus.scrollIntoViewIfNeeded();
 
-    const serviceAgreementStatusDropdown = this.page.locator("button[aria-label='Service Agreement Status']");
+    const serviceAgreementStatusDropdown = this.page.locator(OpportunityLocators.serviceAgreementStatusDropdown);
     
     await serviceAgreementStatusDropdown.click();
 
-    await this.page.getByText('Signed', { exact: true }).click();
+    await this.page.getByText(OpportunityLocators.serviceAgreementSignedOptionText, { exact: true }).click();
 
     await this.page.waitForTimeout(5000);
 
@@ -488,15 +486,15 @@ export class OpportunityPage extends BasePage {
 
   async selectReferrerTypeFamilyViolencePrograms(): Promise<void> {
     Logger.step('Select Referrer Type as Family violence programs');
-    const referrerDetailsSection = this.page.locator("xpath=(//button[@aria-label='Referrer Type'])");
+    const referrerDetailsSection = this.page.locator(OpportunityLocators.referrerTypeDropdownByAria);
     
     await referrerDetailsSection.scrollIntoViewIfNeeded();
 
-    const referrerTypeDropdown = this.page.locator('xpath=(//button[@aria-label="Referrer Type"])');
+    const referrerTypeDropdown = this.page.locator(OpportunityLocators.referrerTypeDropdownByAria);
     
     await referrerTypeDropdown.click();
 
-    await this.page.getByText('Family violence programs', { exact: true }).click();
+    await this.page.getByText(OpportunityLocators.referrerTypeFamilyViolenceOptionText, { exact: true }).click();
 
     await this.page.waitForTimeout(5000);
 
@@ -506,30 +504,30 @@ export class OpportunityPage extends BasePage {
 
   async saveOpportunityDetails(): Promise<void> {
     Logger.step('Save opportunity details');
-    const saveButton = this.page.locator('xpath=(//button[text()="Save"])');
+    const saveButton = this.page.locator(OpportunityLocators.saveButtonByText);
     await this.waitForVisible(saveButton, 30000);
     await saveButton.scrollIntoViewIfNeeded();
     await saveButton.click();
-    await this.page.waitForTimeout(5000);
+    
     Logger.pass('Opportunity details saved');
   }
 
   async verifyQuoteNotGenerated(): Promise<void> {
     Logger.step('Verify the quote is not generated ');
-    const generateQuote = this.page.locator('xpath=(//button[text()="Generate Quote"])');
+    const generateQuote = this.page.locator(OpportunityLocators.generateQuoteButton);
     await this.waitForVisible(generateQuote, 30000);
     await generateQuote.scrollIntoViewIfNeeded();
     await generateQuote.click();
-    await this.page.waitForTimeout(5000);
+    
     Logger.pass('Generate Quote button clicked');
 
-    const QuoteText = this.page.locator('xpath=(//p[text()="Quote cannot be generated as no products available for this opportunity."])');
+    const QuoteText = this.page.locator(OpportunityLocators.quoteErrorText);
 
     await expect(QuoteText).toContainText('Quote cannot be generated as no products available for this opportunity.', { timeout: 30000 });
 
       Logger.pass('Verified that quote cannot be generated due to no products available');
 
-    const quoteCloseButton = this.page.locator('xpath=(//button[text()="Close"])');
+    const quoteCloseButton = this.page.locator(OpportunityLocators.closeButtonByText);
     await this.waitForVisible(quoteCloseButton, 30000);
     await quoteCloseButton.click();
     await this.page.waitForTimeout(5000);
@@ -540,7 +538,7 @@ export class OpportunityPage extends BasePage {
 
   async switchToRelatedTab(): Promise<void> {
     Logger.step('Select Switch to related tab');
-    const relatedTab = this.page.getByText('Related', { exact: true }).first();
+    const relatedTab = this.page.getByText(OpportunityLocators.relatedTabText, { exact: true }).first();
     await relatedTab.scrollIntoViewIfNeeded();
     await relatedTab.click();
     await this.page.waitForTimeout(5000);
@@ -550,12 +548,12 @@ export class OpportunityPage extends BasePage {
 
   async configurePriceBook(): Promise<void> {
     Logger.step('Select Choose Price Book');
-    const relatedTab = this.page.getByText('Choose Price Book', { exact: true }).first();
+    const relatedTab = this.page.getByText(OpportunityLocators.choosePriceBookText, { exact: true }).first();
     await relatedTab.scrollIntoViewIfNeeded();
     await relatedTab.click();
     await this.page.waitForTimeout(5000);
 
-    const enterPriceBook = this.page.locator('input[aria-label="Price Book"]');
+    const enterPriceBook = this.page.locator(OpportunityLocators.priceBookInput);
     await this.waitForVisible(enterPriceBook, 30000);
     await enterPriceBook.click();
     await enterPriceBook.press('Delete');

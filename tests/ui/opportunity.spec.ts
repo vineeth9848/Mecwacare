@@ -26,7 +26,6 @@ test('verify funding source and funding type in first opportunity record', async
   await opportunityPage.selectReferrerTypeFamilyViolencePrograms();
   await opportunityPage.saveOpportunityDetails();
   await opportunityPage.verifyQuoteNotGenerated();
-  await opportunityPage.switchToRelatedTab();
   Logger.pass('Opportunity funding validation test completed successfully');
 });
 
