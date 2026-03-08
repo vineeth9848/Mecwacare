@@ -546,6 +546,64 @@ export class OpportunityPage extends BasePage {
     Logger.pass('Switched to Related tab');
   }
 
+  async verifyProductsAndClickGenerateQuote(): Promise<void> {
+    Logger.step('Verify products section and click Generate Quote');
+
+    const productsHeader = this.page.locator(OpportunityLocators.productsHeader).first();
+    await this.scrollIntoView(productsHeader);
+
+    const productsCount = this.page.locator(OpportunityLocators.productsCount).filter({ hasText: '(1)' }).first();
+    await this.waitForVisible(productsCount, 30000);
+    await expect(productsCount).toContainText('(1)', { timeout: 30000 });
+
+    const productNameLink = this.page.locator(OpportunityLocators.productNameLink).filter({ hasText: 'Absorbent product' }).first();
+    await this.waitForVisible(productNameLink, 30000);
+    await expect(productNameLink).toContainText('Absorbent product', { timeout: 30000 });
+
+    Logger.pass('Verified products count and Absorbent product name');
+
+    //const generateQuoteButton = this.page.locator(OpportunityLocators.generateQuoteButton).first();
+    const generateQuoteButton = this.page.getByRole('button', { name: 'Generate Quote', exact: true }).first();
+    await this.scrollIntoView(generateQuoteButton);
+    await this.waitForVisible(generateQuoteButton, 30000);
+    await generateQuoteButton.click();
+
+    const generateQuoteDialogTitle = this.page.locator(OpportunityLocators.generateQuoteDialogTitle).last();
+    await this.waitForVisible(generateQuoteDialogTitle, 30000);
+
+    const generateQuoteDialogMessage = this.page.locator(OpportunityLocators.generateQuoteDialogMessage).first();
+    await this.waitForVisible(generateQuoteDialogMessage, 30000);
+    await expect(generateQuoteDialogMessage).toContainText('Please click on Generate button to generate the quote for this opportunity.', { timeout: 30000 });
+
+    const generateButton = this.page.locator(OpportunityLocators.generateQuoteDialogButton).first();
+    await this.waitForVisible(generateButton, 30000);
+    await generateButton.click();
+
+    Logger.pass('Generate Quote button clicked');
+  }
+
+  async verifyFilesGenerated(firstName: string, lastName: string): Promise<void> {
+    Logger.step('Verify generated files');
+
+    const runNumber = PropertyReader.getRunNumber(1);
+    const expectedFileText = `${firstName} ${lastName}${runNumber}`;
+
+    const filesHeaderWithCount = this.page.locator(OpportunityLocators.filesHeaderWithCount).first();
+    await this.scrollIntoView(filesHeaderWithCount);
+    await this.waitForVisible(filesHeaderWithCount, 30000);
+
+    const filesCountText = ((await filesHeaderWithCount.textContent()) || '').trim();
+    const countMatch = filesCountText.match(/\((\d+)\)/);
+    const countValue = Number(countMatch ? countMatch[1] : '0');
+    expect(countValue).toBeGreaterThan(0);
+
+    const fileNameLink = this.page.getByText(expectedFileText, { exact: false }).first();
+    await this.waitForVisible(fileNameLink, 30000);
+    await expect(fileNameLink).toContainText(expectedFileText, { timeout: 30000 });
+
+    Logger.pass(`Verified generated file: ${expectedFileText}`);
+  }
+
   async configurePriceBook(): Promise<void> {
     Logger.step('Select Choose Price Book');
     const relatedTab = this.page.getByText(OpportunityLocators.choosePriceBookText, { exact: true }).first();
@@ -554,17 +612,101 @@ export class OpportunityPage extends BasePage {
     await this.page.waitForTimeout(5000);
 
     const enterPriceBook = this.page.locator(OpportunityLocators.priceBookInput);
-    await this.waitForVisible(enterPriceBook, 30000);
+    await this.waitForVisible(enterPriceBook, 90000);
     await enterPriceBook.click();
     await enterPriceBook.press('Delete');
     await enterPriceBook.clear();
     await enterPriceBook.fill('Support At Home');
-    await this.page.waitForTimeout(5000);
-    await enterPriceBook.press('ArrowDown');
-    await enterPriceBook.press('Enter');
+
+    const option = this.page.getByText('Support At Home 2025/2026', { exact: true });
+    await option.waitFor();
+    await option.click();
     await this.page.getByRole('button', { name: 'Save' }).click();
     await this.page.waitForTimeout(5000);
 
     Logger.pass('Price Book configured Successfully');
   }
+
+  async configureProductManagement(): Promise<void> {
+    Logger.step('Select Product Management');
+    const productManagementButton = this.page.getByRole('button', { name: OpportunityLocators.productManagementText, exact: true }).first();
+    await productManagementButton.scrollIntoViewIfNeeded();
+    await productManagementButton.click();
+    await this.page.waitForTimeout(5000);
+
+    const addProductsButton = this.page.getByRole('button', { name: 'Add' });
+    await this.waitForVisible(addProductsButton, 90000);
+    await addProductsButton.click();
+    await this.page.waitForTimeout(5000);
+
+    const customPeriodOption = this.page.getByText('Custom', { exact: true });
+    await this.waitForVisible(customPeriodOption, 90000);
+    await customPeriodOption.click();
+    await this.page.waitForTimeout(5000);
+    
+    const endDateInput = this.page.getByLabel('End Date').first();
+    await this.waitForVisible(endDateInput, 90000);
+
+    const today = new Date();
+
+    today.setDate(today.getDate() + 10);
+
+    const formattedDate = today.toLocaleDateString('en-GB', {
+      day: 'numeric',
+      month: 'short',
+      year: 'numeric'
+    });
+
+    await endDateInput.click();
+    await endDateInput.press('Backspace');
+    await endDateInput.clear();
+    await endDateInput.fill('');
+    await endDateInput.fill(formattedDate);
+
+    const serviceDay = this.page.locator( "(//span[text()='Anytime'])[1]");
+    await this.waitForVisible(serviceDay, 90000);
+    await serviceDay.click();
+    await this.page.waitForTimeout(5000);
+
+    const availableFundingSection = this.page.locator(OpportunityLocators.availableFundingSection).first();
+    await this.waitForVisible(availableFundingSection, 90000);
+    await availableFundingSection.scrollIntoViewIfNeeded();
+
+    const supportItemsLabel = this.page.locator(OpportunityLocators.supportItemLabel).first();
+    await this.waitForVisible(supportItemsLabel, 90000);
+    await supportItemsLabel.scrollIntoViewIfNeeded();
+
+    const searchBox = this.page.locator(OpportunityLocators.searchSupportItemInput).first();
+    await this.waitForVisible(searchBox, 90000);
+    await searchBox.fill('Absorbent products, washable');
+    await this.staticWait(1500);
+
+    const firstCheckbox = this.page.locator(OpportunityLocators.availableFundingFirstRowCheckbox).first();
+    await this.waitForVisible(firstCheckbox, 90000);
+    await firstCheckbox.scrollIntoViewIfNeeded();
+    try {
+      await firstCheckbox.check({ force: true });
+    } catch {
+      const firstCheckboxLabel = this.page.locator(OpportunityLocators.availableFundingFirstRowCheckboxLabel).first();
+      if (await firstCheckboxLabel.isVisible().catch(() => false)) {
+        await firstCheckboxLabel.click({ force: true });
+      }
+      await firstCheckbox.evaluate((node) => {
+        const input = node as HTMLInputElement;
+        input.checked = true;
+        input.dispatchEvent(new Event('input', { bubbles: true }));
+        input.dispatchEvent(new Event('change', { bubbles: true }));
+      });
+    }
+    await expect(firstCheckbox).toBeChecked({ timeout: 30000 });
+
+    await this.page.getByRole('button', { name: 'Add' }).click();
+
+    const Submit = this.page.getByRole('button', { name: 'Submit' });
+    await Submit.scrollIntoViewIfNeeded();
+    await Submit.isVisible({ timeout: 30000 });
+    await Submit.click();
+    await this.page.waitForTimeout(5000);
+        Logger.pass('Product Management configured Successfully');
+      }
 }
