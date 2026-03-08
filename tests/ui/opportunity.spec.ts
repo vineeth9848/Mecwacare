@@ -43,4 +43,11 @@ test.only('verify Generate Quote functionality on Opportunity', async ({ page })
   await opportunityPage.searchAndOpenOpportunityByLeadName(lead.firstName, lead.lastName);
   await opportunityPage.switchToRelatedTab();
   await opportunityPage.configurePriceBook();
+  await opportunityPage.configureProductManagement();
+  await opportunityPage.refreshPage();
+  await opportunityPage.switchToRelatedTab();
+  await opportunityPage.verifyProductsAndClickGenerateQuote();
+  await opportunityPage.refreshPage();
+  await opportunityPage.switchToRelatedTab();
+  await opportunityPage.verifyFilesGenerated(lead.firstName, lead.lastName);
 });
