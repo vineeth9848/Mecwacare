@@ -16,7 +16,7 @@ test('convert lead and verify conversion details', async ({ page }) => {
 
   Logger.info('Starting lead conversion test');
   test.setTimeout(900000);
-  await leadPage.staticWait(10000);
+  //await leadPage.staticWait(10000);
   await leadPage.refreshPage();
   await homePage.verifyHomePage();
   await homePage.selectObjectFromDropdown('Leads');

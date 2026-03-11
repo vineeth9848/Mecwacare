@@ -48,9 +48,10 @@ test.only('verify lead validations', async ({ page }) => {
   await leadPage.selectLeadsListView("Today's Leads");
 
   const expectedEmail = leadPage.getEmailWithRunNumber(lead.email);
+  const birthYear = Number(lead.dob.split('/')[2]);
   await leadPage.openLatestLeadIfEmailMatches(expectedEmail);
   await leadPage.verifyEmailValue(expectedEmail);
-  await leadPage.verifyAgeValueFromDob(lead.dob);
+  await leadPage.verifyAgeValueFromYear(birthYear);
   const addressUpdated = await leadPage.updateAddressFromLaunchVerify(lead.verifySearchAddress);
   if (addressUpdated) {
     await leadPage.verifyAddressValue(lead.verifyExpectedAddress);

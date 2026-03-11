@@ -29,7 +29,7 @@ test('verify funding source and funding type in first opportunity record', async
   Logger.pass('Opportunity funding validation test completed successfully');
 });
 
-test.only('verify Generate Quote functionality on Opportunity', async ({ page }) => {
+test('verify Generate Quote functionality on Opportunity', async ({ page }) => {
   const homePage = new HomePage(page);
   const opportunityPage = new OpportunityPage(page);
   const { leadCreate } = TestDataHelper.readJsonFile<{ leadCreate: Array<Record<string, string>> }>('leads.json');
@@ -50,4 +50,29 @@ test.only('verify Generate Quote functionality on Opportunity', async ({ page })
   await opportunityPage.refreshPage();
   await opportunityPage.switchToRelatedTab();
   await opportunityPage.verifyFilesGenerated(lead.firstName, lead.lastName);
+});
+
+test.only('verify Generate Service Agreement functionality on Opportunity', async ({ page }) => {
+  const homePage = new HomePage(page);
+  const opportunityPage = new OpportunityPage(page);
+  const { leadCreate } = TestDataHelper.readJsonFile<{ leadCreate: Array<Record<string, string>> }>('leads.json');
+  const lead = leadCreate[0];
+
+  Logger.info('Starting service agreement generation validation test');
+  await opportunityPage.refreshPage();
+  await homePage.verifyHomePage();
+  await homePage.selectObjectFromDropdown('Opportunities');
+  await opportunityPage.selectOpportunitiesListView('My Opportunities');
+  await opportunityPage.searchAndOpenOpportunityByLeadName(lead.firstName, lead.lastName);
+  await opportunityPage.configureStage();
+  await opportunityPage.configureStatus();
+  await opportunityPage.saveOpportunityDetails();
+  await opportunityPage.refreshPage();
+  await opportunityPage.verifySignaturevisible();
+  await opportunityPage.generateAgreement();
+  await opportunityPage.refreshPage();
+  await opportunityPage.switchToRelatedTab();
+  await opportunityPage.verifyServiceAgreementFileGenerated();
+  
+  
 });
