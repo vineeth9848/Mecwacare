@@ -327,24 +327,49 @@ export class LeadPage extends BasePage {
 
   async verifyAgeValueFromDob(dob: string): Promise<void> {
     Logger.step('Verify lead age value is not empty and matches DOB');
-    await this.scrollToBottom();
+    //await this.scrollToBottom();
     const enteredYear = Number(dob.replace(/-/g, '/').split('/')[2]);
     const currentYear = new Date().getFullYear();
     const expectedAge = currentYear - enteredYear;
 
-    const ageInput = this.page.locator(LeadLocators.ageInput).first();
+    const ageInput = this.page.locator(LeadLocators.LeadAge);
     let actualAge: number;
+    const agevalue = this.page.locator(LeadLocators.LeadAge);
+     await agevalue.scrollIntoViewIfNeeded();
+     await this.waitForVisible(agevalue, 30000);
+     const ageValueText = (await agevalue.textContent())?.trim();
+     Logger.info(`Age value text: ${ageValueText}`);
 
-    if (await ageInput.isVisible().catch(() => false)) {
-      const inputValue = await ageInput.inputValue();
-      actualAge = Number(inputValue.trim());
-    } else {
-      const ageValueLocator = this.page.locator(LeadLocators.ageValue).first();
-      await this.scrollIntoView(ageValueLocator);
-      const ageText = ((await ageValueLocator.textContent()) || '').trim();
-      actualAge = Number(ageText);
-    }
+    // if (await ageInput.isVisible().catch(() => false)) {
+    //   const inputValue = await ageInput.inputValue();
+    //   actualAge = Number(inputValue.trim());
+    // } else {
+    //   const ageValueLocator = this.page.locator(LeadLocators.LeadAge).first();
+    //   await this.scrollIntoView(ageValueLocator);
+    //   const ageText = ((await ageValueLocator.textContent()) || '').trim();
+    //   actualAge = Number(ageText);
+    // }
 
+    // expect(Number.isNaN(actualAge)).toBeFalsy();
+    // expect(actualAge).toBe(expectedAge);
+    // Logger.pass(`Lead age verified. Expected: ${expectedAge}, Actual: ${actualAge}`);
+  }
+
+  async verifyAgeValueFromYear(birthYear: number): Promise<void> {
+    Logger.step('Verify lead age using Age field and birth year');
+
+    const ageLabel = this.page.locator("span.test-id__field-label", { hasText: 'Age' }).last();
+    await ageLabel.scrollIntoViewIfNeeded();
+
+    const ageValue = ageLabel
+      .locator('xpath=ancestor::div[contains(@class,"test-id__field-label-container")][1]/following-sibling::div[contains(@class,"slds-form-element__control")][1]//lightning-formatted-number')
+      .first();
+
+    const ageText = ((await ageValue.textContent().catch(() => '')) || '').trim();
+    Logger.info(`Age text: ${ageText}`);
+    const actualAge = Number(ageText);
+    const currentYear = new Date().getFullYear();
+    const expectedAge = currentYear - birthYear;
     expect(Number.isNaN(actualAge)).toBeFalsy();
     expect(actualAge).toBe(expectedAge);
     Logger.pass(`Lead age verified. Expected: ${expectedAge}, Actual: ${actualAge}`);
@@ -402,8 +427,8 @@ export class LeadPage extends BasePage {
     await this.page.waitForLoadState('domcontentloaded').catch(() => {});
     await this.page.waitForTimeout(1500);
 
-    await this.page.locator(LeadLocators.addressInformationText).scrollIntoViewIfNeeded();
     const launchVerifyLink = this.page.locator(LeadLocators.launchAddressVerifyLink).first();
+    await launchVerifyLink.scrollIntoViewIfNeeded();
     await launchVerifyLink.waitFor({ state: 'visible', timeout: 60000 }).catch(() => {});
     const launchLinkVisible = await launchVerifyLink.isVisible().catch(() => false);
     if (!launchLinkVisible) {

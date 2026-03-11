@@ -14,7 +14,8 @@
       "leadOption": "Medium",
       "serviceOption": "Home Care",
       "verifySearchAddress": "80 Alma Rd CLAYFIELD",
-      "verifyExpectedAddress": "80 Alma Rd CLAYFIELD"
+      "verifyExpectedAddress": "80 Alma Rd CLAYFIELD",
+      "ExpectedFilesCount":1
     }
   ],
   "leadConvert": [

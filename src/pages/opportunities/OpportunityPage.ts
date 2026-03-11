@@ -604,6 +604,16 @@ export class OpportunityPage extends BasePage {
     Logger.pass(`Verified generated file: ${expectedFileText}`);
   }
 
+  async getFilesCount(): Promise<number> {
+    const filesHeaderWithCount = this.page.locator(OpportunityLocators.filesHeaderWithCount).first();
+    await this.scrollIntoView(filesHeaderWithCount);
+    await this.waitForVisible(filesHeaderWithCount, 30000);
+
+    const filesCountText = ((await filesHeaderWithCount.textContent()) || '').trim();
+    const countMatch = filesCountText.match(/\((\d+)\)/);
+    return Number(countMatch ? countMatch[1] : '0');
+  }
+ 
   async configurePriceBook(): Promise<void> {
     Logger.step('Select Choose Price Book');
     const relatedTab = this.page.getByText(OpportunityLocators.choosePriceBookText, { exact: true }).first();
@@ -709,4 +719,99 @@ export class OpportunityPage extends BasePage {
     await this.page.waitForTimeout(5000);
         Logger.pass('Product Management configured Successfully');
       }
+
+
+      async configureStage(): Promise<void> {
+        Logger.step('Select Stage as In-Progress');
+        await this.page.waitForTimeout(5000);
+        const StageEditButton = this.page.locator(OpportunityLocators.stageEditButton);
+        await this.waitForVisible(StageEditButton, 30000);
+        await StageEditButton.click({ force: true });
+
+        await this.page.getByRole('combobox', { name: 'Stage' }).click();
+
+        await this.page
+          .locator('lightning-base-combobox-item')
+          .filter({ hasText: 'In Progress' })
+          .click();
+
+        Logger.pass('Stage set to In-Progress');
+
+}
+
+      async configureStatus(): Promise<void> {
+        Logger.step('Select Status as Initial Consultation');
+        await this.page.waitForTimeout(5000);
+
+        await this.page.getByRole('combobox', { name: 'Status', exact: true }).click();
+
+        await this.page
+          .locator('lightning-base-combobox-item')
+          .filter({ hasText: 'Initial Consultation' })
+          .click();
+
+        await this.page.waitForTimeout(5000);
+
+        Logger.pass('Status set to Initial Consultation');
+
+}
+
+      async verifySignaturevisible(): Promise<void> {
+        Logger.step('Verify signature is visible');
+        const moreActions = this.page.locator(OpportunityLocators.moreActionsButton).first();
+        await this.waitForVisible(moreActions, 30000);
+        await moreActions.click({ force: true });
+
+        const signatureOption = this.page.getByRole('menuitem', { name: 'Send for Signature' });
+
+        await expect(signatureOption).toBeVisible({ timeout: 30000 });
+        await this.page.waitForTimeout(5000);
+
+        Logger.pass('Signature is visible');
+}
+
+async generateAgreement(): Promise<void> {
+        Logger.step('Verify Generate agreement');
+        const GenerateAgreementButton = this.page.getByRole('button', { name: 'Generate Agreement' }).first();
+        await this.waitForVisible(GenerateAgreementButton, 30000);
+        await GenerateAgreementButton.click({ force: true });
+
+        await this.page.waitForTimeout(5000);
+
+        const generateagreementDialogMessage = this.page.locator(OpportunityLocators.GenerateAgreementText).first();
+        await this.waitForVisible(generateagreementDialogMessage, 30000);
+        await expect(generateagreementDialogMessage).toContainText('Generate the Service Agreement for', { timeout: 30000 });
+
+        const generateButton = this.page.getByRole('button', { name: 'Generate', exact: true }).first();
+        await this.waitForVisible(generateButton, 30000);
+        await generateButton.click({ force: true });
+
+        await this.page.waitForTimeout(5000);
+
+        const agreementGeneratedMessage = this.page.locator(OpportunityLocators.GenerateAgreementsuccessMessage).first();
+        await this.waitForVisible(agreementGeneratedMessage, 30000);
+        await expect(agreementGeneratedMessage).toContainText('Agreement Generated Successfully. Check the Files related list on this Opportunity', { timeout: 30000 });
+        
+        const finishButton = this.page.getByRole('button', { name: 'Finish', exact: true }).first();
+        await this.waitForVisible(finishButton, 30000);
+        await finishButton.click({ force: true });
+        
+        Logger.pass('Generated agreement successfully');
+}
+
+      async verifyServiceAgreementFileGenerated(): Promise<void> {
+        Logger.step('Verify Service agreement file is generated');
+
+        const AddFilesButton = this.page.getByRole('button', { name: 'Add Files' }).first();
+        await AddFilesButton.scrollIntoViewIfNeeded();
+
+        const serviceAgreementText = this.page.locator(OpportunityLocators.ServiceAgreementtext);
+
+        const text = await serviceAgreementText.textContent();
+        Logger.info(`Service agreement file text: ${text}`);
+
+        await expect(serviceAgreementText).toContainText('Service Agreement');
+
+        Logger.pass('Service agreement file is generated');
+}
 }

@@ -17,8 +17,9 @@ export const LeadLocators = {
   modalContainer: ".modal-container, .forceModal, .slds-modal",
   conversionDialog: "section[role='dialog'], .slds-modal",
   ageInput: "input[aria-label='Age']",
+  LeadAge:"xpath=//span[text()='Age']",
   body: "body",
-  addressInformationText: "text=Address Information",
+  addressInformationText: "button:has-text('Address Information')",
   saveToast: "text=Address verified and saved, text=Saved, [role='alert']",
   dobInputVisible: "input[aria-label='Date Of Birth']:visible, input[aria-label='Date of Birth']:visible",
   detailsTab: "a[title='Details'], [role='tab']:has-text('Details'), a:has-text('Details')",
@@ -37,7 +38,7 @@ export const LeadLocators = {
   ageRow:
     "xpath=(//span[contains(@class,'test-id__field-label') and normalize-space()='Age']/ancestor::div[contains(@class,'slds-form-element')][1] | //*[normalize-space()='Age']/ancestor::records-record-layout-item[1])[1]",
   ageValue:
-    "xpath=((//span[contains(@class,'test-id__field-label') and normalize-space()='Age']/ancestor::div[contains(@class,'slds-form-element')][1]//*[contains(@class,'test-id__field-value') or contains(@class,'slds-form-element__static')][1]) | (//*[normalize-space()='Age']/following::*[self::lightning-formatted-number or self::lightning-formatted-text or self::span][1]))[1]",
+    "xpath=(//span[normalize-space()='Age']/ancestor::div[contains(@class,'slds-form-element')][1]//span[contains(@class,'test-id__field-value') or contains(@class,'slds-form-element__static')][1])[1]",
   addressValue: "[data-target-selection-name='sfdc:RecordField.Lead.Address']",
   lead_source: "Lead Source",
   first_name: "First Name",

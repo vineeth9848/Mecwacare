@@ -71,7 +71,14 @@ export const OpportunityLocators = {
   generateQuoteDialogTitle: "text=Generate Quote",
   generateQuoteDialogMessage: "text=Please click on Generate button to generate the quote for this opportunity.",
   generateQuoteDialogButton: "xpath=(//button[text()='Generate'])[last()]",
+  generateServiceAgreementButton: "button:has-text('Generate Service Agreement')",
+  generateButtonByText: "button:has-text('Generate')",
   filesHeaderWithCount: "h2:has-text('Files (')",
   filesSection: "h2:has-text('Files (')",
-  fileNameLink: "table tbody tr th a, table tbody tr td a"
-} as const;
+  fileNameLink: "table tbody tr th a, table tbody tr td a",
+  stageEditButton: 'xpath=(//button[@title="Edit Stage"])',
+  moreActionsButton: 'xpath=(//span[text()="Show more actions"])',
+  GenerateAgreementText: "text=Generate the Service Agreement for",
+  GenerateAgreementsuccessMessage: "text=Agreement Generated Successfully. Check the Files related list on this Opportunity",
+  ServiceAgreementtext:'xpath=(//lightning-base-formatted-text[text()="Service Agreement"])[1]',
+   } as const;
