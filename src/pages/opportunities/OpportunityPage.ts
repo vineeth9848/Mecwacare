@@ -581,6 +581,7 @@ export class OpportunityPage extends BasePage {
 
   async verifyFilesGenerated(firstName: string, lastName: string): Promise<void> {
     Logger.step('Verify generated files');
+    await this.page.waitForTimeout(10000);
 
     const runNumber = PropertyReader.getRunNumber(1);
     const expectedFileText = `${firstName} ${lastName}${runNumber}`;
@@ -650,7 +651,7 @@ export class OpportunityPage extends BasePage {
     const productManagementButton = this.page.getByRole('button', { name: OpportunityLocators.productManagementText, exact: true }).first();
     await productManagementButton.scrollIntoViewIfNeeded();
     await productManagementButton.click();
-    await this.page.waitForTimeout(5000);
+    await this.page.waitForTimeout(10000);
 
     const addProductsButton = this.page.getByRole('button', { name: 'Add' });
     await this.waitForVisible(addProductsButton, 90000);
@@ -660,7 +661,6 @@ export class OpportunityPage extends BasePage {
     const customPeriodOption = this.page.getByText('Custom', { exact: true });
     await this.waitForVisible(customPeriodOption, 90000);
     await customPeriodOption.click();
-    await this.page.waitForTimeout(5000);
     
     const endDateInput = this.page.getByLabel('End Date').first();
     await this.waitForVisible(endDateInput, 90000);
@@ -684,7 +684,6 @@ export class OpportunityPage extends BasePage {
     const serviceDay = this.page.locator( "(//span[text()='Anytime'])[1]");
     await this.waitForVisible(serviceDay, 90000);
     await serviceDay.click();
-    await this.page.waitForTimeout(5000);
 
     const availableFundingSection = this.page.locator(OpportunityLocators.availableFundingSection).first();
     await this.waitForVisible(availableFundingSection, 90000);
@@ -724,7 +723,6 @@ export class OpportunityPage extends BasePage {
     await Submit.scrollIntoViewIfNeeded();
     await Submit.isVisible({ timeout: 30000 });
     await Submit.click();
-    await this.page.waitForTimeout(5000);
         Logger.pass('Product Management configured Successfully');
       }
 

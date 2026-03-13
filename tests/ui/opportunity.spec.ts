@@ -26,8 +26,6 @@ test('verify funding source and funding type in first opportunity record', async
   await opportunityPage.selectServiceAgreementStatus();
   await opportunityPage.selectReferrerTypeFamilyViolencePrograms();
   await opportunityPage.saveOpportunityDetails();
-  await opportunityPage.refreshPage();
-  await opportunityPage.verifyQuoteNotGenerated();
   Logger.pass('Opportunity funding validation test completed successfully');
 });
 
@@ -43,10 +41,12 @@ test('verify Generate Quote functionality on Opportunity', async ({ page }) => {
   await homePage.selectObjectFromDropdown('Opportunities');
   await opportunityPage.selectOpportunitiesListView('My Opportunities');
   await opportunityPage.searchAndOpenOpportunityByLeadName(lead.firstName, lead.lastName);
+  await opportunityPage.verifyQuoteNotGenerated();
   await opportunityPage.switchToRelatedTab();
   await opportunityPage.configurePriceBook();
   await opportunityPage.configureProductManagement();
   await opportunityPage.verifyProductsAndClickGenerateQuote();
+  await opportunityPage.refreshPage();
   await opportunityPage.refreshPage();
   await opportunityPage.switchToRelatedTab();
   await opportunityPage.verifyFilesGenerated(lead.firstName, lead.lastName);
