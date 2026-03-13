@@ -3,6 +3,7 @@ import { Logger } from '../../src/utils/Logger';
 import { HomePage } from '../../src/pages/homepage/HomePage';
 import { OpportunityPage } from '../../src/pages/opportunities/OpportunityPage';
 import { TestDataHelper } from '../../src/utils/TestDataHelper';
+import { time } from 'console';
 
 test('verify funding source and funding type in first opportunity record', async ({ page }) => {
   const homePage = new HomePage(page);
@@ -25,6 +26,7 @@ test('verify funding source and funding type in first opportunity record', async
   await opportunityPage.selectServiceAgreementStatus();
   await opportunityPage.selectReferrerTypeFamilyViolencePrograms();
   await opportunityPage.saveOpportunityDetails();
+  await opportunityPage.refreshPage();
   await opportunityPage.verifyQuoteNotGenerated();
   Logger.pass('Opportunity funding validation test completed successfully');
 });
@@ -44,8 +46,6 @@ test('verify Generate Quote functionality on Opportunity', async ({ page }) => {
   await opportunityPage.switchToRelatedTab();
   await opportunityPage.configurePriceBook();
   await opportunityPage.configureProductManagement();
-  await opportunityPage.refreshPage();
-  await opportunityPage.switchToRelatedTab();
   await opportunityPage.verifyProductsAndClickGenerateQuote();
   await opportunityPage.refreshPage();
   await opportunityPage.switchToRelatedTab();

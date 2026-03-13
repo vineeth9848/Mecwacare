@@ -38,8 +38,10 @@ export const LeadLocators = {
   ageRow:
     "xpath=(//span[contains(@class,'test-id__field-label') and normalize-space()='Age']/ancestor::div[contains(@class,'slds-form-element')][1] | //*[normalize-space()='Age']/ancestor::records-record-layout-item[1])[1]",
   ageValue:
-    "xpath=(//span[normalize-space()='Age']/ancestor::div[contains(@class,'slds-form-element')][1]//span[contains(@class,'test-id__field-value') or contains(@class,'slds-form-element__static')][1])[1]",
+    "xpath=(//div[@class='slds-form-element__control']//ancestor::lightning-formatted-number)",
   addressValue: "[data-target-selection-name='sfdc:RecordField.Lead.Address']",
+  Agevalue: "xpath=(//div[@class='slds-form-element__control']//ancestor::lightning-formatted-number)",
+  AgeText: "xpath=(//span[text()='Age'])",
   lead_source: "Lead Source",
   first_name: "First Name",
   last_name: "Last Name",
