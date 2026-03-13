@@ -478,8 +478,6 @@ export class OpportunityPage extends BasePage {
 
     await this.page.getByText(OpportunityLocators.serviceAgreementSignedOptionText, { exact: true }).click();
 
-    await this.page.waitForTimeout(5000);
-
     await expect(serviceAgreementStatusDropdown).toContainText('Signed', { timeout: 30000 });
     Logger.pass('Service Agreement Status set to Signed');
   }
@@ -495,8 +493,6 @@ export class OpportunityPage extends BasePage {
     await referrerTypeDropdown.click();
 
     await this.page.getByText(OpportunityLocators.referrerTypeFamilyViolenceOptionText, { exact: true }).click();
-
-    await this.page.waitForTimeout(5000);
 
     await expect(referrerTypeDropdown).toContainText('Family violence programs', { timeout: 30000 });
     Logger.pass('Referrer Type set to Family violence programs');
@@ -538,7 +534,7 @@ export class OpportunityPage extends BasePage {
   async switchToRelatedTab(): Promise<void> {
     Logger.step('Select Switch to related tab');
     const relatedTab = this.page.getByText(OpportunityLocators.relatedTabText, { exact: true }).first();
-    await relatedTab.scrollIntoViewIfNeeded();
+    //await relatedTab.scrollIntoViewIfNeeded();
     await relatedTab.click();
 
     Logger.pass('Switched to Related tab');
@@ -581,7 +577,7 @@ export class OpportunityPage extends BasePage {
 
   async verifyFilesGenerated(firstName: string, lastName: string): Promise<void> {
     Logger.step('Verify generated files');
-    await this.page.waitForTimeout(10000);
+    // await this.page.waitForTimeout(10000);
 
     const runNumber = PropertyReader.getRunNumber(1);
     const expectedFileText = `${firstName} ${lastName}${runNumber}`;
