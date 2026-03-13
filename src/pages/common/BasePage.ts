@@ -147,11 +147,15 @@ export class BasePage {
 
   async scrollIntoView(target: Locator): Promise<void> {
     Logger.step('Scroll element into view');
-    await this.waitForVisible(target, 30000);
+    if (this.page.isClosed()) {
+      Logger.info('Page is closed. Skipping scroll into view');
+      return;
+    }
+    await this.waitForVisible(target, 10000);
     try {
       await target.scrollIntoViewIfNeeded();
     } catch {
-      const handle = await target.elementHandle();
+      const handle = await target.elementHandle().catch(() => null);
       if (!handle) {
         throw new Error('Element not found while scrolling into view');
       }

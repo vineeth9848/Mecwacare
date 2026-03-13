@@ -4,6 +4,7 @@ import { Logger } from '../../utils/Logger';
 import { LeadLocators } from '../locators/LeadLocators';
 import PropertyReader from '../../utils/PropertyReader';
 import { HomePage } from '../homepage/HomePage';
+import { time } from 'console';
 
 export class LeadPage extends BasePage {
   constructor(page: Page) {
@@ -37,6 +38,7 @@ export class LeadPage extends BasePage {
 
         const dobField = this.page.getByRole('textbox', { name: /Date Of Birth|Date of Birth/i }).first();
         const targetDob = (dob || '01/01/2001').replace(/-/g, '/');
+        await this.setDobValue(dobField, targetDob);
         await this.setDobValue(dobField, targetDob);
         Logger.info(`Filled DOB: ${targetDob}`);
         
@@ -181,14 +183,14 @@ export class LeadPage extends BasePage {
 
   async openLatestLeadIfEmailMatches(expectedEmail: string): Promise<void> {
     Logger.step(`Open lead record by email: ${expectedEmail}`);
-    await this.staticWait(5000);
+    await this.staticWait(1000);
     const listSearchInput = this.page.locator(LeadLocators.leadsListSearchInput).first();
     await this.waitForVisible(listSearchInput, 30000);
-    await this.staticWait(3000);
+    await this.staticWait(1000);
     await listSearchInput.fill(expectedEmail);
-    await this.staticWait(2000);
+    await this.staticWait(500);
     await listSearchInput.press('Enter');
-    await this.staticWait(10000);
+    await this.staticWait(2000);
     await listSearchInput.fill(expectedEmail);
     await listSearchInput.press('Enter');
     await this.staticWait(5000);
@@ -299,13 +301,6 @@ export class LeadPage extends BasePage {
     Logger.pass('Lead conversion success message verified');
   }
 
-  async goToLeadsFromConversionSuccess(): Promise<void> {
-    Logger.step('Click Go to Leads from conversion success popup');
-    const goToLeadsButton = this.page.locator(LeadLocators.goToLeadsButton).first();
-    await this.click(goToLeadsButton);
-    Logger.pass('Navigated to Leads list');
-  }
-
   async verifyLeadNotPresentInList(leadEmail: string): Promise<void> {
     const homePage = new HomePage(this.page);
     Logger.step('Verify converted lead is not present in Leads list');
@@ -315,7 +310,7 @@ export class LeadPage extends BasePage {
 
     const expectedEmail = this.getEmailWithRunNumber(leadEmail);
     const searchInput = this.page.locator(LeadLocators.leadsListSearchInput).first();
-    await this.waitForVisible(searchInput, 30000);
+    await this.waitForVisible(searchInput, 15000);
     await searchInput.fill(expectedEmail);
     await searchInput.press('Enter');
     await this.staticWait(3000);
@@ -325,51 +320,31 @@ export class LeadPage extends BasePage {
     Logger.pass('Converted lead is not present in Leads list');
   }
 
-  async verifyAgeValueFromDob(dob: string): Promise<void> {
-    Logger.step('Verify lead age value is not empty and matches DOB');
-    //await this.scrollToBottom();
-    const enteredYear = Number(dob.replace(/-/g, '/').split('/')[2]);
-    const currentYear = new Date().getFullYear();
-    const expectedAge = currentYear - enteredYear;
-
-    const ageInput = this.page.locator(LeadLocators.LeadAge);
-    let actualAge: number;
-    const agevalue = this.page.locator(LeadLocators.LeadAge);
-     await agevalue.scrollIntoViewIfNeeded();
-     await this.waitForVisible(agevalue, 30000);
-     const ageValueText = (await agevalue.textContent())?.trim();
-     Logger.info(`Age value text: ${ageValueText}`);
-
-    // if (await ageInput.isVisible().catch(() => false)) {
-    //   const inputValue = await ageInput.inputValue();
-    //   actualAge = Number(inputValue.trim());
-    // } else {
-    //   const ageValueLocator = this.page.locator(LeadLocators.LeadAge).first();
-    //   await this.scrollIntoView(ageValueLocator);
-    //   const ageText = ((await ageValueLocator.textContent()) || '').trim();
-    //   actualAge = Number(ageText);
-    // }
-
-    // expect(Number.isNaN(actualAge)).toBeFalsy();
-    // expect(actualAge).toBe(expectedAge);
-    // Logger.pass(`Lead age verified. Expected: ${expectedAge}, Actual: ${actualAge}`);
-  }
-
   async verifyAgeValueFromYear(birthYear: number): Promise<void> {
     Logger.step('Verify lead age using Age field and birth year');
 
-    const ageLabel = this.page.locator("span.test-id__field-label", { hasText: 'Age' }).last();
-    await ageLabel.scrollIntoViewIfNeeded();
+    try {
+    await this.page.waitForLoadState('domcontentloaded', { timeout: 3000 }).catch(() => {});
+    await this.page.waitForTimeout(500);
 
-    const ageValue = ageLabel
-      .locator('xpath=ancestor::div[contains(@class,"test-id__field-label-container")][1]/following-sibling::div[contains(@class,"slds-form-element__control")][1]//lightning-formatted-number')
-      .first();
+    const launchVerifyLink = this.page.locator(LeadLocators.launchAddressVerifyLink).first();
+    await launchVerifyLink.scrollIntoViewIfNeeded();
+    await launchVerifyLink.waitFor({ state: 'visible', timeout: 5000 }).catch(() => {});
+    const launchLinkVisible = await launchVerifyLink.isVisible().catch(() => false);
+    } catch {
+      Logger.info('Page might have reloaded, proceeding with age verification');
+    }
 
-    const ageText = ((await ageValue.textContent().catch(() => '')) || '').trim();
-    Logger.info(`Age text: ${ageText}`);
+    const ageValue = this.page.locator(LeadLocators.ageValue).last();
+    await expect(ageValue).toBeVisible({ timeout: 5000 });
+
+    const ageText = ((await ageValue.textContent()) || '').trim();
+    Logger.info(`Age: ${ageText}`);
+
     const actualAge = Number(ageText);
     const currentYear = new Date().getFullYear();
     const expectedAge = currentYear - birthYear;
+
     expect(Number.isNaN(actualAge)).toBeFalsy();
     expect(actualAge).toBe(expectedAge);
     Logger.pass(`Lead age verified. Expected: ${expectedAge}, Actual: ${actualAge}`);
@@ -384,17 +359,6 @@ export class LeadPage extends BasePage {
     const normalizedExpected = expectedAddressText.replace(/\s+/g, ' ').trim().toLowerCase();
     expect(addressText).toContain(normalizedExpected);
     Logger.pass(`Lead address contains: ${expectedAddressText}`);
-  }
-
-  async verifyAddressContainsAny(expectedValues: string[]): Promise<void> {
-    Logger.step('Verify lead address with allowed values');
-    const addressLocator = this.page.locator(LeadLocators.addressValue).first();
-    await this.scrollToBottom();
-    await this.scrollIntoView(addressLocator);
-    const addressText = (await addressLocator.innerText()).trim().toLowerCase();
-    const matched = expectedValues.some((value) => addressText.includes(value.toLowerCase()));
-    expect(matched).toBeTruthy();
-    Logger.pass(`Lead address matched one of: ${expectedValues.join(', ')}`);
   }
 
   async verifyEmailValue(expectedEmail: string): Promise<void> {
@@ -424,12 +388,12 @@ export class LeadPage extends BasePage {
     }
 
     try {
-    await this.page.waitForLoadState('domcontentloaded').catch(() => {});
-    await this.page.waitForTimeout(1500);
+    await this.page.waitForLoadState('domcontentloaded', { timeout: 3000 }).catch(() => {});
+    await this.page.waitForTimeout(500);
 
     const launchVerifyLink = this.page.locator(LeadLocators.launchAddressVerifyLink).first();
     await launchVerifyLink.scrollIntoViewIfNeeded();
-    await launchVerifyLink.waitFor({ state: 'visible', timeout: 60000 }).catch(() => {});
+    await launchVerifyLink.waitFor({ state: 'visible', timeout: 5000 }).catch(() => {});
     const launchLinkVisible = await launchVerifyLink.isVisible().catch(() => false);
     if (!launchLinkVisible) {
       Logger.info('Launch Address / Verify link is not visible on this record, skipping update');
@@ -469,7 +433,7 @@ export class LeadPage extends BasePage {
           await searchInput.press('Enter');
         }
       } else {
-        await this.waitForVisible(firstSuggestion, 15000);
+        await this.waitForVisible(firstSuggestion, 8000);
         await firstSuggestion.scrollIntoViewIfNeeded().catch(() => {});
         try {
           await firstSuggestion.click({ force: true });
@@ -494,7 +458,7 @@ export class LeadPage extends BasePage {
           await searchInput.press('Enter');
         }
       } else {
-        await this.waitForVisible(firstSuggestion, 15000);
+        await this.waitForVisible(firstSuggestion, 8000);
         await firstSuggestion.scrollIntoViewIfNeeded().catch(() => {});
         try {
           await firstSuggestion.click({ force: true });
@@ -512,11 +476,11 @@ export class LeadPage extends BasePage {
     await this.click(verifyAndSaveButton);
 
     const saveToast = this.page.locator(LeadLocators.saveToast).first();
-    await saveToast.waitFor({ state: 'visible', timeout: 15000 }).catch(() => {});
+    await saveToast.waitFor({ state: 'visible', timeout: 8000 }).catch(() => {});
 
-    await searchInput.waitFor({ state: 'hidden', timeout: 30000 }).catch(() => {});
-    await this.page.waitForLoadState('domcontentloaded').catch(() => {});
-    await this.page.waitForTimeout(1500);
+    await searchInput.waitFor({ state: 'hidden', timeout: 10000 }).catch(() => {});
+    await this.page.waitForLoadState('domcontentloaded', { timeout: 3000 }).catch(() => {});
+    await this.page.waitForTimeout(500);
 
     await this.refreshPage();
     await this.page.waitForLoadState('domcontentloaded').catch(() => {});
@@ -527,11 +491,11 @@ export class LeadPage extends BasePage {
     }
 
     const addressSection = this.page.locator(LeadLocators.addressInformationText).first();
-    await addressSection.waitFor({ state: 'visible', timeout: 30000 });
+    await addressSection.waitFor({ state: 'visible', timeout: 10000 });
     await addressSection.scrollIntoViewIfNeeded();
 
     const addressLocator = this.page.locator(LeadLocators.addressValue).first();
-    await addressLocator.waitFor({ state: 'visible', timeout: 30000 });
+    await addressLocator.waitFor({ state: 'visible', timeout: 10000 });
     const latestAddress = (await addressLocator.innerText()).replace(/\s+/g, ' ').trim().toLowerCase();
     const normalizedExpected = searchAddress.replace(/\s+/g, ' ').trim().toLowerCase();
     expect(latestAddress).toContain(normalizedExpected);

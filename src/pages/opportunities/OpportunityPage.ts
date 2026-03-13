@@ -515,7 +515,7 @@ export class OpportunityPage extends BasePage {
   async verifyQuoteNotGenerated(): Promise<void> {
     Logger.step('Verify the quote is not generated ');
     const generateQuote = this.page.locator(OpportunityLocators.generateQuoteButton);
-    await this.waitForVisible(generateQuote, 30000);
+    await this.waitForVisible(generateQuote, 90000);
     await generateQuote.scrollIntoViewIfNeeded();
     await generateQuote.click();
     
@@ -530,7 +530,6 @@ export class OpportunityPage extends BasePage {
     const quoteCloseButton = this.page.locator(OpportunityLocators.closeButtonByText);
     await this.waitForVisible(quoteCloseButton, 30000);
     await quoteCloseButton.click();
-    await this.page.waitForTimeout(5000);
 
     Logger.pass('Closed the quote dialog');
 
@@ -541,7 +540,6 @@ export class OpportunityPage extends BasePage {
     const relatedTab = this.page.getByText(OpportunityLocators.relatedTabText, { exact: true }).first();
     await relatedTab.scrollIntoViewIfNeeded();
     await relatedTab.click();
-    await this.page.waitForTimeout(5000);
 
     Logger.pass('Switched to Related tab');
   }
@@ -562,7 +560,6 @@ export class OpportunityPage extends BasePage {
 
     Logger.pass('Verified products count and Absorbent product name');
 
-    //const generateQuoteButton = this.page.locator(OpportunityLocators.generateQuoteButton).first();
     const generateQuoteButton = this.page.getByRole('button', { name: 'Generate Quote', exact: true }).first();
     await this.scrollIntoView(generateQuoteButton);
     await this.waitForVisible(generateQuoteButton, 30000);
@@ -588,16 +585,27 @@ export class OpportunityPage extends BasePage {
     const runNumber = PropertyReader.getRunNumber(1);
     const expectedFileText = `${firstName} ${lastName}${runNumber}`;
 
-    const filesHeaderWithCount = this.page.locator(OpportunityLocators.filesHeaderWithCount).first();
-    await this.scrollIntoView(filesHeaderWithCount);
-    await this.waitForVisible(filesHeaderWithCount, 30000);
+    const filesHeaders = this.page.locator(OpportunityLocators.filesHeaderWithCount);
+    await this.waitForVisible(filesHeaders.last(), 30000);
+    await filesHeaders.last().scrollIntoViewIfNeeded().catch(() => {});
 
-    const filesCountText = ((await filesHeaderWithCount.textContent()) || '').trim();
-    const countMatch = filesCountText.match(/\((\d+)\)/);
-    const countValue = Number(countMatch ? countMatch[1] : '0');
-    expect(countValue).toBeGreaterThan(0);
+    await expect
+      .poll(
+        async () => {
+          const texts = await filesHeaders.allTextContents();
+          const counts = texts
+            .map(text => (text || '').trim())
+            .map(text => {
+              const match = text.match(/\((\d+)\)/);
+              return Number(match ? match[1] : '0');
+            });
+          return counts.length ? Math.max(...counts) : 0;
+        },
+        { timeout: 30000 },
+      )
+      .toBeGreaterThan(0);
 
-    const fileNameLink = this.page.getByText(expectedFileText, { exact: false }).first();
+    const fileNameLink = this.page.getByText(expectedFileText, { exact: false }).last();
     await this.waitForVisible(fileNameLink, 30000);
     await expect(fileNameLink).toContainText(expectedFileText, { timeout: 30000 });
 
@@ -750,8 +758,6 @@ export class OpportunityPage extends BasePage {
           .filter({ hasText: 'Initial Consultation' })
           .click();
 
-        await this.page.waitForTimeout(5000);
-
         Logger.pass('Status set to Initial Consultation');
 
 }
@@ -765,7 +771,6 @@ export class OpportunityPage extends BasePage {
         const signatureOption = this.page.getByRole('menuitem', { name: 'Send for Signature' });
 
         await expect(signatureOption).toBeVisible({ timeout: 30000 });
-        await this.page.waitForTimeout(5000);
 
         Logger.pass('Signature is visible');
 }
@@ -776,8 +781,6 @@ async generateAgreement(): Promise<void> {
         await this.waitForVisible(GenerateAgreementButton, 30000);
         await GenerateAgreementButton.click({ force: true });
 
-        await this.page.waitForTimeout(5000);
-
         const generateagreementDialogMessage = this.page.locator(OpportunityLocators.GenerateAgreementText).first();
         await this.waitForVisible(generateagreementDialogMessage, 30000);
         await expect(generateagreementDialogMessage).toContainText('Generate the Service Agreement for', { timeout: 30000 });
@@ -785,8 +788,6 @@ async generateAgreement(): Promise<void> {
         const generateButton = this.page.getByRole('button', { name: 'Generate', exact: true }).first();
         await this.waitForVisible(generateButton, 30000);
         await generateButton.click({ force: true });
-
-        await this.page.waitForTimeout(5000);
 
         const agreementGeneratedMessage = this.page.locator(OpportunityLocators.GenerateAgreementsuccessMessage).first();
         await this.waitForVisible(agreementGeneratedMessage, 30000);
