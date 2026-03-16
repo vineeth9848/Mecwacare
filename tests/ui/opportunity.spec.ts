@@ -47,11 +47,12 @@ test('verify Generate Quote functionality on Opportunity', async ({ page }) => {
   await opportunityPage.configurePriceBook();
   await opportunityPage.configureProductManagement();
   await opportunityPage.verifyProductsAndClickGenerateQuote();
+  await opportunityPage.refreshPage();
   await opportunityPage.switchToRelatedTab();
   await opportunityPage.verifyFilesGenerated(lead.firstName, lead.lastName);
 });
 
-test.only('verify Generate Service Agreement functionality on Opportunity', async ({ page }) => {
+test('verify Generate Service Agreement functionality on Opportunity', async ({ page }) => {
   const homePage = new HomePage(page);
   const opportunityPage = new OpportunityPage(page);
   const { leadCreate } = TestDataHelper.readJsonFile<{ leadCreate: Array<Record<string, string>> }>('leads.json');
@@ -73,5 +74,21 @@ test.only('verify Generate Service Agreement functionality on Opportunity', asyn
   await opportunityPage.switchToRelatedTab();
   await opportunityPage.verifyServiceAgreementFileGenerated();
   
+});
+
+test.only('verify Send For Signature functionality on Opportunity', async ({ page }) => {
+  const homePage = new HomePage(page);
+  const opportunityPage = new OpportunityPage(page);
+  const { leadCreate } = TestDataHelper.readJsonFile<{ leadCreate: Array<Record<string, string>> }>('leads.json');
+  const lead = leadCreate[0];
+
+  Logger.info('Starting sending for signature validation test');
+  await opportunityPage.refreshPage();
+  await homePage.verifyHomePage();
+  await homePage.selectObjectFromDropdown('Opportunities');
+  await opportunityPage.selectOpportunitiesListView('My Opportunities');
+  await opportunityPage.searchAndOpenOpportunityByLeadName(lead.firstName, lead.lastName);
+  await opportunityPage.clickSignaturevisible();
+  await opportunityPage.configureSignature();
   
 });

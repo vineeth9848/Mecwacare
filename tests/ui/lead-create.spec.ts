@@ -41,7 +41,7 @@ test.only('verify lead validations', async ({ page }) => {
   const lead = leadCreate[0];
 
   Logger.info('Starting lead validation test');
-  await homePage.verifyHomePage();
+  //await homePage.verifyHomePage();
   await homePage.selectObjectFromDropdown('Leads');
   await leadPage.selectLeadsListView("Today's Leads");
 

@@ -2,6 +2,7 @@ import { Page, expect } from '@playwright/test';
 import { BasePage } from '../common/BasePage';
 import { Logger } from '../../utils/Logger';
 import { AccountLocators } from '../locators/AccountLocators';
+import PropertyReader from '../../utils/PropertyReader';
 
 export class AccountPage extends BasePage {
   constructor(page: Page) {
@@ -108,6 +109,45 @@ export class AccountPage extends BasePage {
     const accountLink = this.page.getByRole('link', { name: accountName, exact: true }).first();
     await this.click(accountLink);
     Logger.pass(`Opened account: ${accountName}`);
+  }
+
+  async selectAccountsListView(viewName: string): Promise<void> {
+    Logger.step(`Select accounts list view: ${viewName}`);
+    const listViewDropdown = this.page.locator(AccountLocators.listViewDropdown).first();
+    await this.waitForVisible(listViewDropdown, 30000);
+    await listViewDropdown.click({ force: true });
+
+    await this.page.waitForSelector('[role="listbox"]', { timeout: 30000 });
+    const listViewOption = this.page
+      .locator(AccountLocators.listViewOption)
+      .filter({ hasText: viewName })
+      .first();
+    await this.waitForVisible(listViewOption, 20000);
+    await listViewOption.scrollIntoViewIfNeeded().catch(() => {});
+    await listViewOption.click({ force: true });
+    Logger.pass(`Accounts list view selected: ${viewName}`);
+  }
+
+  getEmailWithRunNumber(email: string): string {
+    const runNumber = PropertyReader.getRunNumber(1);
+    const [localPart, domain] = email.split('@');
+    return `${localPart}${runNumber}@${domain}`;
+  }
+
+  async searchAndOpenAccountByEmail(email: string): Promise<void> {
+    Logger.step(`Search and open account by email: ${email}`);
+    const searchInput = this.page.locator(AccountLocators.listSearchInput).first();
+    await this.waitForVisible(searchInput, 30000);
+    await searchInput.fill(email);
+    await searchInput.press('Enter');
+    await this.staticWait(3000);
+
+    const matchedRow = this.page.locator(AccountLocators.tableRows).filter({ hasText: email }).first();
+    await this.waitForVisible(matchedRow, 30000);
+
+    const accountLink = matchedRow.locator(AccountLocators.rowLink).first();
+    await this.click(accountLink);
+    Logger.pass(`Opened account record using email: ${email}`);
   }
 
   async verifyAgeValueFromDob(dob: string): Promise<void> {
