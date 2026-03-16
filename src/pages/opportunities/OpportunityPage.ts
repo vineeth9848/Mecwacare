@@ -769,6 +769,84 @@ export class OpportunityPage extends BasePage {
         Logger.pass('Signature is visible');
 }
 
+      async clickSignaturevisible(): Promise<void> {
+              Logger.step('Click signature option');
+              const moreActions = this.page.locator(OpportunityLocators.moreActionsButton).first();
+              await this.waitForVisible(moreActions, 30000);
+              await moreActions.click({ force: true });
+
+              const signatureOption = this.page.getByRole('menuitem', { name: 'Send for Signature' });
+
+              await expect(signatureOption).toBeVisible({ timeout: 30000 });
+
+              await signatureOption.click({ force: true });
+
+              Logger.pass('clicked signature option');
+      }
+
+      async configureSignature(): Promise<void> {
+              Logger.step('Click on Next Button on Document screen');
+              
+              await this.page.waitForSelector('iframe[title="Send with Docusign"]');
+
+              let frame = this.page.frameLocator('iframe[title="Send with Docusign"]');
+
+            
+              await frame.getByRole('button', { name: 'Next' }).click();
+              Logger.step('Clicked on Next Button on Document screen');
+
+              
+              await frame.getByRole('button', { name: 'Next' }).waitFor({ state: 'visible' });
+
+              
+              await frame.getByRole('button', { name: 'Next' }).click();
+              Logger.step('Clicked on Next Button on Recipients screen');
+
+              // const editorFrame = frame.frameLocator('iframe');
+
+              // await editorFrame.locator('[data-qa="Signature"]').waitFor({ state: 'visible', timeout: 60000 });
+
+            
+              // await editorFrame.locator('[data-qa="Signature"]').click();
+
+              
+              // await editorFrame.locator('svg image').click({
+              //   position: { x: 295, y: 421 }
+              // });
+
+              await this.page.waitForSelector('iframe[title="Send with Docusign"]');
+
+              const Newframe = this.page.frameLocator('iframe[title="Send with Docusign"]');
+
+              await Newframe.locator('[data-qa="footer-send-button"]').waitFor({ state: 'visible', timeout: 60000 });
+
+              await Newframe.locator('[data-qa="footer-send-button"]').click();
+
+              const Finalframe = this.page.frameLocator('iframe[title="Send with Docusign"]');
+
+              await Finalframe.locator('[data-qa="send-without-fields"]').waitFor({
+                state: 'visible',
+                timeout: 60000
+              });
+
+              await Finalframe.locator('[data-qa="send-without-fields"]').click();
+
+              // await this.page.waitForTimeout(10000);
+
+              const Envelopeframe = this.page.frameLocator('iframe[title="Send with Docusign"]').last();
+
+              await Envelopeframe.locator('[data-id="envelopeSentLabel"]').waitFor({
+                state: 'visible',
+                timeout: 60000
+              });
+
+              await expect(
+                Envelopeframe.locator('[data-id="envelopeSentLabel"]')
+              ).toContainText('Your envelope was sent!');
+
+              Logger.pass('Signature process completed and envelope sent');
+      }
+
 async generateAgreement(): Promise<void> {
         Logger.step('Verify Generate agreement');
         const GenerateAgreementButton = this.page.getByRole('button', { name: 'Generate Agreement' }).first();

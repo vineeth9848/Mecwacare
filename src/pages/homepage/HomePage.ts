@@ -53,6 +53,7 @@ export class HomePage extends BasePage {
 
       Logger.info(`Retry object selection for ${objectName}. Attempt: ${attempt}`);
     }
+    
 
     await expect(this.objectDropdownPanel).toBeHidden();
     Logger.pass(`Selected object: ${objectName}`);

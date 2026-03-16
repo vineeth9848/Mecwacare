@@ -46,3 +46,19 @@ test.skip('Verify account validations', async ({ page }) => {
   await accountPage.verifyAgeValueFromDob(accountData.dob);
   await accountPage.verifyServiceDeliveryAddress(accountData.serviceDelivery);
 });
+
+test.only('Verify account care and Support Plan', async ({ page }) => {
+  const homePage = new HomePage(page);
+  const accountPage = new AccountPage(page);
+  const { accountCreate } = TestDataHelper.readJsonFile<{ accountCreate: Array<Record<string, string>> }>('accounts.json');
+  const accountData = accountCreate[0];
+
+  Logger.info('Starting account Care Plan validation test');
+  await accountPage.refreshPage();
+  await homePage.verifyHomePage();
+  await homePage.selectObjectFromDropdown('Accounts');
+  await accountPage.selectAccountsListView('My Accounts');
+  const expectedEmail = accountPage.getEmailWithRunNumber(accountData.email);
+  await accountPage.searchAndOpenAccountByEmail(expectedEmail);
+  
+});
