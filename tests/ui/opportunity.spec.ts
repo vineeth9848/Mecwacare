@@ -22,6 +22,7 @@ test('verify funding source and funding type in first opportunity record', async
   await opportunityPage.clickSearchFundingAndAddNewFunding();
   await opportunityPage.selectParticipantInNewFunding(lead.firstName, lead.lastName);
   await opportunityPage.selectNewFundingSourceAndTypeSupportAtHomeAndSave();
+  await opportunityPage.selectFundingAdministrator(lead.firstName, lead.lastName);
   await opportunityPage.selectAssessmentVisitPreferenceInPerson();
   await opportunityPage.selectServiceAgreementStatus();
   await opportunityPage.selectReferrerTypeFamilyViolencePrograms();
@@ -76,7 +77,7 @@ test('verify Generate Service Agreement functionality on Opportunity', async ({ 
   
 });
 
-test.only('verify Send For Signature functionality on Opportunity', async ({ page }) => {
+test('Generate Send For Signature functionality on Opportunity', async ({ page }) => {
   const homePage = new HomePage(page);
   const opportunityPage = new OpportunityPage(page);
   const { leadCreate } = TestDataHelper.readJsonFile<{ leadCreate: Array<Record<string, string>> }>('leads.json');
@@ -90,5 +91,25 @@ test.only('verify Send For Signature functionality on Opportunity', async ({ pag
   await opportunityPage.searchAndOpenOpportunityByLeadName(lead.firstName, lead.lastName);
   await opportunityPage.clickSignaturevisible();
   await opportunityPage.configureSignature();
+  
+});
+
+test.only('verify Signature and Close the Opportunity', async ({ page }) => {
+  const homePage = new HomePage(page);
+  const opportunityPage = new OpportunityPage(page);
+  const { leadCreate } = TestDataHelper.readJsonFile<{ leadCreate: Array<Record<string, string>> }>('leads.json');
+  const lead = leadCreate[0];
+
+  Logger.info('Verifying signature and closing opportunity');
+  await opportunityPage.refreshPage();
+  await homePage.verifyHomePage();
+  await homePage.selectObjectFromDropdown('Opportunities');
+  await opportunityPage.selectOpportunitiesListView('My Opportunities');
+  await opportunityPage.searchAndOpenOpportunityByLeadName(lead.firstName, lead.lastName);
+  await opportunityPage.verifySentForSignature();
+  await opportunityPage.selectFundingAdministrator(lead.firstName, lead.lastName);
+  await opportunityPage.refreshPage();
+  await opportunityPage.setOpportunityToClosedWon();
+  
   
 });
