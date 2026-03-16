@@ -40,6 +40,9 @@ export const OpportunityLocators = {
   searchIconInCombobox:
     "xpath=ancestor::div[contains(@class,'slds-combobox')]//button[contains(@title,'Search') or contains(@aria-label,'Search')]",
   advancedSearchParticipantInput: "input[aria-label='Participant']",
+  fundingAdministratorInput: "input[placeholder='Search Accounts...'], input[aria-label='Funding Administrator']",
+  advancedSearchFundingAdministratorInput: "input[aria-label='Funding Administrator']",
+  advancedSearchSearchButton: "button:has-text('Search')",
   advancedSearchFirstRowRadio: "table tbody tr label.slds-radio__label",
   advancedSearchSelectButton:
     "lightning-modal-footer button.slds-button_brand:has-text('Select'), button.slds-button_brand:has-text('Select')",
@@ -81,4 +84,8 @@ export const OpportunityLocators = {
   GenerateAgreementText: "text=Generate the Service Agreement for",
   GenerateAgreementsuccessMessage: "text=Agreement Generated Successfully. Check the Files related list on this Opportunity",
   ServiceAgreementtext:'xpath=(//lightning-base-formatted-text[text()="Service Agreement"])[1]',
+  EditStageDropdown: 'button[title="Edit Stage"]',
+  stageDropdown:"xpath=(//button[@aria-label='Stage'])",
+  EditFundingAdministrator: 'button[title="Edit Funding Administrator"]',
+  EnterFundingAdministratorInput: 'input[aria-label="Funding Administrator"]',
    } as const;

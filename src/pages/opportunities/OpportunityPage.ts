@@ -4,6 +4,7 @@ import { Logger } from '../../utils/Logger';
 import { OpportunityLocators } from '../locators/OpportunityLocators';
 import PropertyReader from '../../utils/PropertyReader';
 
+
 export class OpportunityPage extends BasePage {
   private readonly newButton = this.page.locator(OpportunityLocators.newButton).first();
   private readonly accountNameInput = this.page.locator(OpportunityLocators.accountNameInput).first();
@@ -383,6 +384,82 @@ export class OpportunityPage extends BasePage {
     }
 
     Logger.pass(`Participant selected in New Funding: ${participantName}`);
+  }
+
+  async selectFundingAdministrator(firstName: string, lastName: string): Promise<void> {
+    const runNumber = PropertyReader.getRunNumber(1);
+    const administratorName = `${firstName} ${lastName}${runNumber}`;
+
+    Logger.step(`Select Funding Administrator: ${administratorName}`);
+    const EditFundingAdministratorInput = this.page.locator(OpportunityLocators.EditFundingAdministrator);
+    const EnterFundingAdministratorInput = this.page.locator(OpportunityLocators.EnterFundingAdministratorInput);
+    await this.waitForVisible(EditFundingAdministratorInput, 30000);
+    await this.scrollIntoView(EditFundingAdministratorInput);
+    await EditFundingAdministratorInput.click({ force: true });
+    await EnterFundingAdministratorInput.fill(administratorName);
+    await this.staticWait(1500);
+    await EnterFundingAdministratorInput.click({ force: true });
+    await this.staticWait(800);
+
+    const showMoreResults = this.page
+      .locator(OpportunityLocators.listboxOptions)
+      .filter({ hasText: `Show more results for "${administratorName}"` })
+      .first();
+
+    if (await showMoreResults.isVisible().catch(() => false)) {
+      await showMoreResults.click({ force: true });
+
+      const advancedSearchHeading = this.page.getByRole('heading', { name: 'Advanced Search' }).first();
+      await expect(advancedSearchHeading).toBeVisible({ timeout: 30000 });
+
+      const advancedSearchInput = this.page
+        .locator(OpportunityLocators.advancedSearchFundingAdministratorInput)
+        .first();
+      await this.waitForVisible(advancedSearchInput, 30000);
+      await advancedSearchInput.fill(administratorName);
+
+      const searchButton = this.page.locator(OpportunityLocators.advancedSearchSearchButton).last();
+      if (await searchButton.isVisible().catch(() => false)) {
+        await searchButton.click({ force: true });
+      }
+
+      const firstRadioLabel = this.page.locator(OpportunityLocators.advancedSearchFirstRowRadio).first();
+      await this.waitForVisible(firstRadioLabel, 30000);
+      await firstRadioLabel.click({ force: true });
+
+      const selectButton = this.page.locator(OpportunityLocators.advancedSearchSelectButton).first();
+      await this.waitForVisible(selectButton, 30000);
+      await expect.poll(async () => selectButton.isEnabled(), { timeout: 30000 }).toBeTruthy();
+      await selectButton.click({ force: true });
+
+      await expect(advancedSearchHeading).toBeHidden({ timeout: 30000 });
+    } else {
+      const listboxId = await EditFundingAdministratorInput.getAttribute('aria-controls');
+      const escapedName = administratorName.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+      const administratorResult = listboxId
+        ? this.page
+            .locator(`#${listboxId} [role='option'], #${listboxId} li`)
+            .filter({ hasText: new RegExp(`^\\s*${escapedName}(\\s|$)`, 'i') })
+            .first()
+        : this.page
+            .locator(OpportunityLocators.listboxOptions)
+            .filter({ hasText: new RegExp(`^\\s*${escapedName}(\\s|$)`, 'i') })
+            .first();
+
+      await this.waitForVisible(administratorResult, 30000);
+      await administratorResult.click({ force: true });
+    }
+
+    await this.page.getByRole('button', { name: 'Save' }).click();
+
+        const saveButton = this.page.locator("//button[text()='Save']").last();
+        await this.waitForVisible(saveButton, 10000);
+        await saveButton.scrollIntoViewIfNeeded().catch(() => {});
+        await saveButton.click({ force: true });
+
+    await this.page.waitForTimeout(5000);
+
+    Logger.pass(`Funding Administrator selected and saved : ${administratorName}`);
   }
 
   async selectNewFundingSourceSupportAtHomeWithoutSave(): Promise<void> {
@@ -886,5 +963,59 @@ async generateAgreement(): Promise<void> {
         await expect(serviceAgreementText).toContainText('Service Agreement');
 
         Logger.pass('Service agreement file is generated');
+}
+
+async verifySentForSignature(): Promise<void> {
+        Logger.step('Verify Send for Signature is generated');
+
+        await this.page.getByRole('button', { name: 'Show All Activities' }).scrollIntoViewIfNeeded();
+
+        await this.page.waitForTimeout(5000);
+        await this.page.locator('h3:has-text("Sent for Signature")').first().waitFor();
+
+        const count = await this.page.locator('h3:has-text("Sent for Signature")').count();
+
+        expect(count).toBeGreaterThan(0);
+
+        Logger.pass('Sent for Signature is generated');
+}
+
+async setOpportunityToClosedWon(): Promise<void> {
+        Logger.step('Set opportunity to Closed Won');
+
+        const EditstageDropdown = this.page.locator(OpportunityLocators.EditStageDropdown);
+        await EditstageDropdown.scrollIntoViewIfNeeded().catch(() => {});
+        await EditstageDropdown.click();
+
+        const stageDropdown = this.page.locator(OpportunityLocators.stageDropdown);
+    
+        await stageDropdown.click();
+
+        await this.page.getByText('Closed Won', { exact: true }).click();
+        const closedWonOption = stageDropdown;
+
+        await expect(closedWonOption).toBeVisible({ timeout: 30000 });
+        await expect(closedWonOption).toHaveText('Closed Won');
+
+        const tomorrow = new Date();
+        tomorrow.setDate(tomorrow.getDate() + 1);
+
+        const date = `${String(tomorrow.getDate()).padStart(2, '0')}/${String(
+          tomorrow.getMonth() + 1
+        ).padStart(2, '0')}/${tomorrow.getFullYear()}`;
+
+
+        await this.page.locator("input[name='Agreement_Start_Date__c']").fill(date);
+
+       
+        await this.page.getByRole('button', { name: 'Save' }).click();
+
+        const saveButton = this.page.locator("//button[text()='Save']").last();
+        await this.waitForVisible(saveButton, 10000);
+        await saveButton.scrollIntoViewIfNeeded().catch(() => {});
+        await saveButton.click({ force: true });
+
+        Logger.info(`Agreement Start Date set to ${date}`);
+        Logger.pass('Opportunity set to Closed Won');
 }
 }
