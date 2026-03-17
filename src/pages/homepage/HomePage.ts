@@ -58,4 +58,6 @@ export class HomePage extends BasePage {
     await expect(this.objectDropdownPanel).toBeHidden();
     Logger.pass(`Selected object: ${objectName}`);
   }
+
+
 }
