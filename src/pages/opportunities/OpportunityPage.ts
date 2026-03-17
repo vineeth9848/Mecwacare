@@ -140,6 +140,7 @@ export class OpportunityPage extends BasePage {
 
     const rowLink = matchedRow.locator(OpportunityLocators.rowLink).first();
     await this.click(rowLink);
+    await this.page.waitForTimeout(5000);
     Logger.pass(`Opened opportunity record for: ${fullNameWithRunNumber}`);
   }
 
@@ -1018,4 +1019,79 @@ async setOpportunityToClosedWon(): Promise<void> {
         Logger.info(`Agreement Start Date set to ${date}`);
         Logger.pass('Opportunity set to Closed Won');
 }
+
+async verifyNoFurtherUpdatesOnRecord(): Promise<void> {
+        Logger.step('Verify no further updates on record');
+
+        const noFurtherUpdatesText = this.page.getByText('No further updates are allowed on this Opportunity').first();
+        await expect(noFurtherUpdatesText).toBeVisible({ timeout: 30000 });
+
+        Logger.pass('No further updates on record is verified');
 }
+
+async createServiceAgreement(): Promise<void> {
+        Logger.step('Create service agreement');
+
+        const createServiceAgreementButton = this.page.getByRole('button', { name: 'Create Service Agreement' });
+        await expect(createServiceAgreementButton).toBeVisible({ timeout: 30000 });
+       
+        await createServiceAgreementButton.click();
+      
+        const AgreementStartDate = this.page.getByLabel('Agreement Start Date').first();
+          await this.waitForVisible(AgreementStartDate, 30000);
+            await AgreementStartDate.click(); 
+            await AgreementStartDate.clear();   
+
+         const todaysDate = new Date();
+         const tomorrow = new Date();
+         tomorrow.setDate(tomorrow.getDate() + 1);
+         const formattedTodaysDate = `${String(todaysDate.getDate()).padStart(2, '0')}/${String(
+          todaysDate.getMonth() + 1
+        ).padStart(2, '0')}/${todaysDate.getFullYear()}`;
+
+        await AgreementStartDate.fill(formattedTodaysDate);
+
+        await this.page.waitForTimeout(5000);
+
+        const formattedTomorrowsDate = `${String(tomorrow.getDate()).padStart(2, '0')}/${String(
+          tomorrow.getMonth() + 1
+        ).padStart(2, '0')}/${tomorrow.getFullYear()}`;
+
+        const AgreementEndDate = this.page.getByLabel('Agreement End Date').first();
+        await this.waitForVisible(AgreementEndDate, 30000);
+        await AgreementEndDate.click(); 
+        await AgreementEndDate.clear(); 
+        await AgreementEndDate.fill(formattedTomorrowsDate);
+
+        await this.page.waitForTimeout(5000);
+
+        const confirmButton = this.page.getByRole('button', { name: 'Confirm' }).first();
+        await confirmButton.scrollIntoViewIfNeeded();
+        await this.waitForVisible(confirmButton, 30000);
+        await confirmButton.click();
+
+        await this.page.waitForTimeout(20000);
+
+        Logger.pass('Service agreement is created');
+}
+
+async verifyServiceAgreementButtonNotPresent(): Promise<void> {
+        Logger.step('Verify Create Service Agreement button is not present');
+
+        const createServiceAgreementButton = this.page.getByRole('button', { name: 'Create Service Agreement' });
+        await expect(createServiceAgreementButton).toBeHidden({ timeout: 30000 });
+
+        Logger.pass('Create Service Agreement button is not present');
+}
+
+async verifyActiveServiceAgreement(): Promise<void> {
+        Logger.step('Verify active service agreement');
+
+        const createServiceAgreementButton = this.page.getByRole('button', { name: 'Create Service Agreement' });
+        await expect(createServiceAgreementButton).toBeHidden({ timeout: 30000 });
+
+        Logger.pass('Create Service Agreement button is not present');
+}
+
+}
+

@@ -51,6 +51,7 @@ test('verify Generate Quote functionality on Opportunity', async ({ page }) => {
   await opportunityPage.refreshPage();
   await opportunityPage.switchToRelatedTab();
   await opportunityPage.verifyFilesGenerated(lead.firstName, lead.lastName);
+  Logger.pass('Opportunity quote generation validation test completed successfully');
 });
 
 test('verify Generate Service Agreement functionality on Opportunity', async ({ page }) => {
@@ -74,6 +75,7 @@ test('verify Generate Service Agreement functionality on Opportunity', async ({ 
   await opportunityPage.refreshPage();
   await opportunityPage.switchToRelatedTab();
   await opportunityPage.verifyServiceAgreementFileGenerated();
+  Logger.pass('Service agreement generation validation test completed successfully');
   
 });
 
@@ -91,10 +93,11 @@ test('Generate Send For Signature functionality on Opportunity', async ({ page }
   await opportunityPage.searchAndOpenOpportunityByLeadName(lead.firstName, lead.lastName);
   await opportunityPage.clickSignaturevisible();
   await opportunityPage.configureSignature();
+  Logger.pass('Send for signature functionality on opportunity validated successfully');
   
 });
 
-test.only('verify Signature and Close the Opportunity', async ({ page }) => {
+test('verify Signature and Close the Opportunity', async ({ page }) => {
   const homePage = new HomePage(page);
   const opportunityPage = new OpportunityPage(page);
   const { leadCreate } = TestDataHelper.readJsonFile<{ leadCreate: Array<Record<string, string>> }>('leads.json');
@@ -110,6 +113,36 @@ test.only('verify Signature and Close the Opportunity', async ({ page }) => {
   await opportunityPage.selectFundingAdministrator(lead.firstName, lead.lastName);
   await opportunityPage.refreshPage();
   await opportunityPage.setOpportunityToClosedWon();
+  await opportunityPage.refreshPage();
+  await opportunityPage.verifyNoFurtherUpdatesOnRecord();
+  Logger.pass('Signature verification and opportunity closure validated successfully');
+  
+});
+
+test.only('Create Service Agreement on Opportunity record', async ({ page }) => {
+  const homePage = new HomePage(page);
+  const opportunityPage = new OpportunityPage(page);
+  const { leadCreate } = TestDataHelper.readJsonFile<{ leadCreate: Array<Record<string, string>> }>('leads.json');
+  const lead = leadCreate[0];
+
+  Logger.info('Creating service agreement on opportunity record');
+  await opportunityPage.refreshPage();
+  await homePage.verifyHomePage();
+  await homePage.selectObjectFromDropdown('Opportunities');
+  await opportunityPage.selectOpportunitiesListView('My Opportunities');
+  await opportunityPage.searchAndOpenOpportunityByLeadName(lead.firstName, lead.lastName);
+  // await opportunityPage.createServiceAgreement();
+  await opportunityPage.verifyServiceAgreementButtonNotPresent();
+  await opportunityPage.refreshPage();
+  await opportunityPage.verifyServiceAgreementButtonNotPresent();
+  await opportunityPage.refreshPage();
+  await homePage.selectObjectFromDropdown('Service Agreements');
+  await opportunityPage.searchAndOpenOpportunityByLeadName(lead.firstName, lead.lastName);
+  
+
+  Logger.pass('Service agreement creation on opportunity record validated successfully');
+  
   
   
 });
+
