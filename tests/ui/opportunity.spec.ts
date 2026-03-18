@@ -131,13 +131,14 @@ test.only('Create Service Agreement on Opportunity record', async ({ page }) => 
   await homePage.selectObjectFromDropdown('Opportunities');
   await opportunityPage.selectOpportunitiesListView('My Opportunities');
   await opportunityPage.searchAndOpenOpportunityByLeadName(lead.firstName, lead.lastName);
-  // await opportunityPage.createServiceAgreement();
+  await opportunityPage.createServiceAgreement();
   await opportunityPage.verifyServiceAgreementButtonNotPresent();
   await opportunityPage.refreshPage();
   await opportunityPage.verifyServiceAgreementButtonNotPresent();
   await opportunityPage.refreshPage();
   await homePage.selectObjectFromDropdown('Service Agreements');
   await opportunityPage.searchAndOpenOpportunityByLeadName(lead.firstName, lead.lastName);
+  await opportunityPage.verifyActiveServiceAgreement();
   
 
   Logger.pass('Service agreement creation on opportunity record validated successfully');
@@ -145,4 +146,3 @@ test.only('Create Service Agreement on Opportunity record', async ({ page }) => 
   
   
 });
-
