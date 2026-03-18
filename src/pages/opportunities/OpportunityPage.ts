@@ -392,11 +392,11 @@ export class OpportunityPage extends BasePage {
     const administratorName = `${firstName} ${lastName}${runNumber}`;
 
     Logger.step(`Select Funding Administrator: ${administratorName}`);
-    const EditFundingAdministratorInput = this.page.locator(OpportunityLocators.EditFundingAdministrator);
+    //const EditFundingAdministratorInput = this.page.locator(OpportunityLocators.EditFundingAdministrator);
     const EnterFundingAdministratorInput = this.page.locator(OpportunityLocators.EnterFundingAdministratorInput);
-    await this.waitForVisible(EditFundingAdministratorInput, 30000);
-    await this.scrollIntoView(EditFundingAdministratorInput);
-    await EditFundingAdministratorInput.click({ force: true });
+    await this.waitForVisible(EnterFundingAdministratorInput, 30000);
+    await this.scrollIntoView(EnterFundingAdministratorInput);
+    await EnterFundingAdministratorInput.click({ force: true });
     await EnterFundingAdministratorInput.fill(administratorName);
     await this.staticWait(1500);
     await EnterFundingAdministratorInput.click({ force: true });
@@ -435,7 +435,7 @@ export class OpportunityPage extends BasePage {
 
       await expect(advancedSearchHeading).toBeHidden({ timeout: 30000 });
     } else {
-      const listboxId = await EditFundingAdministratorInput.getAttribute('aria-controls');
+      const listboxId = await EnterFundingAdministratorInput.getAttribute('aria-controls');
       const escapedName = administratorName.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
       const administratorResult = listboxId
         ? this.page
@@ -536,8 +536,6 @@ export class OpportunityPage extends BasePage {
     await assessmentDropdown.click();
 
     await this.page.getByText(OpportunityLocators.inPersonOptionText, { exact: true }).click();
-
-    await this.page.waitForTimeout(5000);
 
     await expect(assessmentDropdown).toContainText('In-Person', { timeout: 30000 });
 
