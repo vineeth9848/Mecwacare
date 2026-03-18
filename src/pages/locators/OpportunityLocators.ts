@@ -88,4 +88,7 @@ export const OpportunityLocators = {
   stageDropdown:"xpath=(//button[@aria-label='Stage'])",
   EditFundingAdministrator: 'button[title="Edit Funding Administrator"]',
   EnterFundingAdministratorInput: 'input[aria-label="Funding Administrator"]',
+  agreementInformationSection: "button:has-text('Agreement Information'), span:has-text('Agreement Information')",
+  serviceAgreementStatusValue:
+    "xpath=(//span[normalize-space()='Status']/following::lightning-formatted-text[1] | //span[normalize-space()='Status']/following::span[contains(@class,'test-id__field-value') or contains(@class,'slds-form-element__static')][1])[1]",
    } as const;

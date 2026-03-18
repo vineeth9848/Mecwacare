@@ -3,7 +3,8 @@
     {
       "listView": "My Planner",
       "searchText": "John Doe",
-      "recordName": "John Doe"
+      "recordName": "John Doe",
+      "username": "John Doe"
     }
   ]
 }

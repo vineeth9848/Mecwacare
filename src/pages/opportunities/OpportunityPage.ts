@@ -1085,13 +1085,21 @@ async verifyServiceAgreementButtonNotPresent(): Promise<void> {
 }
 
 async verifyActiveServiceAgreement(): Promise<void> {
-        Logger.step('Verify active service agreement');
+        Logger.step('Verify service agreement status is Active');
 
-        const createServiceAgreementButton = this.page.getByRole('button', { name: 'Create Service Agreement' });
-        await expect(createServiceAgreementButton).toBeHidden({ timeout: 30000 });
+        
+        const section = this.page.locator('button:has-text("Agreement Period Information")').first();
 
-        Logger.pass('Create Service Agreement button is not present');
+        await section.scrollIntoViewIfNeeded();
+        
+        const status = this.page
+            .locator('lightning-formatted-text')
+            .filter({ hasText: 'Active' })
+            .first();
+
+          await expect(status).toBeVisible({ timeout: 30000 });
+
+        Logger.pass('Service agreement status verified as Active');
 }
 
 }
-
