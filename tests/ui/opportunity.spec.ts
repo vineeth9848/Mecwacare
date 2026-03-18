@@ -30,7 +30,7 @@ test('verify funding source and funding type in first opportunity record', async
   Logger.pass('Opportunity funding validation test completed successfully');
 });
 
-test('verify Generate Quote functionality on Opportunity', async ({ page }) => {
+test.only('verify Generate Quote functionality on Opportunity', async ({ page }) => {
   const homePage = new HomePage(page);
   const opportunityPage = new OpportunityPage(page);
   const { leadCreate } = TestDataHelper.readJsonFile<{ leadCreate: Array<Record<string, string>> }>('leads.json');
@@ -119,7 +119,7 @@ test('verify Signature and Close the Opportunity', async ({ page }) => {
   
 });
 
-test.only('Create Service Agreement on Opportunity record', async ({ page }) => {
+test('Create Service Agreement on Opportunity record', async ({ page }) => {
   const homePage = new HomePage(page);
   const opportunityPage = new OpportunityPage(page);
   const { leadCreate } = TestDataHelper.readJsonFile<{ leadCreate: Array<Record<string, string>> }>('leads.json');
