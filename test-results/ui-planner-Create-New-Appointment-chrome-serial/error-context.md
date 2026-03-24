@@ -1,0 +1,318 @@
+# Page snapshot
+
+```yaml
+- generic:
+  - generic:
+    - generic [ref=e2]:
+      - generic [ref=e3]:
+        - link [ref=e4] [cursor=pointer]:
+          - /url: javascript:void(0);
+          - text: Skip to Navigation
+        - link [ref=e5] [cursor=pointer]:
+          - /url: javascript:void(0);
+          - text: Skip to Main Content
+        - generic [ref=e8]:
+          - generic [ref=e9]: "Sandbox: mecwaR2QA |"
+          - link [ref=e10] [cursor=pointer]:
+            - /url: /secur/logout.jsp
+            - text: Log out
+        - generic [ref=e11]:
+          - button [ref=e17]:
+            - img [ref=e19]
+            - text: Search...
+          - navigation [ref=e22]:
+            - list [ref=e24]:
+              - listitem [ref=e25]:
+                - group [ref=e26]:
+                  - button [ref=e28] [cursor=pointer]:
+                    - img [ref=e33]
+                  - button [ref=e37] [cursor=pointer]:
+                    - img [ref=e42]
+              - listitem [ref=e45]:
+                - button [ref=e51] [cursor=pointer]:
+                  - img [ref=e56]
+              - listitem [ref=e59]:
+                - button [ref=e61] [cursor=pointer]:
+                  - img [ref=e66]
+              - listitem [ref=e69]:
+                - button [ref=e72] [cursor=pointer]:
+                  - img [ref=e77]
+              - listitem [ref=e80]:
+                - button [ref=e86] [cursor=pointer]:
+                  - img [ref=e91]
+              - listitem [ref=e94]:
+                - button [ref=e97] [cursor=pointer]:
+                  - generic [ref=e99]:
+                    - img [ref=e103]
+                    - generic [ref=e107]: 20+
+                - generic [ref=e108]: 221 new notifications
+              - listitem [ref=e109]:
+                - button [ref=e112] [cursor=pointer]
+      - generic [ref=e117]:
+        - generic [ref=e118]:
+          - generic [ref=e120]:
+            - generic [ref=e121]:
+              - navigation [ref=e122]:
+                - button [ref=e124] [cursor=pointer]:
+                  - generic [ref=e135]: App Launcher
+              - heading [level=1] [ref=e136]:
+                - generic [ref=e137]: mCare360
+            - navigation [ref=e138]:
+              - link [ref=e140] [cursor=pointer]:
+                - /url: /lightning/n/maica_cc__Planner
+                - generic [ref=e141]: Planner
+              - button [ref=e144] [cursor=pointer]:
+                - img [ref=e146]
+                - generic [ref=e149]: Show Navigation Menu
+          - navigation [ref=e151]:
+            - tablist [ref=e152]:
+              - generic [ref=e154]: Press Spacebar to reorder tabs.
+              - tab [ref=e155] [cursor=pointer]:
+                - generic [ref=e156]:
+                  - generic:
+                    - generic:
+                      - generic:
+                        - generic:
+                          - img
+                        - generic: maica cc Service Agreement c
+                - generic [ref=e157]: John Doe4 - Support at Home | Service Agreement
+              - button [ref=e160] [cursor=pointer]:
+                - img [ref=e162]
+                - generic [ref=e165]: Actions
+              - button [ref=e167] [cursor=pointer]:
+                - img [ref=e169]
+                - generic [ref=e172]: Close Tab
+              - status [ref=e173]
+              - tab [ref=e174] [cursor=pointer]:
+                - generic [ref=e175]:
+                  - generic:
+                    - generic:
+                      - generic:
+                        - generic:
+                          - img
+                        - generic: maica cc Service Agreement c
+                - generic [ref=e176]: John Doe2 - Support at Home | Service Agreement
+              - button [ref=e179] [cursor=pointer]:
+                - img [ref=e181]
+                - generic [ref=e184]: Actions
+              - button [ref=e186] [cursor=pointer]:
+                - img [ref=e188]
+                - generic [ref=e191]: Close Tab
+              - status [ref=e192]
+              - tab [ref=e193] [cursor=pointer]:
+                - generic [ref=e194]:
+                  - generic:
+                    - generic:
+                      - generic:
+                        - generic:
+                          - img
+                        - generic: maica cc Service Agreement c
+                - generic [ref=e195]: John Doe1 - Support at Home | Service Agreement
+              - button [ref=e198] [cursor=pointer]:
+                - img [ref=e200]
+                - generic [ref=e203]: Actions
+              - button [ref=e205] [cursor=pointer]:
+                - img [ref=e207]
+                - generic [ref=e210]: Close Tab
+              - status [ref=e211]
+              - tab [ref=e212] [cursor=pointer]:
+                - generic [ref=e213]:
+                  - generic:
+                    - generic:
+                      - generic:
+                        - generic:
+                          - img
+                        - generic: maica cc Service Agreement c
+                - generic [ref=e214]: John Doe2 - Support at Home | Service Agreement
+              - button [ref=e217] [cursor=pointer]:
+                - img [ref=e219]
+                - generic [ref=e222]: Actions
+              - button [ref=e224] [cursor=pointer]:
+                - img [ref=e226]
+                - generic [ref=e229]: Close Tab
+              - status [ref=e230]
+              - tab [ref=e231] [cursor=pointer]:
+                - generic [ref=e232]:
+                  - generic:
+                    - generic:
+                      - generic:
+                        - generic:
+                          - img
+                        - generic: Opportunity
+                - generic [ref=e233]: John Doe5 - Support at Home | Opportunity
+              - button [ref=e236] [cursor=pointer]:
+                - img [ref=e238]
+                - generic [ref=e241]: Actions
+              - button [ref=e243] [cursor=pointer]:
+                - img [ref=e245]
+                - generic [ref=e248]: Close Tab
+              - status [ref=e249]
+              - button [ref=e254] [cursor=pointer]:
+                - generic [ref=e255]: More
+                - generic [ref=e257]:
+                  - img [ref=e259]
+                  - generic [ref=e262]: Show additional tabs
+        - main [ref=e265]:
+          - generic [ref=e272]:
+            - generic [ref=e273]:
+              - generic [ref=e275]:
+                - generic [ref=e276]:
+                  - button [ref=e278] [cursor=pointer]:
+                    - img [ref=e280]
+                  - generic [ref=e283]:
+                    - button [ref=e285] [cursor=pointer]:
+                      - img [ref=e287]
+                    - button [ref=e291] [cursor=pointer]:
+                      - img [ref=e293]
+                    - button [ref=e297] [cursor=pointer]:
+                      - img [ref=e299]
+                  - generic [ref=e302]:
+                    - button [ref=e304] [cursor=pointer]:
+                      - img [ref=e306]
+                    - button [ref=e310] [cursor=pointer]:
+                      - img [ref=e312]
+                    - button [ref=e316] [cursor=pointer]: TODAY
+                    - button [ref=e318] [cursor=pointer]:
+                      - img [ref=e320]
+                  - generic [ref=e323]:
+                    - button [ref=e325] [cursor=pointer]:
+                      - img [ref=e327]
+                    - button [ref=e331] [cursor=pointer]:
+                      - img [ref=e333]
+                  - button [ref=e338] [cursor=pointer]:
+                    - generic [ref=e339]:
+                      - img [ref=e340]
+                      - text: Calcutta
+                - generic [ref=e343]: 23 Mar 2026 – 29 Mar 2026
+                - generic [ref=e344]:
+                  - generic [ref=e345]:
+                    - button [ref=e347] [cursor=pointer]:
+                      - img [ref=e349]
+                    - button [ref=e353] [cursor=pointer]:
+                      - img [ref=e355]
+                  - generic [ref=e358]:
+                    - button [ref=e360] [cursor=pointer]:
+                      - generic [ref=e361]:
+                        - img [ref=e362]
+                        - text: Schedule
+                      - img [ref=e366]
+                      - generic [ref=e369]: Show menu
+                    - button [ref=e371] [cursor=pointer]:
+                      - generic [ref=e372]:
+                        - img [ref=e373]
+                        - text: Week
+                      - img [ref=e377]
+                      - generic [ref=e380]: Show menu
+                    - button [ref=e382] [cursor=pointer]:
+                      - img [ref=e384]
+              - generic [ref=e387]:
+                - button [ref=e390] [cursor=pointer]:
+                  - img [ref=e392]
+                - application [ref=e396]:
+                  - generic [ref=e397]:
+                    - generic [ref=e398]:
+                      - generic [ref=e399]: Mon, March 23
+                      - generic [ref=e400]: Tue, March 24
+                      - generic [ref=e401]: Wed, March 25
+                      - generic [ref=e402]: Thu, March 26
+                      - generic [ref=e403]: Fri, March 27
+                      - generic [ref=e404]: Sat, March 28
+                      - generic [ref=e405]: Sun, March 29
+                    - generic [ref=e406]: 00:00
+                    - generic [ref=e407]: 01:00
+                    - generic [ref=e408]: 02:00
+                    - generic [ref=e409]: 03:00
+                    - generic [ref=e410]: 04:00
+                    - generic [ref=e411]: 05:00
+                    - generic [ref=e412]: 06:00
+                    - generic [ref=e413]: 07:00
+                    - generic [ref=e414]: 08:00
+                    - generic [ref=e415]: 09:00
+                    - generic [ref=e416]: 10:00
+                    - generic [ref=e417]: 11:00
+                    - generic [ref=e418]: 12:00
+                    - generic [ref=e419]: 13:00
+                    - generic [ref=e420]: 14:00
+                    - generic [ref=e421]: 15:00
+                    - generic [ref=e422]: 16:00
+                    - generic [ref=e423]: 17:00
+                    - generic [ref=e424]: 18:00
+                    - generic [ref=e425]: 19:00
+                    - generic [ref=e426]: 20:00
+                  - generic [ref=e433]: Resources
+            - generic [ref=e434]:
+              - separator [ref=e435]
+              - button [ref=e437] [cursor=pointer]:
+                - img [ref=e439]
+      - list [ref=e444]:
+        - listitem [ref=e445]:
+          - button [ref=e448] [cursor=pointer]:
+            - img [ref=e452]
+            - generic [ref=e456]: Omni-Channel
+    - dialog "New Appointment" [ref=e459]:
+      - generic [ref=e460]:
+        - generic [ref=e461]:
+          - heading "New Appointment" [level=1] [ref=e462]
+          - button "Cancel and close" [ref=e463] [cursor=pointer]:
+            - generic [ref=e464]: Cancel and close
+            - img [ref=e468]
+        - generic [ref=e471]:
+          - generic [ref=e474]:
+            - paragraph [ref=e475]: Location
+            - generic [ref=e477]:
+              - list [ref=e478]:
+                - listitem [ref=e479]:
+                  - generic [ref=e480]:
+                    - img [ref=e482]
+                    - generic [ref=e485]: Basic Details - Stage Complete
+                - listitem [ref=e486]:
+                  - generic [ref=e488]: Location - Current Stage
+                - listitem [ref=e489]:
+                  - generic [ref=e491]: Schedule - Stage Not Started
+                - listitem [ref=e492]:
+                  - generic [ref=e494]: Additional Details - Stage Not Started
+                - listitem [ref=e495]:
+                  - generic [ref=e497]: Appointment Instructions - Stage Not Started
+                - listitem [ref=e498]:
+                  - generic [ref=e500]: Other Information - Stage Not Started
+                - listitem [ref=e501]:
+                  - generic [ref=e503]: Summary - Stage Not Started
+              - progressbar "Progress Bar" [ref=e504]:
+                - generic [ref=e506]: Progress 16%
+            - generic [ref=e509]:
+              - generic [ref=e510]:
+                - generic [ref=e511]: This Appointment is happening at a physical address
+                - generic [ref=e514]:
+                  - generic [ref=e516]:
+                    - generic [ref=e517]: This Appointment is happening at a physical address
+                    - switch "This Appointment is happening at a physical address" [checked] [ref=e518]
+                  - status
+              - radiogroup "Location Type" [ref=e523]:
+                - generic [ref=e524]: Location Type
+                - generic [ref=e526]:
+                  - generic [ref=e527]:
+                    - radio "Location" [checked] [ref=e528]
+                    - generic [ref=e529]: Location
+                  - generic [ref=e530]:
+                    - radio "Manual Entry" [ref=e531]
+                    - generic [ref=e532]: Manual Entry
+                - status
+              - generic [ref=e535]:
+                - generic [ref=e536]: Location
+                - generic [ref=e541]:
+                  - textbox [ref=e547]:
+                    - /placeholder: Select a Location
+                  - img [ref=e552] [cursor=pointer]
+              - generic [ref=e557]:
+                - generic [ref=e558]: Accommodation
+                - generic [ref=e563]:
+                  - textbox [ref=e569]:
+                    - /placeholder: Select an Accommodation
+                  - img [ref=e574] [cursor=pointer]
+          - status [ref=e577]
+        - generic [ref=e580]:
+          - button "Previous" [ref=e581] [cursor=pointer]
+          - button "Next" [active] [ref=e582] [cursor=pointer]
+  - generic:
+    - status
+```
