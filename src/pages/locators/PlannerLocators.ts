@@ -6,4 +6,5 @@ export const PlannerLocators = {
   tableRows: 'table tbody tr',
   rowLink: 'th a, td a',
   detailsTab: "a[title='Details'], [role='tab']:has-text('Details')",
+  participantLocation:"(//span[contains(text(),'Participant Location')])[1]",
 } as const;
