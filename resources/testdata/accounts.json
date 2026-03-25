@@ -3,12 +3,19 @@
     {
       "firstName": "John",
       "lastName": "Doe",
-      "phone": "9876543210",
       "dob": "01/01/1990",
-      "categoryOption": "Individual",
-      "serviceDelivery": "80 Almond",
+      "leadSource": "Website",
+      "serviceRequest": "Home Care",
+      "additionalInfo": "Automation lead creation",
       "email": "john.doe@example.com",
-      "successMessage": "Account created successfully"
+      "phone": "1234567890",
+      "leadScore": "Warm",
+      "searchAddress": "80 Alma Rd CLAYFIELD",
+      "leadOption": "Medium",
+      "serviceOption": "Home Care",
+      "verifySearchAddress": "80 Almond",
+      "verifyExpectedAddress": "80 Almond",
+      "ExpectedFilesCount":1
     }
   ]
 }
