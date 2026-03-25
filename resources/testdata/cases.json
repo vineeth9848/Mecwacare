@@ -1,0 +1,21 @@
+{
+  "caseCreate": [
+    {
+      "firstName": "John",
+      "lastName": "Doe",
+      "dob": "01/01/1990",
+      "leadSource": "Website",
+      "serviceRequest": "Home Care",
+      "additionalInfo": "Automation lead creation",
+      "email": "john.doe@example.com",
+      "phone": "1234567890",
+      "leadScore": "Warm",
+      "searchAddress": "80 Alma Rd CLAYFIELD",
+      "leadOption": "Medium",
+      "serviceOption": "Home Care",
+      "verifySearchAddress": "80 Almond",
+      "verifyExpectedAddress": "80 Almond",
+      "ExpectedFilesCount":1
+    }
+  ]
+}
