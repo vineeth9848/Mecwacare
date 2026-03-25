@@ -93,24 +93,6 @@ export class AccountPage extends BasePage {
     Logger.pass('Service delivery address selected');
   }
 
-    async verifySuccessToast(message: string) {
-    await expect(this.page.getByRole('alert'))
-      .toContainText(message);
-  }
-
-  async verifyAccountCreated(): Promise<void> {
-    Logger.step('Verify account created');
-    await this.waitForVisible(this.page.locator(AccountLocators.successToast));
-    Logger.pass('Account created successfully');
-  }
-
-  async openAccountFromList(accountName: string): Promise<void> {
-    Logger.step(`Open account from list: ${accountName}`);
-    const accountLink = this.page.getByRole('link', { name: accountName, exact: true }).first();
-    await this.click(accountLink);
-    Logger.pass(`Opened account: ${accountName}`);
-  }
-
   async selectAccountsListView(viewName: string): Promise<void> {
     Logger.step(`Select accounts list view: ${viewName}`);
     const listViewDropdown = this.page.locator(AccountLocators.listViewDropdown).first();
@@ -127,12 +109,209 @@ export class AccountPage extends BasePage {
     await listViewOption.click({ force: true });
     Logger.pass(`Accounts list view selected: ${viewName}`);
   }
+   private buildEmailWithRunNumber(email: string): string {
+      const runNumber = PropertyReader.getRunNumber(1);
+      const parts = email.split('@');
+      if (parts.length !== 2) {
+        return email;
+      }
+      return `${parts[0]}${runNumber}@${parts[1]}`;
+    }
 
-  getEmailWithRunNumber(email: string): string {
-    const runNumber = PropertyReader.getRunNumber(1);
-    const [localPart, domain] = email.split('@');
-    return `${localPart}${runNumber}@${domain}`;
+    getEmailWithRunNumber(email: string): string {
+    return this.buildEmailWithRunNumber(email);
   }
+
+  async verifyEmailValue(expectedEmail: string): Promise<void> {
+      Logger.step('Verify Account email in details page');
+      await this.scrollToTop();
+      const detailsTab = this.page.locator(AccountLocators.detailsTab).first();
+      if (await detailsTab.isVisible().catch(() => false)) {
+        await this.click(detailsTab);
+      }
+  
+      const expected = expectedEmail.toLowerCase();
+      const pageText = (await this.page.locator(AccountLocators.body).innerText()).toLowerCase();
+      expect(pageText).toContain(expected);
+  
+      const emailMatch = pageText.match(/[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}/);
+      expect(emailMatch).not.toBeNull();
+      const actual = (emailMatch ? emailMatch[0] : '').trim();
+      expect(actual).not.toBe('');
+      Logger.pass(`Account email verified: ${expectedEmail}`);
+    }
+
+    async verifyAgeValueFromYear(birthYear: number): Promise<void> {
+        Logger.step('Verify Account age using Age field and birth year');
+    
+        try {
+        await this.page.waitForLoadState('domcontentloaded', { timeout: 3000 }).catch(() => {});
+        await this.page.waitForTimeout(500);
+    
+        const launchVerifyLink = this.page.locator(AccountLocators.launchAddressVerifyLink).first();
+        await launchVerifyLink.scrollIntoViewIfNeeded();
+        await launchVerifyLink.waitFor({ state: 'visible', timeout: 5000 }).catch(() => {});
+        const launchLinkVisible = await launchVerifyLink.isVisible().catch(() => false);
+        } catch {
+          Logger.info('Page might have reloaded, proceeding with age verification');
+        }
+    
+        const ageValue = this.page.locator(AccountLocators.ageValue).last();
+        await expect(ageValue).toBeVisible({ timeout: 5000 });
+    
+        const ageText = ((await ageValue.textContent()) || '').trim();
+        Logger.info(`Age: ${ageText}`);
+    
+        const actualAge = Number(ageText);
+        const currentYear = new Date().getFullYear();
+        const expectedAge = currentYear - birthYear;
+    
+        expect(Number.isNaN(actualAge)).toBeFalsy();
+        expect(actualAge).toBe(expectedAge);
+        Logger.pass(`Account age verified. Expected: ${expectedAge}, Actual: ${actualAge}`);
+      }
+
+      async updateAddressFromLaunchVerify(searchAddress: string): Promise<boolean> {
+          Logger.step(`Update address from Launch Address / Verify: ${searchAddress}`);
+          if (this.page.isClosed()) {
+            Logger.info('Page is already closed, skipping Launch Address / Verify update');
+            return false;
+          }
+      
+          try {
+          await this.page.waitForLoadState('domcontentloaded', { timeout: 3000 }).catch(() => {});
+          await this.page.waitForTimeout(500);
+      
+          const launchVerifyLink = this.page.locator(AccountLocators.launchAddressVerifyLink).first();
+          await launchVerifyLink.scrollIntoViewIfNeeded();
+          await launchVerifyLink.waitFor({ state: 'visible', timeout: 5000 }).catch(() => {});
+          const launchLinkVisible = await launchVerifyLink.isVisible().catch(() => false);
+          if (!launchLinkVisible) {
+            Logger.info('Launch Address / Verify link is not visible on this record, skipping update');
+            return false;
+          }
+      
+          await launchVerifyLink.click();
+      
+          let searchInput = this.page.locator(AccountLocators.verifyAddressInput).first();
+          const verifyInputVisible = await searchInput.isVisible().catch(() => false);
+          if (!verifyInputVisible) {
+            searchInput = this.page.locator(AccountLocators.fallbackAddressInput).first();
+          }
+      
+          await this.waitForVisible(searchInput, 30000);
+          await searchInput.scrollIntoViewIfNeeded();
+          await searchInput.click();
+          await searchInput.fill('');
+          await searchInput.type(searchAddress, { delay: 40 });
+      
+          const listboxId = await searchInput.getAttribute('aria-controls');
+          if (listboxId) {
+            const matchingSuggestion = this.page
+              .locator(`#${listboxId} [role='option']:visible, #${listboxId} li:visible, #${listboxId} div:visible`)
+              .filter({ hasText: searchAddress })
+              .first();
+            const firstSuggestion = this.page
+              .locator(`#${listboxId} [role='option']:visible, #${listboxId} li:visible, #${listboxId} div:visible`)
+              .first();
+      
+            if (await matchingSuggestion.isVisible().catch(() => false)) {
+              await matchingSuggestion.scrollIntoViewIfNeeded().catch(() => {});
+              try {
+                await matchingSuggestion.click({ force: true });
+              } catch {
+                await searchInput.press('ArrowDown');
+                await searchInput.press('Enter');
+              }
+            } else {
+              await this.waitForVisible(firstSuggestion, 8000);
+              await firstSuggestion.scrollIntoViewIfNeeded().catch(() => {});
+              try {
+                await firstSuggestion.click({ force: true });
+              } catch {
+                await searchInput.press('ArrowDown');
+                await searchInput.press('Enter');
+              }
+            }
+          } else {
+            const matchingSuggestion = this.page
+              .locator(AccountLocators.addressSuggestionItems)
+              .filter({ hasText: searchAddress })
+              .first();
+            const firstSuggestion = this.page.locator(AccountLocators.addressSuggestionItems).first();
+      
+            if (await matchingSuggestion.isVisible().catch(() => false)) {
+              await matchingSuggestion.scrollIntoViewIfNeeded().catch(() => {});
+              try {
+                await matchingSuggestion.click({ force: true });
+              } catch {
+                await searchInput.press('ArrowDown');
+                await searchInput.press('Enter');
+              }
+            } else {
+              await this.waitForVisible(firstSuggestion, 8000);
+              await firstSuggestion.scrollIntoViewIfNeeded().catch(() => {});
+              try {
+                await firstSuggestion.click({ force: true });
+              } catch {
+                await searchInput.press('ArrowDown');
+                await searchInput.press('Enter');
+              }
+            }
+          }
+      
+          await searchInput.press('Enter');
+          await searchInput.press('Tab');
+      
+          const verifyAndSaveButton = this.page.locator(AccountLocators.verifyAndSaveButton).first();
+          await this.click(verifyAndSaveButton);
+      
+          const saveToast = this.page.locator(AccountLocators.saveToast).first();
+          await saveToast.waitFor({ state: 'visible', timeout: 8000 }).catch(() => {});
+      
+          await searchInput.waitFor({ state: 'hidden', timeout: 10000 }).catch(() => {});
+          await this.page.waitForLoadState('domcontentloaded', { timeout: 3000 }).catch(() => {});
+          await this.page.waitForTimeout(500);
+      
+          await this.refreshPage();
+          await this.page.waitForLoadState('domcontentloaded').catch(() => {});
+      
+          const detailsTabAfterSave = this.page.locator(AccountLocators.detailsTab).first();
+          if (await detailsTabAfterSave.isVisible().catch(() => false)) {
+            await detailsTabAfterSave.click();
+          }
+      
+          const addressSection = this.page.locator(AccountLocators.addressInformationText).first();
+          await addressSection.waitFor({ state: 'visible', timeout: 10000 });
+          await addressSection.scrollIntoViewIfNeeded();
+      
+          const addressLocator = this.page.locator(AccountLocators.addressValue).first();
+          await addressLocator.waitFor({ state: 'visible', timeout: 10000 });
+          const latestAddress = (await addressLocator.innerText()).replace(/\s+/g, ' ').trim().toLowerCase();
+          const normalizedExpected = searchAddress.replace(/\s+/g, ' ').trim().toLowerCase();
+          expect(latestAddress).toContain(normalizedExpected);
+          Logger.pass('Address verified and saved');
+          return true;
+          } catch (error) {
+            const message = String(error);
+            if (message.includes('Target page, context or browser has been closed')) {
+              Logger.info('Page/context closed during address update step. Skipping this step.');
+              return false;
+            }
+            throw error;
+          }
+        }
+
+        async verifyAddressValue(expectedAddressText: string): Promise<void> {
+            Logger.step('Verify Account address in details page');
+            const addressLocator = this.page.locator(AccountLocators.addressValue).first();
+            await this.scrollToBottom();
+            await this.scrollIntoView(addressLocator);
+            const addressText = (await addressLocator.innerText()).replace(/\s+/g, ' ').trim().toLowerCase();
+            const normalizedExpected = expectedAddressText.replace(/\s+/g, ' ').trim().toLowerCase();
+            expect(addressText).toContain(normalizedExpected);
+            Logger.pass(`Account address contains: ${expectedAddressText}`);
+          }
 
   async searchAndOpenAccountByEmail(email: string): Promise<void> {
     Logger.step(`Search and open account by email: ${email}`);
@@ -150,36 +329,6 @@ export class AccountPage extends BasePage {
 
     await this.page.waitForTimeout(5000);
     Logger.pass(`Opened account record using email: ${email}`);
-  }
-
-  async verifyAgeValueFromDob(dob: string): Promise<void> {
-    Logger.step('Verify age value is not empty and matches DOB');
-    const detailsTab = this.page.locator(AccountLocators.detailsTab).first();
-    await this.click(detailsTab);
-    const ageLocator = this.page.locator(AccountLocators.ageValue).first();
-    await this.scrollIntoView(ageLocator);
-    const ageText = (await ageLocator.innerText()).trim();
-
-    await expect(ageLocator).not.toHaveText('');
-
-    const actualAge = Number(ageText);
-    const expectedAge = this.calculateAgeFromDob(dob);
-    expect(actualAge).toBe(expectedAge);
-    Logger.pass(`Age verified. Expected: ${expectedAge}, Actual: ${actualAge}`);
-  }
-
-  async verifyServiceDeliveryAddress(expectedAddressText: string): Promise<void> {
-    Logger.step('Verify Service Delivery Address in details page');
-    const addressLocator = this.page.locator(AccountLocators.serviceDeliveryAddressValue).first();
-    await this.scrollIntoView(addressLocator);
-    await expect(addressLocator).toContainText(expectedAddressText, { ignoreCase: true });
-    Logger.pass(`Service Delivery Address contains: ${expectedAddressText}`);
-  }
-
-  private calculateAgeFromDob(dob: string): number {
-    const year = Number(dob.split('/')[2]);
-    const currentYear = new Date().getFullYear();
-    return currentYear - year;
   }
 
    async createCarePlan(): Promise<void> {

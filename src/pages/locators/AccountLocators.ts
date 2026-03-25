@@ -8,7 +8,7 @@ export const AccountLocators = {
   listSearchInput: "input[placeholder='Search this list...'], input[aria-label='Search this list...']",
   tableRows: 'table tbody tr',
   rowLink: 'th a, td a',
-  ageValue: "//records-record-layout-item//*[normalize-space(text())='Age']/ancestor::records-record-layout-item//lightning-formatted-number | //records-record-layout-item//*[normalize-space(text())='Age']/ancestor::records-record-layout-item//lightning-formatted-text",
+  //ageValue: "//records-record-layout-item//*[normalize-space(text())='Age']/ancestor::records-record-layout-item//lightning-formatted-number | //records-record-layout-item//*[normalize-space(text())='Age']/ancestor::records-record-layout-item//lightning-formatted-text",
   serviceDeliveryAddressValue: "//records-record-layout-item//*[contains(normalize-space(text()),'Service Delivery Address')]/ancestor::records-record-layout-item//lightning-formatted-address | //records-record-layout-item//*[contains(normalize-space(text()),'Service Delivery Address')]/ancestor::records-record-layout-item//slot//span",
   personaccount: "//span[text()='Person Account']",
   button: "Next",
@@ -36,4 +36,23 @@ export const AccountLocators = {
   task:"textarea[name='Name'] >>nth=-1",
   planprovided:"input[name='planProvided']",
   selectDropdown:"input[placeholder='Select an Option']",
+  body: "body",
+  launchAddressVerifyLink:
+    "xpath=//span[text()='Launch Address / Verify']",
+    ageRow:
+    "xpath=(//span[contains(@class,'test-id__field-label') and normalize-space()='Age']/ancestor::div[contains(@class,'slds-form-element')][1] | //*[normalize-space()='Age']/ancestor::records-record-layout-item[1])[1]",
+  ageValue:
+    "xpath=(//div[@class='slds-form-element__control']//ancestor::lightning-formatted-number)",
+  verifyAddressInput:
+    "input[placeholder='Search Address Here'], input[aria-label='Search Address Here'], input[role='combobox'][aria-autocomplete='list']",
+  addressSuggestionItems: "[role='listbox'] [role='option']:visible, ul li:visible",
+  searchAddressInput:
+    "input[aria-label='Search Address Here'], input[placeholder='Search Address Here'], input[aria-label='Search Service Delivery Address Here'], input[placeholder='Search Service Delivery Address Here']",
+  verifyAndSaveButton: "button:has-text('Verify & Save')",
+    fallbackAddressInput: "xpath=(//label[contains(normalize-space(),'Address')]/following::input[1])[1]",
+    saveToast: "text=Address verified and saved, text=Saved, [role='alert']",
+    addressInformationText: "button:has-text('Address Information')",
+      addressValue: "[data-target-selection-name='sfdc:RecordField.Lead.Address']",
+
+
 } as const;

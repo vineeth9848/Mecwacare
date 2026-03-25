@@ -6,106 +6,11 @@ import PropertyReader from '../../utils/PropertyReader';
 
 
 export class OpportunityPage extends BasePage {
-  private readonly newButton = this.page.locator(OpportunityLocators.newButton).first();
-  private readonly accountNameInput = this.page.locator(OpportunityLocators.accountNameInput).first();
-  private readonly firstOpportunityLink = this.page.locator(OpportunityLocators.firstOpportunityLink).first();
-  private readonly detailsTab = this.page.locator(OpportunityLocators.detailsTab).first();
-  private readonly fundingDetailsSection = this.page.locator(OpportunityLocators.fundingDetailsSection).first();
-  private readonly fundingSourceEditButton = this.page
-    .locator(OpportunityLocators.fundingSourceEditButton)
-    .first();
-  private readonly fundingSourceLabel = this.page.locator(OpportunityLocators.fundingSourceLabel).first();
-  private readonly fundingTypeLabel = this.page.locator(OpportunityLocators.fundingTypeLabel).first();
-  private readonly fundingSourceValue = this.page.locator(OpportunityLocators.fundingSourceValue).first();
-  private readonly fundingTypeValue = this.page.locator(OpportunityLocators.fundingTypeValue).first();
-  private readonly fundingValue = this.page.locator(OpportunityLocators.fundingValue).first();
-  private readonly assessmentVisitPreferenceDropdown = this.page
-    .locator(OpportunityLocators.assessmentVisitPreferenceDropdown)
-    .first();
-  private readonly virtualOption = this.page.locator(OpportunityLocators.virtualOption).first();
-  private readonly opportunitySaveButton = this.page.locator(OpportunityLocators.opportunitySaveButton).first();
-  private readonly fundingSourceDropdown = this.page.locator(OpportunityLocators.fundingSourceDropdown).first();
-  private readonly fundingTypeDropdown = this.page.locator(OpportunityLocators.fundingTypeDropdown).first();
-  private readonly supportAtHomeOption = this.page.locator(OpportunityLocators.supportAtHomeOption).first();
-  private readonly fundingSearchInput = this.page.locator(OpportunityLocators.fundingSearchInput).first();
-  private readonly newFundingOption = this.page.locator(OpportunityLocators.newFundingOption).first();
-  private readonly participantInput = this.page.locator(OpportunityLocators.participantInput).first();
-  private readonly participantFirstResult = this.page.locator(OpportunityLocators.participantFirstResult).first();
-  private readonly newFundingSourceDropdown = this.page.locator(OpportunityLocators.newFundingSourceDropdown).first();
-  private readonly newFundingTypeDropdown = this.page.locator(OpportunityLocators.newFundingTypeDropdown).first();
-  private readonly newFundingSaveButton = this.page.locator(OpportunityLocators.newFundingSaveButton).first();
 
   constructor(page: Page) {
     super(page);
   }
 
-  private async selectOptionFromCombobox(combobox: Locator, optionText: string): Promise<void> {
-    await this.waitForVisible(combobox, 30000);
-    await combobox.scrollIntoViewIfNeeded();
-    await combobox.click({ force: true });
-
-    const listboxId = await combobox.getAttribute('aria-controls');
-    const optionInScopedListbox = listboxId
-      ? this.page
-          .locator(`#${listboxId} [role='option'], #${listboxId} li, #${listboxId} span[title]`)
-          .filter({ hasText: new RegExp(`^\\s*${optionText}\\s*$`, 'i') })
-          .first()
-      : this.page
-          .locator(OpportunityLocators.listboxOptions)
-          .filter({ hasText: new RegExp(`^\\s*${optionText}\\s*$`, 'i') })
-          .first();
-
-    const optionInAnyListbox = this.page
-      .locator(OpportunityLocators.listboxOptions)
-      .filter({ hasText: new RegExp(`^\\s*${optionText}\\s*$`, 'i') })
-      .first();
-
-    if (await optionInScopedListbox.isVisible().catch(() => false)) {
-      await optionInScopedListbox.scrollIntoViewIfNeeded().catch(() => {});
-      await optionInScopedListbox.click({ force: true });
-    } else if (await optionInAnyListbox.isVisible().catch(() => false)) {
-      await optionInAnyListbox.scrollIntoViewIfNeeded().catch(() => {});
-      await optionInAnyListbox.click({ force: true });
-    } else {
-      await combobox.press('ArrowDown').catch(() => {});
-      await combobox.press('Enter').catch(() => {});
-    }
-
-    await this.page.keyboard.press('Enter').catch(() => {});
-    await this.page.keyboard.press('Tab').catch(() => {});
-    if (listboxId) {
-      await this.page.locator(`#${listboxId}`).waitFor({ state: 'hidden', timeout: 5000 }).catch(() => {});
-    }
-  }
-
-  async clickNewButton(): Promise<void> {
-    Logger.step('Click New button in Opportunities page');
-    await this.click(this.newButton);
-    Logger.pass('Clicked New button in Opportunities page');
-  }
-
-  async selectAccountName(accountName: string): Promise<void> {
-    Logger.step(`Select account name in Opportunity: ${accountName}`);
-    await this.waitForVisible(this.accountNameInput);
-    await this.accountNameInput.fill(accountName);
-
-    const matchingOption = this.page
-      .locator(OpportunityLocators.accountNameOptions)
-      .filter({ hasText: accountName })
-      .first();
-
-    await this.waitForVisible(matchingOption);
-    await matchingOption.click();
-    await expect(this.accountNameInput).toHaveValue(new RegExp(accountName, 'i'));
-    Logger.pass(`Selected account name in Opportunity: ${accountName}`);
-  }
-
-  async openFirstOpportunityRecord(): Promise<void> {
-    Logger.step('Open first opportunity record from list');
-    await this.waitForVisible(this.firstOpportunityLink);
-    await this.click(this.firstOpportunityLink);
-    Logger.pass('Opened first opportunity record');
-  }
 
   async selectOpportunitiesListView(viewName: string): Promise<void> {
     Logger.step(`Select opportunities list view: ${viewName}`);
@@ -264,7 +169,6 @@ export class OpportunityPage extends BasePage {
     }
     Logger.pass('Funding Type auto-populated as Support at Home');
 
-    // await this.page.getByRole('button', { name: 'Save' }).first().click({ force: true });
     Logger.pass('Funding Source updated to Support at Home');
   }
 
@@ -392,7 +296,6 @@ export class OpportunityPage extends BasePage {
     const administratorName = `${firstName} ${lastName}${runNumber}`;
 
     Logger.step(`Select Funding Administrator: ${administratorName}`);
-    //const EditFundingAdministratorInput = this.page.locator(OpportunityLocators.EditFundingAdministrator);
     const EnterFundingAdministratorInput = this.page.locator(OpportunityLocators.EnterFundingAdministratorInput);
     await this.waitForVisible(EnterFundingAdministratorInput, 30000);
     await this.scrollIntoView(EnterFundingAdministratorInput);
@@ -461,17 +364,6 @@ export class OpportunityPage extends BasePage {
     await this.page.waitForTimeout(5000);
 
     Logger.pass(`Funding Administrator selected and saved : ${administratorName}`);
-  }
-
-  async selectNewFundingSourceSupportAtHomeWithoutSave(): Promise<void> {
-    Logger.step('Select New Funding Source as Support at Home');
-    const participantInput = this.page.getByRole('combobox', { name: 'Participant' }).first();
-    await this.waitForVisible(participantInput, 30000);
-    await this.selectOptionFromCombobox(this.newFundingSourceDropdown, 'Support at Home');
-    await expect
-      .poll(async () => (await this.newFundingSourceDropdown.textContent())?.trim() || '')
-      .toContain('Support at Home');
-    Logger.pass('New Funding Source selected as Support at Home');
   }
 
   async selectNewFundingSourceAndTypeSupportAtHomeAndSave(): Promise<void> {
@@ -683,16 +575,6 @@ export class OpportunityPage extends BasePage {
     await expect(fileNameLink).toContainText(expectedFileText, { timeout: 30000 });
 
     Logger.pass(`Verified generated file: ${expectedFileText}`);
-  }
-
-  async getFilesCount(): Promise<number> {
-    const filesHeaderWithCount = this.page.locator(OpportunityLocators.filesHeaderWithCount).first();
-    await this.scrollIntoView(filesHeaderWithCount);
-    await this.waitForVisible(filesHeaderWithCount, 30000);
-
-    const filesCountText = ((await filesHeaderWithCount.textContent()) || '').trim();
-    const countMatch = filesCountText.match(/\((\d+)\)/);
-    return Number(countMatch ? countMatch[1] : '0');
   }
  
   async configurePriceBook(): Promise<void> {

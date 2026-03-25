@@ -174,13 +174,6 @@ export class LeadPage extends BasePage {
     Logger.pass('Lead address selected');
   }
 
-  async openLeadFromList(leadName: string): Promise<void> {
-    Logger.step(`Open lead from list: ${leadName}`);
-    const leadLink = this.page.getByRole('link', { name: leadName, exact: true }).first();
-    await this.click(leadLink);
-    Logger.pass(`Opened lead: ${leadName}`);
-  }
-
   async openLatestLeadIfEmailMatches(expectedEmail: string): Promise<void> {
     Logger.step(`Open lead record by email: ${expectedEmail}`);
     await this.staticWait(1000);
