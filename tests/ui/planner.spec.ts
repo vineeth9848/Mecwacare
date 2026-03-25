@@ -17,7 +17,7 @@ test.only('Create New Appointment', async ({ page }) => {
   await plannerPage.NewAppointment(planner.username);
   await plannerPage.setStartDateToTomorrow();
   await plannerPage.selectAppointmentServiceAndClickNext();
-  await plannerPage.NavigationtoNext();
+  await plannerPage.NavigationToNextPages();
 
   
 });
