@@ -25,5 +25,15 @@ export const AccountLocators = {
   Billing_City: "Billing City",
   Billing_state: "Billing State/Province",
   Billing_postalcode: "Billing PostalCode",
-
+  more_Tabs: "button[title='More Tabs'] >> nth=0",
+  StoryDescription: "textarea[name='caredescription']",
+  Goals: "textarea[name='Name'] >>nth=0",
+  currentSituation: "textarea[name='ProblemName']",
+  needstobeDone: "textarea[name='ProblemDescription']",
+  whom: "textarea[name='By_whom__c']",
+  byWhen: "textarea[name='By_when__c']",
+  progress:"textarea[name='Progress_and_review__c']",
+  task:"textarea[name='Name'] >>nth=-1",
+  planprovided:"input[name='planProvided']",
+  selectDropdown:"input[placeholder='Select an Option']",
 } as const;
