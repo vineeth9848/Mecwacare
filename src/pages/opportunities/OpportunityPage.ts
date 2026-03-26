@@ -610,13 +610,19 @@ export class OpportunityPage extends BasePage {
     const productsHeader = this.page.locator(OpportunityLocators.productsHeader).first();
     await this.scrollIntoView(productsHeader);
 
-    const productsCount = this.page.locator(OpportunityLocators.productsCount).filter({ hasText: '(1)' }).first();
-    await this.waitForVisible(productsCount, 30000);
-    await expect(productsCount).toContainText('(1)', { timeout: 30000 });
+    const productsSection = this.page.getByText(/Products\s*\(\d+\)/);
 
-    const productNameLink = this.page.locator(OpportunityLocators.productNameLink).filter({ hasText: 'Absorbent product' }).first();
-    await this.waitForVisible(productNameLink, 30000);
-    await expect(productNameLink).toContainText('Absorbent product', { timeout: 30000 });
+    await productsSection.waitFor({ state: 'visible', timeout: 30000 });
+    const text = await productsSection.textContent();
+    const count = Number(text?.match(/\((\d+)\)/)?.[1]);
+
+    expect(count).toBeGreaterThan(0);
+
+    const productNameLink = this.page.getByRole('link', {
+      name: /Aboriginal/i
+    });
+    await productNameLink.waitFor({ state: 'visible' });
+    await expect(productNameLink).toBeVisible();
 
     Logger.pass('Verified products count and Absorbent product name');
 

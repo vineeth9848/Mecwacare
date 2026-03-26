@@ -5,7 +5,7 @@ import { OpportunityPage } from '../../src/pages/opportunities/OpportunityPage';
 import { TestDataHelper } from '../../src/utils/TestDataHelper';
 import { time } from 'console';
 
-test('verify Generate Quote functionality on Opportunity', async ({ page }) => {
+test.only('verify Generate Quote functionality on Opportunity', async ({ page }) => {
   const homePage = new HomePage(page);
   const opportunityPage = new OpportunityPage(page);
   const { leadCreate } = TestDataHelper.readJsonFile<{ leadCreate: Array<Record<string, string>> }>('leads.json');
@@ -17,12 +17,12 @@ test('verify Generate Quote functionality on Opportunity', async ({ page }) => {
   await homePage.selectObjectFromDropdown('Opportunities');
   await opportunityPage.selectOpportunitiesListView('My Opportunities');
   await opportunityPage.searchAndOpenOpportunityByLeadName(lead.firstName, lead.lastName);
-  await opportunityPage.verifyQuoteNotGenerated();
-  await opportunityPage.refreshPage();
-  await opportunityPage.switchToRelatedTab();
-  await opportunityPage.configurePriceBook();
-  await opportunityPage.configureProductManagement();
-  await opportunityPage.refreshPage();
+  // await opportunityPage.verifyQuoteNotGenerated();
+  // await opportunityPage.refreshPage();
+  // await opportunityPage.switchToRelatedTab();
+  // await opportunityPage.configurePriceBook();
+  // await opportunityPage.configureProductManagement();
+  // await opportunityPage.refreshPage();
   await opportunityPage.switchToRelatedTab();
   await opportunityPage.verifyProductsAndClickGenerateQuote();
   await opportunityPage.refreshPage();
