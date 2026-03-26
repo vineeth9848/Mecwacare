@@ -83,8 +83,8 @@ export class OpportunityPage extends BasePage {
     Logger.pass('Opportunity details tab opened');
   }
 
-  async selectSupportAtHomeForFundingSourceAndType(): Promise<void> {
-    Logger.step('Update Funding Source to Support at Home');
+  async selectBlockFundingForFundingSourceAndType(): Promise<void> {
+    Logger.step('Update Funding Source to Block Funding');
 
     const fundingDetailsSection = this.page
       .locator(OpportunityLocators.fundingDetailsSection)
@@ -127,24 +127,24 @@ export class OpportunityPage extends BasePage {
     await this.staticWait(1200);
 
     const listboxId = await fundingSourceDropdown.getAttribute('aria-controls');
-    let supportAtHomeOption = this.page.getByRole('option', { name: 'Support at Home' }).first();
+    let supportAtHomeOption = this.page.getByRole('option', { name: 'Block Funding' }).first();
 
     if (listboxId) {
       supportAtHomeOption = this.page
         .locator(`#${listboxId} [role='option'], #${listboxId} li, #${listboxId} span[title]`)
-        .filter({ hasText: 'Support at Home' })
+        .filter({ hasText: 'Block Funding' })
         .first();
     }
 
     const optionVisible = await supportAtHomeOption.isVisible().catch(() => false);
     if (!optionVisible) {
-      await fundingSourceDropdown.type('Support at Home', { delay: 40 }).catch(() => {});
+      await fundingSourceDropdown.type('Block Funding', { delay: 40 }).catch(() => {});
       await this.staticWait(1000);
     }
 
     const matchingOption = this.page
       .locator(OpportunityLocators.listboxOptions)
-      .filter({ hasText: 'Support at Home' })
+      .filter({ hasText: 'Block Funding' })
       .first();
 
     if (await matchingOption.isVisible().catch(() => false)) {
@@ -158,60 +158,169 @@ export class OpportunityPage extends BasePage {
       await fundingSourceDropdown.press('Enter');
     }
 
-    const fundingTypeButton = this.page.locator(OpportunityLocators.fundingTypeComboboxButton).first();
-    const fundingTypeInput = this.page.locator(OpportunityLocators.fundingTypeComboboxInput).first();
-    const fundingTypeButtonVisible = await fundingTypeButton.isVisible().catch(() => false);
+    await expect(fundingSourceDropdown).toContainText('Block Funding', { timeout: 30000 });
+    Logger.pass('Funding Source updated to Block Funding');
 
-    if (fundingTypeButtonVisible) {
-      await expect(fundingTypeButton).toContainText('Support at Home', { timeout: 30000 });
-    } else {
-      await expect(fundingTypeInput).toHaveValue(/Support at Home/i, { timeout: 30000 });
-    }
-    Logger.pass('Funding Type auto-populated as Support at Home');
+    // const fundingTypeButton = this.page.locator(OpportunityLocators.fundingTypeComboboxButton).first();
+    // const fundingTypeInput = this.page.locator(OpportunityLocators.fundingTypeComboboxInput).first();
+    // const fundingTypeButtonVisible = await fundingTypeButton.isVisible().catch(() => false);
 
-    Logger.pass('Funding Source updated to Support at Home');
+    // if (fundingTypeButtonVisible) {
+    //   await expect(fundingTypeButton).toContainText('Support at Home', { timeout: 30000 });
+    // } else {
+    //   await expect(fundingTypeInput).toHaveValue(/Support at Home/i, { timeout: 30000 });
+    // }
+
+    const fundingTypeDropdown = this.page.locator('button[aria-label="Funding Type"]');
+
+    await fundingTypeDropdown.click();
+
+    const option = this.page.getByRole('option', { name: 'HACC-PYP' });
+    await option.waitFor({ state: 'visible' });
+    await option.click();
+    await expect(fundingTypeDropdown).toContainText('HACC-PYP', { timeout: 30000 });
+    await this.page.waitForTimeout(5000);
+
+    await this.staticWait(1200);
+    Logger.pass('Funding Type updated to HACC-PYP');
   }
 
   async clickSearchFundingAndAddNewFunding(): Promise<void> {
     Logger.step('Click Search Funding and select New Funding');
 
-    const fundingInput = this.page.getByRole('combobox', { name: /^Funding$/i }).first();
-    await this.waitForVisible(fundingInput, 30000);
-    await this.scrollIntoView(fundingInput);
-    await fundingInput.click({ force: true });
-    await this.staticWait(1000);
+    // const fundingInput = this.page.getByRole('combobox', { name: /^Funding$/i }).first();
+    // await this.waitForVisible(fundingInput, 60000);
+    // await this.scrollIntoView(fundingInput);
+    // await fundingInput.click({ force: true });
+    // await this.staticWait(1000);
 
-    const listboxId = await fundingInput.getAttribute('aria-controls');
-    const newFundingRowScoped = listboxId
-      ? this.page
-          .locator(`#${listboxId} [role='option'], #${listboxId} li, #${listboxId} span[title]`)
-          .filter({ hasText: /^\s*New Funding\s*$/ })
-          .first()
-      : this.page
-          .locator(OpportunityLocators.listboxOptions)
-          .filter({ hasText: /^\s*New Funding\s*$/ })
-          .first();
+    // const listboxId = await fundingInput.getAttribute('aria-controls');
+    // const newFundingRowScoped = listboxId
+    //   ? this.page
+    //       .locator(`#${listboxId} [role='option'], #${listboxId} li, #${listboxId} span[title]`)
+    //       .filter({ hasText: /^\s*New Funding\s*$/ })
+    //       .first()
+    //   : this.page
+    //       .locator(OpportunityLocators.listboxOptions)
+    //       .filter({ hasText: /^\s*New Funding\s*$/ })
+    //       .first();
 
-    const newFundingRowGlobal = this.page
-      .locator(OpportunityLocators.listboxOptions)
-      .filter({ hasText: /^\s*New Funding\s*$/ })
-      .first();
+    // const newFundingRowGlobal = this.page
+    //   .locator(OpportunityLocators.listboxOptions)
+    //   .filter({ hasText: /^\s*New Funding\s*$/ })
+    //   .first();
 
-    const rowVisible = await newFundingRowScoped.isVisible().catch(() => false);
-    if (rowVisible) {
-      await newFundingRowScoped.scrollIntoViewIfNeeded().catch(() => {});
-      await newFundingRowScoped.click({ force: true });
-    } else if (await newFundingRowGlobal.isVisible().catch(() => false)) {
-      await newFundingRowGlobal.scrollIntoViewIfNeeded().catch(() => {});
-      await newFundingRowGlobal.click({ force: true });
-    } else {
-      await fundingInput.press('ArrowDown');
-      await fundingInput.press('Enter');
-    }
+    // const rowVisible = await newFundingRowScoped.isVisible().catch(() => false);
+    // if (rowVisible) {
+    //   await newFundingRowScoped.scrollIntoViewIfNeeded().catch(() => {});
+    //   await newFundingRowScoped.click({ force: true });
+    // } else if (await newFundingRowGlobal.isVisible().catch(() => false)) {
+    //   await newFundingRowGlobal.scrollIntoViewIfNeeded().catch(() => {});
+    //   await newFundingRowGlobal.click({ force: true });
+    // } else {
+    //   await fundingInput.press('ArrowDown');
+    //   await fundingInput.press('Enter');
+    // }
 
-    await this.staticWait(10000);
+    // //await this.staticWait(10000);
+
+    const fundingInput = this.page.getByRole('combobox', { name: 'Funding', exact: true });
+
+    // Open dropdown
+    await fundingInput.waitFor({ state: 'visible', timeout: 60000 });
+    await fundingInput.scrollIntoViewIfNeeded();
+    await fundingInput.click();
+
+    // Select "New Funding"
+    const newFunding = this.page.getByText('New Funding', { exact: false });
+
+    await newFunding.waitFor({ state: 'visible', timeout: 10000 });
+    await newFunding.scrollIntoViewIfNeeded();   // 👈 scroll here too
+    await newFunding.click();
 
     Logger.pass('Clicked New Funding from search');
+  }
+
+  async clickSearchFundingProgram(): Promise<void> {
+    Logger.step('Click Search Funding program and select New Funding');
+
+    // const fundingInput = this.page.getByRole('combobox', { name: /^Funding Program$/i }).first();
+    // await this.waitForVisible(fundingInput, 30000);
+    // await this.scrollIntoView(fundingInput);
+    // await fundingInput.click({ force: true });
+    // await this.staticWait(1000);
+
+    // const listboxId = await fundingInput.getAttribute('aria-controls');
+    // const newFundingRowScoped = listboxId
+    //   ? this.page
+    //       .locator(`#${listboxId} [role='option'], #${listboxId} li, #${listboxId} span[title]`)
+    //       .filter({ hasText: /^\s*New Funding Program\s*$/ })
+    //       .first()
+    //   : this.page
+    //       .locator(OpportunityLocators.listboxOptions)
+    //       .filter({ hasText: /^\s*New Funding Program\s*$/ })
+    //       .first();
+
+    // const newFundingRowGlobal = this.page
+    //   .locator(OpportunityLocators.listboxOptions)
+    //   .filter({ hasText: /^\s*New Funding Program\s*$/ })
+    //   .first();
+
+    // const rowVisible = await newFundingRowScoped.isVisible().catch(() => false);
+    // if (rowVisible) {
+    //   await newFundingRowScoped.scrollIntoViewIfNeeded().catch(() => {});
+    //   await newFundingRowScoped.click({ force: true });
+    // } else if (await newFundingRowGlobal.isVisible().catch(() => false)) {
+    //   await newFundingRowGlobal.scrollIntoViewIfNeeded().catch(() => {});
+    //   await newFundingRowGlobal.click({ force: true });
+    // } else {
+    //   await fundingInput.press('ArrowDown');
+    //   await fundingInput.press('Enter');
+    // }
+
+    const fundingProgram = this.page.getByRole('combobox', { name: 'Funding Program', exact: true });
+
+    await fundingProgram.waitFor({ state: 'visible', timeout: 60000 });
+    await fundingProgram.scrollIntoViewIfNeeded();
+    await fundingProgram.click();
+
+    const option = this.page.getByText('New Funding Program', { exact: false });
+    await option.waitFor({ state: 'visible', timeout: 10000 });
+    await option.scrollIntoViewIfNeeded();
+    await option.click();
+    
+    Logger.pass('Clicked New Funding Program from search');
+  }
+
+  async newFundingProgram(): Promise<void> {
+    Logger.step('Enter details in New Funding Program');
+
+    const programName = this.page.getByLabel(/Funding Program Name/i).first();
+    await programName.waitFor({ state: 'visible', timeout: 30000 });
+    await programName.fill('Automation Funding Type' + PropertyReader.getRunNumber(1));
+
+    const fundingPeriodDropdown = this.page.locator('button[aria-label="Funding Period"]');
+    await fundingPeriodDropdown.click();
+    const op = await this.page.getByRole('option', { name: 'Weekly' })
+    await op.waitFor({ state: 'visible' });
+    await op.click();
+
+    const reportingPeriodDropdown = this.page.locator('button[aria-label="Reporting Period"]');
+    await reportingPeriodDropdown.click();
+    const option = this.page.getByRole('option', { name: 'Weekly' });
+    await option.waitFor({ state: 'visible' });
+    await option.click();
+
+    Logger.step('Save New Funding');
+    const saveButton = this.page.locator(OpportunityLocators.newFundingSaveButtonInModal);
+    await this.waitForVisible(saveButton, 30000);
+    await saveButton.click({ force: true });
+    Logger.pass('New Funding saved');
+
+    await this.page.waitForTimeout(10000);
+    
+
+    Logger.pass('New Funding Program created successfully');
   }
 
   async selectParticipantInNewFunding(firstName: string, lastName: string): Promise<void> {
@@ -220,7 +329,7 @@ export class OpportunityPage extends BasePage {
 
     Logger.step(`Select participant in New Funding: ${participantName}`);
     const participantInput = this.page.locator(OpportunityLocators.participantSearchInput).first();
-    await this.waitForVisible(participantInput, 30000);
+    await this.waitForVisible(participantInput, 60000);
     await this.scrollIntoView(participantInput);
     await participantInput.fill(participantName);
     await this.staticWait(1500);
@@ -354,20 +463,11 @@ export class OpportunityPage extends BasePage {
       await administratorResult.click({ force: true });
     }
 
-    await this.page.getByRole('button', { name: 'Save' }).click();
-
-        const saveButton = this.page.locator("//button[text()='Save']").last();
-        await this.waitForVisible(saveButton, 10000);
-        await saveButton.scrollIntoViewIfNeeded().catch(() => {});
-        await saveButton.click({ force: true });
-
-    await this.page.waitForTimeout(5000);
-
-    Logger.pass(`Funding Administrator selected and saved : ${administratorName}`);
+    Logger.pass(`Funding Administrator selected : ${administratorName}`);
   }
 
   async selectNewFundingSourceAndTypeSupportAtHomeAndSave(): Promise<void> {
-    Logger.step('Select New Funding Source as Support at Home');
+    Logger.step('Select New Funding Source as Hacc-PYP Funding');
     const fundingSourceDropdown = this.page.locator(OpportunityLocators.newFundingSourceDropdownInModal);
     await this.waitForVisible(fundingSourceDropdown, 30000);
     await fundingSourceDropdown.click({ force: true });
@@ -377,19 +477,19 @@ export class OpportunityPage extends BasePage {
           .locator(
             `#${fundingSourceListboxId} [data-value='Support at Home'], #${fundingSourceListboxId} [role='option'], #${fundingSourceListboxId} li`,
           )
-          .filter({ hasText: /^Support at Home$/ })
+          .filter({ hasText: /^Block Funding$/ })
           .first()
       : this.page
           .locator(OpportunityLocators.listboxOptions)
-          .filter({ hasText: /^Support at Home$/ })
+          .filter({ hasText: /^Block Funding$/ })
           .first();
     await this.waitForVisible(fundingSourceOption, 30000);
     await fundingSourceOption.scrollIntoViewIfNeeded().catch(() => {});
     await fundingSourceOption.click({ force: true });
-    await expect(fundingSourceDropdown).toContainText('Support at Home', { timeout: 30000 });
-    Logger.pass('New Funding Source selected as Support at Home');
+    await expect(fundingSourceDropdown).toContainText('Block Funding', { timeout: 30000 });
+    Logger.pass('New Funding Source selected as Block Funding');
 
-    Logger.step('Select New Funding Type as Support at Home');
+    Logger.step('Select New Funding Type as HACC-PYP');
     const fundingTypeDropdown = this.page.locator(OpportunityLocators.newFundingTypeDropdownInModal);
     await this.waitForVisible(fundingTypeDropdown, 30000);
     await fundingTypeDropdown.click({ force: true });
@@ -397,25 +497,20 @@ export class OpportunityPage extends BasePage {
     const fundingTypeOption = fundingTypeListboxId
       ? this.page
           .locator(
-            `#${fundingTypeListboxId} [data-value='Support at Home'], #${fundingTypeListboxId} [role='option'], #${fundingTypeListboxId} li`,
+            `#${fundingTypeListboxId} [data-value='HACC-PYP'], #${fundingTypeListboxId} [role='option'], #${fundingTypeListboxId} li`,
           )
-          .filter({ hasText: /^Support at Home$/ })
+          .filter({ hasText: /^HACC-PYP$/ })
           .first()
       : this.page
           .locator(OpportunityLocators.listboxOptions)
-          .filter({ hasText: /^Support at Home$/ })
+          .filter({ hasText: /^HACC-PYP$/ })
           .first();
     await this.waitForVisible(fundingTypeOption, 30000);
     await fundingTypeOption.scrollIntoViewIfNeeded().catch(() => {});
     await fundingTypeOption.click({ force: true });
-    await expect(fundingTypeDropdown).toContainText('Support at Home', { timeout: 30000 });
-    Logger.pass('New Funding Type selected as Support at Home');
+    await expect(fundingTypeDropdown).toContainText('HACC-PYP', { timeout: 30000 });
+    Logger.pass('New Funding Type selected as HACC-PYP');
 
-    Logger.step('Save New Funding');
-    const saveButton = this.page.locator(OpportunityLocators.newFundingSaveButtonInModal);
-    await this.waitForVisible(saveButton, 30000);
-    await saveButton.click({ force: true });
-    Logger.pass('New Funding saved');
   }
 
 
@@ -463,6 +558,7 @@ export class OpportunityPage extends BasePage {
     await this.page.getByText(OpportunityLocators.referrerTypeFamilyViolenceOptionText, { exact: true }).click();
 
     await expect(referrerTypeDropdown).toContainText('Family violence programs', { timeout: 30000 });
+
     Logger.pass('Referrer Type set to Family violence programs');
   }
 
@@ -478,8 +574,8 @@ export class OpportunityPage extends BasePage {
 
   async verifyQuoteNotGenerated(): Promise<void> {
     Logger.step('Verify the quote is not generated ');
-    const generateQuote = this.page.locator(OpportunityLocators.generateQuoteButton);
-    await this.waitForVisible(generateQuote, 90000);
+    const generateQuote = this.page.locator('button:has-text("Generate Quote"):visible');
+    await generateQuote.waitFor({ state: 'visible', timeout: 90000 });
     await generateQuote.scrollIntoViewIfNeeded();
     await generateQuote.click();
     
@@ -589,9 +685,9 @@ export class OpportunityPage extends BasePage {
     await enterPriceBook.click();
     await enterPriceBook.press('Delete');
     await enterPriceBook.clear();
-    await enterPriceBook.fill('Support At Home');
+    await enterPriceBook.fill('HACC - Ballarat - Low Fee');
 
-    const option = this.page.getByText('Support At Home 2025/2026', { exact: true });
+    const option = this.page.getByText('HACC - Ballarat - Low Fee', { exact: true });
     await option.waitFor();
     await option.click();
     await this.page.getByRole('button', { name: 'Save' }).click();
@@ -649,7 +745,7 @@ export class OpportunityPage extends BasePage {
 
     const searchBox = this.page.locator(OpportunityLocators.searchSupportItemInput).first();
     await this.waitForVisible(searchBox, 90000);
-    await searchBox.fill('Absorbent products, washable');
+    await searchBox.fill('Annual review - Community Care');
     await this.staticWait(1500);
 
     const firstCheckbox = this.page.locator(OpportunityLocators.availableFundingFirstRowCheckbox).first();
