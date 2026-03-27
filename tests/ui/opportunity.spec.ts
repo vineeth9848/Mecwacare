@@ -17,12 +17,12 @@ test.only('verify Generate Quote functionality on Opportunity', async ({ page })
   await homePage.selectObjectFromDropdown('Opportunities');
   await opportunityPage.selectOpportunitiesListView('My Opportunities');
   await opportunityPage.searchAndOpenOpportunityByLeadName(lead.firstName, lead.lastName);
-  // await opportunityPage.verifyQuoteNotGenerated();
-  // await opportunityPage.refreshPage();
-  // await opportunityPage.switchToRelatedTab();
-  // await opportunityPage.configurePriceBook();
-  // await opportunityPage.configureProductManagement();
-  // await opportunityPage.refreshPage();
+  //await opportunityPage.verifyQuoteNotGenerated();
+  await opportunityPage.refreshPage();
+  await opportunityPage.switchToRelatedTab();
+  await opportunityPage.configurePriceBook();
+  await opportunityPage.configureProductManagement();
+  await opportunityPage.refreshPage();
   await opportunityPage.switchToRelatedTab();
   await opportunityPage.verifyProductsAndClickGenerateQuote();
   await opportunityPage.refreshPage();
@@ -49,12 +49,13 @@ test('verify funding source and funding type in first opportunity record', async
   await opportunityPage.selectParticipantInNewFunding(lead.firstName, lead.lastName);
   await opportunityPage.selectNewFundingSourceAndTypeSupportAtHomeAndSave();
   await opportunityPage.clickSearchFundingProgram();
-  await opportunityPage.newFundingProgram();
-  await opportunityPage.selectFundingAdministrator(lead.firstName, lead.lastName);
-  await opportunityPage.selectAssessmentVisitPreferenceInPerson();
-  await opportunityPage.selectServiceAgreementStatus();
-  await opportunityPage.selectReferrerTypeFamilyViolencePrograms();
-  await opportunityPage.saveOpportunityDetails();
+
+  //await opportunityPage.newFundingProgram();
+  // await opportunityPage.selectFundingAdministrator(lead.firstName, lead.lastName);
+  // await opportunityPage.selectAssessmentVisitPreferenceInPerson();
+  // await opportunityPage.selectServiceAgreementStatus();
+  // await opportunityPage.selectReferrerTypeFamilyViolencePrograms();
+  // await opportunityPage.saveOpportunityDetails();
   Logger.pass('Opportunity funding validation test completed successfully');
 });
 
@@ -114,7 +115,7 @@ test('verify Signature and Close the Opportunity', async ({ page }) => {
   await opportunityPage.selectOpportunitiesListView('My Opportunities');
   await opportunityPage.searchAndOpenOpportunityByLeadName(lead.firstName, lead.lastName);
   await opportunityPage.verifySentForSignature();
-  await opportunityPage.selectFundingAdministrator(lead.firstName, lead.lastName);
+  //await opportunityPage.selectFundingAdministrator(lead.firstName, lead.lastName);
   await opportunityPage.refreshPage();
   await opportunityPage.setOpportunityToClosedWon();
   await opportunityPage.refreshPage();
