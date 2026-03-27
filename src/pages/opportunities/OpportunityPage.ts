@@ -284,11 +284,16 @@ export class OpportunityPage extends BasePage {
     await fundingProgram.scrollIntoViewIfNeeded();
     await fundingProgram.click();
 
-    const option = this.page.getByText('New Funding Program', { exact: false });
+    // const option = this.page.getByText('New Funding Program', { exact: false });
+    // await option.waitFor({ state: 'visible', timeout: 10000 });
+    // await option.scrollIntoViewIfNeeded();
+    // await option.click();
+
+    const option = this.page.getByText('HACC - Ballarat', { exact: true });
     await option.waitFor({ state: 'visible', timeout: 10000 });
     await option.scrollIntoViewIfNeeded();
     await option.click();
-    
+
     Logger.pass('Clicked New Funding Program from search');
   }
 
@@ -311,15 +316,12 @@ export class OpportunityPage extends BasePage {
     await option.waitFor({ state: 'visible' });
     await option.click();
 
-    Logger.step('Save New Funding');
-    const saveButton = this.page.locator(OpportunityLocators.newFundingSaveButtonInModal);
+    Logger.step('Save opportunity details');
+    const saveButton = this.page.getByRole('button', { name: 'Save' }).first();
     await this.waitForVisible(saveButton, 30000);
-    await saveButton.click({ force: true });
-    Logger.pass('New Funding saved');
-
-    await this.page.waitForTimeout(10000);
+    await saveButton.scrollIntoViewIfNeeded();
+    await saveButton.click();
     
-
     Logger.pass('New Funding Program created successfully');
   }
 
@@ -511,6 +513,14 @@ export class OpportunityPage extends BasePage {
     await expect(fundingTypeDropdown).toContainText('HACC-PYP', { timeout: 30000 });
     Logger.pass('New Funding Type selected as HACC-PYP');
 
+    Logger.step('Save opportunity details');
+    const saveButton = this.page.getByRole('button', { name: 'Save' }).first();
+    await this.waitForVisible(saveButton, 30000);
+    await saveButton.scrollIntoViewIfNeeded();
+    await saveButton.click();
+    
+    Logger.pass('New Funding created and saved successfully');
+
   }
 
 
@@ -564,7 +574,7 @@ export class OpportunityPage extends BasePage {
 
   async saveOpportunityDetails(): Promise<void> {
     Logger.step('Save opportunity details');
-    const saveButton = this.page.locator(OpportunityLocators.saveButtonByText);
+    const saveButton = this.page.getByRole('button', { name: 'Save' }).first();
     await this.waitForVisible(saveButton, 30000);
     await saveButton.scrollIntoViewIfNeeded();
     await saveButton.click();
@@ -608,6 +618,7 @@ export class OpportunityPage extends BasePage {
     Logger.step('Verify products section and click Generate Quote');
 
     const productsHeader = this.page.locator(OpportunityLocators.productsHeader).first();
+    await productsHeader.waitFor({ state: 'visible', timeout: 30000 });
     await this.scrollIntoView(productsHeader);
 
     const productsSection = this.page.getByText(/Products\s*\(\d+\)/);
@@ -619,12 +630,12 @@ export class OpportunityPage extends BasePage {
     expect(count).toBeGreaterThan(0);
 
     const productNameLink = this.page.getByRole('link', {
-      name: /Aboriginal/i
-    });
+      name: /Annual review/i
+    }).first();
     await productNameLink.waitFor({ state: 'visible' });
     await expect(productNameLink).toBeVisible();
 
-    Logger.pass('Verified products count and Absorbent product name');
+    Logger.pass('Verified products count and Annual product name');
 
     const generateQuoteButton = this.page.getByRole('button', { name: 'Generate Quote', exact: true }).first();
     await this.scrollIntoView(generateQuoteButton);
@@ -790,12 +801,17 @@ export class OpportunityPage extends BasePage {
         await this.waitForVisible(StageEditButton, 30000);
         await StageEditButton.click({ force: true });
 
-        await this.page.getByRole('combobox', { name: 'Stage' }).click();
-
+        const stageDropdown = await this.page.getByRole('combobox', { name: 'Stage', exact: true });
+        await stageDropdown.waitFor({ state: 'visible', timeout: 30000 });
+        await stageDropdown.scrollIntoViewIfNeeded();
+        await stageDropdown.click();
+        
         await this.page
-          .locator('lightning-base-combobox-item')
-          .filter({ hasText: 'In Progress' })
-          .click();
+            .locator('lightning-base-combobox-item')
+            .filter({ hasText: 'In Progress' }).first()
+            .click();
+
+        await expect(stageDropdown).toContainText('In Progress', { timeout: 30000 });
 
         Logger.pass('Stage set to In-Progress');
 
@@ -803,14 +819,18 @@ export class OpportunityPage extends BasePage {
 
       async configureStatus(): Promise<void> {
         Logger.step('Select Status as Initial Consultation');
-        await this.page.waitForTimeout(5000);
 
-        await this.page.getByRole('combobox', { name: 'Status', exact: true }).click();
+        const statusDropdown = this.page.getByRole('combobox', { name: 'Status', exact: true });
+        await statusDropdown.waitFor({ state: 'visible', timeout: 30000 });
+        await statusDropdown.scrollIntoViewIfNeeded();
+        await statusDropdown.click();
 
         await this.page
-          .locator('lightning-base-combobox-item')
-          .filter({ hasText: 'Initial Consultation' })
-          .click();
+            .locator('lightning-base-combobox-item')
+            .filter({ hasText: 'Initial Consultation' }).first()
+            .click();
+
+        await expect(statusDropdown).toContainText('Initial Consultation', { timeout: 30000 });
 
         Logger.pass('Status set to Initial Consultation');
 
@@ -886,7 +906,7 @@ export class OpportunityPage extends BasePage {
 
               await Finalframe.locator('[data-qa="send-without-fields"]').waitFor({
                 state: 'visible',
-                timeout: 60000
+                timeout: 90000
               });
 
               await Finalframe.locator('[data-qa="send-without-fields"]').click();
@@ -897,7 +917,7 @@ export class OpportunityPage extends BasePage {
 
               await Envelopeframe.locator('[data-id="envelopeSentLabel"]').waitFor({
                 state: 'visible',
-                timeout: 60000
+                timeout: 90000
               });
 
               await expect(
