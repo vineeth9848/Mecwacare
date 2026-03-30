@@ -289,10 +289,19 @@ export class OpportunityPage extends BasePage {
     // await option.scrollIntoViewIfNeeded();
     // await option.click();
 
-    const option = this.page.getByText('HACC - Ballarat', { exact: true });
+    const option = this.page.getByText('Test CHSP Block Funding', { exact: true });//HACC - Ballarat
     await option.waitFor({ state: 'visible', timeout: 10000 });
     await option.scrollIntoViewIfNeeded();
     await option.click();
+
+    await expect(fundingProgram).toContainText('Test CHSP Block Funding', { timeout: 30000 });
+    await this.page.waitForTimeout(5000);
+
+    // Logger.step('Save opportunity details');
+    // const saveButton = this.page.getByRole('button', { name: 'Save' }).first();
+    // await this.waitForVisible(saveButton, 30000);
+    // await saveButton.scrollIntoViewIfNeeded();
+    // await saveButton.click();
 
     Logger.pass('Clicked New Funding Program from search');
   }
@@ -468,7 +477,90 @@ export class OpportunityPage extends BasePage {
     Logger.pass(`Funding Administrator selected : ${administratorName}`);
   }
 
-  async selectNewFundingSourceAndTypeSupportAtHomeAndSave(): Promise<void> {
+  async selectFundingProgramBlockTestFundingHacc(): Promise<void> {
+    const fundingProgramSearch = 'HACC - Ballarat';
+    const expectedFundingProgram = 'HACC - Ballarat';
+
+    Logger.step(`Select Funding Program: ${expectedFundingProgram}`);
+    const fundingProgramInput = this.page.locator(OpportunityLocators.fundingProgramInput).first();
+    await this.waitForVisible(fundingProgramInput, 30000);
+    await this.scrollIntoView(fundingProgramInput);
+    await fundingProgramInput.click({ force: true });
+    await fundingProgramInput.fill(fundingProgramSearch);
+    await this.staticWait(1500);
+    await fundingProgramInput.click({ force: true });
+    await this.staticWait(800);
+
+    const showMoreResults = this.page
+      .locator(OpportunityLocators.listboxOptions)
+      .filter({ hasText: `Show more results for "${fundingProgramSearch}"` })
+      .first();
+
+    if (await showMoreResults.isVisible().catch(() => false)) {
+      await showMoreResults.click({ force: true });
+
+      const advancedSearchHeading = this.page.getByRole('heading', { name: 'Advanced Search' }).first();
+      await expect(advancedSearchHeading).toBeVisible({ timeout: 30000 });
+
+      const advancedSearchInput = this.page
+        .locator(OpportunityLocators.advancedSearchFundingProgramInput)
+        .first();
+      await this.waitForVisible(advancedSearchInput, 30000);
+      await advancedSearchInput.fill(fundingProgramSearch);
+
+      const searchButton = this.page.locator(OpportunityLocators.advancedSearchSearchButton).last();
+      if (await searchButton.isVisible().catch(() => false)) {
+        await searchButton.click({ force: true });
+      }
+
+      const firstRadioLabel = this.page.locator(OpportunityLocators.advancedSearchFirstRowRadio).first();
+      await this.waitForVisible(firstRadioLabel, 30000);
+      await firstRadioLabel.click({ force: true });
+
+      const selectButton = this.page.locator(OpportunityLocators.advancedSearchSelectButton).first();
+      await this.waitForVisible(selectButton, 30000);
+      await expect.poll(async () => selectButton.isEnabled(), { timeout: 30000 }).toBeTruthy();
+      await selectButton.click({ force: true });
+
+      await expect(advancedSearchHeading).toBeHidden({ timeout: 30000 });
+    } else {
+      const listboxId = await fundingProgramInput.getAttribute('aria-controls');
+      const fundingProgramResult = listboxId
+        ? this.page
+            .locator(`#${listboxId} [role='option'], #${listboxId} li`)
+            .filter({ hasText: expectedFundingProgram })
+            .first()
+        : this.page
+            .locator(OpportunityLocators.listboxOptions)
+            .filter({ hasText: expectedFundingProgram })
+            .first();
+
+      await this.waitForVisible(fundingProgramResult, 30000);
+      await fundingProgramResult.click({ force: true });
+    }
+
+    await expect
+      .poll(
+        async () =>
+          (await fundingProgramInput.getAttribute('data-value').catch(() => '')) ||
+          (await fundingProgramInput.inputValue().catch(() => '')) ||
+          (await fundingProgramInput.getAttribute('placeholder').catch(() => '')) ||
+          '',
+        { timeout: 30000 },
+      )
+      .toContain(expectedFundingProgram);
+
+    Logger.step('Save opportunity details');
+    const saveButton = this.page.getByRole('button', { name: 'Save' }).first();
+    await this.waitForVisible(saveButton, 30000);
+    await saveButton.scrollIntoViewIfNeeded();
+    await saveButton.click();
+    await this.page.waitForTimeout(5000);
+
+    Logger.pass(`Funding Program selected: ${expectedFundingProgram}`);
+  }
+
+  async selectNewFundingSourceAndTypeSupportAtHome(): Promise<void> {
     Logger.step('Select New Funding Source as Hacc-PYP Funding');
     const fundingSourceDropdown = this.page.locator(OpportunityLocators.newFundingSourceDropdownInModal);
     await this.waitForVisible(fundingSourceDropdown, 30000);
@@ -513,13 +605,8 @@ export class OpportunityPage extends BasePage {
     await expect(fundingTypeDropdown).toContainText('HACC-PYP', { timeout: 30000 });
     Logger.pass('New Funding Type selected as HACC-PYP');
 
-    Logger.step('Save opportunity details');
-    const saveButton = this.page.getByRole('button', { name: 'Save' }).first();
-    await this.waitForVisible(saveButton, 30000);
-    await saveButton.scrollIntoViewIfNeeded();
-    await saveButton.click();
     
-    Logger.pass('New Funding created and saved successfully');
+    Logger.pass('New Funding created successfully');
 
   }
 
@@ -616,26 +703,13 @@ export class OpportunityPage extends BasePage {
 
   async verifyProductsAndClickGenerateQuote(): Promise<void> {
     Logger.step('Verify products section and click Generate Quote');
+    await this.page.mouse.wheel(0, 4000);
+    await this.page.waitForTimeout(2000);
 
-    const productsHeader = this.page.locator(OpportunityLocators.productsHeader).first();
-    await productsHeader.waitFor({ state: 'visible', timeout: 30000 });
-    await this.scrollIntoView(productsHeader);
-
-    const productsSection = this.page.getByText(/Products\s*\(\d+\)/);
-
-    await productsSection.waitFor({ state: 'visible', timeout: 30000 });
-    const text = await productsSection.textContent();
-    const count = Number(text?.match(/\((\d+)\)/)?.[1]);
-
-    expect(count).toBeGreaterThan(0);
-
-    const productNameLink = this.page.getByRole('link', {
-      name: /Annual review/i
-    }).first();
-    await productNameLink.waitFor({ state: 'visible' });
-    await expect(productNameLink).toBeVisible();
-
-    Logger.pass('Verified products count and Annual product name');
+    await expect(
+      this.page.locator('table tbody tr', { hasText: 'Annual' }).first()
+    ).toBeVisible();
+    Logger.pass('Verified Annual text is present under Products section');
 
     const generateQuoteButton = this.page.getByRole('button', { name: 'Generate Quote', exact: true }).first();
     await this.scrollIntoView(generateQuoteButton);

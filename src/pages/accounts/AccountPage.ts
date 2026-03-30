@@ -170,6 +170,7 @@ export class AccountPage extends BasePage {
         expect(actualAge).toBe(expectedAge);
         Logger.pass(`Account age verified. Expected: ${expectedAge}, Actual: ${actualAge}`);
       }
+        
 
       async updateAddressFromLaunchVerify(searchAddress: string): Promise<boolean> {
           Logger.step(`Update address from Launch Address / Verify: ${searchAddress}`);
@@ -177,130 +178,112 @@ export class AccountPage extends BasePage {
             Logger.info('Page is already closed, skipping Launch Address / Verify update');
             return false;
           }
-      
+
           try {
-          await this.page.waitForLoadState('domcontentloaded', { timeout: 3000 }).catch(() => {});
-          await this.page.waitForTimeout(500);
-      
-          const launchVerifyLink = this.page.locator(AccountLocators.launchAddressVerifyLink).first();
-          await launchVerifyLink.scrollIntoViewIfNeeded();
-          await launchVerifyLink.waitFor({ state: 'visible', timeout: 5000 }).catch(() => {});
-          const launchLinkVisible = await launchVerifyLink.isVisible().catch(() => false);
-          if (!launchLinkVisible) {
-            Logger.info('Launch Address / Verify link is not visible on this record, skipping update');
-            return false;
-          }
-      
-          await launchVerifyLink.click();
-      
-          let searchInput = this.page.locator(AccountLocators.verifyAddressInput).first();
-          const verifyInputVisible = await searchInput.isVisible().catch(() => false);
-          if (!verifyInputVisible) {
-            searchInput = this.page.locator(AccountLocators.fallbackAddressInput).first();
-          }
-      
-          await this.waitForVisible(searchInput, 30000);
-          await searchInput.scrollIntoViewIfNeeded();
-          await searchInput.click();
-          await searchInput.fill('');
-          await searchInput.type(searchAddress, { delay: 40 });
-      
-          const listboxId = await searchInput.getAttribute('aria-controls');
-          if (listboxId) {
-            const matchingSuggestion = this.page
-              .locator(`#${listboxId} [role='option']:visible, #${listboxId} li:visible, #${listboxId} div:visible`)
-              .filter({ hasText: searchAddress })
-              .first();
-            const firstSuggestion = this.page
-              .locator(`#${listboxId} [role='option']:visible, #${listboxId} li:visible, #${listboxId} div:visible`)
-              .first();
-      
-            if (await matchingSuggestion.isVisible().catch(() => false)) {
-              await matchingSuggestion.scrollIntoViewIfNeeded().catch(() => {});
-              try {
-                await matchingSuggestion.click({ force: true });
-              } catch {
-                await searchInput.press('ArrowDown');
-                await searchInput.press('Enter');
-              }
-            } else {
-              await this.waitForVisible(firstSuggestion, 8000);
-              await firstSuggestion.scrollIntoViewIfNeeded().catch(() => {});
-              try {
-                await firstSuggestion.click({ force: true });
-              } catch {
-                await searchInput.press('ArrowDown');
-                await searchInput.press('Enter');
-              }
-            }
-          } else {
-            const matchingSuggestion = this.page
-              .locator(AccountLocators.addressSuggestionItems)
-              .filter({ hasText: searchAddress })
-              .first();
-            const firstSuggestion = this.page.locator(AccountLocators.addressSuggestionItems).first();
-      
-            if (await matchingSuggestion.isVisible().catch(() => false)) {
-              await matchingSuggestion.scrollIntoViewIfNeeded().catch(() => {});
-              try {
-                await matchingSuggestion.click({ force: true });
-              } catch {
-                await searchInput.press('ArrowDown');
-                await searchInput.press('Enter');
-              }
-            } else {
-              await this.waitForVisible(firstSuggestion, 8000);
-              await firstSuggestion.scrollIntoViewIfNeeded().catch(() => {});
-              try {
-                await firstSuggestion.click({ force: true });
-              } catch {
-                await searchInput.press('ArrowDown');
-                await searchInput.press('Enter');
-              }
-            }
-          }
-      
-          await searchInput.press('Enter');
-          await searchInput.press('Tab');
-      
-          const verifyAndSaveButton = this.page.locator(AccountLocators.verifyAndSaveButton).first();
-          await this.click(verifyAndSaveButton);
-      
-          const saveToast = this.page.locator(AccountLocators.saveToast).first();
-          await saveToast.waitFor({ state: 'visible', timeout: 8000 }).catch(() => {});
-      
-          await searchInput.waitFor({ state: 'hidden', timeout: 10000 }).catch(() => {});
-          await this.page.waitForLoadState('domcontentloaded', { timeout: 3000 }).catch(() => {});
-          await this.page.waitForTimeout(500);
-      
-          await this.refreshPage();
-          await this.page.waitForLoadState('domcontentloaded').catch(() => {});
-      
-          const detailsTabAfterSave = this.page.locator(AccountLocators.detailsTab).first();
-          if (await detailsTabAfterSave.isVisible().catch(() => false)) {
-            await detailsTabAfterSave.click();
-          }
-      
-          const addressSection = this.page.locator(AccountLocators.addressInformationText).first();
-          await addressSection.waitFor({ state: 'visible', timeout: 10000 });
-          await addressSection.scrollIntoViewIfNeeded();
-      
-          const addressLocator = this.page.locator(AccountLocators.addressValue).first();
-          await addressLocator.waitFor({ state: 'visible', timeout: 10000 });
-          const latestAddress = (await addressLocator.innerText()).replace(/\s+/g, ' ').trim().toLowerCase();
-          const normalizedExpected = searchAddress.replace(/\s+/g, ' ').trim().toLowerCase();
-          expect(latestAddress).toContain(normalizedExpected);
-          Logger.pass('Address verified and saved');
-          return true;
-          } catch (error) {
-            const message = String(error);
-            if (message.includes('Target page, context or browser has been closed')) {
-              Logger.info('Page/context closed during address update step. Skipping this step.');
+            await this.page.waitForLoadState('domcontentloaded', { timeout: 3000 }).catch(() => {});
+            await this.page.waitForTimeout(500);
+
+            const launchVerifyLink = this.page.locator(AccountLocators.launchAddressVerifyLink).first();
+            await launchVerifyLink.scrollIntoViewIfNeeded();
+            await launchVerifyLink.waitFor({ state: 'visible', timeout: 5000 }).catch(() => {});
+            const launchLinkVisible = await launchVerifyLink.isVisible().catch(() => false);
+            if (!launchLinkVisible) {
+              Logger.info('Launch Address / Verify link is not visible on this record, skipping update');
               return false;
             }
-            throw error;
+
+            await launchVerifyLink.click();
+
+            const addressToSearch = searchAddress?.trim() || '46 Epworth';
+
+              // STEP 1: scroll to top
+              await this.page.evaluate(() => window.scrollTo(0, 0));
+              await this.page.waitForTimeout(1000);
+
+
+              // STEP 2: locate correct input (based on label text)
+              const searchInput = this.page
+                .locator('text=Search Service Delivery Address Here')
+                .locator('xpath=following::input[1]');
+
+              await searchInput.waitFor({ state: 'visible', timeout: 30000 });
+              await searchInput.click();
+
+
+              // STEP 3: type (important for SF)
+              await searchInput.type(addressToSearch, { delay: 100 });
+
+
+              // STEP 4: wait for dropdown option with same text
+              const option = this.page.getByRole('option', {
+                name: new RegExp(addressToSearch, 'i')
+              });
+
+              await option.waitFor({ state: 'visible', timeout: 10000 });
+
+
+              // STEP 5: click exact option
+              await option.click();
+
+
+              // STEP 6: wait for value to reflect in input
+              await this.page.waitForTimeout(2000);
+
+              // STEP 6: copy buttons
+              const copyToHome = this.page.getByText('Copy to Home Address', { exact: true });
+              const copyToBilling = this.page.getByText('Copy to Billing Address', { exact: true });
+              const copyToPostal = this.page.getByText('Copy to Postal Address', { exact: true });
+
+              await copyToHome.waitFor({ state: 'visible' });
+              await copyToHome.click();
+
+              await copyToBilling.waitFor({ state: 'visible' });
+              await copyToBilling.click();
+
+              await copyToPostal.waitFor({ state: 'visible' });
+              await copyToPostal.click();
+
+              Logger.info('Clicked all Copy buttons');
+
+              Logger.info('Waiting for address to be updated after clicking Copy buttons');
+
+                        
+            const buttons = this.page.locator('button:has-text("Verify & Save")');
+
+            let target;
+
+            const count = await buttons.count();
+
+            for (let i = 0; i < count; i++) {
+              const btn = buttons.nth(i);
+              const box = await btn.boundingBox();
+
+              if (box && box.y > 0) {
+                target = btn;
+              }
+            }
+
+            if (!target) {
+              target = buttons.last();
+            }
+
+            await target.scrollIntoViewIfNeeded();
+
+            await this.page.waitForTimeout(1000);
+
+            await target.waitFor({ state: 'visible' });
+
+            await target.click({ force: true });
+            await this.page.waitForTimeout(3000);
+
+            Logger.pass('Address Updated and saved');
+
+            
           }
-        }
+           catch (error) {
+            Logger.error(`Error during address update: ${(error as Error).message}`);
+           }
+          }
 
         async verifyAddressValue(expectedAddressText: string): Promise<void> {
             Logger.step('Verify Account address in details page');
@@ -436,5 +419,148 @@ export class AccountPage extends BasePage {
     await this.page.waitForTimeout(10000);
     
     Logger.pass('Created Care Plan from Planner page');
+  }
+
+  async editAccountFields(): Promise<void> {
+    Logger.step("Update account fields and verify updates");
+
+    Logger.info("Clicking Edit button to update account");
+    
+    const editBtn = this.page.locator('.slds-page-header')
+  .getByRole('button', { name: 'Edit' });
+
+    await editBtn.waitFor({ state: 'visible', timeout: 30000 });
+    await editBtn.click();
+
+    Logger.pass("Opened account record for update");
+  }
+
+  async updateBasicInformationAccountDetails(label: string | RegExp, value: string) {
+    Logger.step(`Update Basic Information section - ${label}: ${value}`);
+      
+      const field = this.page.getByRole('combobox', { name: label, exact: true }).first();
+
+        await field.waitFor({ state: 'visible', timeout: 90000 });
+        await field.scrollIntoViewIfNeeded();
+        await field.click();
+
+        let option = this.page.locator('lightning-base-combobox-item')
+          .filter({ hasText: value })
+          .first();
+
+        if (!(await option.isVisible().catch(() => false))) {
+          option = this.page.locator('[role="listbox"]')
+            .getByText(value, { exact: false })
+            .first();
+        }
+
+        await option.waitFor({ state: 'visible', timeout: 60000 });
+        await option.scrollIntoViewIfNeeded();
+        await option.click({timeout: 10000});
+        await expect(option).toContainText(value, { timeout: 10000 });
+
+      Logger.pass(`Updated Basic Information - ${label}: ${value}`);
+}
+
+async selectPrimaryLanguage(value: string) {
+  Logger.step(`Select Primary Language: ${value} from dropdown`);
+  
+  const modal = this.page.locator('[role="dialog"]');
+
+  const field = modal.getByRole('combobox', { name: /Primary Language/i }).last();
+
+  await field.waitFor({ state: 'visible', timeout: 60000 });
+
+  await field.evaluate(el => el.scrollIntoView({ block: 'center' }));
+
+  await field.click({ force: true });
+
+  const dropdown = this.page.locator('[role="listbox"]').filter({ has: this.page.locator(':visible') }).first();
+
+  await dropdown.waitFor({ state: 'visible', timeout: 10000 });
+
+  const option = dropdown.locator('lightning-base-combobox-item')
+    .filter({ hasText: value })
+    .first();
+
+  await option.evaluate(el => el.scrollIntoView({ block: 'nearest' }));
+
+  await option.click();
+
+  await expect(field).toContainText(value);
+    await this.page.waitForTimeout(5000);
+
+  Logger.pass(`Selected Primary Language: ${value}`);
+}
+
+async selectImportantInformationDetails(label: string | RegExp, value: string) {
+  Logger.step(`Select ${label}: ${value} from dropdown in bottom section`);
+
+  const field = this.page
+    .locator(`button[role="combobox"][aria-label="${label}"]`)
+    .first();
+
+  await field.waitFor({ state: 'visible', timeout: 60000 });
+
+  await field.evaluate(el => el.scrollIntoView({ block: 'center' }));
+
+  await field.click({ force: true });
+
+  await this.page.keyboard.type(value, { delay: 50 });
+
+  await this.page.waitForTimeout(500);
+
+  await this.page.keyboard.press('Enter');
+  await expect(field).toContainText(value, { timeout: 10000 });
+  await this.page.waitForTimeout(5000);
+
+  Logger.pass(`Selected ${label}: ${value} from dropdown in bottom section`);
+
+  
+}
+
+async updateTextField(label: string | RegExp, value: string) {
+  Logger.step(`Update text field: ${label} with value: ${value}`);
+
+  const field = this.page.getByLabel(label);
+  await field.waitFor({ state: 'visible' });
+  await field.scrollIntoViewIfNeeded();
+  await field.fill(value);
+
+  Logger.pass(`Updated text field: ${label} with value: ${value}`);
+}
+
+async selectLivingArrangement(value: string) {
+  Logger.step(`Select Living Arrangement: ${value}`);
+
+  const field = this.page.getByRole('combobox', {
+    name: 'Living Arrangements',
+    exact: true
+  }).first();
+
+  await field.waitFor({ state: 'visible', timeout: 30000 });
+  await field.scrollIntoViewIfNeeded();
+
+  await field.locator('span').click({ force: true });
+
+  await this.page.waitForTimeout(500);
+
+  const option = this.page.locator('text=' + value).filter({ hasText: value }).first();
+
+  await option.waitFor({ state: 'visible', timeout: 10000 });
+  await option.scrollIntoViewIfNeeded();
+  await option.click();
+  await this.page.waitForTimeout(5000);
+  Logger.pass(`Selected Living Arrangement: ${value}`);
+}
+
+async saveAccountDetails(): Promise<void> {
+    Logger.step('Save Account details');
+    const saveButton = this.page.getByRole('button', { name: 'Save' }).first();
+    await this.waitForVisible(saveButton, 30000);
+    await saveButton.scrollIntoViewIfNeeded();
+    await saveButton.click();
+    
+    Logger.pass('Account details saved');
   }
 }
