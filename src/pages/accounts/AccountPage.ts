@@ -493,6 +493,37 @@ async selectPrimaryLanguage(value: string) {
   Logger.pass(`Selected Primary Language: ${value}`);
 }
 
+async selectGender(value: string) {
+  Logger.step(`Select Gender: ${value} from dropdown`);
+  
+  const modal = this.page.locator('[role="dialog"]');
+
+  const field = modal.getByRole('combobox', { name: /Gender/i }).last();
+
+  await field.waitFor({ state: 'visible', timeout: 60000 });
+
+  await field.evaluate(el => el.scrollIntoView({ block: 'center' }));
+
+  await field.click({ force: true });
+
+  const dropdown = this.page.locator('[role="listbox"]').filter({ has: this.page.locator(':visible') }).first();
+
+  await dropdown.waitFor({ state: 'visible', timeout: 10000 });
+
+  const option = dropdown.locator('lightning-base-combobox-item')
+    .filter({ hasText: value })
+    .first();
+
+  await option.evaluate(el => el.scrollIntoView({ block: 'nearest' }));
+
+  await option.click();
+
+  await expect(field).toContainText(value);
+    await this.page.waitForTimeout(5000);
+
+  Logger.pass(`Selected Gender: ${value}`);
+}
+
 async selectImportantInformationDetails(label: string | RegExp, value: string) {
   Logger.step(`Select ${label}: ${value} from dropdown in bottom section`);
 

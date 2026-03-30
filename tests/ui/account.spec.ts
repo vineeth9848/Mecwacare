@@ -49,7 +49,7 @@ test('Update mandatory DEX fields in Account for Opportunity closure', async ({ 
   await accountPage.updateBasicInformationAccountDetails('Indigenous Status', 'Both Aboriginal and Torres Strait Islander origin');
   await accountPage.selectPrimaryLanguage('Afar');
   await accountPage.updateBasicInformationAccountDetails('Interpreter required', 'Yes');
-  await accountPage.updateBasicInformationAccountDetails('Gender', 'Male'); 
+  await accountPage.selectGender('Male'); 
   await accountPage.updateBasicInformationAccountDetails('DVA Card Type', 'Gold Card');
   await accountPage.updateTextField('DVA Number', '1234567890');
   await accountPage.selectImportantInformationDetails('Pension Type', 'DVA Pension');
@@ -60,7 +60,7 @@ test('Update mandatory DEX fields in Account for Opportunity closure', async ({ 
 
 });
 
-test.only('Update and  Verify account validations', async ({ page }) => {
+test('Update and  Verify account validations', async ({ page }) => {
   const homePage = new HomePage(page);
   const accountPage = new AccountPage(page);
   const { accountCreate } = TestDataHelper.readJsonFile<{ accountCreate: Array<Record<string, string>> }>('accounts.json');
@@ -83,7 +83,7 @@ test.only('Update and  Verify account validations', async ({ page }) => {
   } 
 });
 
-test('Verify Creation of care plan form under Accounts', async ({ page }) => {
+test.only('Verify Creation of care plan form under Accounts', async ({ page }) => {
   const homePage = new HomePage(page);
   const accountPage = new AccountPage(page);
   const { accountCreate } = TestDataHelper.readJsonFile<{ accountCreate: Array<Record<string, string>> }>('accounts.json');
