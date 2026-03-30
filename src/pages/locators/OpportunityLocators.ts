@@ -36,6 +36,7 @@ export const OpportunityLocators = {
   closeButtonByText: 'xpath=(//button[text()="Close"])',
   relatedTabText: 'Related',
   choosePriceBookText: 'Choose Price Book',
+  choosePriceBookButton: "button:has-text('Choose Price Book'), text=Choose Price Book",
   priceBookInput: 'input[aria-label="Price Book"]',
   productManagementText: 'Product Management',
   availableFundingSection: "span[title='Available Funding']",
@@ -44,8 +45,9 @@ export const OpportunityLocators = {
   availableFundingFirstRowCheckbox: 'table tbody tr:first-child input[type="checkbox"]',
   availableFundingFirstRowCheckboxLabel: 'table tbody tr:first-child label.slds-checkbox__label, table tbody tr:first-child span.slds-checkbox_faux',
   productsHeader: "span[title='Products']",
-  productsCount: "span[title='(1)'], span.slds-truncate.slds-m-right_xx-small",
+  productsCount: "span[title='Products'] + span, h2 span[title='Products'] + span",
   productNameLink: "table tbody tr:first-child th a, table tbody tr:first-child td a",
+  productRowsText: "table tbody tr",
   generateQuoteDialogTitle: "text=Generate Quote",
   generateQuoteDialogMessage: "text=Please click on Generate button to generate the quote for this opportunity.",
   generateQuoteDialogButton: "xpath=(//button[text()='Generate'])[last()]",
@@ -58,5 +60,7 @@ export const OpportunityLocators = {
   EditStageDropdown: 'button[title="Edit Stage"]',
   stageDropdown:"xpath=(//button[@aria-label='Stage'])",
   EnterFundingAdministratorInput: 'input[aria-label="Funding Administrator"]',
+  fundingProgramInput: 'input[aria-label="Funding Program"]',
+  advancedSearchFundingProgramInput: 'input[aria-label="Funding Program"]',
   
    } as const;
