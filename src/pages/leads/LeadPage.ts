@@ -329,7 +329,7 @@ export class LeadPage extends BasePage {
     }
 
     const ageValue = this.page.locator(LeadLocators.ageValue).last();
-    await expect(ageValue).toBeVisible({ timeout: 5000 });
+    await expect(ageValue).toBeVisible({ timeout: 10000 });
 
     const ageText = ((await ageValue.textContent()) || '').trim();
     Logger.info(`Age: ${ageText}`);

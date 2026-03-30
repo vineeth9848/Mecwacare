@@ -894,21 +894,21 @@ export class OpportunityPage extends BasePage {
       async configureStatus(): Promise<void> {
         Logger.step('Select Status as Initial Consultation');
 
-        const statusDropdown = this.page.getByRole('combobox', { name: 'Status', exact: true });
-        await statusDropdown.waitFor({ state: 'visible', timeout: 30000 });
-        await statusDropdown.scrollIntoViewIfNeeded();
-        await statusDropdown.click();
+        await this.page.waitForTimeout(5000);
+        const statusDropdown = this.page.locator('button[aria-label="Status"]').first();
+        await statusDropdown.waitFor({ state: 'visible' });
+        await statusDropdown.click({ force: true });
 
-        await this.page
-            .locator('lightning-base-combobox-item')
-            .filter({ hasText: 'Initial Consultation' }).first()
-            .click();
-
+        const option = this.page.locator('[role="option"]')
+        .filter({ hasText: 'Initial Consultation' })
+        .first().click();
         await expect(statusDropdown).toContainText('Initial Consultation', { timeout: 30000 });
+        await this.page.waitForTimeout(5000);
 
         Logger.pass('Status set to Initial Consultation');
 
 }
+
 
       async verifySignaturevisible(): Promise<void> {
         Logger.step('Verify signature is visible');

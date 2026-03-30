@@ -62,5 +62,5 @@ export const OpportunityLocators = {
   EnterFundingAdministratorInput: 'input[aria-label="Funding Administrator"]',
   fundingProgramInput: 'input[aria-label="Funding Program"]',
   advancedSearchFundingProgramInput: 'input[aria-label="Funding Program"]',
-  
+  statusDropdownByAria: "button[aria-label='Status']",
    } as const;

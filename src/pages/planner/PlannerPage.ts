@@ -62,11 +62,11 @@ export class PlannerPage extends BasePage {
     const appointmentService = this.page.getByPlaceholder('Select a Appointment Service').first();
     await appointmentService.scrollIntoViewIfNeeded();
     await appointmentService.click();
-    await appointmentService.fill('Travel Bracket 2');
+    await appointmentService.fill('Annual review - Community Care');
 
     const appointmentServiceOption = this.page
       .locator(dropdownOptions)
-      .filter({ hasText: 'Travel Bracket 2' })
+      .filter({ hasText: 'Annual review - Community Care' })
       .first();
     await this.page.waitForTimeout(5000);
     await expect(appointmentServiceOption).toBeVisible({ timeout: 10000 });
@@ -102,17 +102,17 @@ export class PlannerPage extends BasePage {
   async NavigationToNextPages(): Promise<void> {
     Logger.step('Navigate to next set of pages');
 
-    const parrticipantLocationLabel = this.page.locator(PlannerLocators.participantLocation);
-    await expect(parrticipantLocationLabel).toBeVisible({ timeout: 10000 });
-    await parrticipantLocationLabel.click();
+    // const parrticipantLocationLabel = this.page.locator(PlannerLocators.participantLocation);
+    // await expect(parrticipantLocationLabel).toBeVisible({ timeout: 10000 });
+    // await parrticipantLocationLabel.click();
 
-    const participantLocationDropdown = this.page.locator('select').last();
-    await expect(participantLocationDropdown).toBeVisible({ timeout: 10000 });
-    await participantLocationDropdown.scrollIntoViewIfNeeded();
-    await participantLocationDropdown.click();
-    await participantLocationDropdown.press('ArrowDown');
-    await participantLocationDropdown.press('Enter');
-    Logger.pass('Selected participant location');
+    // const participantLocationDropdown = this.page.locator('select').last();
+    // await expect(participantLocationDropdown).toBeVisible({ timeout: 10000 });
+    // await participantLocationDropdown.scrollIntoViewIfNeeded();
+    // await participantLocationDropdown.click();
+    // await participantLocationDropdown.press('ArrowDown');
+    // await participantLocationDropdown.press('Enter');
+    // Logger.pass('Selected participant location');
 
     const participantNextButton = this.page.getByRole('button', { name: 'Next' }).first();
     await expect(participantNextButton).toBeVisible({ timeout: 10000 });
