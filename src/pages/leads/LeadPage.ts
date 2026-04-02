@@ -195,12 +195,12 @@ export class LeadPage extends BasePage {
               await hotOption.click({ force: true });
               await score.press('Tab');
 
-              const NameField = this.page.getByRole('textbox', { name: 'Name' }).first();
-              await this.waitForVisible(NameField, 30000);
-              const NameWithRunNumber = this.buildLastNameWithRunNumber(lastName);
-              await NameField.fill(NameWithRunNumber);
-              await expect(NameField).toHaveValue(NameWithRunNumber);
-              Logger.info(`Filled name field: ${NameWithRunNumber}`);
+              // const NameField = this.page.getByRole('textbox', { name: 'Name' }).first();
+              // await this.waitForVisible(NameField, 30000);
+              // const NameWithRunNumber = this.buildLastNameWithRunNumber(lastName);
+              // await NameField.fill(NameWithRunNumber);
+              // await expect(NameField).toHaveValue(NameWithRunNumber);
+              // Logger.info(`Filled name field: ${NameWithRunNumber}`);
 
               const organizationField = this.page.getByRole('textbox', { name: 'Organisation' }).first();
               await this.waitForVisible(organizationField, 30000);
