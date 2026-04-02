@@ -1,0 +1,129 @@
+name: Playwright CI
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+    inputs:
+      suite:
+        description: Select suite to execute
+        required: true
+        default: full
+        type: choice
+        options:
+          - smoke
+          - regression
+          - full
+
+jobs:
+  playwright:
+    runs-on: ubuntu-latest
+    timeout-minutes: 180
+
+    env:
+      CI: true
+      TEST_GAP_MS: 3000
+      BASE_URL: ${{ secrets.BASE_URL }}
+      SF_LOGIN_URL: ${{ secrets.SF_LOGIN_URL }}
+      SF_USERNAME: ${{ secrets.SF_USERNAME }}
+      SF_PASSWORD: ${{ secrets.SF_PASSWORD }}
+
+    steps:
+      # Step 1: Checkout repository
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # Step 2: Setup Node.js 18
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18
+          cache: npm
+
+      # Step 3: Install dependencies
+      - name: Install dependencies
+        run: npm ci
+
+      # Step 4: Install Playwright browsers and OS dependencies
+      - name: Install Playwright browsers
+        run: npx playwright install --with-deps
+
+      # Step 5: Run login setup and generate auth.json before suite execution
+      - name: Generate auth.json
+        run: npx playwright test tests/login.setup.ts --project=setup --workers=1
+        env:
+          SKIP_GLOBAL_SETUP: true
+
+      # Resolve requested suite without disturbing the existing repository layout
+      - name: Resolve suite target
+        id: suite
+        run: |
+          if [ "${{ github.event_name }}" = "push" ]; then
+            echo "target=tests" >> "$GITHUB_OUTPUT"
+          elif [ "${{ github.event.inputs.suite }}" = "smoke" ]; then
+            if [ -d tests/smoke ]; then
+              echo "target=tests/smoke" >> "$GITHUB_OUTPUT"
+            else
+              echo "target=tests/ui/smoke.spec.ts" >> "$GITHUB_OUTPUT"
+            fi
+          elif [ "${{ github.event.inputs.suite }}" = "regression" ]; then
+            if [ -d tests/regression ]; then
+              echo "target=tests/regression" >> "$GITHUB_OUTPUT"
+            else
+              echo "target=tests/ui" >> "$GITHUB_OUTPUT"
+            fi
+          else
+            echo "target=tests" >> "$GITHUB_OUTPUT"
+          fi
+
+      # Step 6: Run tests sequentially with retries intact
+      - name: Run Playwright suite sequentially
+        run: npx playwright test ${{ steps.suite.outputs.target }} --project=ci-sequential --workers=1
+
+      # Step 7: Upload HTML report as artifact
+      - name: Upload Playwright HTML report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: playwright-html-report
+          path: playwright-report
+          retention-days: 5
+
+      # Step 8: Upload test results (screenshots/videos/traces)
+      - name: Upload Playwright test results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: playwright-test-results
+          path: test-results
+          retention-days: 5
+
+  publish-report:
+    if: always()
+    needs: playwright
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Download HTML report artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: playwright-html-report
+          path: playwright-report
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: playwright-report
+
+      - name: Deploy report to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

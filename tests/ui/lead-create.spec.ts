@@ -33,7 +33,7 @@ test('create lead from leads page', async ({ page }) => {
   );
 });
 
-test.only('verify lead validations', async ({ page }) => {
+test('verify lead validations', async ({ page }) => {
   // test.setTimeout(120000);
   const homePage = new HomePage(page);
   const leadPage = new LeadPage(page);

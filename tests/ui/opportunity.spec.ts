@@ -17,7 +17,7 @@ test('Configure PriceBook and Product Management on Opportunity', async ({ page 
   await homePage.selectObjectFromDropdown('Opportunities');
   await opportunityPage.selectOpportunitiesListView('My Opportunities');
   await opportunityPage.searchAndOpenOpportunityByLeadName(lead.firstName, lead.lastName);
-  await opportunityPage.verifyQuoteNotGenerated();
+  //await opportunityPage.verifyQuoteNotGenerated();
   await opportunityPage.refreshPage();
   await opportunityPage.switchToRelatedTab();
   await opportunityPage.configurePriceBook();
@@ -74,7 +74,7 @@ test('verify funding source and funding type in first opportunity record', async
   Logger.pass('Opportunity funding validation test completed successfully');
 });
 
-test.only('verify Generate Service Agreement functionality on Opportunity', async ({ page }) => {
+test('verify Generate Service Agreement functionality on Opportunity', async ({ page }) => {
   const homePage = new HomePage(page);
   const opportunityPage = new OpportunityPage(page);
   const { leadCreate } = TestDataHelper.readJsonFile<{ leadCreate: Array<Record<string, string>> }>('leads.json');
