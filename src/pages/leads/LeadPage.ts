@@ -36,6 +36,75 @@ export class LeadPage extends BasePage {
         await lastNameField.fill(lastNameWithRunNumber);
         Logger.info(`Filled last name: ${lastNameWithRunNumber}`);
 
+        const primaryLanguage = this.page.getByRole('combobox', {
+        name: LeadLocators.primary_language
+        });
+        await primaryLanguage.scrollIntoViewIfNeeded();
+        await this.waitForVisible(primaryLanguage, 30000);
+        await primaryLanguage.click();
+        await this.staticWait(1500);
+
+        const primaryLanguageOption = this.page.getByRole('option', {
+          name: 'English'
+        });
+        await primaryLanguageOption.scrollIntoViewIfNeeded();
+        await this.waitForVisible(primaryLanguageOption, 10000);
+        await primaryLanguageOption.click();
+        await expect(primaryLanguage).toHaveValue(/English/);
+        Logger.info("Selected primary language option: English");
+
+        const secondaryLanguage = this.page.getByRole('combobox', {
+        name: LeadLocators.secondary_language
+        });
+        await secondaryLanguage.scrollIntoViewIfNeeded();
+        await this.waitForVisible(secondaryLanguage, 30000);
+        await secondaryLanguage.click();
+        await this.staticWait(1500);
+
+        const secondaryLanguageOption = this.page.getByRole('option', {
+          name: 'Arabic'
+        });
+        await secondaryLanguageOption.scrollIntoViewIfNeeded();
+        await this.waitForVisible(secondaryLanguageOption, 10000);
+        await secondaryLanguageOption.click();
+        await expect(secondaryLanguage).toHaveValue(/Arabic/);
+        Logger.info("Selected secondary language option: Arabic");
+
+        const Interpreterrequired = this.page.getByRole('combobox', {
+        name: LeadLocators.interpreter_required
+        });
+        await Interpreterrequired.scrollIntoViewIfNeeded();
+        await this.waitForVisible(Interpreterrequired, 30000);
+        await Interpreterrequired.click();
+        await this.staticWait(1500);
+
+        const Interpreterrequiredoption = this.page.getByRole('option', {
+          name: 'Yes'
+        });
+        await Interpreterrequiredoption.scrollIntoViewIfNeeded();
+        await this.waitForVisible(Interpreterrequiredoption, 10000);
+        await Interpreterrequiredoption.click();
+        await expect(Interpreterrequired).toHaveValue(/Yes/);
+        Logger.info("Selected interpreter required option: Yes");
+
+        const preferredContactMethod = this.page.getByRole('combobox', {
+        name: LeadLocators.preferred_contact_method
+        });
+        await preferredContactMethod.scrollIntoViewIfNeeded();
+        await this.waitForVisible(preferredContactMethod, 30000);
+        await preferredContactMethod.click();
+        await this.staticWait(1500);
+
+        const preferredContactMethodOption = this.page.getByRole('option', {
+          name: 'Email'
+        });
+        await preferredContactMethodOption.scrollIntoViewIfNeeded();
+        await this.waitForVisible(preferredContactMethodOption, 10000);
+        await preferredContactMethodOption.click();
+        await expect(preferredContactMethod).toHaveValue(/Email/);
+        Logger.info("Selected preferred contact method option: Email");
+
+
         const dobField = this.page.getByRole('textbox', { name: /Date Of Birth|Date of Birth/i }).first();
         const targetDob = (dob || '01/01/2001').replace(/-/g, '/');
         await this.setDobValue(dobField, targetDob);
@@ -49,7 +118,7 @@ export class LeadPage extends BasePage {
         await this.waitForVisible(leadSourceDropdown, 30000);
         await leadSourceDropdown.click();
         await this.staticWait(1500);
-        Logger.info(`Selected lead source dropdown`);
+        
 
         const listboxId = await leadSourceDropdown.getAttribute('aria-controls');
         let leadSourceOption = this.page.getByRole('option', { name: lead_source }).first();
@@ -126,6 +195,67 @@ export class LeadPage extends BasePage {
               await hotOption.click({ force: true });
               await score.press('Tab');
 
+              const NameField = this.page.getByRole('textbox', { name: 'Name' }).first();
+              await this.waitForVisible(NameField, 30000);
+              const NameWithRunNumber = this.buildLastNameWithRunNumber(lastName);
+              await NameField.fill(NameWithRunNumber);
+              await expect(NameField).toHaveValue(NameWithRunNumber);
+              Logger.info(`Filled name field: ${NameWithRunNumber}`);
+
+              const organizationField = this.page.getByRole('textbox', { name: 'Organisation' }).first();
+              await this.waitForVisible(organizationField, 30000);
+              await organizationField.fill("mecwacare");
+              await expect(organizationField).toHaveValue("mecwacare");
+              Logger.info(`Filled organisation field: ${"mecwacare"}`);
+
+              const relationship = this.page.getByRole('combobox', {
+        name: LeadLocators.relationship
+        });
+        await relationship.scrollIntoViewIfNeeded();
+        await this.waitForVisible(relationship, 30000);
+        await relationship.click();
+        await this.staticWait(1500);
+
+        const relationshipOption = this.page.getByRole('option', {
+          name: 'Son'
+        });
+        await relationshipOption.scrollIntoViewIfNeeded();
+        await this.waitForVisible(relationshipOption, 10000);
+        await relationshipOption.click();
+        await expect(relationship).toHaveValue(/Son/);
+        Logger.info("Selected relationship option: Son");
+
+        const marketingCommunication = this.page.locator(LeadLocators.marketing_communication_opt_in).first();
+        await marketingCommunication.scrollIntoViewIfNeeded();
+        await this.waitForVisible(marketingCommunication, 30000);
+        await marketingCommunication.click();
+        await this.staticWait(1500);
+
+        const marketingOption = this.page.getByRole('option', {
+          name: 'Yes'
+        });
+        await marketingOption.scrollIntoViewIfNeeded();
+        await this.waitForVisible(marketingOption, 10000);
+        await marketingOption.click();
+        await expect(marketingCommunication).toHaveValue(/Yes/);
+        Logger.info("Selected marketing communication option: Yes");
+
+        const marketingCommunicationPreference = this.page.locator(LeadLocators.marketing_communication_preference).first();
+        await marketingCommunicationPreference.scrollIntoViewIfNeeded();
+        await this.waitForVisible(marketingCommunicationPreference, 30000);
+        await marketingCommunicationPreference.click();
+        await this.staticWait(1500);
+
+        const marketingCommunicationOption = this.page.getByRole('option', {
+          name: 'Email'
+        });
+        await marketingCommunicationOption.scrollIntoViewIfNeeded();
+        await this.waitForVisible(marketingCommunicationOption, 10000);
+        await marketingCommunicationOption.click();
+        await expect(marketingCommunicationPreference).toHaveValue(/Email/);
+        Logger.info("Selected marketing communication Preference option: Email");
+
+
         const save_button = await this.page.getByRole('button', { name: LeadLocators.save_button });
         await save_button.scrollIntoViewIfNeeded();
         await save_button.click();
@@ -149,11 +279,17 @@ export class LeadPage extends BasePage {
 
   async searchAddress(searchAddress: string): Promise<void> {
     Logger.step(`Search lead address: ${searchAddress}`);
-    let addressField = this.page.locator(LeadLocators.searchAddressInput).first();
-    const primaryVisible = await addressField.isVisible().catch(() => false);
-    if (!primaryVisible) {
-      addressField = this.page.locator(LeadLocators.fallbackAddressInput).first();
-    }
+    // let addressField = this.page.locator(LeadLocators.searchAddressInput).first();
+    // const primaryVisible = await addressField.isVisible().catch(() => false);
+
+   
+    // if (!primaryVisible) {
+    //   addressField = this.page.locator(LeadLocators.fallbackAddressInput).first();
+    // }
+
+    const addressField = this.page
+    .locator('text=Search Address Here')
+    .locator('xpath=following::input[@role="combobox"][1]');
 
     await this.waitForVisible(addressField, 20000);
     await addressField.scrollIntoViewIfNeeded();
@@ -272,7 +408,7 @@ export class LeadPage extends BasePage {
 
   async clickConvertAndVerifySuccess(expectedFullName: string): Promise<void> {
     Logger.step('Click Convert and verify conversion success');
-    await this.staticWait(60000);
+    await this.staticWait(30000);
     await this.page.waitForLoadState('domcontentloaded', { timeout: 60000 }).catch(() => {});
 
     const conversionDialog = this.page.locator(LeadLocators.conversionDialog).last();

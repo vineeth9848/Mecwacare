@@ -15,7 +15,10 @@
       "serviceOption": "Home Care",
       "verifySearchAddress": "80 Almond",
       "verifyExpectedAddress": "80 Almond",
-      "ExpectedFilesCount":1
+      "ExpectedFilesCount":1,
+        "accountFirstName": "John",
+        "accountLastName": "Doe",
+        "subject": "Test Case Subject"
     }
   ]
 }

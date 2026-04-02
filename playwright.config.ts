@@ -3,6 +3,8 @@ import PropertyReader from './src/utils/PropertyReader';
 import { serialTests, parallelTests } from './test-groups';
 
 const rawBrowser = (PropertyReader.getProperty('browser') || 'chromium').toLowerCase();
+const baseURL = process.env.BASE_URL || process.env.SF_LOGIN_URL || PropertyReader.getBaseUrl();
+const isCI = process.env.CI === 'true';
 
 let browserName: 'chromium' | 'firefox' | 'webkit' = 'chromium';
 let channel: 'chrome' | 'msedge' | undefined;
@@ -31,27 +33,52 @@ switch (rawBrowser) {
 }
 
 export default defineConfig({
-  globalSetup: './global-setup.ts',
+  globalSetup: process.env.SKIP_GLOBAL_SETUP === 'true' ? undefined : './global-setup.ts',
   testDir: './tests',
   timeout: 60000,
-  retries: 0,
-  maxFailures: 1,
+  expect: {
+    timeout: 10000,
+  },
+  retries: isCI ? 2 : 0,
+  outputDir: 'test-results',
   reporter: [
     ['html', { outputFolder: 'playwright-report', open: 'never' }],
     ['junit', { outputFile: 'reports/junit/results.xml' }],
   ],
   use: {
-    baseURL: PropertyReader.getBaseUrl(),
+    baseURL,
     storageState: 'auth.json',
-    headless: false,
+    headless: isCI ? true : false,
     screenshot: 'on',
     video: 'on',
     trace: 'on-first-retry',
   },
   projects: [
     {
+      name: 'setup',
+      testMatch: /.*login\.setup\.ts/,
+      workers: 1,
+      fullyParallel: false,
+      use: {
+        browserName,
+        ...(channel ? { channel } : {}),
+        storageState: undefined,
+      },
+    },
+    {
       name: `${projectName}-serial`,
       testMatch: serialTests,
+      testIgnore: /.*login\.setup\.ts/,
+      workers: 1,
+      fullyParallel: false,
+      use: {
+        browserName,
+        ...(channel ? { channel } : {}),
+      },
+    },
+    {
+      name: 'ci-sequential',
+      testIgnore: /.*login\.setup\.ts/,
       workers: 1,
       fullyParallel: false,
       use: {
@@ -62,6 +89,7 @@ export default defineConfig({
     {
       name: `${projectName}-parallel`,
       testMatch: parallelTests,
+      testIgnore: /.*login\.setup\.ts/,
       fullyParallel: true,
       use: {
         browserName,

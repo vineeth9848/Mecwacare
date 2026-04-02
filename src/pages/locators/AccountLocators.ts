@@ -53,6 +53,7 @@ export const AccountLocators = {
     saveToast: "text=Address verified and saved, text=Saved, [role='alert']",
     addressInformationText: "button:has-text('Address Information')",
       addressValue: "[data-target-selection-name='sfdc:RecordField.Lead.Address']",
+      SelectClientFormCategory: "button[aria-label='Select Category']",
 
 
 } as const;

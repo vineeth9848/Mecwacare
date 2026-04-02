@@ -314,9 +314,289 @@ export class AccountPage extends BasePage {
     Logger.pass(`Opened account record using email: ${email}`);
   }
 
+  async createClientForm(): Promise<void> {
+    Logger.step("Create Client form from account record");
+    const moreTabs = await this.page.locator('button[title="More Tabs"]:visible');
+    await expect(moreTabs).toBeVisible({ timeout: 10000 });
+    await moreTabs.click();
+    Logger.pass('Clicked More Tabs button');
+
+    const carePlanOption = this.page.getByRole('menuitem', { name: 'Client Forms' }).first();
+    await expect(carePlanOption).toBeVisible({ timeout: 10000 });
+    await carePlanOption.click();
+    Logger.pass('Selected Client Forms from More Tabs');
+
+    const categoryDropdown = this.page.locator(AccountLocators.SelectClientFormCategory).first();
+    await expect(categoryDropdown).toBeVisible({ timeout: 10000 });
+    await categoryDropdown.click();
+    
+    const clientFormOption = this.page.getByRole('option', { name: 'Support at Home' }).first();
+    await expect(clientFormOption).toBeVisible({ timeout: 10000 });
+    await clientFormOption.click();
+
+    await this.scrollToBottom();
+
+    await this.page
+    .locator('lightning-button[data-object="HACC_Linkage_Service_Request_Form__c"] button')
+    .filter({ hasText: /Start|Resume/ })
+    .click();
+
+   const ReferralTo = await this.page.getByRole('button', {
+      name: /Referral To/i
+    });
+    await ReferralTo.waitFor({ state: 'visible', timeout: 10000 });
+    await ReferralTo.click();
+
+    Logger.pass('Expanded Referral To option to start filling form');
+
+    const ContactName = this.page.getByRole('textbox', {
+      name: 'Contact Name'
+    });
+
+    await ContactName.clear();
+
+    await ContactName.fill('John Doe');
+    await expect(ContactName).toBeVisible({ timeout: 10000 });
+    await ContactName.clear();
+    await ContactName.fill('John Doe');
+    await expect(ContactName).toHaveValue('John Doe');
+    Logger.pass('Filled Contact Name field in client form');
+
+    const referredTo = await this.page.getByRole('textbox', {
+      name: 'Referred To'
+    });
+    await expect(referredTo).toBeVisible({ timeout: 10000 });
+    await referredTo.clear();
+    await referredTo.fill('Test Referral');
+    await expect(referredTo).toHaveValue('Test Referral');
+    Logger.pass('Filled Referred To field in client form');
+
+    const email = await this.page.getByRole('textbox', {
+      name: 'Email'
+    });
+    await email.waitFor({ state: 'visible', timeout: 10000 });
+    await email.fill('john.doe@example.com');
+    await expect(email).toHaveValue('john.doe@example.com');
+    Logger.pass('Filled Email field in client form');
+
+    const referredFrom = await this.page.getByRole('textbox', {
+      name: 'Referred From'
+    });
+    await expect(referredFrom).toBeVisible({ timeout: 10000 });
+    await referredFrom.clear();
+    await referredFrom.fill('Test Referral Source');
+    await expect(referredFrom).toHaveValue('Test Referral Source');
+    Logger.pass('Filled Referred From field in client form');
+
+    const ReferrerPhone = await this.page.getByRole('textbox', {
+      name: 'Referrer Phone No'
+    });
+    await expect(ReferrerPhone).toBeVisible({ timeout: 10000 });
+    await ReferrerPhone.clear();
+    await ReferrerPhone.fill('123-456-7890');
+    await expect(ReferrerPhone).toHaveValue('123-456-7890');
+    Logger.pass('Filled Referrer Phone No field in client form');
+
+    const AccountsForwardedTo = this.page
+    .locator('text=Accounts forwarded to')
+    .locator('xpath=following::input[1]');
+
+    await AccountsForwardedTo.waitFor({ state: 'visible' });
+    AccountsForwardedTo.scrollIntoViewIfNeeded();
+    AccountsForwardedTo.clear();
+    await AccountsForwardedTo.fill('Demo Account');
+    await expect(AccountsForwardedTo).toHaveValue('Demo Account');
+    Logger.pass('Filled Accounts Forwarded To field in client form');
+
+    const ReferralToButton = await this.page.getByRole('button', {
+      name: /Referral To/i
+    });
+    await ReferralToButton.waitFor({ state: 'visible', timeout: 10000 });
+    await ReferralToButton.scrollIntoViewIfNeeded();
+    await ReferralToButton.click();
+    Logger.pass('Closed Referral To option to start filling form');
+
+    //--------------------------
+
+    const ClientDetails = await this.page.getByRole('button', {
+      name: /Client Details/i
+    });
+    await ClientDetails.waitFor({ state: 'visible', timeout: 10000 });
+    await ClientDetails.click();
+    Logger.pass('Expanded Client Details option to fill more fields in form');
+
+    const ClientName = await this.page.getByLabel('Client Name').first();
+    await expect(ClientName).toBeVisible({ timeout: 10000 });
+    await ClientName.scrollIntoViewIfNeeded();
+    await expect(ClientName).toHaveValue(/John Doe/);
+    Logger.pass('Verified Client Name field in client form');
+
+    const DateOfBirth = await this.page.getByLabel('Date of Birth').first();
+    await expect(DateOfBirth).toBeVisible({ timeout: 10000 });
+    await DateOfBirth.scrollIntoViewIfNeeded();
+    await expect(DateOfBirth).not.toHaveValue('');
+    Logger.pass('Verified Date of Birth field in client form not empty');
+
+    const Address = await this.page.getByLabel('Address').first();
+    await expect(Address).toBeVisible({ timeout: 10000 });
+    await Address.scrollIntoViewIfNeeded();
+    await expect(Address).not.toBeEmpty();
+    await expect(Address).toHaveValue(/46 Epworth/);
+    Logger.pass('Verified Address field in client form not empty and contains expected text');
+
+    const MainLanguage = await this.page.getByLabel('Main Language').first();
+    await expect(MainLanguage).toBeVisible({ timeout: 10000 });
+    await MainLanguage.scrollIntoViewIfNeeded();
+    await MainLanguage.clear();
+    await MainLanguage.fill('English');
+    await expect(MainLanguage).toHaveValue('English');
+    Logger.pass('Filled Main Language field in client form');
+
+    const LivingArrangements = await this.page.getByLabel('Living Arrangements').first();
+    await expect(LivingArrangements).toBeVisible({ timeout: 10000 });
+    await LivingArrangements.scrollIntoViewIfNeeded();
+    await LivingArrangements.clear();
+    await LivingArrangements.fill('Living with family');
+    await expect(LivingArrangements).toHaveValue('Living with family');
+    Logger.pass('Filled Living Arrangements field in client form');
+
+    const WhotoContactRegardingCare = this.page
+    .locator('text=Who to Contact Regarding Care')
+    .locator('xpath=following::input[1]');
+
+    await WhotoContactRegardingCare.waitFor({ state: 'visible' });
+    WhotoContactRegardingCare.scrollIntoViewIfNeeded();
+    WhotoContactRegardingCare.clear();
+    await WhotoContactRegardingCare.fill('Jane Doe');
+    await expect(WhotoContactRegardingCare).toHaveValue('Jane Doe');
+    Logger.pass('Filled Who to contact regarding care field in client form');
+
+    const ClosedClientDetails = await this.page.getByRole('button', {
+      name: /Client Details/i
+    });
+    await ClosedClientDetails.waitFor({ state: 'visible', timeout: 10000 });
+    await ClosedClientDetails.scrollIntoViewIfNeeded();
+    await ClosedClientDetails.click();
+    Logger.pass('Closed Client Details option to fill more fields in form');
+
+    //--------------------------------------------------
+
+    const MedicalHealth = await this.page.getByRole('button', {
+      name: /Medical and Health/i
+    });
+    await MedicalHealth.waitFor({ state: 'visible', timeout: 10000 });
+    await MedicalHealth.scrollIntoViewIfNeeded();
+    await MedicalHealth.click();
+    Logger.pass('Expanded Medical and Health option to fill more fields in form');
+
+    const medicalInfo = this.page
+    .locator('text=Medical and Health Information')
+    .locator('xpath=following::textarea[1]');
+    await medicalInfo.waitFor({ state: 'visible', timeout: 10000 });
+    await medicalInfo.scrollIntoViewIfNeeded();
+    await medicalInfo.clear();
+
+    await medicalInfo.fill('Patient has diabetes and requires regular monitoring');
+    await expect(medicalInfo).toHaveValue('Patient has diabetes and requires regular monitoring');
+    Logger.pass('Filled Medical and Health Information field in client form');
+
+    const mobilityInfo = this.page
+    .locator('text=Mobility Aids and Manual Handling')
+    .locator('xpath=following::textarea[1]');
+    await mobilityInfo.waitFor({ state: 'visible', timeout: 10000 });
+    await mobilityInfo.scrollIntoViewIfNeeded();
+    await mobilityInfo.clear();
+
+    await mobilityInfo.fill('Uses wheelchair and requires assistance for transfer');
+    await expect(mobilityInfo).toHaveValue('Uses wheelchair and requires assistance for transfer');
+    Logger.pass('Filled Mobility Aids and Manual Handling field in client form');
+
+     const ClosedMedicalHealth = await this.page.getByRole('button', {
+      name: /Medical and Health/i
+    });
+    await ClosedMedicalHealth.waitFor({ state: 'visible', timeout: 10000 });
+    await ClosedMedicalHealth.scrollIntoViewIfNeeded();
+    await ClosedMedicalHealth.click();
+    Logger.pass('Closed Medical and Health option after filling form');
+
+    const HealthSafety = await this.page.getByRole('button', {
+      name: /Health and Safety/i
+    });
+    await HealthSafety.waitFor({ state: 'visible', timeout: 10000 });
+    await HealthSafety.scrollIntoViewIfNeeded();
+    await HealthSafety.click();
+    Logger.pass('Expanded Health and Safety option to fill more fields in form');
+
+    const ohsDropdown = this.page.getByRole('combobox', {
+      name: /OHS Assessment Conducted/i
+    });
+    await ohsDropdown.waitFor({ state: 'visible', timeout: 10000 });
+    await ohsDropdown.scrollIntoViewIfNeeded();
+
+    await ohsDropdown.click();
+
+    await this.page.locator('[role="option"]', { hasText: 'Yes' }).click();
+
+    await expect(ohsDropdown).toHaveValue('Yes');
+    Logger.pass('Selected Yes for OHS Assessment Conducted field in client form');
+
+    const hazards = this.page
+      .locator('text=Hazards Identified and Actions Taken')
+      .locator('xpath=following::textarea[1]');
+
+      await hazards.waitFor({ state: 'visible', timeout: 10000 });
+      await hazards.scrollIntoViewIfNeeded();
+      await hazards.clear();
+
+      await hazards.fill('Hazards identified and mitigated properly');
+      await expect(hazards).toHaveValue('Hazards identified and mitigated properly');
+      Logger.pass('Filled Hazards Identified and Actions Taken field in client form');
+
+      const keySafe = await this.page
+      .locator('text=Key Safe in Use?')
+      .locator('xpath=following::label[.//text()="Yes"][1]')
+      await keySafe.waitFor({ state: 'visible', timeout: 10000 });
+      await keySafe.scrollIntoViewIfNeeded();
+      await keySafe.click();
+
+      const PersonalAlarm = await this.page
+      .locator('text=Personal Alarm in Use?')
+      .locator('xpath=following::label[.//text()="Yes"][1]');
+
+      await PersonalAlarm.waitFor({ state: 'visible', timeout: 10000 });
+      await PersonalAlarm.scrollIntoViewIfNeeded();
+      await PersonalAlarm.click();
+
+      const CloseHealthSafety = await this.page.getByRole('button', {
+      name: /Health and Safety/i
+        });
+      await CloseHealthSafety.waitFor({ state: 'visible', timeout: 10000 });
+      await CloseHealthSafety.scrollIntoViewIfNeeded();
+      await CloseHealthSafety.click();
+      Logger.pass('Closed Health and Safety option to fill more fields in form');
+
+
+      const CompleteFormButton = this.page.getByRole('button', { name: 'Complete' }).first();
+      await CompleteFormButton.waitFor({ state: 'visible', timeout: 10000 });
+      await CompleteFormButton.scrollIntoViewIfNeeded();
+      await CompleteFormButton.click();
+      Logger.pass('Clicked Complete Form button in client form');
+
+      await this.page.waitForTimeout(10000);
+
+      await expect(
+        this.page.getByText(/Update Successful/i)
+      ).toBeVisible({ timeout: 15000 });
+
+      Logger.pass('Client form completed successfully with Update Successful message');
+
+      await this.page.waitForTimeout(10000);
+      Logger.pass("Client form created successfully from account record");
+  }
+
    async createCarePlan(): Promise<void> {
     Logger.step('Create Care Plan from Planner page');
-    const moreTabs = this.page.locator(AccountLocators.more_Tabs);
+    const moreTabs = await this.page.locator('button[title="More Tabs"]:visible');
     await expect(moreTabs).toBeVisible({ timeout: 10000 });
     await moreTabs.click();
     Logger.pass('Clicked More Tabs button');
