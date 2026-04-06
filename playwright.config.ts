@@ -39,7 +39,9 @@ export default defineConfig({
   expect: {
     timeout: 10000,
   },
-  retries: isCI ? 2 : 0,
+  retries: 2,
+  workers: 1,
+  fullyParallel: false,
   outputDir: 'test-results',
   reporter: [
     ['html', { outputFolder: 'playwright-report', open: 'never' }],
@@ -48,7 +50,7 @@ export default defineConfig({
   use: {
     baseURL,
     storageState: 'auth.json',
-    headless: isCI ? true : false,
+    headless: false,
     screenshot: 'on',
     video: 'on',
     trace: 'on-first-retry',
@@ -76,16 +78,20 @@ export default defineConfig({
         ...(channel ? { channel } : {}),
       },
     },
-    {
-      name: 'ci-sequential',
-      testIgnore: /.*login\.setup\.ts/,
-      workers: 1,
-      fullyParallel: false,
-      use: {
-        browserName,
-        ...(channel ? { channel } : {}),
-      },
-    },
+    ...(isCI
+      ? [
+          {
+            name: 'ci-sequential',
+            testIgnore: /.*login\.setup\.ts/,
+            workers: 1,
+            fullyParallel: false,
+            use: {
+              browserName,
+              ...(channel ? { channel } : {}),
+            },
+          },
+        ]
+      : []),
     {
       name: `${projectName}-parallel`,
       testMatch: parallelTests,

@@ -12,7 +12,10 @@ export class BasePage {
   async gotoBaseUrl(): Promise<void> {
     const baseUrl = PropertyReader.getBaseUrl();
     Logger.step(`Navigate to base URL: ${baseUrl}`);
-    await this.page.goto(baseUrl, { waitUntil: 'domcontentloaded' });
+    await this.safeAction(async () => {
+      await this.page.goto(baseUrl, { waitUntil: 'domcontentloaded' });
+    });
+    await this.waitForPageReady();
     const escaped = baseUrl.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
     await expect(this.page).toHaveURL(new RegExp(escaped));
     Logger.pass('Base URL loaded');
@@ -20,8 +23,39 @@ export class BasePage {
 
   async refreshPage(): Promise<void> {
     Logger.step('Refresh page');
-    await this.page.reload({ waitUntil: 'domcontentloaded' });
+    await this.safeAction(async () => {
+      await this.page.reload({ waitUntil: 'domcontentloaded' });
+    });
+    await this.waitForPageReady();
     Logger.pass('Page refreshed');
+  }
+
+  async safeAction<T>(action: () => Promise<T>): Promise<T> {
+    if (this.page.isClosed()) {
+      throw new Error('Page is already closed');
+    }
+
+    try {
+      return await action();
+    } catch (error) {
+      if (this.page.isClosed()) {
+        throw error;
+      }
+
+      await this.waitForPageReady().catch(() => {});
+      return await action();
+    }
+  }
+
+  async waitForPageReady(): Promise<void> {
+    if (this.page.isClosed()) {
+      throw new Error('Page is already closed');
+    }
+
+    await this.page.waitForLoadState('domcontentloaded');
+    await this.page.waitForLoadState('networkidle', { timeout: 10000 }).catch(() => {
+      Logger.info('Network did not become idle within 10s; continuing after DOM content loaded');
+    });
   }
 
   async staticWait(milliseconds: number): Promise<void> {
@@ -53,7 +87,9 @@ export class BasePage {
   async click(target: Locator): Promise<void> {
     Logger.step('Click element');
     await this.waitForVisible(target);
-    await target.click();
+    await this.safeAction(async () => {
+      await target.click();
+    });
     Logger.pass('Clicked element');
   }
 
@@ -73,22 +109,74 @@ export class BasePage {
   async selectDropdownByValue(target: Locator, value: string): Promise<void> {
     Logger.step(`Select dropdown by value: ${value}`);
     await this.waitForVisible(target);
-    await target.selectOption({ value });
+    await this.safeAction(async () => {
+      await target.selectOption({ value });
+    });
+    await this.waitForPageReady();
     Logger.pass('Dropdown value selected');
   }
 
   async selectDropdownByLabel(target: Locator, label: string): Promise<void> {
     Logger.step(`Select dropdown by label: ${label}`);
     await this.waitForVisible(target);
-    await target.selectOption({ label });
+    await this.safeAction(async () => {
+      await target.selectOption({ label });
+    });
+    await this.waitForPageReady();
     Logger.pass('Dropdown label selected');
   }
 
   async selectDropdownByIndex(target: Locator, index: number): Promise<void> {
     Logger.step(`Select dropdown by index: ${index}`);
     await this.waitForVisible(target);
-    await target.selectOption({ index });
+    await this.safeAction(async () => {
+      await target.selectOption({ index });
+    });
+    await this.waitForPageReady();
     Logger.pass('Dropdown index selected');
+  }
+
+  async selectDropdown(label: string, value: string): Promise<void> {
+    Logger.step(`Select dropdown ${label}: ${value}`);
+
+    const dropdown = this.page.locator(`[role="combobox"][aria-label="${label}"]`).first();
+    await dropdown.waitFor({ state: 'visible', timeout: 30000 });
+
+    await this.safeAction(async () => {
+      await dropdown.click();
+    });
+
+    const option = this.page
+      .locator(`lightning-base-combobox-item[role="option"]:has-text("${value}"), [role="option"]:has-text("${value}")`)
+      .first();
+
+    try {
+      await option.waitFor({ state: 'visible', timeout: 5000 });
+      await this.safeAction(async () => {
+        await option.click();
+      });
+    } catch {
+      const inputValue = await dropdown.getAttribute('readonly').catch(() => null);
+      if (inputValue === null) {
+        await dropdown.fill(value).catch(() => {});
+      }
+      await this.page.keyboard.press('ArrowDown');
+      await this.page.keyboard.press('Enter');
+    }
+
+    await this.waitForPageReady();
+    await expect
+      .poll(async () =>
+        (
+          (await dropdown.textContent().catch(() => '')) ||
+          (await dropdown.inputValue().catch(() => '')) ||
+          (await dropdown.getAttribute('data-value').catch(() => '')) ||
+          ''
+        ).trim(),
+      )
+      .toContain(value);
+
+    Logger.pass(`Selected dropdown ${label}: ${value}`);
   }
 
   async getSelectedDropdownValue(target: Locator): Promise<string> {

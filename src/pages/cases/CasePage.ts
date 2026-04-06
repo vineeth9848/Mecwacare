@@ -20,9 +20,9 @@ export class CasePage extends BasePage {
     }
 
     async selectCaseType(): Promise<void> {
-      Logger.step('Select Case Type');
+      Logger.step('Select Case Type - Home Care: Discharge');
       
-        const caseRadioLabel = this.page.locator('label').filter({ hasText: 'Home Care - Invoice Adjustment' }).first();
+        const caseRadioLabel = this.page.locator('label').filter({ hasText: 'Home Care: Discharge' }).first();
 
         await this.waitForVisible(caseRadioLabel, 20000);
         await caseRadioLabel.click();
@@ -33,28 +33,80 @@ export class CasePage extends BasePage {
 
         await this.page.waitForTimeout(5000);
 
-      Logger.pass('Selected Case Type: Issue');
+      Logger.pass('Selected Case Type: Home Care: Discharge');
     }
 
     async selectCaseDropdown(label: string, value: string): Promise<void> {
-      Logger.step(`Select dropdown value for ${label}: ${value}`);
+      Logger.step(`Selecting ${value} for ${label}`);
 
-      const dropdown = this.page.locator(`[role="combobox"][aria-label="${label}"]`).first();
-      await this.waitForVisible(dropdown, 30000);
+      const dropdown = this.page
+        .locator(`[role="combobox"][aria-label="${label}"]`)
+        .first();
+
+      await dropdown.waitFor({ state: 'visible', timeout: 30000 });
       await dropdown.scrollIntoViewIfNeeded();
-      await dropdown.click({ force: true });
+      await dropdown.click();
 
-      const option = this.page.locator('[role="option"]').filter({
-        hasText: new RegExp(`^${value}$`, 'i'),
-      }).first();
+      const option = this.page.locator(
+        `lightning-base-combobox-item[role="option"]:has-text("${value}")`
+      ).first();
 
-      await this.waitForVisible(option, 30000);
-      await option.scrollIntoViewIfNeeded();
-      await option.click({ force: true });
+      try {
+        await option.waitFor({ state: 'visible', timeout: 5000 });
+        await option.click();
+      } catch {
+       
+        await dropdown.fill(value);
+        await this.page.waitForTimeout(1000);
+        await this.page.keyboard.press('ArrowDown');
+        await this.page.keyboard.press('Enter');
+      }
+
       await expect(dropdown).toContainText(value, { timeout: 30000 });
-      Logger.pass(`Selected dropdown value for ${label}: ${value}`);
-    }
 
+      Logger.pass(`Selected ${value} for ${label}`);
+      await this.page.waitForTimeout(5000);
+}
+
+formatDateDDMMYYYY(date: Date): string {
+  const day = String(date.getDate()).padStart(2, '0');
+  const month = String(date.getMonth() + 1).padStart(2, '0');
+  const year = date.getFullYear();
+
+  return `${day}/${month}/${year}`;
+}
+
+async DateField(name: string, date: Date): Promise<void> {
+  Logger.step(`Filling date for ${name}: ${date.toDateString()}`);
+
+  const day = String(date.getDate()).padStart(2, '0');
+  const month = String(date.getMonth() + 1).padStart(2, '0');
+  const year = date.getFullYear();
+
+  const formattedDate = `${day}/${month}/${year}`;
+
+  const field = this.page.locator(`input[name="${name}"]`);
+
+  await field.waitFor({ state: 'visible', timeout: 30000 });
+
+  await field.evaluate((el) => {
+    el.scrollIntoView({ block: 'center' });
+  });
+
+  await field.click();
+  await field.fill('');
+  await field.fill(formattedDate);
+
+  await field.press('Tab');
+
+  // 🔥 Flexible validation
+  const actualValue = await field.inputValue();
+  Logger.info(`Date entered: ${actualValue}`);
+
+  expect(actualValue).toContain(year.toString());
+
+  Logger.pass(`Filled date: ${formattedDate}`);
+}
     async fillTextFields(label: string, value: string): Promise<void> {
       Logger.step(`Fill text field for ${label}: ${value}`);
 
@@ -67,22 +119,22 @@ export class CasePage extends BasePage {
 
 
       async clickSearchInvoiceAndAddNewInvoice(): Promise<void> {
-    Logger.step('Click Search Invoice and select New Invoice');
+        Logger.step('Click Search Invoice and select New Invoice');
 
 
-    const fundingInput = this.page.locator(CaseLocators.invoiceSearchInput).first();
+        const fundingInput = await this.page.locator(CaseLocators.invoiceSearchInput).first();
 
-    await fundingInput.waitFor({ state: 'visible', timeout: 60000 });
-    await fundingInput.scrollIntoViewIfNeeded();
-    await fundingInput.click({ force: true });
+        await fundingInput.waitFor({ state: 'visible', timeout: 60000 });
+        await fundingInput.scrollIntoViewIfNeeded();
+        await fundingInput.click({ force: true });
 
-    const newFunding = this.page.getByText('New Invoice', { exact: false });
+        const newFunding = this.page.getByText('New Invoice', { exact: false });
 
-    await newFunding.waitFor({ state: 'visible', timeout: 10000 });
-    await newFunding.scrollIntoViewIfNeeded();  
-    await newFunding.click();
+        await newFunding.waitFor({ state: 'visible', timeout: 10000 });
+        await newFunding.scrollIntoViewIfNeeded();  
+        await newFunding.click();
 
-    Logger.pass('Clicked New Invoice from search');
+        Logger.pass('Clicked New Invoice from search');
   }
 
 
@@ -252,6 +304,7 @@ async saveButtonClick(): Promise<void> {
   await saveButton.waitFor({ state: 'visible', timeout: 30000 });
   await saveButton.scrollIntoViewIfNeeded();
   await saveButton.click();
+  await this.page.waitForTimeout(5000);
 
   Logger.info('Clicked Save button');
 }

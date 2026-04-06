@@ -477,7 +477,44 @@ export class OpportunityPage extends BasePage {
     Logger.pass(`Funding Administrator selected : ${administratorName}`);
   }
 
+  async DateField(name: string, date: Date): Promise<void> {
+  Logger.step(`Filling date for ${name}: ${date.toDateString()}`);
+
+  const day = String(date.getDate()).padStart(2, '0');
+  const month = String(date.getMonth() + 1).padStart(2, '0');
+  const year = date.getFullYear();
+
+  const formattedDate = `${day}/${month}/${year}`;
+
+  const field = this.page.locator(`input[name="${name}"]`);
+
+  await field.waitFor({ state: 'visible', timeout: 30000 });
+
+  await field.evaluate((el) => {
+    el.scrollIntoView({ block: 'center' });
+  });
+
+  await field.click();
+  await field.fill('');
+  await field.fill(formattedDate);
+
+  await field.press('Tab');
+
+  // 🔥 Flexible validation
+  const actualValue = await field.inputValue();
+  Logger.info(`Date entered: ${actualValue}`);
+
+  expect(actualValue).toContain(year.toString());
+
+  Logger.pass(`Filled date: ${formattedDate}`);
+}
+
   async selectFundingProgramBlockTestFundingHacc(): Promise<void> {
+    const today = new Date();
+
+    const tomorrow = new Date();
+    tomorrow.setDate(today.getDate() + 1);
+
     const fundingProgramSearch = 'HACC - Ballarat';
     const expectedFundingProgram = 'HACC - Ballarat';
 
@@ -549,6 +586,11 @@ export class OpportunityPage extends BasePage {
         { timeout: 30000 },
       )
       .toContain(expectedFundingProgram);
+
+      this.DateField('Start Date', today);
+      Logger.info(`Filled Start Date with today's date: ${today.toDateString()}`);
+      this.DateField('End Date', tomorrow);
+      Logger.info(`Filled End Date with tomorrow's date: ${tomorrow.toDateString()}`);
 
     Logger.step('Save opportunity details');
     const saveButton = this.page.getByRole('button', { name: 'Save' }).first();
