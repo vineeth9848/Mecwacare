@@ -15,6 +15,15 @@ export class LoginPage extends BasePage {
     Logger.pass('Login page opened');
   }
 
+  async navigateToLoginUrl(loginUrl: string): Promise<void> {
+    Logger.step(`Navigate to login URL: ${loginUrl}`);
+    await this.safeAction(async () => {
+      await this.page.goto(loginUrl, { waitUntil: 'domcontentloaded' });
+    });
+    await this.waitForPageReady();
+    Logger.pass('Custom login URL opened');
+  }
+
   async login(username: string, password: string): Promise<void> {
     const usernameField = this.page.locator(LoginLocators.usernameInput);
     const passwordField = this.page.locator(LoginLocators.passwordInput);
@@ -37,6 +46,30 @@ export class LoginPage extends BasePage {
     const password = PropertyReader.getProperty('password');
     Logger.info('Using credentials from config.properties');
     await this.login(username, password);
+  }
+
+  async loginToUrl(loginUrl: string, username: string, password: string): Promise<void> {
+    await this.navigateToLoginUrl(loginUrl);
+    await this.login(username, password);
+  }
+
+  async logoutFromSalesforce(): Promise<void> {
+    Logger.step('Logout from Salesforce');
+
+    const profileMenu = this.page.locator("//span[text()='View profile']").first();
+    await this.waitForVisible(profileMenu, 15000);
+    await this.safeAction(async () => {
+      await profileMenu.click();
+    });
+
+    const logoutLink = this.page.locator("//a[text()='Log out']").first();
+    await this.waitForVisible(logoutLink, 15000);
+    await this.safeAction(async () => {
+      await logoutLink.click();
+    });
+
+    await this.waitForPageReady();
+    Logger.pass('Logged out from Salesforce');
   }
 
   async getErrorMessage(): Promise<string> {

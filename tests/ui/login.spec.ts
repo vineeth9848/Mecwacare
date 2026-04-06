@@ -2,6 +2,8 @@ import { test, expect } from '@playwright/test';
 import { LoginPage } from '../../src/pages/login/LoginPage';
 import { Logger } from '../../src/utils/Logger';
 
+test.describe.configure({ mode: 'serial' });
+
 const profileMenu = "//span[text()='View profile']";
 const logoutLink = "//a[text()='Log out']";
 

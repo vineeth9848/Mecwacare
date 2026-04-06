@@ -5,6 +5,40 @@ import { OpportunityPage } from '../../src/pages/opportunities/OpportunityPage';
 import { TestDataHelper } from '../../src/utils/TestDataHelper';
 import { time } from 'console';
 
+test.describe.configure({ mode: 'serial' });
+
+test('verify funding source and funding type in first opportunity record', async ({ page }) => {
+  const homePage = new HomePage(page);
+  const opportunityPage = new OpportunityPage(page);
+  const { leadCreate } = TestDataHelper.readJsonFile<{ leadCreate: Array<Record<string, string>> }>('leads.json');
+  const lead = leadCreate[0];
+
+  const today = new Date();
+
+    const tomorrow = new Date();
+    tomorrow.setDate(today.getDate() + 1);
+
+  Logger.info('Starting opportunity funding validation test');
+  await opportunityPage.refreshPage();
+  await homePage.verifyHomePage();
+  await homePage.selectObjectFromDropdown('Opportunities');
+  await opportunityPage.selectOpportunitiesListView('My Opportunities');
+  await opportunityPage.searchAndOpenOpportunityByLeadName(lead.firstName, lead.lastName);
+  await opportunityPage.openDetailsTab();
+  await opportunityPage.selectBlockFundingForFundingSourceAndType();
+  await opportunityPage.clickSearchFundingAndAddNewFunding();
+  await opportunityPage.selectParticipantInNewFunding(lead.firstName, lead.lastName);
+  await opportunityPage.selectNewFundingSourceAndTypeSupportAtHome();
+  //await opportunityPage.clickSearchFundingProgram();
+  await opportunityPage.selectFundingProgramBlockTestFundingHacc();
+  await opportunityPage.selectFundingAdministrator(lead.firstName, lead.lastName);
+  await opportunityPage.selectAssessmentVisitPreferenceInPerson();
+  await opportunityPage.selectServiceAgreementStatus();
+  await opportunityPage.selectReferrerTypeFamilyViolencePrograms();
+  await opportunityPage.saveOpportunityDetails();
+  Logger.pass('Opportunity funding validation test completed successfully');
+});
+
 test('Configure PriceBook and Product Management on Opportunity', async ({ page }) => {
   const homePage = new HomePage(page);
   const opportunityPage = new OpportunityPage(page);
@@ -45,33 +79,6 @@ test('Verify Generate Quote functionality and verify Files on Opportunity', asyn
   await opportunityPage.switchToRelatedTab();
   await opportunityPage.verifyFilesGenerated(lead.firstName, lead.lastName);
   Logger.pass('Opportunity quote generation and file verification validated successfully');
-});
-
-test('verify funding source and funding type in first opportunity record', async ({ page }) => {
-  const homePage = new HomePage(page);
-  const opportunityPage = new OpportunityPage(page);
-  const { leadCreate } = TestDataHelper.readJsonFile<{ leadCreate: Array<Record<string, string>> }>('leads.json');
-  const lead = leadCreate[0];
-
-  Logger.info('Starting opportunity funding validation test');
-  await opportunityPage.refreshPage();
-  await homePage.verifyHomePage();
-  await homePage.selectObjectFromDropdown('Opportunities');
-  await opportunityPage.selectOpportunitiesListView('My Opportunities');
-  await opportunityPage.searchAndOpenOpportunityByLeadName(lead.firstName, lead.lastName);
-  await opportunityPage.openDetailsTab();
-  await opportunityPage.selectBlockFundingForFundingSourceAndType();
-  await opportunityPage.clickSearchFundingAndAddNewFunding();
-  await opportunityPage.selectParticipantInNewFunding(lead.firstName, lead.lastName);
-  await opportunityPage.selectNewFundingSourceAndTypeSupportAtHome();
-  //await opportunityPage.clickSearchFundingProgram();
-  await opportunityPage.selectFundingProgramBlockTestFundingHacc();
-  await opportunityPage.selectFundingAdministrator(lead.firstName, lead.lastName);
-  await opportunityPage.selectAssessmentVisitPreferenceInPerson();
-  await opportunityPage.selectServiceAgreementStatus();
-  await opportunityPage.selectReferrerTypeFamilyViolencePrograms();
-  await opportunityPage.saveOpportunityDetails();
-  Logger.pass('Opportunity funding validation test completed successfully');
 });
 
 test('verify Generate Service Agreement functionality on Opportunity', async ({ page }) => {

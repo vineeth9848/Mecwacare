@@ -4,6 +4,8 @@ import { AccountPage } from '../../src/pages/accounts/AccountPage';
 import { HomePage } from '../../src/pages/homepage/HomePage';
 import { TestDataHelper } from '../../src/utils/TestDataHelper';
 
+test.describe.configure({ mode: 'serial' });
+
 test.skip('create account', async ({ page }) => {
   const homePage = new HomePage(page);
   const accountPage = new AccountPage(page);
