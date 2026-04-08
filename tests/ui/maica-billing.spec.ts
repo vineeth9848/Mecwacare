@@ -4,8 +4,6 @@ import { HomePage } from '../../src/pages/homepage/HomePage';
 import { MaicaBillingPage } from '../../src/pages/maica-billing/MaicaBillingPage';
 import { TestDataHelper } from '../../src/utils/TestDataHelper';
 
-test.describe.configure({ mode: 'serial' });
-
 test.skip('Open MAICA Billing object and record scaffold', async ({ page }) => {
   test.setTimeout(120000);
 

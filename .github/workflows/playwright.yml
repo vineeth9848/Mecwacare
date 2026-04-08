@@ -55,31 +55,15 @@ jobs:
         env:
           SKIP_GLOBAL_SETUP: true
 
-      # Resolve requested suite without disturbing the existing repository layout
-      - name: Resolve suite target
-        id: suite
-        run: |
-          if [ "${{ github.event_name }}" = "push" ]; then
-            echo "target=tests" >> "$GITHUB_OUTPUT"
-          elif [ "${{ github.event.inputs.suite }}" = "smoke" ]; then
-            if [ -d tests/smoke ]; then
-              echo "target=tests/smoke" >> "$GITHUB_OUTPUT"
-            else
-              echo "target=tests/ui/smoke.spec.ts" >> "$GITHUB_OUTPUT"
-            fi
-          elif [ "${{ github.event.inputs.suite }}" = "regression" ]; then
-            if [ -d tests/regression ]; then
-              echo "target=tests/regression" >> "$GITHUB_OUTPUT"
-            else
-              echo "target=tests/ui" >> "$GITHUB_OUTPUT"
-            fi
-          else
-            echo "target=tests" >> "$GITHUB_OUTPUT"
-          fi
+      # Step 6A: Run smoke suite
+      - name: Run smoke suite sequentially
+        if: github.event_name == 'workflow_dispatch' && github.event.inputs.suite == 'smoke'
+        run: npx playwright test tests/ui/smoke.spec.ts --project=ci-sequential --workers=1
 
-      # Step 6: Run tests sequentially with retries intact
-      - name: Run Playwright suite sequentially
-        run: npx playwright test ${{ steps.suite.outputs.target }} --project=ci-sequential --workers=1
+      # Step 6B: Run ordered regression/full suite using the same local sequence
+      - name: Run ordered serial suite
+        if: github.event_name == 'push' || (github.event_name == 'workflow_dispatch' && (github.event.inputs.suite == 'regression' || github.event.inputs.suite == 'full'))
+        run: npm run test:serial-suite:html
 
       # Step 7: Upload HTML report as artifact
       - name: Upload Playwright HTML report

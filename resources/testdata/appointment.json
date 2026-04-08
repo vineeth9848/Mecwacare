@@ -1,0 +1,10 @@
+{
+  "appointmentData": [
+    {
+      "objectName": "Appointment",
+      "listView": "All",
+      "username": "John Doe",
+      "recordName": "APPT"
+    }
+  ]
+}
