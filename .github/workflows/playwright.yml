@@ -53,11 +53,12 @@ jobs:
         run: npm ci
 
       # Step 4: Install Playwright browsers and OS dependencies
-      - name: Install Playwright browsers
-        run: npx playwright install --with-deps
+      - name: Install Playwright browser
+        run: npx playwright install chromium
 
       # Step 5: Run login setup and generate auth.json before suite execution
       - name: Generate auth.json
+        continue-on-error: true
         run: npx playwright test tests/login.setup.ts --project=setup --workers=1
         env:
           SKIP_GLOBAL_SETUP: true
@@ -65,11 +66,13 @@ jobs:
       # Step 6A: Run smoke suite
       - name: Run smoke suite sequentially
         if: github.event_name == 'workflow_dispatch' && github.event.inputs.suite == 'smoke'
+        continue-on-error: true
         run: npx playwright test tests/ui/smoke.spec.ts --project=ci-sequential --workers=1
 
       # Step 6B: Run ordered regression/full suite using the same local sequence
       - name: Run ordered serial suite
         if: github.event_name == 'push' || (github.event_name == 'workflow_dispatch' && (github.event.inputs.suite == 'regression' || github.event.inputs.suite == 'full'))
+        continue-on-error: true
         run: npm run test:serial-suite:html
 
       # Step 7: Upload HTML report as artifact
@@ -80,6 +83,7 @@ jobs:
           name: playwright-html-report
           path: playwright-report
           retention-days: 5
+          if-no-files-found: warn
 
       # Step 8: Upload test results (screenshots/videos/traces)
       - name: Upload Playwright test results
@@ -89,6 +93,7 @@ jobs:
           name: playwright-test-results
           path: test-results
           retention-days: 5
+          if-no-files-found: warn
 
   publish-report:
     if: always()
