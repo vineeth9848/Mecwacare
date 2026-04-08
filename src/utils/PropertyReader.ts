@@ -73,6 +73,11 @@ class PropertyReader {
   }
 
   getRunNumber(defaultValue = 1): number {
+    const envValue = Number(process.env.RUN_NUMBER || process.env.runNumber || '');
+    if (!Number.isNaN(envValue) && envValue > 0) {
+      return envValue;
+    }
+
     const value = Number(this.getProperty('runNumber'));
     return Number.isNaN(value) ? defaultValue : value;
   }

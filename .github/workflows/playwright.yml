@@ -15,6 +15,10 @@ on:
           - smoke
           - regression
           - full
+      run_number:
+        description: Unique run number for test data
+        required: false
+        default: "1"
 
 jobs:
   playwright:
@@ -23,7 +27,10 @@ jobs:
 
     env:
       CI: true
+      HEADLESS: true
+      PW_TRACE_MODE: on
       TEST_GAP_MS: 3000
+      RUN_NUMBER: ${{ github.event.inputs.run_number || '1' }}
       BASE_URL: ${{ secrets.BASE_URL }}
       SF_LOGIN_URL: ${{ secrets.SF_LOGIN_URL }}
       SF_USERNAME: ${{ secrets.SF_USERNAME }}
@@ -87,6 +94,7 @@ jobs:
     if: always()
     needs: playwright
     runs-on: ubuntu-latest
+    continue-on-error: true
     permissions:
       pages: write
       id-token: write
