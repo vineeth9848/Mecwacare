@@ -4,8 +4,6 @@ import { HomePage } from '../../src/pages/homepage/HomePage';
 import { TestDataHelper } from '../../src/utils/TestDataHelper';
 import { CasePage } from '../../src/pages/cases/CasePage';
 
-test.describe.configure({ mode: 'serial' });
-
 
 test.only('create case from case page', async ({ page }) => {
   test.setTimeout(180000);

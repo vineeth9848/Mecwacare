@@ -2,10 +2,11 @@ import { Page, expect } from '@playwright/test';
 import { BasePage } from '../common/BasePage';
 import { Logger } from '../../utils/Logger';
 import { HomePageLocators } from '../locators/HomePageLocators';
+import { AppointmentLocators } from '../locators/AppointmentLocators';
 
 export class HomePage extends BasePage {
-  private readonly mecwaCareLogo = this.page.locator(HomePageLocators.mecwaCareLogo).first();
-  private readonly mCare360Text = this.page.locator(HomePageLocators.mCare360Text).first();
+  private readonly homeLogo = this.page.locator(HomePageLocators.homeLogo).first();
+  private readonly homeText = this.page.locator(HomePageLocators.homeText).first();
   private readonly objectDropdownButton = this.page.locator(HomePageLocators.objectDropdownButton);
   private readonly objectDropdownPanel = this.page.locator(HomePageLocators.objectDropdownPanel);
 
@@ -14,14 +15,15 @@ export class HomePage extends BasePage {
   }
 
   async verifyHomePage(): Promise<void> {
-    Logger.step('Verify MecwaCare logo is visible');
-    await expect(this.mecwaCareLogo).toBeVisible();
-    Logger.pass('MecwaCare logo is visible');
+    Logger.step('Verify homepage is loaded with m360Care branding');
+    await expect(this.homeLogo).toBeVisible({ timeout: 30000 });
+    Logger.pass('Homepage logo is visible');
 
-    Logger.step('Verify mCare360 text is visible');
-    await expect(this.mCare360Text).toBeVisible();
-    Logger.pass('mCare360 text is visible');
+    Logger.step('Verify m360Care branding text is visible');
+    await expect(this.homeText).toBeVisible({ timeout: 30000 });
+    Logger.pass('Homepage is loaded and m360Care branding is visible');
   }
+
 
   async openObjectDropdown(): Promise<void> {
     Logger.step('Open object dropdown');

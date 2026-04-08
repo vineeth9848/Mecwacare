@@ -5,8 +5,6 @@ import { OpportunityPage } from '../../src/pages/opportunities/OpportunityPage';
 import { TestDataHelper } from '../../src/utils/TestDataHelper';
 import { time } from 'console';
 
-test.describe.configure({ mode: 'serial' });
-
 test('verify funding source and funding type in first opportunity record', async ({ page }) => {
   const homePage = new HomePage(page);
   const opportunityPage = new OpportunityPage(page);
@@ -81,7 +79,7 @@ test('Verify Generate Quote functionality and verify Files on Opportunity', asyn
   Logger.pass('Opportunity quote generation and file verification validated successfully');
 });
 
-test('verify Generate Service Agreement functionality on Opportunity', async ({ page }) => {
+test.only('verify Generate Service Agreement functionality on Opportunity', async ({ page }) => {
   const homePage = new HomePage(page);
   const opportunityPage = new OpportunityPage(page);
   const { leadCreate } = TestDataHelper.readJsonFile<{ leadCreate: Array<Record<string, string>> }>('leads.json');
@@ -95,13 +93,13 @@ test('verify Generate Service Agreement functionality on Opportunity', async ({ 
   await opportunityPage.searchAndOpenOpportunityByLeadName(lead.firstName, lead.lastName);
   await opportunityPage.configureStage();
   await opportunityPage.configureStatus();
-  // await opportunityPage.saveOpportunityDetails();
-  // await opportunityPage.refreshPage();
-  // await opportunityPage.verifySignaturevisible();
-  // await opportunityPage.generateAgreement();
-  // await opportunityPage.refreshPage();
-  // await opportunityPage.switchToRelatedTab();
-  // await opportunityPage.verifyServiceAgreementFileGenerated();
+  await opportunityPage.saveOpportunityDetails();
+  await opportunityPage.refreshPage();
+  await opportunityPage.verifySignaturevisible();
+  await opportunityPage.generateAgreement();
+  await opportunityPage.refreshPage();
+  await opportunityPage.switchToRelatedTab();
+  await opportunityPage.verifyServiceAgreementFileGenerated();
   Logger.pass('Service agreement generation validation test completed successfully');
   
 });

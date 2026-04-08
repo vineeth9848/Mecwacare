@@ -53,9 +53,6 @@ export class BasePage {
     }
 
     await this.page.waitForLoadState('domcontentloaded');
-    await this.page.waitForLoadState('networkidle', { timeout: 10000 }).catch(() => {
-      Logger.info('Network did not become idle within 10s; continuing after DOM content loaded');
-    });
   }
 
   async staticWait(milliseconds: number): Promise<void> {

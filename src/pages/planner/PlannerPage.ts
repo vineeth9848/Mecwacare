@@ -5,6 +5,8 @@ import { PlannerLocators } from '../locators/PlannerLocators';
 import PropertyReader from '../../utils/PropertyReader';
 
 export class PlannerPage extends BasePage {
+  private readonly homeLogo = this.page.locator(PlannerLocators.homeLogo).first();
+    private readonly homeText = this.page.locator(PlannerLocators.homeText).first();
   constructor(page: Page) {
     super(page);
   }
@@ -18,6 +20,16 @@ export class PlannerPage extends BasePage {
     });
     await this.waitForPageReady();
     Logger.pass('Clicked New button in Planner page');
+  }
+
+  async verifyHomePage(): Promise<void> {
+    Logger.step('Verify homepage is loaded with m360Care branding');
+    await expect(this.homeLogo).toBeVisible({ timeout: 30000 });
+    Logger.pass('Homepage logo is visible');
+
+    Logger.step('Verify m360Care branding text is visible');
+    await expect(this.homeText).toBeVisible({ timeout: 30000 });
+    Logger.pass('Homepage is loaded and m360Care branding is visible');
   }
 
   async createNewAppointment(username: string, resourceName: string): Promise<void> {
@@ -105,6 +117,70 @@ export class PlannerPage extends BasePage {
     Logger.step('Run secondary account steps placeholder');
     Logger.info('Secondary account context is open. Add the required scripting here when details are provided.');
     Logger.pass('Secondary account placeholder completed');
+  }
+
+  async performCheckInAndCheckOut(): Promise<void> {
+    Logger.step('Perform double Check-In and double Check-Out');
+
+    const checkInButton = this.page.getByRole('button', { name: 'Check-In' }).first();
+    const SecondheckInButton = this.page.getByRole('button', { name: 'Check In' }).first();
+    await this.waitForVisible(checkInButton, 15000);
+    await checkInButton.scrollIntoViewIfNeeded();
+    await this.safeAction(async () => {
+      await checkInButton.click({ force: true });
+    });
+    await this.waitForPageReady();
+
+    await this.waitForVisible(SecondheckInButton, 15000);
+    await SecondheckInButton.scrollIntoViewIfNeeded();
+    await this.safeAction(async () => {
+      await SecondheckInButton.click({ force: true });
+    });
+    await this.waitForPageReady();
+    Logger.pass('Completed Check-In twice');
+
+    const checkOutButton = this.page.getByRole('button', { name: 'Check-Out' }).first();
+
+    await this.waitForVisible(checkOutButton, 15000);
+    await checkOutButton.scrollIntoViewIfNeeded();
+    await this.safeAction(async () => {
+      await checkOutButton.click({ force: true });
+    });
+    await this.waitForPageReady();
+
+    await this.waitForVisible(checkOutButton, 15000);
+    await checkOutButton.scrollIntoViewIfNeeded();
+    await this.safeAction(async () => {
+      await checkOutButton.click({ force: true });
+    });
+    await this.waitForPageReady();
+    Logger.pass('Completed Check-Out twice');
+
+    const appointmentCompletedText = this.page.getByText('Appointment Completed', { exact: true });
+    await expect(appointmentCompletedText).toBeVisible({ timeout: 15000 });
+    Logger.pass('Verified Appointment Completed text after checkout');
+  }
+
+  async clickAgendaEventByAccountName(accountName: string): Promise<void> {
+    const runNumber = PropertyReader.getRunNumber(1);
+    const expectedAccountName = `${accountName}${runNumber}`;
+
+    Logger.step(`Click first planner agenda event for account ${expectedAccountName}`);
+
+    await this.page.mouse.wheel(0, 4000);
+
+    const agendaEvent = this.page
+      .locator(PlannerLocators.agendaEventText)
+      .filter({ hasText: expectedAccountName })
+      .first();
+
+    await this.waitForVisible(agendaEvent, 15000);
+    await agendaEvent.scrollIntoViewIfNeeded();
+    await this.safeAction(async () => {
+      await agendaEvent.click({ force: true });
+    });
+    await this.waitForPageReady();
+    Logger.pass(`Clicked first planner agenda event for account ${expectedAccountName}`);
   }
 
   private async selectParticipantLocationAndClickNext(): Promise<void> {

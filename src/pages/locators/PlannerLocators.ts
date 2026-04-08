@@ -1,5 +1,9 @@
 export const PlannerLocators = {
+  homeLogo: 'div.slds-global-header__logo:visible',
+  homeText: "xpath=//span[@title='m360Link']",
   newButton: "lightning-button-icon [data-key='add']",
+  agendaEventLine: '.dhx_cal_agenda_event_line',
+  agendaEventText: '.dhx_cal_agenda_event_line_text .event-text',
   participantInput: "input[placeholder='Start typing to search or click the filter Icon for more options']",
   lookupOptions: "[role='listbox'] [role='option'], .slds-listbox [role='option'], .slds-listbox li",
   startDateInput: "input[name='start']",
