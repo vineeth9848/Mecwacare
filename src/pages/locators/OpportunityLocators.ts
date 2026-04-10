@@ -63,4 +63,5 @@ export const OpportunityLocators = {
   fundingProgramInput: 'input[aria-label="Funding Program"]',
   advancedSearchFundingProgramInput: 'input[aria-label="Funding Program"]',
   statusDropdownByAria: "button[aria-label='Status']",
+  headerFundingTypeValue: "xpath=(//*[normalize-space()='Funding Type'])[1]/following::*[self::lightning-formatted-text or self::p][1]",
    } as const;

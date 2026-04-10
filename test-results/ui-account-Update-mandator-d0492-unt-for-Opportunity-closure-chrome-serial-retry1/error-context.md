@@ -1,0 +1,1734 @@
+# Page snapshot
+
+```yaml
+- generic:
+  - generic:
+    - generic [ref=e2]:
+      - generic [ref=e3]:
+        - link [ref=e4] [cursor=pointer]:
+          - /url: javascript:void(0);
+          - text: Skip to Navigation
+        - link [ref=e5] [cursor=pointer]:
+          - /url: javascript:void(0);
+          - text: Skip to Main Content
+        - generic [ref=e8]:
+          - generic [ref=e9]: "Sandbox: mecwaR2QA |"
+          - link [ref=e10] [cursor=pointer]:
+            - /url: /secur/logout.jsp
+            - text: Log out
+        - generic [ref=e11]:
+          - button [ref=e17]:
+            - img [ref=e19]
+            - text: Search...
+          - navigation [ref=e22]:
+            - list [ref=e24]:
+              - listitem [ref=e25]:
+                - group [ref=e26]:
+                  - button [ref=e28] [cursor=pointer]:
+                    - img [ref=e33]
+                  - button [ref=e37] [cursor=pointer]:
+                    - img [ref=e42]
+              - listitem [ref=e45]:
+                - button [ref=e51] [cursor=pointer]:
+                  - img [ref=e56]
+              - listitem [ref=e59]:
+                - button [ref=e61] [cursor=pointer]:
+                  - img [ref=e66]
+              - listitem [ref=e69]:
+                - button [ref=e72] [cursor=pointer]:
+                  - img [ref=e77]
+              - listitem [ref=e80]:
+                - button [ref=e86] [cursor=pointer]:
+                  - img [ref=e91]
+              - listitem [ref=e94]:
+                - button [ref=e97] [cursor=pointer]:
+                  - generic [ref=e99]:
+                    - img [ref=e103]
+                    - generic [ref=e107]: 20+
+                - generic [ref=e108]: 101 new notifications
+              - listitem [ref=e109]:
+                - button [ref=e112] [cursor=pointer]
+      - generic [ref=e117]:
+        - generic [ref=e118]:
+          - generic [ref=e120]:
+            - generic [ref=e121]:
+              - navigation [ref=e122]:
+                - button [ref=e124] [cursor=pointer]:
+                  - generic [ref=e135]: App Launcher
+              - heading [level=1] [ref=e136]:
+                - generic [ref=e137]: mCare360
+            - navigation [ref=e138]:
+              - link [ref=e140] [cursor=pointer]:
+                - /url: /lightning/o/Account/list?filterName=MyAccounts
+                - generic [ref=e141]: Accounts
+              - button [ref=e144] [cursor=pointer]:
+                - img [ref=e146]
+                - generic [ref=e149]: Show Navigation Menu
+          - navigation [ref=e151]:
+            - tablist [ref=e152]:
+              - generic [ref=e154]: Press Spacebar to reorder tabs.
+              - tab [ref=e155] [cursor=pointer]:
+                - generic [ref=e156]:
+                  - generic:
+                    - generic:
+                      - generic:
+                        - generic:
+                          - img
+                        - generic: Opportunity
+                - generic [ref=e157]: HC - Doe231 Doe231 | Opportunity
+              - button [ref=e160] [cursor=pointer]:
+                - img [ref=e162]
+                - generic [ref=e165]: Actions
+              - button [ref=e167] [cursor=pointer]:
+                - img [ref=e169]
+                - generic [ref=e172]: Close Tab
+              - status [ref=e173]
+              - tab [ref=e174] [cursor=pointer]:
+                - generic [ref=e175]:
+                  - generic:
+                    - generic:
+                      - generic:
+                        - generic:
+                          - img
+                        - generic: Loading...
+                - generic [ref=e176]: Loading...
+              - button [ref=e179] [cursor=pointer]:
+                - img [ref=e181]
+                - generic [ref=e184]: Actions
+              - button [ref=e186] [cursor=pointer]:
+                - img [ref=e188]
+                - generic [ref=e191]: Close Tab
+              - status [ref=e192]
+              - tab [ref=e193] [cursor=pointer]:
+                - generic [ref=e194]:
+                  - generic:
+                    - generic:
+                      - generic:
+                        - generic:
+                          - img
+                        - generic: maica cc Appointment c
+                - generic [ref=e195]: APPT - 001777 | Appointment
+              - button [ref=e198] [cursor=pointer]:
+                - img [ref=e200]
+                - generic [ref=e203]: Actions
+              - button [ref=e205] [cursor=pointer]:
+                - img [ref=e207]
+                - generic [ref=e210]: Close Tab
+              - status [ref=e211]
+              - tab [ref=e212] [cursor=pointer]:
+                - generic [ref=e213]:
+                  - generic:
+                    - generic:
+                      - generic:
+                        - generic:
+                          - img
+                        - generic: maica cc Appointment c
+                - generic [ref=e214]: APPT - 001779 | Appointment
+              - button [ref=e217] [cursor=pointer]:
+                - img [ref=e219]
+                - generic [ref=e222]: Actions
+              - button [ref=e224] [cursor=pointer]:
+                - img [ref=e226]
+                - generic [ref=e229]: Close Tab
+              - status [ref=e230]
+              - tab [selected] [ref=e231] [cursor=pointer]:
+                - generic [ref=e232]:
+                  - generic:
+                    - generic:
+                      - generic:
+                        - generic:
+                          - img
+                        - generic: Account
+                - generic [ref=e233]: John Doe308 | Account
+              - button [ref=e236] [cursor=pointer]:
+                - img [ref=e238]
+                - generic [ref=e241]: Actions for John Doe308 | Account
+              - button [ref=e243] [cursor=pointer]:
+                - img [ref=e245]
+                - generic [ref=e248]: Close John Doe308 | Account
+              - status [ref=e249] [cursor=pointer]
+              - button [ref=e254] [cursor=pointer]:
+                - generic [ref=e255]: More
+                - generic [ref=e257]:
+                  - img [ref=e259]
+                  - generic [ref=e262]: Show additional tabs
+        - generic [ref=e264]:
+          - button [ref=e268] [cursor=pointer]:
+            - img [ref=e270]
+            - generic [ref=e273]: Split view mode
+          - main [ref=e274]:
+            - tabpanel [ref=e275]:
+              - tabpanel [ref=e278]:
+                - generic [ref=e294]:
+                  - generic [ref=e297]:
+                    - generic [ref=e307]:
+                      - generic [ref=e314]: John Doe308
+                      - generic [ref=e320]:
+                        - generic [ref=e321]: Date of Birth
+                        - generic [ref=e322]: ( Years )
+                      - generic [ref=e328]: Gender
+                    - article [ref=e345]:
+                      - generic [ref=e346]:
+                        - generic [ref=e347]:
+                          - generic [ref=e350]:
+                            - generic [ref=e352]:
+                              - img [ref=e356]
+                              - heading [level=2] [ref=e358]:
+                                - link [ref=e359] [cursor=pointer]:
+                                  - /url: /lightning/r/Account/001Bm00000y8zjkIAA/related/Opportunities/view
+                                  - generic [ref=e360]: Opportunities
+                                  - generic [ref=e361]: (1)
+                            - button [ref=e366] [cursor=pointer]:
+                              - img [ref=e368]
+                              - generic [ref=e371]: Show actions for Opportunities
+                          - article [ref=e382]:
+                            - generic [ref=e383]:
+                              - heading [level=3] [ref=e385]:
+                                - generic [ref=e391]:
+                                  - link [ref=e392] [cursor=pointer]:
+                                    - /url: /lightning/r/006Bm00000RsByDIAV/view
+                                    - generic [ref=e396]: HC - John Doe308
+                                  - button [ref=e398] [cursor=pointer]:
+                                    - img [ref=e400]
+                                    - generic [ref=e403]: Open HC - John Doe308 Preview
+                              - generic [ref=e405]:
+                                - term [ref=e406]: "Stage:"
+                                - definition [ref=e407]:
+                                  - generic [ref=e409]: New
+                                - term [ref=e410]: "Amount:"
+                                - term [ref=e411]: "Close Date:"
+                                - definition [ref=e412]:
+                                  - generic [ref=e413]: 8/8/2026
+                            - button [ref=e418] [cursor=pointer]:
+                              - img [ref=e420]
+                              - generic [ref=e423]: Show Actions
+                        - link [ref=e424] [cursor=pointer]:
+                          - /url: /lightning/r/Account/001Bm00000y8zjkIAA/related/Opportunities/view
+                          - generic [ref=e425]:
+                            - text: View All
+                            - generic [ref=e426]: Opportunities
+                    - generic [ref=e432]:
+                      - heading [level=3] [ref=e433]:
+                        - button [expanded] [ref=e434] [cursor=pointer]:
+                          - img [ref=e438]
+                          - generic [ref=e441]: Key Details
+                      - list [ref=e444]:
+                        - generic [ref=e448]:
+                          - listitem [ref=e451]:
+                            - generic [ref=e453]:
+                              - generic [ref=e454]: mecwacare Client ID
+                              - button [ref=e458] [cursor=pointer]:
+                                - img [ref=e460]
+                                - generic [ref=e463]: Help mecwacare Client ID
+                              - generic [ref=e466]: "12789"
+                          - listitem [ref=e469]:
+                            - generic [ref=e471]:
+                              - generic [ref=e472]: Account Owner
+                              - generic [ref=e477]:
+                                - generic [ref=e484]:
+                                  - link [ref=e485] [cursor=pointer]:
+                                    - /url: /lightning/r/User/005Bm00000GaJMHIA3/view
+                                    - generic [ref=e489]: Manager Services User
+                                  - button [ref=e491] [cursor=pointer]:
+                                    - img [ref=e493]
+                                    - generic [ref=e496]: Open Manager Services User Preview
+                                - button [ref=e498] [cursor=pointer]:
+                                  - img [ref=e500]
+                                  - generic [ref=e503]: Change Owner
+                          - listitem [ref=e506]:
+                            - generic [ref=e508]:
+                              - generic [ref=e509]: Email
+                              - generic [ref=e510]:
+                                - link [ref=e516] [cursor=pointer]:
+                                  - /url: mailto:john.doe308@example.com
+                                  - text: john.doe308@example.com
+                                - button [ref=e517] [cursor=pointer]:
+                                  - generic [ref=e519]: Edit Email
+                          - listitem [ref=e522]:
+                            - generic [ref=e524]:
+                              - generic [ref=e525]: Phone
+                              - button [ref=e529] [cursor=pointer]:
+                                - img [ref=e531]
+                                - generic [ref=e534]: Help Phone
+                              - generic [ref=e535]:
+                                - link [ref=e540] [cursor=pointer]:
+                                  - /url: tel:1234567890
+                                  - text: "1234567890"
+                                - button [ref=e541] [cursor=pointer]:
+                                  - generic [ref=e543]: Edit Phone
+                          - listitem [ref=e546]:
+                            - generic [ref=e548]:
+                              - generic [ref=e549]: Mobile
+                              - button [ref=e553] [cursor=pointer]:
+                                - img [ref=e555]
+                                - generic [ref=e558]: Help Mobile
+                              - button [ref=e560] [cursor=pointer]:
+                                - generic [ref=e562]: Edit Mobile
+                          - listitem [ref=e565]:
+                            - generic [ref=e567]:
+                              - generic [ref=e568]: Postal Address
+                              - link [ref=e573] [cursor=pointer]:
+                                - /url: https://www.google.com/maps?q=Australia
+                                - generic [ref=e574]: Australia
+                                - iframe [ref=e578]:
+                                  - img "Map" [ref=f7e2]
+                          - listitem [ref=e582]:
+                            - generic [ref=e584]:
+                              - generic [ref=e585]: Date of Birth
+                              - button [ref=e589] [cursor=pointer]:
+                                - img [ref=e591]
+                                - generic [ref=e594]: Help Date of Birth
+                              - button [ref=e596] [cursor=pointer]:
+                                - generic [ref=e598]: Edit Date of Birth
+                          - listitem [ref=e601]:
+                            - generic [ref=e603]:
+                              - generic [ref=e604]: Marital Status
+                              - button [ref=e606] [cursor=pointer]:
+                                - generic [ref=e608]: Edit Marital Status
+                          - listitem [ref=e611]:
+                            - generic [ref=e613]:
+                              - generic [ref=e614]: Primary Language
+                              - button [ref=e618] [cursor=pointer]:
+                                - img [ref=e620]
+                                - generic [ref=e623]: Help Primary Language
+                              - button [ref=e625] [cursor=pointer]:
+                                - generic [ref=e627]: Edit Primary Language
+                          - listitem [ref=e630]:
+                            - generic [ref=e632]:
+                              - generic [ref=e633]: Best Time to call
+                              - button [ref=e637] [cursor=pointer]:
+                                - img [ref=e639]
+                                - generic [ref=e642]: Help Best Time to call
+                              - button [ref=e644] [cursor=pointer]:
+                                - generic [ref=e646]: Edit Best Time to call
+                  - generic [ref=e647]:
+                    - generic [ref=e650]:
+                      - generic [ref=e654]:
+                        - generic [ref=e656]:
+                          - generic [ref=e668]:
+                            - generic [ref=e672]: Account
+                            - heading [level=1] [ref=e673]:
+                              - generic [ref=e686]: John Doe308
+                          - generic [ref=e688]:
+                            - button [ref=e694] [cursor=pointer]: Edit
+                            - button [ref=e700] [cursor=pointer]: Manage Preferences
+                            - button [ref=e706] [cursor=pointer]: Manage Alerts
+                            - button [ref=e708] [cursor=pointer]:
+                              - img [ref=e710]
+                              - generic [ref=e713]: Show more actions
+                        - generic [ref=e715]:
+                          - generic [ref=e720]:
+                            - generic [ref=e721]: Account Owner
+                            - generic [ref=e726]:
+                              - generic [ref=e733]:
+                                - link [ref=e734] [cursor=pointer]:
+                                  - /url: /lightning/r/User/005Bm00000GaJMHIA3/view
+                                  - generic [ref=e738]: Manager Services User
+                                - button [ref=e740] [cursor=pointer]:
+                                  - img [ref=e742]
+                                  - generic [ref=e745]: Open Manager Services User Preview
+                              - button [ref=e747] [cursor=pointer]:
+                                - img [ref=e749]
+                                - generic [ref=e752]: Change Owner
+                          - generic [ref=e757]:
+                            - generic [ref=e758]: Email
+                            - link [ref=e765] [cursor=pointer]:
+                              - /url: mailto:john.doe308@example.com
+                              - text: john.doe308@example.com
+                          - generic [ref=e770]:
+                            - generic [ref=e771]: Phone
+                            - link [ref=e777] [cursor=pointer]:
+                              - /url: tel:1234567890
+                              - text: "1234567890"
+                      - generic [ref=e781]:
+                        - heading [level=2] [ref=e782]: Tabs
+                        - generic [ref=e784]:
+                          - heading [level=2] [ref=e785]: Tabs
+                          - tablist [ref=e787]:
+                            - tab [selected] [ref=e788] [cursor=pointer]: Details
+                            - tab [ref=e789] [cursor=pointer]: Related
+                            - tab [ref=e790] [cursor=pointer]: Client Party Relationships
+                            - tab [ref=e791]:
+                              - button [ref=e793] [cursor=pointer]:
+                                - text: More
+                                - img [ref=e795]
+                                - generic [ref=e798]: Tabs
+                          - tabpanel [ref=e801]:
+                            - generic [ref=e802]:
+                              - generic [ref=e808]:
+                                - heading [level=3] [ref=e809]:
+                                  - button [expanded] [ref=e810] [cursor=pointer]:
+                                    - img [ref=e814]
+                                    - generic [ref=e817]: Basic Information
+                                - list [ref=e820]:
+                                  - generic [ref=e821]:
+                                    - generic [ref=e824]:
+                                      - listitem [ref=e827]:
+                                        - generic [ref=e829]:
+                                          - generic [ref=e830]: Account Name
+                                          - generic [ref=e831]:
+                                            - generic [ref=e834]: John Doe308
+                                            - button [ref=e835] [cursor=pointer]:
+                                              - generic [ref=e837]: Edit Account Name
+                                      - listitem [ref=e840]:
+                                        - generic [ref=e842]:
+                                          - generic [ref=e843]: Date of Birth
+                                          - button [ref=e847] [cursor=pointer]:
+                                            - img [ref=e849]
+                                            - generic [ref=e852]: Help Date of Birth
+                                          - button [ref=e854] [cursor=pointer]:
+                                            - generic [ref=e856]: Edit Date of Birth
+                                      - listitem [ref=e859]:
+                                        - generic [ref=e861]:
+                                          - generic [ref=e862]: Estimated Date of Birth
+                                          - button [ref=e866] [cursor=pointer]:
+                                            - img [ref=e868]
+                                            - generic [ref=e871]: Help Estimated Date of Birth
+                                          - generic [ref=e872]:
+                                            - generic [ref=e877]:
+                                              - generic [ref=e879]:
+                                                - img [ref=e881]
+                                                - generic [ref=e884]: "False"
+                                              - generic [ref=e885]: Estimated Date of Birth
+                                            - button [ref=e886] [cursor=pointer]:
+                                              - generic [ref=e888]: Edit Estimated Date of Birth
+                                      - listitem [ref=e891]:
+                                        - generic [ref=e894]: Age
+                                      - listitem [ref=e898]:
+                                        - generic [ref=e900]:
+                                          - generic [ref=e901]: Gender
+                                          - button [ref=e905] [cursor=pointer]:
+                                            - img [ref=e907]
+                                            - generic [ref=e910]: Help Gender
+                                          - button [ref=e912] [cursor=pointer]:
+                                            - generic [ref=e914]: Edit Gender
+                                      - listitem [ref=e917]:
+                                        - generic [ref=e919]:
+                                          - generic [ref=e920]: Pronouns
+                                          - button [ref=e922] [cursor=pointer]:
+                                            - generic [ref=e924]: Edit Pronouns
+                                      - listitem [ref=e927]:
+                                        - generic [ref=e929]:
+                                          - generic [ref=e930]: Employment Status
+                                          - button [ref=e932] [cursor=pointer]:
+                                            - generic [ref=e934]: Edit Employment Status
+                                    - generic [ref=e937]:
+                                      - listitem [ref=e940]:
+                                        - generic [ref=e942]:
+                                          - generic [ref=e943]: Marital Status
+                                          - button [ref=e945] [cursor=pointer]:
+                                            - generic [ref=e947]: Edit Marital Status
+                                      - listitem [ref=e950]:
+                                        - generic [ref=e952]:
+                                          - generic [ref=e953]: Country of Birth
+                                          - button [ref=e955] [cursor=pointer]:
+                                            - generic [ref=e957]: Edit Country of Birth
+                                      - listitem [ref=e960]:
+                                        - generic [ref=e962]:
+                                          - generic [ref=e963]: Indigenous Status
+                                          - button [ref=e965] [cursor=pointer]:
+                                            - generic [ref=e967]: Edit Indigenous Status
+                                      - listitem [ref=e970]:
+                                        - generic [ref=e972]:
+                                          - generic [ref=e973]: Cultural Background / Ethnicity
+                                          - button [ref=e975] [cursor=pointer]:
+                                            - generic [ref=e977]: Edit Cultural Background / Ethnicity
+                                      - listitem [ref=e980]:
+                                        - generic [ref=e982]:
+                                          - generic [ref=e983]: Primary Language
+                                          - button [ref=e985] [cursor=pointer]:
+                                            - generic [ref=e987]: Edit Primary Language
+                                      - listitem [ref=e990]:
+                                        - generic [ref=e992]:
+                                          - generic [ref=e993]: Secondary Language
+                                          - button [ref=e997] [cursor=pointer]:
+                                            - img [ref=e999]
+                                            - generic [ref=e1002]: Help Secondary Language
+                                          - generic [ref=e1003]:
+                                            - generic [ref=e1005]: Arabic
+                                            - button [ref=e1006] [cursor=pointer]:
+                                              - generic [ref=e1008]: Edit Secondary Language
+                                      - listitem [ref=e1011]:
+                                        - generic [ref=e1013]:
+                                          - generic [ref=e1014]: Interpreter required
+                                          - button [ref=e1016] [cursor=pointer]:
+                                            - generic [ref=e1018]: Edit Interpreter required
+                              - heading [level=3] [ref=e1025]:
+                                - button [expanded] [ref=e1026] [cursor=pointer]:
+                                  - img [ref=e1030]
+                                  - generic [ref=e1033]: Account Information
+                              - heading [level=3] [ref=e1043]:
+                                - button [expanded] [ref=e1044] [cursor=pointer]:
+                                  - img [ref=e1048]
+                                  - generic [ref=e1051]: Contact Information
+                              - heading [level=3] [ref=e1061]:
+                                - button [expanded] [ref=e1062] [cursor=pointer]:
+                                  - img [ref=e1066]
+                                  - generic [ref=e1069]: Address Information
+                              - button [ref=e1082] [cursor=pointer]:
+                                - generic [ref=e1083]: Launch Address / Verify
+                              - heading [level=3] [ref=e1090]:
+                                - button [expanded] [ref=e1091] [cursor=pointer]:
+                                  - img [ref=e1095]
+                                  - generic [ref=e1098]: Catchment Area
+                              - heading [level=3] [ref=e1108]:
+                                - button [expanded] [ref=e1109] [cursor=pointer]:
+                                  - img [ref=e1113]
+                                  - generic [ref=e1116]: Important Information
+                              - heading [level=3] [ref=e1126]:
+                                - button [expanded] [ref=e1127] [cursor=pointer]:
+                                  - img [ref=e1131]
+                                  - generic [ref=e1134]: ACVVS
+                              - heading [level=3] [ref=e1144]:
+                                - button [expanded] [ref=e1145] [cursor=pointer]:
+                                  - img [ref=e1149]
+                                  - generic [ref=e1152]: Referral
+                              - heading [level=3] [ref=e1162]:
+                                - button [expanded] [ref=e1163] [cursor=pointer]:
+                                  - img [ref=e1167]
+                                  - generic [ref=e1170]: System Information
+                    - generic [ref=e1176]:
+                      - generic [ref=e1180]:
+                        - heading [level=2] [ref=e1181]: Tabs
+                        - generic [ref=e1183]:
+                          - heading [level=2] [ref=e1184]: Tabs
+                          - tablist [ref=e1186]:
+                            - tab [selected] [ref=e1187] [cursor=pointer]: Activity
+                            - tab [ref=e1188] [cursor=pointer]: Chatter
+                          - tabpanel [ref=e1191]:
+                            - generic [ref=e1192]:
+                              - article [ref=e1197]:
+                                - generic [ref=e1198]:
+                                  - generic [ref=e1199]:
+                                    - img [ref=e1204]
+                                    - heading [level=2] [ref=e1208]:
+                                      - generic [ref=e1209]: We found 13 potential duplicates of this Account.
+                                  - link [ref=e1211] [cursor=pointer]:
+                                    - /url: javascript:void(0);
+                                    - text: View Duplicates
+                              - generic [ref=e1216]:
+                                - heading [level=2] [ref=e1217]: Activity Publisher
+                                - generic [ref=e1218]:
+                                  - group [ref=e1219]:
+                                    - generic [ref=e1221]:
+                                      - button [ref=e1222] [cursor=pointer]:
+                                        - generic [ref=e1224]:
+                                          - img [ref=e1226]
+                                          - generic [ref=e1229]: New Event
+                                      - button [ref=e1231] [cursor=pointer]:
+                                        - img [ref=e1233]
+                                        - generic [ref=e1236]: More New Event Actions
+                                  - group [ref=e1237]:
+                                    - generic [ref=e1239]:
+                                      - button [ref=e1240] [cursor=pointer]:
+                                        - generic [ref=e1242]:
+                                          - img [ref=e1244]
+                                          - generic [ref=e1247]: Email
+                                      - button [ref=e1249] [cursor=pointer]:
+                                        - img [ref=e1251]
+                                        - generic [ref=e1254]: More Email Actions
+                                  - group [ref=e1255]:
+                                    - generic [ref=e1257]:
+                                      - button [ref=e1258] [cursor=pointer]:
+                                        - generic [ref=e1260]:
+                                          - img [ref=e1262]
+                                          - generic [ref=e1265]: New Task
+                                      - button [disabled] [ref=e1267]:
+                                        - generic:
+                                          - img
+                                        - generic: No Additional New Task Actions
+                                  - group [ref=e1268]:
+                                    - generic [ref=e1270]:
+                                      - button [ref=e1271] [cursor=pointer]:
+                                        - generic [ref=e1273]:
+                                          - img [ref=e1275]
+                                          - generic [ref=e1278]: Log a Call
+                                      - button [ref=e1280] [cursor=pointer]:
+                                        - img [ref=e1282]
+                                        - generic [ref=e1285]: More Log a Call Actions
+                                - heading [level=2] [ref=e1286]: Activity Timeline
+                                - generic [ref=e1288]:
+                                  - link [ref=e1289] [cursor=pointer]:
+                                    - /url: javascript:void(0);
+                                    - text: Skip to the bottom of the activity timeline
+                                  - generic [ref=e1291]:
+                                    - generic [ref=e1293]: "Filters: Within 2 months • All activities • All types"
+                                    - button [ref=e1294] [cursor=pointer]:
+                                      - img [ref=e1296]
+                                      - generic [ref=e1299]: Timeline Settings
+                                  - generic [ref=e1302]:
+                                    - button [ref=e1303] [cursor=pointer]: Refresh
+                                    - text: •
+                                    - button [ref=e1304] [cursor=pointer]: Expand All
+                                    - text: •
+                                    - button [ref=e1305] [cursor=pointer]: View All
+                                  - generic [ref=e1307]:
+                                    - heading [level=3] [ref=e1308]:
+                                      - button [expanded] [ref=e1309] [cursor=pointer]:
+                                        - img [ref=e1311]
+                                        - text: Upcoming & Overdue
+                                    - generic [ref=e1317]: No activities to show. Get started by sending an email, scheduling a task, and more.
+                                  - generic [ref=e1322]:
+                                    - heading [level=3] [ref=e1323]:
+                                      - button [expanded] [ref=e1324] [cursor=pointer]:
+                                        - img [ref=e1326]
+                                        - generic [ref=e1329]: April • 2026
+                                        - generic [ref=e1330]: This Month
+                                    - list [ref=e1332]:
+                                      - listitem [ref=e1333]:
+                                        - generic [ref=e1335]:
+                                          - button [ref=e1338] [cursor=pointer]:
+                                            - generic [ref=e1340]:
+                                              - img [ref=e1342]
+                                              - generic [ref=e1345]: Details for
+                                          - generic [ref=e1346]:
+                                            - img [ref=e1351]
+                                            - generic [ref=e1352]:
+                                              - generic [ref=e1353]:
+                                                - link [ref=e1359] [cursor=pointer]:
+                                                  - /url: /lightning/r/02sBm00000AmLSbIAN/view
+                                                  - text: Thank You for Your Enquiry
+                                                - generic [ref=e1361]:
+                                                  - generic [ref=e1362]: 4:05 PM | Today
+                                                  - button [ref=e1365] [cursor=pointer]:
+                                                    - generic [ref=e1366]:
+                                                      - generic [ref=e1367]:
+                                                        - img
+                                                      - generic [ref=e1368]: Show more actions - Thank You for Your Enquiry
+                                              - generic [ref=e1373]:
+                                                - link [ref=e1374] [cursor=pointer]:
+                                                  - /url: mailto:padurivineeth.reddy@mecwacare.org.au
+                                                  - text: padurivineeth.reddy@mecwacare.org.au
+                                                - text: sent an email to
+                                                - link [ref=e1376] [cursor=pointer]:
+                                                  - /url: /lightning/r/00QBm00000Pi4PhMAJ/view
+                                                  - text: John Doe308
+                                              - generic [ref=e1380]:
+                                                - img [ref=e1383]
+                                                - text: Unopened
+                                  - status [ref=e1385]:
+                                    - generic [ref=e1387]:
+                                      - img [ref=e1391]
+                                      - generic [ref=e1394]: information
+                                    - paragraph [ref=e1396]: To change what's shown, try changing your filters.
+                                  - button [ref=e1398] [cursor=pointer]: Show All Activities
+                                  - link [ref=e1399] [cursor=pointer]:
+                                    - /url: javascript:void(0);
+                                    - text: Skip to the top of the activity timeline
+                      - article [ref=e1406]:
+                        - generic [ref=e1407]:
+                          - generic [ref=e1409]:
+                            - img [ref=e1411]
+                            - heading [level=2] [ref=e1413]: Docusign Envelope Status
+                          - generic [ref=e1415]:
+                            - img [ref=e1417]
+                            - generic [ref=e1418]: Send an envelope to view its status
+      - list [ref=e1422]:
+        - listitem [ref=e1423]:
+          - button [ref=e1426] [cursor=pointer]:
+            - img [ref=e1430]
+            - generic [ref=e1434]: Omni-Channel
+    - dialog "Edit John Doe308" [ref=e1437]:
+      - generic [ref=e1438]:
+        - button "Cancel and close" [ref=e1439] [cursor=pointer]:
+          - img [ref=e1441]
+          - generic [ref=e1444]: Cancel and close
+        - generic [ref=e1445]:
+          - generic [ref=e1451]:
+            - generic [ref=e1452]:
+              - heading "Edit John Doe308" [level=2] [ref=e1454]
+              - generic [ref=e1456]:
+                - generic [ref=e1457]: "* = Required Information"
+                - generic [ref=e1463]:
+                  - generic [ref=e1469]:
+                    - heading "Key Details" [level=3] [ref=e1470]:
+                      - generic "Key Details" [ref=e1471]
+                    - list [ref=e1474]:
+                      - generic [ref=e1478]:
+                        - listitem [ref=e1481]:
+                          - generic [ref=e1483]:
+                            - generic [ref=e1484]: mecwacare Client ID
+                            - button "Help mecwacare Client ID" [ref=e1487] [cursor=pointer]:
+                              - img [ref=e1489]
+                              - generic [ref=e1492]: Help mecwacare Client ID
+                            - generic [ref=e1495]: "12789"
+                        - listitem [ref=e1498]:
+                          - generic [ref=e1500]:
+                            - generic [ref=e1501]: Account Owner
+                            - generic [ref=e1513]: Manager Services User
+                        - listitem [ref=e1516]:
+                          - generic [ref=e1522]:
+                            - generic [ref=e1523]: Email
+                            - textbox "Email" [ref=e1525]: john.doe308@example.com
+                        - listitem [ref=e1528]:
+                          - generic [ref=e1534]:
+                            - generic [ref=e1535]: Phone
+                            - button "Phone Help Info" [ref=e1538] [cursor=pointer]:
+                              - img [ref=e1540]
+                              - generic [ref=e1543]: Phone Help Info
+                            - textbox "Phone" [ref=e1545]: "1234567890"
+                        - listitem [ref=e1548]:
+                          - generic [ref=e1554]:
+                            - generic [ref=e1555]: Mobile
+                            - button "Mobile Help Info" [ref=e1558] [cursor=pointer]:
+                              - img [ref=e1560]
+                              - generic [ref=e1563]: Mobile Help Info
+                            - textbox "Mobile" [ref=e1565]
+                        - listitem [ref=e1568]:
+                          - generic [ref=e1570]:
+                            - generic [ref=e1571]: Postal Address
+                            - link "Australia" [ref=e1576] [cursor=pointer]:
+                              - /url: https://www.google.com/maps?q=Australia
+                              - generic [ref=e1577]: Australia
+                              - iframe [ref=e1581]:
+                                - img "Map" [ref=f8e2]
+                        - listitem [ref=e1585]:
+                          - generic [ref=e1590]:
+                            - group [ref=e1591]:
+                              - generic [ref=e1592]: Date of Birth
+                              - button "Date of Birth Help Info" [ref=e1595] [cursor=pointer]:
+                                - img [ref=e1597]
+                                - generic [ref=e1600]: Date of Birth Help Info
+                              - generic [ref=e1601]:
+                                - textbox "Date of Birth" [ref=e1602]
+                                - generic:
+                                  - button "Select a date for Date of Birth":
+                                    - generic:
+                                      - img
+                                    - generic: Select a date for Date of Birth
+                            - generic [ref=e1603]: "Format: 31/12/2024"
+                        - listitem [ref=e1606]:
+                          - generic [ref=e1614]:
+                            - generic [ref=e1615]: Marital Status
+                            - generic [ref=e1619]:
+                              - combobox "Marital Status" [ref=e1620] [cursor=pointer]:
+                                - generic [ref=e1621]: "--None--"
+                              - generic:
+                                - generic:
+                                  - generic:
+                                    - generic:
+                                      - img
+                            - status
+                        - listitem [ref=e1624]:
+                          - generic [ref=e1632]:
+                            - generic [ref=e1633]: Primary Language
+                            - button "Primary Language Help Info" [ref=e1636] [cursor=pointer]:
+                              - img [ref=e1638]
+                              - generic [ref=e1641]: Primary Language Help Info
+                            - generic [ref=e1645]:
+                              - combobox "Primary Language" [ref=e1646] [cursor=pointer]:
+                                - generic [ref=e1647]: "--None--"
+                              - generic:
+                                - generic:
+                                  - generic:
+                                    - generic:
+                                      - img
+                            - status
+                        - listitem [ref=e1650]:
+                          - generic [ref=e1658]:
+                            - generic [ref=e1659]: Best Time to call
+                            - button "Best Time to call Help Info" [ref=e1662] [cursor=pointer]:
+                              - img [ref=e1664]
+                              - generic [ref=e1667]: Best Time to call Help Info
+                            - generic [ref=e1671]:
+                              - combobox "Best Time to call" [ref=e1672] [cursor=pointer]:
+                                - generic [ref=e1673]: "--None--"
+                              - generic:
+                                - generic:
+                                  - generic:
+                                    - generic:
+                                      - img
+                            - status
+                  - generic [ref=e1679]:
+                    - heading "Basic Information" [level=3] [ref=e1680]:
+                      - generic "Basic Information" [ref=e1681]
+                    - list [ref=e1684]:
+                      - generic [ref=e1685]:
+                        - generic [ref=e1688]:
+                          - listitem [ref=e1691]:
+                            - generic [ref=e1692]:
+                              - button "Undo Account Name" [ref=e1694] [cursor=pointer]:
+                                - img [ref=e1696]
+                              - group "Account Name required" [ref=e1704]:
+                                - generic [ref=e1705]:
+                                  - text: "*Account Name"
+                                  - generic "required" [ref=e1706]
+                                - generic [ref=e1708]:
+                                  - generic [ref=e1712]:
+                                    - generic [ref=e1714]: Salutation
+                                    - generic [ref=e1718]:
+                                      - combobox "Salutation" [ref=e1719] [cursor=pointer]:
+                                        - generic [ref=e1720]: Mr.
+                                      - generic:
+                                        - generic:
+                                          - generic:
+                                            - generic:
+                                              - img
+                                    - status
+                                  - generic [ref=e1724]:
+                                    - generic [ref=e1725]: First Name
+                                    - textbox "First Name" [ref=e1727]: John
+                                  - generic [ref=e1731]:
+                                    - generic [ref=e1732]: Middle Name
+                                    - textbox "Middle Name" [ref=e1734]
+                                  - generic [ref=e1738]:
+                                    - generic [ref=e1739]: "*Last Name"
+                                    - textbox "Last Name" [ref=e1741]: Doe308
+                                  - generic [ref=e1745]:
+                                    - generic [ref=e1746]: Suffix
+                                    - textbox "Suffix" [ref=e1748]
+                          - listitem [ref=e1751]:
+                            - generic [ref=e1756]:
+                              - group [ref=e1757]:
+                                - generic [ref=e1758]: Date of Birth
+                                - button "Date of Birth Help Info" [ref=e1761] [cursor=pointer]:
+                                  - img [ref=e1763]
+                                  - generic [ref=e1766]: Date of Birth Help Info
+                                - generic [ref=e1767]:
+                                  - textbox "Date of Birth" [ref=e1768]
+                                  - generic:
+                                    - button "Select a date for Date of Birth":
+                                      - generic:
+                                        - img
+                                      - generic: Select a date for Date of Birth
+                              - generic [ref=e1769]: "Format: 31/12/2024"
+                          - listitem [ref=e1772]:
+                            - generic [ref=e1778]:
+                              - generic [ref=e1779]: Estimated Date of Birth
+                              - button "Estimated Date of Birth Help Info" [ref=e1782] [cursor=pointer]:
+                                - img [ref=e1784]
+                                - generic [ref=e1787]: Estimated Date of Birth Help Info
+                              - checkbox "Estimated Date of Birth" [ref=e1789]
+                          - listitem [ref=e1792]:
+                            - generic [ref=e1794]:
+                              - generic [ref=e1795]: Age
+                              - generic [ref=e1800]: This field is calculated upon save
+                          - listitem [ref=e1803]:
+                            - generic [ref=e1804]:
+                              - button "Undo Gender" [ref=e1806] [cursor=pointer]:
+                                - img [ref=e1808]
+                              - generic [ref=e1817]:
+                                - generic [ref=e1818]: Gender
+                                - button "Gender Help Info" [ref=e1821] [cursor=pointer]:
+                                  - img [ref=e1823]
+                                  - generic [ref=e1826]: Gender Help Info
+                                - generic [ref=e1830]:
+                                  - combobox "Gender" [ref=e1831] [cursor=pointer]:
+                                    - generic [ref=e1832]: Male
+                                  - generic:
+                                    - generic:
+                                      - generic:
+                                        - generic:
+                                          - img
+                                - status
+                          - listitem [ref=e1835]:
+                            - generic [ref=e1843]:
+                              - generic [ref=e1844]: Pronouns
+                              - generic [ref=e1848]:
+                                - combobox "Pronouns" [ref=e1849] [cursor=pointer]:
+                                  - generic [ref=e1850]: "--None--"
+                                - generic:
+                                  - generic:
+                                    - generic:
+                                      - generic:
+                                        - img
+                              - status
+                          - listitem [ref=e1853]:
+                            - generic [ref=e1861]:
+                              - generic [ref=e1862]: Employment Status
+                              - generic [ref=e1866]:
+                                - combobox "Employment Status" [ref=e1867] [cursor=pointer]:
+                                  - generic [ref=e1868]: "--None--"
+                                - generic:
+                                  - generic:
+                                    - generic:
+                                      - generic:
+                                        - img
+                              - status
+                        - generic [ref=e1871]:
+                          - listitem [ref=e1874]:
+                            - generic [ref=e1882]:
+                              - generic [ref=e1883]: Marital Status
+                              - generic [ref=e1887]:
+                                - combobox "Marital Status" [ref=e1888] [cursor=pointer]:
+                                  - generic [ref=e1889]: "--None--"
+                                - generic:
+                                  - generic:
+                                    - generic:
+                                      - generic:
+                                        - img
+                              - status
+                          - listitem [ref=e1892]:
+                            - generic [ref=e1893]:
+                              - button "Undo Country of Birth" [ref=e1895] [cursor=pointer]:
+                                - img [ref=e1897]
+                              - generic [ref=e1906]:
+                                - generic [ref=e1907]: Country of Birth
+                                - generic [ref=e1911]:
+                                  - combobox "Country of Birth" [ref=e1912] [cursor=pointer]:
+                                    - generic [ref=e1913]: Australia
+                                  - generic:
+                                    - generic:
+                                      - generic:
+                                        - generic:
+                                          - img
+                                - status
+                          - listitem [ref=e1916]:
+                            - generic [ref=e1917]:
+                              - button "Undo Indigenous Status" [ref=e1919] [cursor=pointer]:
+                                - img [ref=e1921]
+                              - generic [ref=e1930]:
+                                - generic [ref=e1931]: Indigenous Status
+                                - generic [ref=e1935]:
+                                  - combobox "Indigenous Status" [ref=e1936] [cursor=pointer]:
+                                    - generic [ref=e1937]: Both Aboriginal and Torres Strait Islander origin
+                                  - generic:
+                                    - generic:
+                                      - generic:
+                                        - generic:
+                                          - img
+                                - status
+                          - listitem [ref=e1940]:
+                            - generic [ref=e1948]:
+                              - generic [ref=e1949]: Cultural Background / Ethnicity
+                              - generic [ref=e1953]:
+                                - combobox "Cultural Background / Ethnicity" [ref=e1954] [cursor=pointer]:
+                                  - generic [ref=e1955]: "--None--"
+                                - generic:
+                                  - generic:
+                                    - generic:
+                                      - generic:
+                                        - img
+                              - status
+                          - listitem [ref=e1958]:
+                            - generic [ref=e1959]:
+                              - button "Undo Primary Language" [ref=e1961] [cursor=pointer]:
+                                - img [ref=e1963]
+                              - generic [ref=e1972]:
+                                - generic [ref=e1973]: Primary Language
+                                - generic [ref=e1977]:
+                                  - combobox "Primary Language" [ref=e1978] [cursor=pointer]:
+                                    - generic [ref=e1979]: Afar
+                                  - generic:
+                                    - generic:
+                                      - generic:
+                                        - generic:
+                                          - img
+                                - status
+                          - listitem [ref=e1982]:
+                            - generic [ref=e1990]:
+                              - generic [ref=e1991]: Secondary Language
+                              - button "Secondary Language Help Info" [ref=e1994] [cursor=pointer]:
+                                - img [ref=e1996]
+                                - generic [ref=e1999]: Secondary Language Help Info
+                              - generic [ref=e2003]:
+                                - combobox "Secondary Language" [ref=e2004] [cursor=pointer]:
+                                  - generic [ref=e2005]: Arabic
+                                - generic:
+                                  - generic:
+                                    - generic:
+                                      - generic:
+                                        - img
+                              - status
+                          - listitem [ref=e2008]:
+                            - generic [ref=e2009]:
+                              - button "Undo Interpreter required" [ref=e2011] [cursor=pointer]:
+                                - img [ref=e2013]
+                              - generic [ref=e2022]:
+                                - generic [ref=e2023]: Interpreter required
+                                - generic [ref=e2027]:
+                                  - combobox "Interpreter required" [ref=e2028] [cursor=pointer]:
+                                    - generic [ref=e2029]: "Yes"
+                                  - generic:
+                                    - generic:
+                                      - generic:
+                                        - generic:
+                                          - img
+                                - status
+                  - generic [ref=e2035]:
+                    - heading "Account Information" [level=3] [ref=e2036]:
+                      - generic "Account Information" [ref=e2037]
+                    - list [ref=e2040]:
+                      - generic [ref=e2041]:
+                        - generic [ref=e2044]:
+                          - listitem [ref=e2047]:
+                            - generic [ref=e2049]:
+                              - generic [ref=e2050]: mecwacare Client ID
+                              - button "Help mecwacare Client ID" [ref=e2053] [cursor=pointer]:
+                                - img [ref=e2055]
+                                - generic [ref=e2058]: Help mecwacare Client ID
+                              - generic [ref=e2061]: "12789"
+                          - listitem [ref=e2064]:
+                            - generic [ref=e2066]:
+                              - generic [ref=e2067]: Account Owner
+                              - generic [ref=e2079]: Manager Services User
+                          - listitem [ref=e2082]:
+                            - generic [ref=e2087]:
+                              - generic [ref=e2088]: Description
+                              - button "Description Help Info" [ref=e2091] [cursor=pointer]:
+                                - img [ref=e2093]
+                                - generic [ref=e2096]: Description Help Info
+                              - textbox "Description" [ref=e2098]
+                              - status
+                          - listitem [ref=e2101]:
+                            - generic [ref=e2102]:
+                              - button "Undo Customer Category" [ref=e2104] [cursor=pointer]:
+                                - img [ref=e2106]
+                              - generic [ref=e2115]:
+                                - generic [ref=e2116]: "*Customer Category"
+                                - generic [ref=e2120]:
+                                  - combobox "Customer Category" [active] [ref=e2121] [cursor=pointer]:
+                                    - generic [ref=e2122]: Individual
+                                  - generic:
+                                    - generic:
+                                      - generic:
+                                        - generic:
+                                          - img
+                                - status [ref=e2123]:
+                                  - generic [ref=e2124]:
+                                    - generic [ref=e2125]: Customer Category
+                                    - text: "bad value for restricted picklist field: Individual"
+                          - listitem [ref=e2128]:
+                            - group "Customer Group" [ref=e2136]:
+                              - generic [ref=e2137]: Customer Group
+                              - generic [ref=e2139]:
+                                - generic [ref=e2141]: Press Ctrl (Cmd on Mac) + Left Arrow or Ctrl (Cmd on Mac) + Right Arrow to move items between lists. Supports single character navigation. Press CTRL + Space key to select the option.
+                                - generic [ref=e2142]:
+                                  - generic [ref=e2143]: Available
+                                  - listbox "Available" [ref=e2145]:
+                                    - option "HCP - Other Gov" [ref=e2146]:
+                                      - generic "HCP - Other Gov" [ref=e2148]
+                                    - option "HCP (741 ITF)" [ref=e2149]:
+                                      - generic "HCP (741 ITF)" [ref=e2151]
+                                    - option "HCP IPA" [ref=e2152]:
+                                      - generic "HCP IPA" [ref=e2154]
+                                    - option "Housing" [ref=e2155]:
+                                      - generic "Housing" [ref=e2157]
+                                    - option "INDIV" [ref=e2158]:
+                                      - generic "INDIV" [ref=e2160]
+                                    - option "INST" [ref=e2161]:
+                                      - generic "INST" [ref=e2163]
+                                    - option "NDIS Day Centre" [ref=e2164]:
+                                      - generic "NDIS Day Centre" [ref=e2166]
+                                    - option "NDIS PLAN" [ref=e2167]:
+                                      - generic "NDIS PLAN" [ref=e2169]
+                                    - option "NDIS PORTAL" [ref=e2170]:
+                                      - generic "NDIS PORTAL" [ref=e2172]
+                                    - option "NDIS SELF" [ref=e2173]:
+                                      - generic "NDIS SELF" [ref=e2175]
+                                    - option "Other" [ref=e2176]:
+                                      - generic "Other" [ref=e2178]
+                                    - option "Other – Misc" [ref=e2179]:
+                                      - generic "Other – Misc" [ref=e2181]
+                                    - option "Residential" [ref=e2182]:
+                                      - generic "Residential" [ref=e2184]
+                                    - option "Residential RAD" [ref=e2185]:
+                                      - generic "Residential RAD" [ref=e2187]
+                                    - option "Respite" [ref=e2188]:
+                                      - generic "Respite" [ref=e2190]
+                                    - option "Retirement Villages" [ref=e2191]:
+                                      - generic "Retirement Villages" [ref=e2193]
+                                    - option "Retirement Villages DMF" [ref=e2194]:
+                                      - generic "Retirement Villages DMF" [ref=e2196]
+                                    - option "Retirement Villages AMF" [ref=e2197]:
+                                      - generic "Retirement Villages AMF" [ref=e2199]
+                                    - option "Home Care" [ref=e2200]:
+                                      - generic "Home Care" [ref=e2202]
+                                - generic [ref=e2203]:
+                                  - button "Move selection to Chosen" [ref=e2205] [cursor=pointer]:
+                                    - img [ref=e2207]
+                                    - generic [ref=e2210]: Move selection to Chosen
+                                  - button "Move selection to Available" [ref=e2212] [cursor=pointer]:
+                                    - img [ref=e2214]
+                                    - generic [ref=e2217]: Move selection to Available
+                                - generic [ref=e2218]:
+                                  - generic [ref=e2219]: Chosen
+                                  - generic [ref=e2220]:
+                                    - listbox "Chosen"
+                          - listitem [ref=e2223]:
+                            - generic [ref=e2225]:
+                              - generic [ref=e2226]: Opted for Direct Debit
+                              - generic [ref=e2232]:
+                                - generic "False" [ref=e2233]:
+                                  - generic [ref=e2234]:
+                                    - img [ref=e2236]
+                                    - generic [ref=e2239]: "False"
+                                - generic [ref=e2240]: Opted for Direct Debit
+                          - listitem [ref=e2243]:
+                            - generic [ref=e2251]:
+                              - generic [ref=e2252]: Payment Method
+                              - generic [ref=e2256]:
+                                - combobox "Payment Method" [ref=e2257] [cursor=pointer]:
+                                  - generic [ref=e2258]: "--None--"
+                                - generic:
+                                  - generic:
+                                    - generic:
+                                      - generic:
+                                        - img
+                              - status
+                        - generic [ref=e2261]:
+                          - listitem [ref=e2264]:
+                            - generic [ref=e2270]:
+                              - generic [ref=e2271]: Non-Client
+                              - button "Non-Client Help Info" [ref=e2274] [cursor=pointer]:
+                                - img [ref=e2276]
+                                - generic [ref=e2279]: Non-Client Help Info
+                              - checkbox "Non-Client" [ref=e2281]
+                          - listitem [ref=e2284]:
+                            - generic [ref=e2292]:
+                              - generic [ref=e2293]: Account Source
+                              - button "Account Source Help Info" [ref=e2296] [cursor=pointer]:
+                                - img [ref=e2298]
+                                - generic [ref=e2301]: Account Source Help Info
+                              - generic [ref=e2305]:
+                                - combobox "Account Source" [ref=e2306] [cursor=pointer]:
+                                  - generic [ref=e2307]: Company Website
+                                - generic:
+                                  - generic:
+                                    - generic:
+                                      - generic:
+                                        - img
+                              - status
+                          - listitem [ref=e2310]:
+                            - group "Deceased Date" [ref=e2318]:
+                              - generic [ref=e2319]: Deceased Date
+                              - generic [ref=e2322]:
+                                - generic [ref=e2323]:
+                                  - group [ref=e2324]:
+                                    - generic [ref=e2325]: Date
+                                    - generic [ref=e2326]:
+                                      - textbox "Date" [ref=e2327]
+                                      - generic:
+                                        - button "Select a date for Date":
+                                          - generic:
+                                            - img
+                                          - generic: Select a date for Date
+                                  - generic [ref=e2328]: "Format: 31/12/2024"
+                                - generic [ref=e2329]:
+                                  - generic [ref=e2330]: Time
+                                  - generic [ref=e2334]:
+                                    - combobox "Time" [ref=e2337]
+                                    - generic:
+                                      - generic:
+                                        - generic:
+                                          - generic:
+                                            - img
+                  - generic [ref=e2343]:
+                    - heading "Contact Information" [level=3] [ref=e2344]:
+                      - generic "Contact Information" [ref=e2345]
+                    - list [ref=e2348]:
+                      - generic [ref=e2349]:
+                        - generic [ref=e2352]:
+                          - listitem [ref=e2355]:
+                            - generic [ref=e2361]:
+                              - generic [ref=e2362]: "*Phone"
+                              - button "Phone Help Info" [ref=e2365] [cursor=pointer]:
+                                - img [ref=e2367]
+                                - generic [ref=e2370]: Phone Help Info
+                              - textbox "Phone" [ref=e2372]: "1234567890"
+                          - listitem [ref=e2375]:
+                            - generic [ref=e2381]:
+                              - generic [ref=e2382]: Mobile
+                              - button "Mobile Help Info" [ref=e2385] [cursor=pointer]:
+                                - img [ref=e2387]
+                                - generic [ref=e2390]: Mobile Help Info
+                              - textbox "Mobile" [ref=e2392]
+                          - listitem [ref=e2395]:
+                            - generic [ref=e2401]:
+                              - generic [ref=e2402]: Email
+                              - textbox "Email" [ref=e2404]: john.doe308@example.com
+                          - listitem [ref=e2407]:
+                            - generic [ref=e2413]:
+                              - generic [ref=e2414]: Client Party Billing Email Preference
+                              - checkbox "Client Party Billing Email Preference" [ref=e2416]
+                          - listitem [ref=e2419]:
+                            - generic [ref=e2427]:
+                              - generic [ref=e2428]: Carer availability
+                              - generic [ref=e2432]:
+                                - combobox "Carer availability" [ref=e2433] [cursor=pointer]:
+                                  - generic [ref=e2434]: "--None--"
+                                - generic:
+                                  - generic:
+                                    - generic:
+                                      - generic:
+                                        - img
+                              - status
+                          - listitem [ref=e2437]:
+                            - generic [ref=e2442]:
+                              - generic [ref=e2443]: Access to property
+                              - textbox "Access to property" [ref=e2445]
+                              - status
+                        - generic [ref=e2448]:
+                          - listitem [ref=e2451]:
+                            - generic [ref=e2459]:
+                              - generic [ref=e2460]: Best Time to call
+                              - button "Best Time to call Help Info" [ref=e2463] [cursor=pointer]:
+                                - img [ref=e2465]
+                                - generic [ref=e2468]: Best Time to call Help Info
+                              - generic [ref=e2472]:
+                                - combobox "Best Time to call" [ref=e2473] [cursor=pointer]:
+                                  - generic [ref=e2474]: "--None--"
+                                - generic:
+                                  - generic:
+                                    - generic:
+                                      - generic:
+                                        - img
+                              - status
+                          - listitem [ref=e2477]:
+                            - generic [ref=e2485]:
+                              - generic [ref=e2486]: Prefered Communication Method
+                              - generic [ref=e2490]:
+                                - combobox "Prefered Communication Method" [ref=e2491] [cursor=pointer]:
+                                  - generic [ref=e2492]: Email
+                                - generic:
+                                  - generic:
+                                    - generic:
+                                      - generic:
+                                        - img
+                              - status
+                          - listitem [ref=e2495]:
+                            - generic [ref=e2503]:
+                              - generic [ref=e2504]: Marketing Communication
+                              - button "Marketing Communication Help Info" [ref=e2507] [cursor=pointer]:
+                                - img [ref=e2509]
+                                - generic [ref=e2512]: Marketing Communication Help Info
+                              - generic [ref=e2516]:
+                                - combobox "Marketing Communication" [ref=e2517] [cursor=pointer]:
+                                  - generic [ref=e2518]: "Yes"
+                                - generic:
+                                  - generic:
+                                    - generic:
+                                      - generic:
+                                        - img
+                              - status
+                          - listitem [ref=e2521]:
+                            - generic [ref=e2529]:
+                              - generic [ref=e2530]: "*Marketing Preference"
+                              - button "Marketing Preference Help Info" [ref=e2533] [cursor=pointer]:
+                                - img [ref=e2535]
+                                - generic [ref=e2538]: Marketing Preference Help Info
+                              - generic [ref=e2542]:
+                                - combobox "Marketing Preference" [ref=e2543] [cursor=pointer]:
+                                  - generic [ref=e2544]: Email
+                                - generic:
+                                  - generic:
+                                    - generic:
+                                      - generic:
+                                        - img
+                              - status
+                          - listitem [ref=e2547]:
+                            - generic [ref=e2555]:
+                              - generic [ref=e2556]: Billing Communication Preference
+                              - generic [ref=e2560]:
+                                - combobox "Billing Communication Preference" [ref=e2561] [cursor=pointer]:
+                                  - generic [ref=e2562]: Email
+                                - generic:
+                                  - generic:
+                                    - generic:
+                                      - generic:
+                                        - img
+                              - status
+                          - listitem [ref=e2565]:
+                            - generic [ref=e2571]:
+                              - generic [ref=e2572]: Consent to Provide Details
+                              - checkbox "Consent to Provide Details" [ref=e2574]
+                          - listitem [ref=e2577]:
+                            - generic [ref=e2583]:
+                              - generic [ref=e2584]: Consented for Future Contacts
+                              - checkbox "Consented for Future Contacts" [ref=e2586]
+                  - generic [ref=e2592]:
+                    - heading "Address Information" [level=3] [ref=e2593]:
+                      - generic "Address Information" [ref=e2594]
+                    - list [ref=e2597]:
+                      - generic [ref=e2598]:
+                        - generic [ref=e2601]:
+                          - listitem [ref=e2604]:
+                            - group "Service Delivery Address" [ref=e2610]:
+                              - generic [ref=e2611]: Service Delivery Address
+                              - generic [ref=e2613]:
+                                - generic [ref=e2615]:
+                                  - generic [ref=e2616]: Address Search
+                                  - generic [ref=e2620]:
+                                    - combobox "Address Search" [ref=e2623]
+                                    - generic:
+                                      - generic:
+                                        - generic:
+                                          - generic:
+                                            - img
+                                - status [ref=e2624]
+                                - generic [ref=e2628]:
+                                  - generic [ref=e2630]: Service Delivery Country
+                                  - generic [ref=e2634]:
+                                    - combobox "Service Delivery Country" [ref=e2637]: Australia
+                                    - generic:
+                                      - generic:
+                                        - generic:
+                                          - generic:
+                                            - img
+                                  - status
+                                - generic [ref=e2639]:
+                                  - generic [ref=e2640]: Service Delivery Street Address
+                                  - textbox "Service Delivery Street Address" [ref=e2642]: 80 Almond St
+                                  - status
+                                - generic [ref=e2643]:
+                                  - generic [ref=e2646]:
+                                    - generic [ref=e2647]: Service Delivery City
+                                    - textbox "Service Delivery City" [ref=e2649]: BALWYN NORTH
+                                  - generic [ref=e2652]:
+                                    - generic [ref=e2654]: Service Delivery State
+                                    - generic [ref=e2658]:
+                                      - combobox "Service Delivery State" [ref=e2661]: Victoria
+                                      - generic:
+                                        - generic:
+                                          - generic:
+                                            - generic:
+                                              - img
+                                    - status
+                                - generic [ref=e2665]:
+                                  - generic [ref=e2666]: Service Delivery Post Code
+                                  - textbox "Service Delivery Post Code" [ref=e2668]: "3104"
+                          - listitem [ref=e2671]:
+                            - group "Home Address" [ref=e2677]:
+                              - generic [ref=e2678]: Home Address
+                              - generic [ref=e2680]:
+                                - generic [ref=e2682]:
+                                  - generic [ref=e2683]: Address Search
+                                  - generic [ref=e2687]:
+                                    - combobox "Address Search" [ref=e2690]
+                                    - generic:
+                                      - generic:
+                                        - generic:
+                                          - generic:
+                                            - img
+                                - status [ref=e2691]
+                                - generic [ref=e2695]:
+                                  - generic [ref=e2697]: Home Address (Country/Territory)
+                                  - generic [ref=e2701]:
+                                    - combobox "Home Address (Country/Territory)" [ref=e2704]: Australia
+                                    - generic:
+                                      - generic:
+                                        - generic:
+                                          - generic:
+                                            - img
+                                  - status
+                                - generic [ref=e2706]:
+                                  - generic [ref=e2707]: Home Address (Street)
+                                  - textbox "Home Address (Street)" [ref=e2709]
+                                  - status
+                                - generic [ref=e2710]:
+                                  - generic [ref=e2713]:
+                                    - generic [ref=e2714]: Home Address (City)
+                                    - textbox "Home Address (City)" [ref=e2716]
+                                  - generic [ref=e2719]:
+                                    - generic [ref=e2721]: Home Address (State/Province)
+                                    - generic [ref=e2725]:
+                                      - combobox "Home Address (State/Province)" [ref=e2728]: "--None--"
+                                      - generic:
+                                        - generic:
+                                          - generic:
+                                            - generic:
+                                              - img
+                                    - status
+                                - generic [ref=e2732]:
+                                  - generic [ref=e2733]: Home Address (ZIP/Postal Code)
+                                  - textbox "Home Address (ZIP/Postal Code)" [ref=e2735]
+                        - generic [ref=e2738]:
+                          - listitem [ref=e2741]:
+                            - group "Billing Address" [ref=e2747]:
+                              - generic [ref=e2748]: Billing Address
+                              - generic [ref=e2750]:
+                                - generic [ref=e2752]:
+                                  - generic [ref=e2753]: Address Search
+                                  - generic [ref=e2757]:
+                                    - combobox "Address Search" [ref=e2760]
+                                    - generic:
+                                      - generic:
+                                        - generic:
+                                          - generic:
+                                            - img
+                                - status [ref=e2761]
+                                - generic [ref=e2765]:
+                                  - generic [ref=e2767]: Billing Country
+                                  - generic [ref=e2771]:
+                                    - combobox "Billing Country" [ref=e2774]: Australia
+                                    - generic:
+                                      - generic:
+                                        - generic:
+                                          - generic:
+                                            - img
+                                  - status
+                                - generic [ref=e2776]:
+                                  - generic [ref=e2777]: Billing Street
+                                  - textbox "Billing Street" [ref=e2779]: 80 Almond St
+                                  - status
+                                - generic [ref=e2780]:
+                                  - generic [ref=e2783]:
+                                    - generic [ref=e2784]: Billing City
+                                    - textbox "Billing City" [ref=e2786]: BALWYN NORTH
+                                  - generic [ref=e2789]:
+                                    - generic [ref=e2791]: Billing State/Province
+                                    - generic [ref=e2795]:
+                                      - combobox "Billing State/Province" [ref=e2798]: Victoria
+                                      - generic:
+                                        - generic:
+                                          - generic:
+                                            - generic:
+                                              - img
+                                    - status
+                                - generic [ref=e2802]:
+                                  - generic [ref=e2803]: Billing Zip/Postal Code
+                                  - textbox "Billing Zip/Postal Code" [ref=e2805]: "3104"
+                          - listitem [ref=e2808]:
+                            - group "Postal Address" [ref=e2814]:
+                              - generic [ref=e2815]: Postal Address
+                              - generic [ref=e2817]:
+                                - generic [ref=e2819]:
+                                  - generic [ref=e2820]: Address Search
+                                  - generic [ref=e2824]:
+                                    - combobox "Address Search" [ref=e2827]
+                                    - generic:
+                                      - generic:
+                                        - generic:
+                                          - generic:
+                                            - img
+                                - status [ref=e2828]
+                                - generic [ref=e2832]:
+                                  - generic [ref=e2834]: Postal Country
+                                  - generic [ref=e2838]:
+                                    - combobox "Postal Country" [ref=e2841]: Australia
+                                    - generic:
+                                      - generic:
+                                        - generic:
+                                          - generic:
+                                            - img
+                                  - status
+                                - generic [ref=e2843]:
+                                  - generic [ref=e2844]: Postal Street Address
+                                  - textbox "Postal Street Address" [ref=e2846]
+                                  - status
+                                - generic [ref=e2847]:
+                                  - generic [ref=e2850]:
+                                    - generic [ref=e2851]: Postal City
+                                    - textbox "Postal City" [ref=e2853]
+                                  - generic [ref=e2856]:
+                                    - generic [ref=e2858]: Postal State
+                                    - generic [ref=e2862]:
+                                      - combobox "Postal State" [ref=e2865]: "--None--"
+                                      - generic:
+                                        - generic:
+                                          - generic:
+                                            - generic:
+                                              - img
+                                    - status
+                                - generic [ref=e2869]:
+                                  - generic [ref=e2870]: Postal Post Code
+                                  - textbox "Postal Post Code" [ref=e2872]
+                  - generic [ref=e2878]:
+                    - heading "Catchment Area" [level=3] [ref=e2879]:
+                      - generic "Catchment Area" [ref=e2880]
+                    - list [ref=e2883]:
+                      - generic [ref=e2884]:
+                        - generic [ref=e2887]:
+                          - listitem [ref=e2890]:
+                            - generic [ref=e2892]:
+                              - generic [ref=e2893]: Region
+                              - generic [ref=e2896]: North East MEL Metro & Regional
+                          - listitem [ref=e2899]:
+                            - generic [ref=e2901]:
+                              - generic [ref=e2902]: Pod
+                              - generic [ref=e2905]: Boroondara East & Manningham
+                        - generic [ref=e2908]:
+                          - listitem [ref=e2911]:
+                            - generic [ref=e2913]:
+                              - generic [ref=e2914]: Hub
+                              - generic [ref=e2917]: Central Hub
+                          - listitem [ref=e2920]:
+                            - generic [ref=e2922]:
+                              - generic [ref=e2923]: CHSP Region
+                              - generic [ref=e2926]: Eastern Metro
+                  - generic [ref=e2932]:
+                    - heading "Important Information" [level=3] [ref=e2933]:
+                      - generic "Important Information" [ref=e2934]
+                    - list [ref=e2937]:
+                      - generic [ref=e2938]:
+                        - generic [ref=e2941]:
+                          - listitem [ref=e2944]:
+                            - generic [ref=e2952]:
+                              - generic [ref=e2953]: Health Care Card Holder Status
+                              - generic [ref=e2957]:
+                                - combobox "Health Care Card Holder Status" [ref=e2958] [cursor=pointer]:
+                                  - generic [ref=e2959]: "--None--"
+                                - generic:
+                                  - generic:
+                                    - generic:
+                                      - generic:
+                                        - img
+                              - status
+                          - listitem [ref=e2962]:
+                            - generic [ref=e2969]:
+                              - generic [ref=e2970]: MAC number
+                              - button "MAC number Help Info" [ref=e2973] [cursor=pointer]:
+                                - img [ref=e2975]
+                                - generic [ref=e2978]: MAC number Help Info
+                              - textbox "MAC number" [ref=e2980]
+                          - listitem [ref=e2983]:
+                            - generic [ref=e2990]:
+                              - generic [ref=e2991]: NDIS Number
+                              - textbox "NDIS Number" [ref=e2993]
+                          - listitem [ref=e2996]:
+                            - generic [ref=e3003]:
+                              - generic [ref=e3004]: Medicare Reference Number
+                              - button "Medicare Reference Number Help Info" [ref=e3007] [cursor=pointer]:
+                                - img [ref=e3009]
+                                - generic [ref=e3012]: Medicare Reference Number Help Info
+                              - textbox "Medicare Reference Number" [ref=e3014]
+                          - listitem [ref=e3017]:
+                            - generic [ref=e3024]:
+                              - generic [ref=e3025]: Medicare Number
+                              - button "Medicare Number Help Info" [ref=e3028] [cursor=pointer]:
+                                - img [ref=e3030]
+                                - generic [ref=e3033]: Medicare Number Help Info
+                              - textbox "Medicare Number" [ref=e3035]
+                          - listitem [ref=e3038]:
+                            - generic [ref=e3046]:
+                              - generic [ref=e3047]: Medicare Expiry Month
+                              - button "Medicare Expiry Month Help Info" [ref=e3050] [cursor=pointer]:
+                                - img [ref=e3052]
+                                - generic [ref=e3055]: Medicare Expiry Month Help Info
+                              - generic [ref=e3059]:
+                                - combobox "Medicare Expiry Month" [ref=e3060] [cursor=pointer]:
+                                  - generic [ref=e3061]: "--None--"
+                                - generic:
+                                  - generic:
+                                    - generic:
+                                      - generic:
+                                        - img
+                              - status
+                          - listitem [ref=e3064]:
+                            - generic [ref=e3072]:
+                              - generic [ref=e3073]: Medicare Expiry Year
+                              - button "Medicare Expiry Year Help Info" [ref=e3076] [cursor=pointer]:
+                                - img [ref=e3078]
+                                - generic [ref=e3081]: Medicare Expiry Year Help Info
+                              - generic [ref=e3085]:
+                                - combobox "Medicare Expiry Year" [ref=e3086] [cursor=pointer]:
+                                  - generic [ref=e3087]: "--None--"
+                                - generic:
+                                  - generic:
+                                    - generic:
+                                      - generic:
+                                        - img
+                              - status
+                          - listitem [ref=e3090]:
+                            - generic [ref=e3097]:
+                              - generic [ref=e3098]: Care Recipient ID
+                              - button "Care Recipient ID Help Info" [ref=e3101] [cursor=pointer]:
+                                - img [ref=e3103]
+                                - generic [ref=e3106]: Care Recipient ID Help Info
+                              - textbox "Care Recipient ID" [ref=e3108]
+                          - listitem [ref=e3111]:
+                            - generic [ref=e3119]:
+                              - generic [ref=e3120]: Naps ID
+                              - generic [ref=e3124]:
+                                - combobox "Naps ID" [ref=e3125] [cursor=pointer]:
+                                  - generic [ref=e3126]: "--None--"
+                                - generic:
+                                  - generic:
+                                    - generic:
+                                      - generic:
+                                        - img
+                              - status
+                        - generic [ref=e3129]:
+                          - listitem [ref=e3132]:
+                            - generic [ref=e3139]:
+                              - generic [ref=e3140]: Customer Reference Number (CRN)
+                              - button "Customer Reference Number (CRN) Help Info" [ref=e3143] [cursor=pointer]:
+                                - img [ref=e3145]
+                                - generic [ref=e3148]: Customer Reference Number (CRN) Help Info
+                              - textbox "Customer Reference Number (CRN)" [ref=e3150]
+                          - listitem [ref=e3153]:
+                            - generic [ref=e3154]:
+                              - button "Undo DVA Number" [ref=e3156] [cursor=pointer]:
+                                - img [ref=e3158]
+                              - generic [ref=e3166]:
+                                - generic [ref=e3167]: "*DVA Number"
+                                - button "DVA Number Help Info" [ref=e3170] [cursor=pointer]:
+                                  - img [ref=e3172]
+                                  - generic [ref=e3175]: DVA Number Help Info
+                                - textbox "DVA Number" [ref=e3177]: "1234567890"
+                          - listitem [ref=e3180]:
+                            - generic [ref=e3181]:
+                              - button "Undo DVA Card Type" [ref=e3183] [cursor=pointer]:
+                                - img [ref=e3185]
+                              - generic [ref=e3194]:
+                                - generic [ref=e3195]: DVA Card Type
+                                - generic [ref=e3199]:
+                                  - combobox "DVA Card Type" [ref=e3200] [cursor=pointer]:
+                                    - generic [ref=e3201]: Gold Card
+                                  - generic:
+                                    - generic:
+                                      - generic:
+                                        - generic:
+                                          - img
+                                - status
+                          - listitem [ref=e3204]:
+                            - generic [ref=e3211]:
+                              - generic [ref=e3212]: VX Number
+                              - textbox "VX Number" [ref=e3214]
+                          - listitem [ref=e3217]:
+                            - generic [ref=e3218]:
+                              - button "Undo Living Arrangements" [ref=e3220] [cursor=pointer]:
+                                - img [ref=e3222]
+                              - generic [ref=e3231]:
+                                - generic [ref=e3232]: Living Arrangements
+                                - generic [ref=e3236]:
+                                  - combobox "Living Arrangements" [ref=e3237] [cursor=pointer]:
+                                    - generic [ref=e3238]: Lives alone
+                                  - generic:
+                                    - generic:
+                                      - generic:
+                                        - generic:
+                                          - img
+                                - status
+                          - listitem [ref=e3241]:
+                            - generic [ref=e3242]:
+                              - button "Undo Accommodation/Residential Setting" [ref=e3244] [cursor=pointer]:
+                                - img [ref=e3246]
+                              - generic [ref=e3255]:
+                                - generic [ref=e3256]: Accommodation/Residential Setting
+                                - generic [ref=e3260]:
+                                  - combobox "Accommodation/Residential Setting" [ref=e3261] [cursor=pointer]:
+                                    - generic [ref=e3262]: Boarding house/private hotel
+                                  - generic:
+                                    - generic:
+                                      - generic:
+                                        - generic:
+                                          - img
+                                - status
+                          - listitem [ref=e3265]:
+                            - generic [ref=e3273]:
+                              - generic [ref=e3274]: Pension
+                              - generic [ref=e3278]:
+                                - combobox "Pension" [ref=e3279] [cursor=pointer]:
+                                  - generic [ref=e3280]: "--None--"
+                                - generic:
+                                  - generic:
+                                    - generic:
+                                      - generic:
+                                        - img
+                              - status
+                          - listitem [ref=e3283]:
+                            - generic [ref=e3284]:
+                              - button "Undo Pension Type" [ref=e3286] [cursor=pointer]:
+                                - img [ref=e3288]
+                              - generic [ref=e3297]:
+                                - generic [ref=e3298]: Pension Type
+                                - generic [ref=e3302]:
+                                  - combobox "Pension Type" [ref=e3303] [cursor=pointer]:
+                                    - generic [ref=e3304]: DVA Pension
+                                  - generic:
+                                    - generic:
+                                      - generic:
+                                        - generic:
+                                          - img
+                                - status
+                          - listitem [ref=e3307]:
+                            - generic [ref=e3315]:
+                              - generic [ref=e3316]: Disability Code
+                              - generic [ref=e3320]:
+                                - combobox "Disability Code" [ref=e3321] [cursor=pointer]:
+                                  - generic [ref=e3322]: "--None--"
+                                - generic:
+                                  - generic:
+                                    - generic:
+                                      - generic:
+                                        - img
+                              - status
+                          - listitem [ref=e3325]:
+                            - generic [ref=e3330]:
+                              - generic [ref=e3331]: Comments
+                              - textbox "Comments" [ref=e3333]
+                              - status
+                  - generic [ref=e3339]:
+                    - heading "ACVVS" [level=3] [ref=e3340]:
+                      - generic "ACVVS" [ref=e3341]
+                    - list [ref=e3344]:
+                      - listitem [ref=e3351]:
+                        - generic [ref=e3357]:
+                          - generic [ref=e3358]: ACVVS Client
+                          - checkbox "ACVVS Client" [ref=e3360]
+                  - generic [ref=e3368]:
+                    - heading "Referral" [level=3] [ref=e3369]:
+                      - generic "Referral" [ref=e3370]
+                    - list [ref=e3373]:
+                      - generic [ref=e3374]:
+                        - generic [ref=e3377]:
+                          - listitem [ref=e3380]:
+                            - generic [ref=e3387]:
+                              - generic [ref=e3388]: Referrer Name
+                              - textbox "Referrer Name" [ref=e3390]
+                          - listitem [ref=e3393]:
+                            - generic [ref=e3399]:
+                              - generic [ref=e3400]: Referrer Phone
+                              - textbox "Referrer Phone" [ref=e3402]
+                        - generic [ref=e3405]:
+                          - listitem [ref=e3408]:
+                            - generic [ref=e3414]:
+                              - generic [ref=e3415]: Referrer Email
+                              - textbox "Referrer Email" [ref=e3417]
+                          - listitem [ref=e3420]:
+                            - generic [ref=e3427]:
+                              - generic [ref=e3428]: Referrer Organisation
+                              - textbox "Referrer Organisation" [ref=e3430]
+                          - listitem [ref=e3433]:
+                            - generic [ref=e3441]:
+                              - generic [ref=e3442]: Referrer Relationship
+                              - generic [ref=e3446]:
+                                - combobox "Referrer Relationship" [ref=e3447] [cursor=pointer]:
+                                  - generic [ref=e3448]: "--None--"
+                                - generic:
+                                  - generic:
+                                    - generic:
+                                      - generic:
+                                        - img
+                              - status
+                  - generic [ref=e3454]:
+                    - heading "System Information" [level=3] [ref=e3455]:
+                      - generic "System Information" [ref=e3456]
+                    - list [ref=e3459]:
+                      - generic [ref=e3460]:
+                        - listitem [ref=e3466]:
+                          - generic [ref=e3468]:
+                            - generic [ref=e3469]: Created By
+                            - generic [ref=e3473]:
+                              - generic [ref=e3479]: Manager Services User
+                              - text: ", 10/4/2026, 4:06 pm"
+                        - listitem [ref=e3485]:
+                          - generic [ref=e3487]:
+                            - generic [ref=e3488]: Last Modified By
+                            - generic [ref=e3492]:
+                              - generic [ref=e3498]: Manager Services User
+                              - text: ", 10/4/2026, 4:06 pm"
+              - generic [ref=e3501]:
+                - button "Information" [ref=e3502] [cursor=pointer]:
+                  - generic "Information" [ref=e3503]:
+                    - generic [ref=e3504]:
+                      - img [ref=e3506]
+                      - generic [ref=e3509]: Information
+                - button "Error" [ref=e3510] [cursor=pointer]:
+                  - generic "Error" [ref=e3511]:
+                    - generic [ref=e3512]:
+                      - img [ref=e3514]
+                      - generic [ref=e3517]: Error
+                - generic [ref=e3519]:
+                  - generic "Cancel" [ref=e3520]:
+                    - button "Cancel" [ref=e3525] [cursor=pointer]
+                  - generic "Save & New" [ref=e3526]:
+                    - button "Save & New" [ref=e3531] [cursor=pointer]
+                  - generic "Save" [ref=e3532]:
+                    - button "Save" [ref=e3537] [cursor=pointer]
+            - generic [ref=e3538]: "The following fields were added to the record: DVA Number."
+          - status [ref=e3539]
+  - generic:
+    - status
+```
