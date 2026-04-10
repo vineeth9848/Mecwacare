@@ -8,7 +8,7 @@ import { existsSync } from 'fs';
 
 const secondaryAuthPath = 'auth-uat.json';
 
-test('Create New Appointment', async ({ page }) => {
+test.only('Create New Appointment', async ({ page }) => {
   test.setTimeout(180000);
 
   const homePage = new HomePage(page);
@@ -31,7 +31,7 @@ test('Create New Appointment', async ({ page }) => {
   );
 });
 
-test.only('Planner secondary account isolated login flow', async ({ page, browser }) => {
+test('Planner secondary account isolated login flow', async ({ page, browser }) => {
   test.setTimeout(180000);
 
   const { plannerData } = TestDataHelper.readJsonFile<{ plannerData: Array<Record<string, string>> }>('planner.json');

@@ -4,7 +4,7 @@ import { Logger } from '../../src/utils/Logger';
 import { HomePage } from '../../src/pages/homepage/HomePage';
 import { LeadPage } from '../../src/pages/leads/LeadPage';
 
-test('convert lead and verify conversion details', async ({ page }) => {
+test.only('convert lead and verify conversion details', async ({ page }) => {
   const homePage = new HomePage(page);
   const leadPage = new LeadPage(page);
   const { leadCreate, leadConvert } = TestDataHelper.readJsonFile<{

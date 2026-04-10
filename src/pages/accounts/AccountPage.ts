@@ -399,7 +399,7 @@ export class AccountPage extends BasePage {
 
     const AccountsForwardedTo = this.page
     .locator('text=Accounts forwarded to')
-    .locator('xpath=following::input[1]');
+    .locator('xpath=following::input[1]').first();
 
     await AccountsForwardedTo.waitFor({ state: 'visible' });
     AccountsForwardedTo.scrollIntoViewIfNeeded();
@@ -695,8 +695,21 @@ export class AccountPage extends BasePage {
 
     const saveButton = this.page.getByRole('button', { name: 'Save' }).first();
     await expect(saveButton).toBeVisible({ timeout: 10000 });
+    const carePlanURLBeforeSave = this.page.url();
     await saveButton.click();
     await this.page.waitForTimeout(10000);
+
+    await Promise.race([
+      saveButton.waitFor({ state: 'hidden', timeout: 15000 }).catch(() => null),
+      this.page.waitForURL(url => url.toString() !== carePlanURLBeforeSave, { timeout: 15000 }).catch(() => null),
+
+    ]);
+
+    await this.waitForPageReady();
+
+    if(await saveButton.isVisible().catch(() => false)) {
+      throw new Error('Care Plan save did not complete. Still on the Care Plan form after clicking Save');
+    }
     
     Logger.pass('Created Care Plan from Planner page');
   }

@@ -83,7 +83,7 @@ test('Update and  Verify account validations', async ({ page }) => {
   } 
 });
 
-test('Verify Creation of care plan form under Accounts', async ({ page }) => {
+test.only('Verify Creation of care plan form under Accounts', async ({ page }) => {
   const homePage = new HomePage(page);
   const accountPage = new AccountPage(page);
   const { accountCreate } = TestDataHelper.readJsonFile<{ accountCreate: Array<Record<string, string>> }>('accounts.json');

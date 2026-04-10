@@ -5,16 +5,12 @@ import { OpportunityPage } from '../../src/pages/opportunities/OpportunityPage';
 import { TestDataHelper } from '../../src/utils/TestDataHelper';
 import { time } from 'console';
 
-test('verify funding source and funding type in first opportunity record', async ({ page }) => {
+test('Configure funding source and funding type in first opportunity record', async ({ page }) => {
   const homePage = new HomePage(page);
   const opportunityPage = new OpportunityPage(page);
   const { leadCreate } = TestDataHelper.readJsonFile<{ leadCreate: Array<Record<string, string>> }>('leads.json');
   const lead = leadCreate[0];
 
-  const today = new Date();
-
-    const tomorrow = new Date();
-    tomorrow.setDate(today.getDate() + 1);
 
   Logger.info('Starting opportunity funding validation test');
   await opportunityPage.refreshPage();
@@ -34,7 +30,7 @@ test('verify funding source and funding type in first opportunity record', async
   await opportunityPage.selectServiceAgreementStatus();
   await opportunityPage.selectReferrerTypeFamilyViolencePrograms();
   await opportunityPage.saveOpportunityDetails();
-  Logger.pass('Opportunity funding validation test completed successfully');
+  Logger.pass('Opportunity funding configuration test completed successfully');
 });
 
 test('Configure PriceBook and Product Management on Opportunity', async ({ page }) => {
@@ -79,7 +75,7 @@ test('Verify Generate Quote functionality and verify Files on Opportunity', asyn
   Logger.pass('Opportunity quote generation and file verification validated successfully');
 });
 
-test.only('verify Generate Service Agreement functionality on Opportunity', async ({ page }) => {
+test('verify Generate Service Agreement functionality on Opportunity', async ({ page }) => {
   const homePage = new HomePage(page);
   const opportunityPage = new OpportunityPage(page);
   const { leadCreate } = TestDataHelper.readJsonFile<{ leadCreate: Array<Record<string, string>> }>('leads.json');
@@ -142,7 +138,7 @@ test('verify Signature and Close the Opportunity', async ({ page }) => {
   
 });
 
-test('Create Service Agreement on Opportunity record', async ({ page }) => {
+test.only('Create Service Agreement on Opportunity record', async ({ page }) => {
   const homePage = new HomePage(page);
   const opportunityPage = new OpportunityPage(page);
   const { leadCreate } = TestDataHelper.readJsonFile<{ leadCreate: Array<Record<string, string>> }>('leads.json');
