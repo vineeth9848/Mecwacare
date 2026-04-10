@@ -226,16 +226,14 @@ export class OpportunityPage extends BasePage {
 
     const fundingInput = this.page.getByRole('combobox', { name: 'Funding', exact: true });
 
-    // Open dropdown
     await fundingInput.waitFor({ state: 'visible', timeout: 60000 });
     await fundingInput.scrollIntoViewIfNeeded();
     await fundingInput.click();
 
-    // Select "New Funding"
     const newFunding = this.page.getByText('New Funding', { exact: false });
 
     await newFunding.waitFor({ state: 'visible', timeout: 10000 });
-    await newFunding.scrollIntoViewIfNeeded();   // 👈 scroll here too
+    await newFunding.scrollIntoViewIfNeeded();  
     await newFunding.click();
 
     Logger.pass('Clicked New Funding from search');
@@ -512,8 +510,8 @@ export class OpportunityPage extends BasePage {
   async selectFundingProgramBlockTestFundingHacc(): Promise<void> {
     const today = new Date();
 
-    const tomorrow = new Date();
-    tomorrow.setDate(today.getDate() + 1);
+    // const tomorrow = new Date();
+    // tomorrow.setDate(today.getDate() + 1);
 
     const fundingProgramSearch = 'HACC - Ballarat';
     const expectedFundingProgram = 'HACC - Ballarat';
@@ -587,17 +585,17 @@ export class OpportunityPage extends BasePage {
       )
       .toContain(expectedFundingProgram);
 
-      this.DateField('Start Date', today);
-      Logger.info(`Filled Start Date with today's date: ${today.toDateString()}`);
-      this.DateField('End Date', tomorrow);
-      Logger.info(`Filled End Date with tomorrow's date: ${tomorrow.toDateString()}`);
+      // this.DateField('Start Date', today);
+      // Logger.info(`Filled Start Date with today's date: ${today.toDateString()}`);
+      // this.DateField('End Date', tomorrow);
+      // Logger.info(`Filled End Date with tomorrow's date: ${tomorrow.toDateString()}`);
 
     Logger.step('Save opportunity details');
     const saveButton = this.page.getByRole('button', { name: 'Save' }).first();
     await this.waitForVisible(saveButton, 30000);
     await saveButton.scrollIntoViewIfNeeded();
     await saveButton.click();
-    await this.page.waitForTimeout(5000);
+    await this.page.waitForTimeout(10000);
 
     Logger.pass(`Funding Program selected: ${expectedFundingProgram}`);
   }
@@ -647,9 +645,6 @@ export class OpportunityPage extends BasePage {
     await expect(fundingTypeDropdown).toContainText('HACC-PYP', { timeout: 30000 });
     Logger.pass('New Funding Type selected as HACC-PYP');
 
-    
-    Logger.pass('New Funding created successfully');
-
   }
 
 
@@ -661,7 +656,7 @@ export class OpportunityPage extends BasePage {
 
     await assessmentDropdown.click();
 
-    await this.page.getByText(OpportunityLocators.inPersonOptionText, { exact: true }).click();
+    await this.page.getByText(OpportunityLocators.inPersonOptionText, { exact: true }).first().click();
 
     await expect(assessmentDropdown).toContainText('In-Person', { timeout: 30000 });
 
@@ -694,7 +689,7 @@ export class OpportunityPage extends BasePage {
     
     await referrerTypeDropdown.click();
 
-    await this.page.getByText(OpportunityLocators.referrerTypeFamilyViolenceOptionText, { exact: true }).click();
+    await this.page.getByText(OpportunityLocators.referrerTypeFamilyViolenceOptionText, { exact: true }).first().click();
 
     await expect(referrerTypeDropdown).toContainText('Family violence programs', { timeout: 30000 });
 
@@ -707,6 +702,12 @@ export class OpportunityPage extends BasePage {
     await this.waitForVisible(saveButton, 30000);
     await saveButton.scrollIntoViewIfNeeded();
     await saveButton.click();
+
+    await Promise.race([
+      this.page.locator('.forceVisualMessageQueue, [data-key="success"], .toastMessage').waitFor({ state: 'visible', timeout: 15000 }).catch(() => null),
+      saveButton.waitFor({ state: 'hidden', timeout: 15000 }).catch(() => null),
+    ]);
+    await this.waitForPageReady();
     
     Logger.pass('Opportunity details saved');
   }
@@ -938,12 +939,12 @@ export class OpportunityPage extends BasePage {
 
         await this.page.waitForTimeout(5000);
         const statusDropdown = this.page.locator('button[aria-label="Status"]').first();
-        await statusDropdown.waitFor({ state: 'visible' });
-        await statusDropdown.click({ force: true });
+        await statusDropdown.evaluate(el => el.scrollIntoView({ block: 'center' }));
+        await statusDropdown.click();
 
-        const option = this.page.locator('[role="option"]')
-        .filter({ hasText: 'Initial Consultation' })
-        .first().click();
+        const option = this.page.locator('[role="option"]').filter({ hasText: 'Initial Consultation' }).first();
+        await option.waitFor({ state: 'visible' });
+        await option.click();
         await expect(statusDropdown).toContainText('Initial Consultation', { timeout: 30000 });
         await this.page.waitForTimeout(5000);
 
@@ -983,19 +984,33 @@ export class OpportunityPage extends BasePage {
       async configureSignature(): Promise<void> {
               Logger.step('Click on Next Button on Document screen');
               
-              await this.page.waitForSelector('iframe[title="Send with Docusign"]');
+              // await this.page.waitForSelector('iframe[title="Send with Docusign"]');
 
-              let frame = this.page.frameLocator('iframe[title="Send with Docusign"]');
+              // let frame = this.page.frameLocator('iframe[title="Send with Docusign"]');
 
             
-              await frame.getByRole('button', { name: 'Next' }).click();
+              // await frame.getByRole('button', { name: 'Next' }).click();
+              const docusignFrame = this.page.frameLocator('iframe[title="Send with Docusign"] >> visible=true').first();
+
+              const frame = docusignFrame.locator('button.slds-button_brand', { hasText: 'Next' });
+
+              Logger.step('Click on Next Button on Document screen');
+
+            
+              await frame.waitFor({ state: 'visible', timeout: 30000 });
+              await frame.click();
               Logger.step('Clicked on Next Button on Document screen');
 
               
-              await frame.getByRole('button', { name: 'Next' }).waitFor({ state: 'visible' });
+              // await frame.getByRole('button', { name: 'Next' }).waitFor({ state: 'visible' });
 
               
-              await frame.getByRole('button', { name: 'Next' }).click();
+              // await frame.getByRole('button', { name: 'Next' }).click();
+              const nextBtnRecipients = docusignFrame.getByRole('button', { name: 'Next' });
+
+
+              await nextBtnRecipients.waitFor({ state: 'visible', timeout: 30000 });
+              await nextBtnRecipients.click();
               Logger.step('Clicked on Next Button on Recipients screen');
 
               // const editorFrame = frame.frameLocator('iframe');
@@ -1010,35 +1025,64 @@ export class OpportunityPage extends BasePage {
               //   position: { x: 295, y: 421 }
               // });
 
-              await this.page.waitForSelector('iframe[title="Send with Docusign"]');
+              // await this.page.waitForSelector('iframe[title="Send with Docusign"]');
 
-              const Newframe = this.page.frameLocator('iframe[title="Send with Docusign"]');
+              // const Newframe = this.page.frameLocator('iframe[title="Send with Docusign"]');
 
-              await Newframe.locator('[data-qa="footer-send-button"]').waitFor({ state: 'visible', timeout: 60000 });
+              // await Newframe.locator('[data-qa="footer-send-button"]').waitFor({ state: 'visible', timeout: 60000 });
 
-              await Newframe.locator('[data-qa="footer-send-button"]').click();
+              // await Newframe.locator('[data-qa="footer-send-button"]').click();
 
-              const Finalframe = this.page.frameLocator('iframe[title="Send with Docusign"]');
+              // const Finalframe = this.page.frameLocator('iframe[title="Send with Docusign"]');
 
-              await Finalframe.locator('[data-qa="send-without-fields"]').waitFor({
-                state: 'visible',
-                timeout: 90000
-              });
+              // await Finalframe.locator('[data-qa="send-without-fields"]').waitFor({
+              //   state: 'visible',
+              //   timeout: 150000
+              // });
 
-              await Finalframe.locator('[data-qa="send-without-fields"]').click();
+              // await Finalframe.locator('[data-qa="send-without-fields"]').click();
 
-              // await this.page.waitForTimeout(10000);
+              // // await this.page.waitForTimeout(10000);
 
-              const Envelopeframe = this.page.frameLocator('iframe[title="Send with Docusign"]').last();
+              // const Envelopeframe = this.page.frameLocator('iframe[title="Send with Docusign"]').last();
 
-              await Envelopeframe.locator('[data-id="envelopeSentLabel"]').waitFor({
-                state: 'visible',
-                timeout: 90000
-              });
+              // await Envelopeframe.locator('[data-id="envelopeSentLabel"]').waitFor({
+              //   state: 'visible',
+              //   timeout: 150000
+              // });
 
-              await expect(
-                Envelopeframe.locator('[data-id="envelopeSentLabel"]')
-              ).toContainText('Your envelope was sent!');
+              // await expect(
+              //   Envelopeframe.locator('[data-id="envelopeSentLabel"]')
+              // ).toContainText('Your envelope was sent!');
+
+              // 1. Target the correct visible frame (Same as your working section)
+const activeFrame = this.page.frameLocator('iframe[title="Send with Docusign"] >> visible=true').first();
+
+Logger.step('Attempting to click Footer Send Button');
+
+// 2. Click Footer Send Button
+const footerSendBtn = activeFrame.locator('[data-qa="footer-send-button"]');
+await footerSendBtn.waitFor({ state: 'visible', timeout: 60000 });
+await footerSendBtn.click();
+
+// 3. Handle the "Send Without Fields" popup (if it appears)
+Logger.step('Checking for "Send Without Fields" confirmation');
+const sendWithoutFieldsBtn = activeFrame.locator('[data-qa="send-without-fields"]');
+
+// We use a shorter timeout here as this popup might not always appear immediately
+await sendWithoutFieldsBtn.waitFor({ state: 'visible', timeout: 30000 });
+await sendWithoutFieldsBtn.click();
+
+// 4. Verify the Envelope was sent
+Logger.step('Verifying Envelope Sent status');
+
+// Note: We use the same 'activeFrame' because the success message is usually in the same frame
+const successLabel = activeFrame.locator('[data-id="envelopeSentLabel"]');
+
+await successLabel.waitFor({ state: 'visible', timeout: 60000 });
+await expect(successLabel).toContainText('Your envelope was sent!');
+
+Logger.pass('Signature process completed and envelope sent');
 
               Logger.pass('Signature process completed and envelope sent');
       }
@@ -1107,14 +1151,24 @@ async setOpportunityToClosedWon(): Promise<void> {
         await EditstageDropdown.click();
 
         const stageDropdown = this.page.locator(OpportunityLocators.stageDropdown);
+        stageDropdown.scrollIntoViewIfNeeded().catch(() => {});
     
         await stageDropdown.click();
 
-        await this.page.getByText('Closed Won', { exact: true }).click();
-        const closedWonOption = stageDropdown;
+        // await this.page.getByText('Closed Won', { exact: true }).click();
+        // const closedWonOption = stageDropdown;
 
-        await expect(closedWonOption).toBeVisible({ timeout: 30000 });
-        await expect(closedWonOption).toHaveText('Closed Won');
+        // await expect(closedWonOption).toBeVisible({ timeout: 30000 });
+        // await expect(closedWonOption).toHaveText('Closed Won');
+        // Logger.pass('Stage set to Closed Won');
+
+        const option = this.page.getByRole('option', { name: 'Closed Won' });
+        await option.click();
+        await option.waitFor({ state: 'hidden' }); 
+
+        await expect(stageDropdown).toHaveText(/Closed Won/);
+
+        await stageDropdown.press('Tab');
 
         const tomorrow = new Date();
         tomorrow.setDate(tomorrow.getDate() + 1);
@@ -1125,17 +1179,35 @@ async setOpportunityToClosedWon(): Promise<void> {
 
 
         await this.page.locator("input[name='Agreement_Start_Date__c']").fill(date);
+        Logger.info(`Filled Agreement Start Date with tomorrow's date: ${date}`);
 
-       
-        await this.page.getByRole('button', { name: 'Save' }).click();
+        
+      const closeButton = this.page.locator("//button[text()='Cancel']").last();
+      await expect(closeButton).toBeVisible({ timeout: 5000 });
+      await closeButton.scrollIntoViewIfNeeded().catch(() => {});
+      Logger.info('Confirmed: Record is in edit mode (Cancel button visible).');
 
-        const saveButton = this.page.locator("//button[text()='Save']").last();
+const saveButton = this.page.locator("//button[text()='Save']").last();
         await this.waitForVisible(saveButton, 10000);
         await saveButton.scrollIntoViewIfNeeded().catch(() => {});
         await saveButton.click({ force: true });
+        Logger.info('Clicked Save button after setting Stage to Closed Won');
 
-        Logger.info(`Agreement Start Date set to ${date}`);
+// 3. After Save: Verify the "Cancel" button is removed from the DOM
+try {
+    
+    await closeButton.waitFor({ state: 'detached', timeout: 10000 });
+    Logger.pass('Success: Cancel button is gone. Record saved successfully.');
+} catch (error) {
+    
+    Logger.error('Save failed: The form is still in Edit Mode.');
+    throw new Error('Form stayed in edit mode. Check for validation errors on the page.');
+}
+        Logger.pass('Record saved successfully and exited edit mode.');
+
+      
         Logger.pass('Opportunity set to Closed Won');
+        await this.page.waitForTimeout(10000);
 }
 
 async verifyNoFurtherUpdatesOnRecord(): Promise<void> {

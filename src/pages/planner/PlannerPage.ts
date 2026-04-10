@@ -14,11 +14,19 @@ export class PlannerPage extends BasePage {
   async clickNewButton(): Promise<void> {
     Logger.step('Click New button in Planner page');
     const newButton = this.page.locator(PlannerLocators.newButton).first();
-    await this.waitForVisible(newButton, 30000);
-    await this.safeAction(async () => {
-      await newButton.click({ force: true });
-    });
-    await this.waitForPageReady();
+
+
+await newButton.waitFor({ state: 'visible', timeout: 30000 });
+
+
+await expect(newButton).toBeEnabled({ timeout: 10000 });
+
+await this.safeAction(async () => {
+    
+    await newButton.click();
+    Logger.info('Clicked the Plus (+) button');
+});
+    
     Logger.pass('Clicked New button in Planner page');
   }
 
@@ -71,6 +79,8 @@ export class PlannerPage extends BasePage {
     await this.scrollIntoView(appointmentServiceInput);
     await this.selectLookupOption(appointmentServiceInput, serviceName, serviceName);
 
+    await this.page.waitForTimeout(10000);
+
     const nextButton = this.page.getByRole('button', { name: 'Next' }).first();
     await this.waitForVisible(nextButton, 15000);
     await this.safeAction(async () => {
@@ -83,7 +93,7 @@ export class PlannerPage extends BasePage {
   async navigationToNextPages(appointmentType: string, appointmentStatus: string, titlePrefix: string): Promise<void> {
     Logger.step('Navigate through remaining Planner pages');
 
-    await this.selectParticipantLocationAndClickNext();
+    //await this.selectParticipantLocationAndClickNext();
     await this.clickNextButton('schedule');
 
     const appointmentTypeSelect = this.page.locator(PlannerLocators.appointmentTypeSelect).first();

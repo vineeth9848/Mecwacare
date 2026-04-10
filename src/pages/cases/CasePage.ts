@@ -301,10 +301,23 @@ async getFormattedDate(offsetDays = 0) {
 
 async saveButtonClick(): Promise<void> {
   const saveButton = this.page.getByRole('button', { name: 'Save' }).first();
-  await saveButton.waitFor({ state: 'visible', timeout: 30000 });
-  await saveButton.scrollIntoViewIfNeeded();
-  await saveButton.click();
-  await this.page.waitForTimeout(5000);
+await saveButton.click();
+Logger.info('Clicked Save button');
+
+const cancelButton = this.page.locator("//button[text()='Cancel']").last();
+
+try {
+    
+    await cancelButton.waitFor({ state: 'hidden', timeout: 15000 });
+    Logger.pass('Save successful: Cancel button is no longer visible.');
+} catch (error) {
+    
+    Logger.error('Save failed: Form is still open.');
+    
+    
+    const errorText = await this.page.locator('.error-message-class').innerText().catch(() => 'No error text found');
+    throw new Error(`Save verification failed. UI Error: ${errorText}`);
+}
 
   Logger.info('Clicked Save button');
 }
