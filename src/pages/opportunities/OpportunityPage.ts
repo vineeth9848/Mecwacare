@@ -701,15 +701,33 @@ export class OpportunityPage extends BasePage {
     const saveButton = this.page.getByRole('button', { name: 'Save' }).first();
     await this.waitForVisible(saveButton, 30000);
     await saveButton.scrollIntoViewIfNeeded();
+    const urlBeforeSave = this.page.url();
     await saveButton.click();
 
     await Promise.race([
       this.page.locator('.forceVisualMessageQueue, [data-key="success"], .toastMessage').waitFor({ state: 'visible', timeout: 15000 }).catch(() => null),
       saveButton.waitFor({ state: 'hidden', timeout: 15000 }).catch(() => null),
+      this.page.waitForURL(url => url.toString() !== urlBeforeSave, { timeout: 15000 }).catch(() => null),
     ]);
+
     await this.waitForPageReady();
+
+    if (await saveButton.isVisible().catch(() => false)) {
+      throw new Error('Opportunity save did not complete. Save button is still visible.');
+    }
     
     Logger.pass('Opportunity details saved');
+  }
+
+  async verifyHeaderFundingType(expectedFundingType: string): Promise<void> {
+    Logger.step(`Verify header Funding Type is ${expectedFundingType}`);
+
+    const fundingTypeValue = this.page.locator(OpportunityLocators.headerFundingTypeValue).first();
+    await this.waitForVisible(fundingTypeValue, 30000);
+    await fundingTypeValue.scrollIntoViewIfNeeded().catch(() => {});
+    await expect(fundingTypeValue).toContainText(expectedFundingType, { timeout: 30000 });
+
+    Logger.pass(`Verified header Funding Type is ${expectedFundingType}`);
   }
 
   async verifyQuoteNotGenerated(): Promise<void> {
@@ -1227,31 +1245,31 @@ async createServiceAgreement(): Promise<void> {
        
         await createServiceAgreementButton.click();
       
-        const AgreementStartDate = this.page.getByLabel('Agreement Start Date').first();
-          await this.waitForVisible(AgreementStartDate, 30000);
-            await AgreementStartDate.click(); 
-            await AgreementStartDate.clear();   
+        // const AgreementStartDate = this.page.getByLabel('Agreement Start Date').first();
+        //   await this.waitForVisible(AgreementStartDate, 30000);
+        //     await AgreementStartDate.click(); 
+        //     await AgreementStartDate.clear();   
 
-         const todaysDate = new Date();
-         const tomorrow = new Date();
-         tomorrow.setDate(tomorrow.getDate() + 1);
-         const formattedTodaysDate = `${String(todaysDate.getDate()).padStart(2, '0')}/${String(
-          todaysDate.getMonth() + 1
-        ).padStart(2, '0')}/${todaysDate.getFullYear()}`;
+        //  const todaysDate = new Date();
+        //  const tomorrow = new Date();
+        //  tomorrow.setDate(tomorrow.getDate() + 1);
+        //  const formattedTodaysDate = `${String(todaysDate.getDate()).padStart(2, '0')}/${String(
+        //   todaysDate.getMonth() + 1
+        // ).padStart(2, '0')}/${todaysDate.getFullYear()}`;
 
-        await AgreementStartDate.fill(formattedTodaysDate);
+        // await AgreementStartDate.fill(formattedTodaysDate);
 
-        await this.page.waitForTimeout(5000);
+        // await this.page.waitForTimeout(5000);
 
-        const formattedTomorrowsDate = `${String(tomorrow.getDate()).padStart(2, '0')}/${String(
-          tomorrow.getMonth() + 1
-        ).padStart(2, '0')}/${tomorrow.getFullYear()}`;
+        // const formattedTomorrowsDate = `${String(tomorrow.getDate()).padStart(2, '0')}/${String(
+        //   tomorrow.getMonth() + 1
+        // ).padStart(2, '0')}/${tomorrow.getFullYear()}`;
 
-        const AgreementEndDate = this.page.getByLabel('Agreement End Date').first();
-        await this.waitForVisible(AgreementEndDate, 30000);
-        await AgreementEndDate.click(); 
-        await AgreementEndDate.clear(); 
-        await AgreementEndDate.fill(formattedTomorrowsDate);
+        // const AgreementEndDate = this.page.getByLabel('Agreement End Date').first();
+        // await this.waitForVisible(AgreementEndDate, 30000);
+        // await AgreementEndDate.click(); 
+        // await AgreementEndDate.clear(); 
+        // await AgreementEndDate.fill(formattedTomorrowsDate);
 
         await this.page.waitForTimeout(5000);
 

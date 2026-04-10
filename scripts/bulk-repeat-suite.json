@@ -1,0 +1,33 @@
+[
+  {
+    "file": "tests/ui/lead-create.spec.ts",
+    "grep": "create lead from leads page"
+  },
+  {
+    "file": "tests/ui/lead-convert.spec.ts"
+  },
+  {
+    "file": "tests/ui/account.spec.ts",
+    "grep": "Update mandatory MDS reporting fields in Account for Opportunity closure"
+  },
+  {
+    "file": "tests/ui/opportunity.spec.ts",
+    "grep": "Configure funding source and funding type in first opportunity record"
+  },
+  {
+    "file": "tests/ui/opportunity.spec.ts",
+    "grep": "Configure PriceBook and Product Management on Opportunity"
+  },
+  {
+    "file": "tests/ui/opportunity.spec.ts",
+    "grep": "verify Generate Service Agreement functionality on Opportunity"
+  },
+  {
+    "file": "tests/ui/opportunity.spec.ts",
+    "grep": "Verifying signature and closing opportunity"
+  },
+  {
+    "file": "tests/ui/opportunity.spec.ts",
+    "grep": "Create Service Agreement on Opportunity record"
+  }
+]

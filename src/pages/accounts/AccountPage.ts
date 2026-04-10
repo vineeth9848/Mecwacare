@@ -884,7 +884,24 @@ async saveAccountDetails(): Promise<void> {
     await this.waitForVisible(saveButton, 30000);
     await saveButton.scrollIntoViewIfNeeded();
     await saveButton.click();
+
+    const cancelButton = this.page.locator("//button[text()='Cancel']").last();
+
+try {
     
+    await cancelButton.waitFor({ state: 'hidden', timeout: 15000 });
+    Logger.pass('Save successful: Cancel button is no longer visible.');
+} catch (error) {
+    
+    Logger.error('Save failed: Form is still open.');
+    
+    
+    const errorText = await this.page.locator('.error-message-class').innerText().catch(() => 'No error text found');
+    throw new Error(`Save MDS fields verification failed. UI Error: ${errorText}`);
+}
+
+await this.page.waitForTimeout(20000);
+
     Logger.pass('Account details saved');
   }
 }
