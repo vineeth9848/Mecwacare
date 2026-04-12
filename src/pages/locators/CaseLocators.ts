@@ -6,7 +6,7 @@ export const CaseLocators = {
   searchIconInCombobox: "button[title='Search'], lightning-button-icon button, [data-key='search']",
   advancedSearchHeading: "h1:has-text('Advanced Search')",
   advancedSearchAccountInput: "input[placeholder='Search Accounts...']",
-  advancedSearchFirstRowRadio: "label[class='slds-radio__label']",
+  advancedSearchFirstRowRadio: "xpath=(//label[contains(@class, 'slds-radio__label')][.//span[text()='Select Item 1']])",
   advancedSearchSelectButton: "lightning-modal-footer button.slds-button_brand:has-text('Select'), button.slds-button_brand:has-text('Select')",
   subjectInput: "input[name='Subject']",
 } as const;
