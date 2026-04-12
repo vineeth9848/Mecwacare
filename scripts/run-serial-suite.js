@@ -12,6 +12,33 @@ const filesToRun = selectedFiles.length ? selectedFiles : orderedFiles;
 const aggregateBlobDir = path.join(projectRoot, 'blob-report-sequential');
 const tempBlobDir = path.join(projectRoot, 'blob-report');
 
+function resolveSerialProject() {
+  if (process.env.CI === 'true') {
+    return 'ci-sequential';
+  }
+
+  const configPath = path.join(projectRoot, 'resources', 'config.properties');
+  const configText = fs.existsSync(configPath) ? fs.readFileSync(configPath, 'utf-8') : '';
+  const browserMatch = configText.match(/^\s*browser\s*=\s*(.+)\s*$/m);
+  const rawBrowser = (process.env.BROWSER || (browserMatch ? browserMatch[1] : 'chromium')).trim().toLowerCase();
+
+  switch (rawBrowser) {
+    case 'chrome':
+      return 'chrome-serial';
+    case 'edge':
+    case 'msedge':
+      return 'edge-serial';
+    case 'firefox':
+      return 'firefox-serial';
+    case 'webkit':
+      return 'webkit-serial';
+    default:
+      return 'chromium-serial';
+  }
+}
+
+const serialProject = resolveSerialProject();
+
 fs.rmSync(aggregateBlobDir, { recursive: true, force: true });
 fs.mkdirSync(aggregateBlobDir, { recursive: true });
 
@@ -23,7 +50,7 @@ for (const [index, file] of filesToRun.entries()) {
 
   const result = spawnSync(
     process.platform === 'win32' ? 'npx.cmd' : 'npx',
-    ['playwright', 'test', file, '--project=chrome-serial', '--workers=1', '--reporter=blob'],
+    ['playwright', 'test', file, `--project=${serialProject}`, '--workers=1', '--reporter=blob'],
     {
       cwd: projectRoot,
       stdio: 'inherit',
