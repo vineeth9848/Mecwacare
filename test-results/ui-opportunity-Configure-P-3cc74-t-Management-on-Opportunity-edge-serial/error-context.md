@@ -1,0 +1,506 @@
+# Page snapshot
+
+```yaml
+- generic [active]:
+  - generic [ref=e2]:
+    - generic [ref=e3]:
+      - link "Skip to Navigation" [ref=e4] [cursor=pointer]:
+        - /url: javascript:void(0);
+      - link "Skip to Main Content" [ref=e5] [cursor=pointer]:
+        - /url: javascript:void(0);
+      - generic [ref=e8]:
+        - img [ref=e12]
+        - generic [ref=e15]: Microsoft is retiring Exchange Web Services (EWS) for Microsoft Office 365. To avoid service disruption, upgrade your Microsoft connection by August 3, 2026.
+        - link "Upgrade Now." [ref=e16] [cursor=pointer]:
+          - /url: /lightning/setup/ActivitySyncEngineSettingsMain/home
+        - link "Close" [ref=e17] [cursor=pointer]:
+          - /url: javascript:void(0);
+          - generic [ref=e19]:
+            - img [ref=e21]
+            - generic [ref=e24]: Close
+      - generic [ref=e28]:
+        - generic [ref=e32]:
+          - button "Toggle Panel" [ref=e36] [cursor=pointer]:
+            - img [ref=e40]
+            - generic [ref=e43]: Menu
+          - generic [ref=e48]:
+            - img [ref=e52]
+            - generic [ref=e56]: Sandbox (UAT)
+        - button "Show menu" [ref=e65] [cursor=pointer]:
+          - img [ref=e67]
+          - generic [ref=e70]: Show menu
+      - generic [ref=e71]:
+        - button "Search" [ref=e77]:
+          - img [ref=e79]
+          - text: Search...
+        - navigation "Global Header" [ref=e82]:
+          - list [ref=e84]:
+            - listitem [ref=e85]:
+              - group [ref=e86]:
+                - button "Add favorite" [ref=e88] [cursor=pointer]:
+                  - generic [ref=e89]:
+                    - img [ref=e93]
+                    - tooltip "Add favorite"
+                - button "Favorites list" [ref=e97] [cursor=pointer]:
+                  - generic [ref=e98]:
+                    - img [ref=e102]
+                    - tooltip "Favorites list"
+            - listitem [ref=e105]:
+              - button "Global Actions" [ref=e111] [cursor=pointer]:
+                - generic [ref=e112]:
+                  - img [ref=e116]
+                  - tooltip "Global Actions"
+            - listitem [ref=e119]:
+              - button "Guidance Center" [ref=e121] [cursor=pointer]:
+                - generic [ref=e122]:
+                  - img [ref=e126]
+                  - tooltip "Guidance Center"
+            - listitem [ref=e129]:
+              - button "Salesforce Help" [ref=e132] [cursor=pointer]:
+                - generic [ref=e133]:
+                  - img [ref=e137]
+                  - tooltip "Salesforce Help"
+            - listitem [ref=e140]:
+              - button "Setup" [ref=e146] [cursor=pointer]:
+                - generic [ref=e147]:
+                  - img [ref=e151]
+                  - tooltip "Setup"
+            - listitem [ref=e154]:
+              - button "20+ Notifications" [ref=e157] [cursor=pointer]:
+                - generic [ref=e158]:
+                  - generic [ref=e159]:
+                    - img [ref=e163]
+                    - generic [ref=e167]: 20+
+                  - tooltip "Notifications"
+              - generic [ref=e168]: 56 new notifications
+            - listitem [ref=e169]:
+              - button "View profile" [ref=e172] [cursor=pointer]:
+                - generic [ref=e173]:
+                  - tooltip "View profile"
+    - generic [ref=e177]:
+      - generic:
+        - generic [ref=e178]:
+          - generic [ref=e180]:
+            - generic [ref=e181]:
+              - navigation "App" [ref=e182]:
+                - button "App Launcher" [ref=e184] [cursor=pointer]:
+                  - generic [ref=e195]: App Launcher
+              - heading "mCare360" [level=1] [ref=e196]:
+                - generic "mCare360" [ref=e197]
+            - navigation "Global" [ref=e198]:
+              - link "Opportunities" [ref=e200] [cursor=pointer]:
+                - /url: /lightning/o/Opportunity/list?filterName=My_Opportunity
+                - generic [ref=e201]: Opportunities
+              - button "Show Navigation Menu" [ref=e204] [cursor=pointer]:
+                - img [ref=e206]
+                - generic [ref=e209]: Show Navigation Menu
+          - navigation "Workspaces" [ref=e211]:
+            - tablist "Workspace tabs for mCare360" [ref=e212]:
+              - generic [ref=e214]: Press Spacebar to reorder tabs.
+              - tab "Lead tstrt kumar | Lead" [ref=e215] [cursor=pointer]:
+                - generic [ref=e216]:
+                  - generic:
+                    - generic:
+                      - generic:
+                        - generic:
+                          - img
+                        - generic: Lead
+                - generic [ref=e217]: tstrt kumar | Lead
+              - button "Actions" [ref=e220] [cursor=pointer]:
+                - img [ref=e222]
+                - generic [ref=e225]: Actions
+              - button "Close Tab" [ref=e227] [cursor=pointer]:
+                - img [ref=e229]
+                - generic [ref=e232]: Close Tab
+              - status [ref=e233]
+              - tab "Account John Doe17 | Account" [ref=e234] [cursor=pointer]:
+                - generic [ref=e235]:
+                  - generic:
+                    - generic:
+                      - generic:
+                        - generic:
+                          - img
+                        - generic: Account
+                - generic [ref=e236]: John Doe17 | Account
+              - button "Actions" [ref=e239] [cursor=pointer]:
+                - img [ref=e241]
+                - generic [ref=e244]: Actions
+              - button "Close Tab" [ref=e246] [cursor=pointer]:
+                - img [ref=e248]
+                - generic [ref=e251]: Close Tab
+              - status [ref=e252]
+              - tab "Account John Doe310 | Account" [ref=e253] [cursor=pointer]:
+                - generic [ref=e254]:
+                  - generic:
+                    - generic:
+                      - generic:
+                        - generic:
+                          - img
+                        - generic: Account
+                - generic [ref=e255]: John Doe310 | Account
+              - button "Actions" [ref=e258] [cursor=pointer]:
+                - img [ref=e260]
+                - generic [ref=e263]: Actions
+              - button "Close Tab" [ref=e265] [cursor=pointer]:
+                - img [ref=e267]
+                - generic [ref=e270]: Close Tab
+              - status [ref=e271]
+              - tab "Lead John Doe311 | Lead" [ref=e272] [cursor=pointer]:
+                - generic [ref=e273]:
+                  - generic:
+                    - generic:
+                      - generic:
+                        - generic:
+                          - img
+                        - generic: Lead
+                - generic [ref=e274]: John Doe311 | Lead
+              - button "Actions" [ref=e277] [cursor=pointer]:
+                - img [ref=e279]
+                - generic [ref=e282]: Actions
+              - button "Close Tab" [ref=e284] [cursor=pointer]:
+                - img [ref=e286]
+                - generic [ref=e289]: Close Tab
+              - status [ref=e290]
+              - tab "Account John Doe311 | Account" [ref=e291] [cursor=pointer]:
+                - generic [ref=e292]:
+                  - generic:
+                    - generic:
+                      - generic:
+                        - generic:
+                          - img
+                        - generic: Account
+                - generic [ref=e293]: John Doe311 | Account
+              - button "Actions" [ref=e296] [cursor=pointer]:
+                - img [ref=e298]
+                - generic [ref=e301]: Actions
+              - button "Close Tab" [ref=e303] [cursor=pointer]:
+                - img [ref=e305]
+                - generic [ref=e308]: Close Tab
+              - status [ref=e309]
+              - tab "Opportunity John Doe311 - HACC-PYP | Opportunity" [selected] [ref=e310] [cursor=pointer]:
+                - generic "Opportunity" [ref=e311]:
+                  - generic:
+                    - generic "Opportunity":
+                      - generic:
+                        - generic:
+                          - img
+                        - generic: Opportunity
+                - generic [ref=e312]: John Doe311 - HACC-PYP | Opportunity
+              - generic "Actions for John Doe311 - HACC-PYP | Opportunity" [ref=e314] [cursor=pointer]:
+                - button "Actions for John Doe311 - HACC-PYP | Opportunity" [ref=e315]:
+                  - img [ref=e317]
+                  - generic [ref=e320]: Actions for John Doe311 - HACC-PYP | Opportunity
+              - button "Close John Doe311 - HACC-PYP | Opportunity" [ref=e322] [cursor=pointer]:
+                - img [ref=e324]
+                - generic [ref=e327]: Close John Doe311 - HACC-PYP | Opportunity
+              - status [ref=e328] [cursor=pointer]
+        - generic [ref=e330]:
+          - button "Split view mode" [ref=e334] [cursor=pointer]:
+            - img [ref=e336]
+            - generic [ref=e339]: Split view mode
+          - main [ref=e340]:
+            - tabpanel [ref=e341]:
+              - tabpanel [ref=e344]:
+                - generic [ref=e359]:
+                  - generic [ref=e361]:
+                    - generic [ref=e368]:
+                      - generic [ref=e369]:
+                        - heading "Opportunity John Doe311 - HACC-PYP" [level=1] [ref=e376]:
+                          - generic [ref=e378]: Opportunity
+                          - generic [ref=e379]: John Doe311 - HACC-PYP
+                        - button "Follow" [ref=e384] [cursor=pointer]:
+                          - generic [ref=e385]:
+                            - img [ref=e389]
+                            - text: Follow
+                        - generic [ref=e395]:
+                          - generic "Edit" [ref=e396]:
+                            - button "Edit" [ref=e401] [cursor=pointer]
+                          - generic "Link Fund" [ref=e402]:
+                            - button "Link Fund" [ref=e407] [cursor=pointer]
+                      - generic [ref=e408]:
+                        - generic [ref=e410]:
+                          - paragraph [ref=e411]: Account Name
+                          - paragraph [ref=e412]:
+                            - generic [ref=e417]:
+                              - link "John Doe311" [ref=e418] [cursor=pointer]:
+                                - /url: /lightning/r/Account/001AD00000zZfLLYA0/view
+                                - generic [ref=e422]: John Doe311
+                              - button "Open John Doe311 Preview" [ref=e424] [cursor=pointer]:
+                                - img [ref=e426]
+                                - generic [ref=e429]: Open John Doe311 Preview
+                        - generic [ref=e431]:
+                          - paragraph [ref=e432]: Opportunity Record Type
+                          - paragraph [ref=e433]:
+                            - generic [ref=e436]: Home Care
+                        - generic [ref=e438]:
+                          - paragraph [ref=e439]: Funding Type
+                          - paragraph [ref=e440]:
+                            - generic [ref=e441]: HACC-PYP
+                    - article [ref=e447]:
+                      - generic [ref=e448]:
+                        - heading "Path" [level=2] [ref=e449]
+                        - generic [ref=e452]:
+                          - button "Show Key Fields and/or Guidance for Success Details" [ref=e453] [cursor=pointer]:
+                            - generic [ref=e454]: Show Key Fields and/or Guidance for Success Details
+                            - img [ref=e458]
+                          - listbox "Path Options" [ref=e465]:
+                            - option "New" [selected] [ref=e466] [cursor=pointer]:
+                              - generic [ref=e467]: New
+                            - option "In Progress" [ref=e468] [cursor=pointer]:
+                              - generic [ref=e469]: In Progress
+                            - option "Agreement" [ref=e470] [cursor=pointer]:
+                              - generic [ref=e471]: Agreement
+                            - option "Closed" [ref=e472] [cursor=pointer]:
+                              - generic [ref=e473]: Closed
+                  - generic [ref=e474]:
+                    - generic [ref=e480]:
+                      - heading "Tabs" [level=2] [ref=e481]
+                      - generic "Tabs" [ref=e482]:
+                        - generic [ref=e483]:
+                          - heading "Tabs" [level=2] [ref=e484]
+                          - tablist "Tabs" [ref=e486]:
+                            - tab "Details" [ref=e487] [cursor=pointer]
+                            - tab "Related" [selected] [ref=e488] [cursor=pointer]
+                          - tabpanel "Related" [ref=e491]:
+                            - generic [ref=e492]:
+                              - article "Notes" [ref=e501]:
+                                - generic [ref=e502]:
+                                  - heading "Notes (0)" [level=2] [ref=e508]:
+                                    - link "Notes (0)" [ref=e509] [cursor=pointer]:
+                                      - /url: /lightning/r/Opportunity/006AD00000NAgggYAD/related/AttachedContentNotes/view
+                                      - generic "Notes" [ref=e510]
+                                      - generic "(0)" [ref=e511]
+                                  - list [ref=e514]:
+                                    - listitem [ref=e515]:
+                                      - button "New" [ref=e516] [cursor=pointer]:
+                                        - generic "New" [ref=e517]
+                              - article [ref=e522]:
+                                - generic [ref=e525]:
+                                  - generic [ref=e526]:
+                                    - generic [ref=e527]:
+                                      - img [ref=e531]
+                                      - heading "Files (0)" [level=2] [ref=e536]
+                                    - button "Add Files" [ref=e538] [cursor=pointer]
+                                  - paragraph [ref=e540]: No files found
+                              - article "Products" [ref=e549]:
+                                - generic [ref=e550]:
+                                  - heading "Products (0)" [level=2] [ref=e556]:
+                                    - link "Products (0)" [ref=e557] [cursor=pointer]:
+                                      - /url: /lightning/r/Opportunity/006AD00000NAgggYAD/related/OpportunityLineItems/view
+                                      - generic "Products" [ref=e558]
+                                      - generic "(0)" [ref=e559]
+                                  - list [ref=e562]:
+                                    - listitem [ref=e563]:
+                                      - button "Choose Price Book" [ref=e564] [cursor=pointer]:
+                                        - generic "Choose Price Book" [ref=e565]
+                              - article "Contact Roles" [ref=e574]:
+                                - generic [ref=e575]:
+                                  - heading "Contact Roles (1)" [level=2] [ref=e581]:
+                                    - link "Contact Roles (1)" [ref=e582] [cursor=pointer]:
+                                      - /url: /lightning/r/Opportunity/006AD00000NAgggYAD/related/OpportunityContactRoles/view
+                                      - generic "Contact Roles" [ref=e583]
+                                      - generic "(1)" [ref=e584]
+                                  - list [ref=e587]:
+                                    - listitem [ref=e588]:
+                                      - button "Add Contact Roles" [ref=e589] [cursor=pointer]:
+                                        - generic "Add Contact Roles" [ref=e590]
+                                    - listitem [ref=e591]:
+                                      - button "Edit Contact Roles" [ref=e592] [cursor=pointer]:
+                                        - generic "Edit Contact Roles" [ref=e593]
+                                - list [ref=e599]:
+                                  - listitem [ref=e600]:
+                                    - article [ref=e601]:
+                                      - generic [ref=e602]:
+                                        - generic [ref=e603]:
+                                          - heading "John Doe311 John Doe311 primary" [level=3] [ref=e604]:
+                                            - generic [ref=e605]:
+                                              - generic [ref=e607]:
+                                                - img "John Doe311" [ref=e611]
+                                                - link "John Doe311" [ref=e612] [cursor=pointer]:
+                                                  - /url: /lightning/r/003AD00000sjKsOYAU/view
+                                              - generic [ref=e613]: primary
+                                          - button "Show Actions" [ref=e615] [cursor=pointer]:
+                                            - generic [ref=e616]:
+                                              - generic [ref=e617]:
+                                                - img
+                                              - generic [ref=e618]: Show Actions
+                                        - list [ref=e620]:
+                                          - listitem [ref=e621]:
+                                            - link "Role:" [ref=e623]
+                                          - listitem [ref=e624]:
+                                            - link "Title:" [ref=e626]
+                                - link "View All Contact Roles" [ref=e627] [cursor=pointer]:
+                                  - /url: /lightning/r/Opportunity/006AD00000NAgggYAD/related/OpportunityContactRoles/view
+                                  - generic [ref=e629]:
+                                    - text: View All
+                                    - generic [ref=e630]: Contact Roles
+                              - article "Stage History" [ref=e639]:
+                                - heading "Stage History (1)" [level=2] [ref=e646]:
+                                  - link "Stage History (1)" [ref=e647] [cursor=pointer]:
+                                    - /url: /lightning/r/Opportunity/006AD00000NAgggYAD/related/OpportunityHistories/view
+                                    - generic "Stage History" [ref=e648]
+                                    - generic "(1)" [ref=e649]
+                                - table "Stage History" [ref=e658]:
+                                  - rowgroup [ref=e659]:
+                                    - row "Stage Amount Probability (%) Close Date Last Modified By Last Modified" [ref=e660]:
+                                      - columnheader "Stage" [ref=e661]: Stage
+                                      - columnheader "Amount" [ref=e663]: Amount
+                                      - columnheader "Probability (%)" [ref=e665]: Probability (%)
+                                      - columnheader "Close Date" [ref=e667]: Close Date
+                                      - columnheader "Last Modified By" [ref=e669]: Last Modified By
+                                      - columnheader "Last Modified" [ref=e671]: Last Modified
+                                  - rowgroup
+                                  - rowgroup [ref=e673]:
+                                    - row "New $0.00 10% 11/8/2026 Concierge Team 13/4/2026, 3:44 am" [ref=e674]:
+                                      - rowheader "New" [ref=e675]
+                                      - cell "$0.00" [ref=e676]
+                                      - cell "10%" [ref=e677]
+                                      - cell "11/8/2026" [ref=e678]
+                                      - cell "Concierge Team" [ref=e679]
+                                      - cell "13/4/2026, 3:44 am" [ref=e680]
+                                - link "View All Stage History" [ref=e681] [cursor=pointer]:
+                                  - /url: /lightning/r/Opportunity/006AD00000NAgggYAD/related/OpportunityHistories/view
+                                  - generic [ref=e683]:
+                                    - text: View All
+                                    - generic [ref=e684]: Stage History
+                              - article [ref=e691]:
+                                - generic [ref=e692]:
+                                  - img [ref=e694]
+                                  - heading "Opportunity Field History" [level=2] [ref=e695]
+                    - generic [ref=e698]:
+                      - generic [ref=e702]:
+                        - heading "Tabs" [level=2] [ref=e703]
+                        - generic "Tabs" [ref=e704]:
+                          - generic [ref=e705]:
+                            - heading "Tabs" [level=2] [ref=e706]
+                            - tablist "Tabs" [ref=e708]:
+                              - tab "Activity" [selected] [ref=e709] [cursor=pointer]
+                              - tab "Chatter" [ref=e710] [cursor=pointer]
+                            - tabpanel "Activity" [ref=e713]:
+                              - generic [ref=e719]:
+                                - heading "Activity Publisher" [level=2] [ref=e720]
+                                - generic [ref=e721]:
+                                  - group [ref=e722]:
+                                    - generic [ref=e724]:
+                                      - button "New Task" [ref=e725] [cursor=pointer]:
+                                        - generic [ref=e727]:
+                                          - img [ref=e729]
+                                          - generic [ref=e732]: New Task
+                                        - generic: New Task
+                                      - generic [ref=e733]:
+                                        - button "No Additional New Task Actions" [disabled]:
+                                          - generic:
+                                            - img
+                                          - generic: No Additional New Task Actions
+                                  - group [ref=e734]:
+                                    - generic [ref=e736]:
+                                      - button "New Event" [ref=e737] [cursor=pointer]:
+                                        - generic [ref=e739]:
+                                          - img [ref=e741]
+                                          - generic [ref=e744]: New Event
+                                        - generic: New Event
+                                      - button "More New Event Actions" [ref=e746] [cursor=pointer]:
+                                        - img [ref=e748]
+                                        - generic [ref=e751]: More New Event Actions
+                                  - group [ref=e752]:
+                                    - generic [ref=e754]:
+                                      - button "Email" [ref=e755] [cursor=pointer]:
+                                        - generic [ref=e757]:
+                                          - img [ref=e759]
+                                          - generic [ref=e762]: Email
+                                        - generic: Email
+                                      - button "More Email Actions" [ref=e764] [cursor=pointer]:
+                                        - img [ref=e766]
+                                        - generic [ref=e769]: More Email Actions
+                                - heading "Activity Timeline" [level=2] [ref=e770]
+                                - generic [ref=e772]:
+                                  - link "Skip to the bottom of the activity timeline" [ref=e773] [cursor=pointer]:
+                                    - /url: javascript:void(0);
+                                  - generic [ref=e775]:
+                                    - generic [ref=e777]: "Filters: Within 2 months • All activities • All types"
+                                    - button "Timeline Settings" [ref=e778] [cursor=pointer]:
+                                      - img [ref=e780]
+                                      - generic [ref=e783]: Timeline Settings
+                                  - generic [ref=e786]:
+                                    - button "Refresh" [ref=e787] [cursor=pointer]
+                                    - text: •
+                                    - button "Expand All. Show details for activities in the timeline." [ref=e788] [cursor=pointer]: Expand All
+                                    - text: •
+                                    - button "View All" [ref=e789] [cursor=pointer]
+                                  - generic [ref=e791]:
+                                    - heading "Upcoming & Overdue" [level=3] [ref=e792]:
+                                      - button "Upcoming & Overdue" [expanded] [ref=e793] [cursor=pointer]:
+                                        - img [ref=e795]
+                                        - text: Upcoming & Overdue
+                                    - generic [ref=e798]:
+                                      - generic:
+                                        - list
+                                      - generic [ref=e801]:
+                                        - text: No activities to show.
+                                        - text: Get started by sending an email, scheduling a task, and more.
+                                  - generic [ref=e806]:
+                                    - heading "April • 2026 This Month" [level=3] [ref=e807]:
+                                      - button "April • 2026 This Month" [expanded] [ref=e808] [cursor=pointer]:
+                                        - img [ref=e810]
+                                        - generic [ref=e813]: April • 2026
+                                        - generic [ref=e814]: This Month
+                                    - list [ref=e816]:
+                                      - listitem [ref=e817]:
+                                        - generic [ref=e819]:
+                                          - button "Show details for Thank You for Your Enquiry" [ref=e822] [cursor=pointer]:
+                                            - generic "Details for Thank You for Your Enquiry" [ref=e823]:
+                                              - generic [ref=e824]:
+                                                - img [ref=e826]
+                                                - generic [ref=e829]: Details for Thank You for Your Enquiry
+                                          - generic [ref=e830]:
+                                            - img "Email" [ref=e835]
+                                            - generic [ref=e836]:
+                                              - generic [ref=e837]:
+                                                - link "Thank You for Your Enquiry" [ref=e843] [cursor=pointer]:
+                                                  - /url: /lightning/r/02sAD000009Cn6DYAS/view
+                                                - generic [ref=e845]:
+                                                  - generic [ref=e846]: 3:41 AM | Today
+                                                  - button "Show more actions - Thank You for Your Enquiry" [ref=e849] [cursor=pointer]:
+                                                    - generic [ref=e850]:
+                                                      - generic [ref=e851]:
+                                                        - img
+                                                      - generic [ref=e852]: Show more actions - Thank You for Your Enquiry
+                                              - generic [ref=e857]:
+                                                - link "trapti.mathur@mecwacare.org.au" [ref=e858] [cursor=pointer]:
+                                                  - /url: mailto:trapti.mathur@mecwacare.org.au
+                                                - text: sent an email to
+                                                - link "John Doe311" [ref=e860] [cursor=pointer]:
+                                                  - /url: /lightning/r/00QAD00000Op3dx2AB/view
+                                              - generic "Unopened" [ref=e864]:
+                                                - img [ref=e867]
+                                                - text: Unopened
+                                  - status [ref=e869]:
+                                    - generic [ref=e871]:
+                                      - img [ref=e875]
+                                      - generic [ref=e878]: information
+                                    - paragraph [ref=e880]: To change what's shown, try changing your filters.
+                                  - button "Show All Activities" [ref=e882] [cursor=pointer]
+                                  - link "Skip to the top of the activity timeline" [ref=e883] [cursor=pointer]:
+                                    - /url: javascript:void(0);
+                      - article [ref=e890]:
+                        - generic:
+                          - generic:
+                            - generic:
+                              - heading [level=2]
+                        - generic [ref=e891]:
+                          - generic [ref=e893]:
+                            - img [ref=e895]
+                            - heading "Docusign Envelope Status" [level=2] [ref=e897]
+                          - generic [ref=e899]:
+                            - img [ref=e901]
+                            - generic [ref=e902]: Send an envelope to view its status
+    - generic:
+      - contentinfo "Utility Bar":
+        - list [ref=e906]:
+          - listitem [ref=e907]:
+            - button "Omni-Channel" [ref=e910] [cursor=pointer]:
+              - img [ref=e914]
+              - generic [ref=e918]: Omni-Channel
+  - generic:
+    - status
+```

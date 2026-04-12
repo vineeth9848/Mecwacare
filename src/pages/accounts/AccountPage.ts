@@ -900,7 +900,6 @@ try {
     throw new Error(`Save MDS fields verification failed. UI Error: ${errorText}`);
 }
 
-await this.page.waitForTimeout(20000);
 
     Logger.pass('Account details saved');
   }

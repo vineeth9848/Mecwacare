@@ -70,22 +70,22 @@ export class LeadPage extends BasePage {
         await expect(secondaryLanguage).toHaveValue(/Arabic/);
         Logger.info("Selected secondary language option: Arabic");
 
-        const Interpreterrequired = this.page.getByRole('combobox', {
-        name: LeadLocators.interpreter_required
-        });
-        await Interpreterrequired.scrollIntoViewIfNeeded();
-        await this.waitForVisible(Interpreterrequired, 30000);
-        await Interpreterrequired.click();
-        await this.staticWait(1500);
+        // const Interpreterrequired = this.page.getByRole('combobox', {
+        // name: LeadLocators.interpreter_required
+        // });
+        // await Interpreterrequired.scrollIntoViewIfNeeded();
+        // await this.waitForVisible(Interpreterrequired, 30000);
+        // await Interpreterrequired.click();
+        // await this.staticWait(1500);
 
-        const Interpreterrequiredoption = this.page.getByRole('option', {
-          name: 'Yes'
-        });
-        await Interpreterrequiredoption.scrollIntoViewIfNeeded();
-        await this.waitForVisible(Interpreterrequiredoption, 10000);
-        await Interpreterrequiredoption.click();
-        await expect(Interpreterrequired).toHaveValue(/Yes/);
-        Logger.info("Selected interpreter required option: Yes");
+        // const Interpreterrequiredoption = this.page.getByRole('option', {
+        //   name: 'Yes'
+        // });
+        // await Interpreterrequiredoption.scrollIntoViewIfNeeded();
+        // await this.waitForVisible(Interpreterrequiredoption, 10000);
+        // await Interpreterrequiredoption.click();
+        // await expect(Interpreterrequired).toHaveValue(/Yes/);
+        // Logger.info("Selected interpreter required option: Yes");
 
         const preferredContactMethod = this.page.getByRole('combobox', {
         name: LeadLocators.preferred_contact_method

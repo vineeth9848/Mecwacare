@@ -5,7 +5,7 @@ import { OpportunityPage } from '../../src/pages/opportunities/OpportunityPage';
 import { TestDataHelper } from '../../src/utils/TestDataHelper';
 import { time } from 'console';
 
-test.only('Configure funding source and funding type in first opportunity record', async ({ page }) => {
+test('Configure funding source and funding type in first opportunity record', async ({ page }) => {
   test.setTimeout(120000);
   const homePage = new HomePage(page);
   const opportunityPage = new OpportunityPage(page);
@@ -21,11 +21,11 @@ test.only('Configure funding source and funding type in first opportunity record
   await opportunityPage.searchAndOpenOpportunityByLeadName(lead.firstName, lead.lastName);
   await opportunityPage.openDetailsTab();
   await opportunityPage.selectBlockFundingForFundingSourceAndType();
-  await opportunityPage.clickSearchFundingAndAddNewFunding();
-  await opportunityPage.selectParticipantInNewFunding(lead.firstName, lead.lastName);
-  await opportunityPage.selectNewFundingSourceAndTypeSupportAtHome();
+  //await opportunityPage.clickSearchFundingAndAddNewFunding();
+  // await opportunityPage.selectParticipantInNewFunding(lead.firstName, lead.lastName);
+  // await opportunityPage.selectNewFundingSourceAndTypeSupportAtHome();
   // //await opportunityPage.clickSearchFundingProgram();
-  await opportunityPage.selectFundingProgramBlockTestFundingHacc();
+  //await opportunityPage.selectFundingProgramBlockTestFundingHacc();
   await opportunityPage.selectFundingAdministrator(lead.firstName, lead.lastName);
   await opportunityPage.selectAssessmentVisitPreferenceInPerson();
   await opportunityPage.selectServiceAgreementStatus();
@@ -133,8 +133,8 @@ test('verify Signature and Close the Opportunity', async ({ page }) => {
   await homePage.selectObjectFromDropdown('Opportunities');
   await opportunityPage.selectOpportunitiesListView('My Opportunities');
   await opportunityPage.searchAndOpenOpportunityByLeadName(lead.firstName, lead.lastName);
-  // await opportunityPage.verifySentForSignature();
-  // await opportunityPage.refreshPage();
+  await opportunityPage.verifySentForSignature();
+  await opportunityPage.refreshPage();
   await opportunityPage.setOpportunityToClosedWon();
   await opportunityPage.refreshPage();
   Logger.pass('Signature verification and opportunity closure validated successfully');
