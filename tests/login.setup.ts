@@ -3,6 +3,7 @@ import { existsSync } from 'fs';
 import globalSetup from '../global-setup';
 
 test.describe.configure({ mode: 'serial' });
+test.use({ storageState: undefined });
 
 test('generate auth storage state', async () => {
   await globalSetup();
