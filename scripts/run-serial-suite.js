@@ -39,6 +39,10 @@ function resolveSerialProject() {
 
 const serialProject = resolveSerialProject();
 
+// console.log(`Using serial project: ${serialProject}`);
+// console.log(`Project root: ${projectRoot}`);
+// console.log(`Files to run: ${filesToRun.join(', ')}`);
+
 fs.rmSync(aggregateBlobDir, { recursive: true, force: true });
 fs.mkdirSync(aggregateBlobDir, { recursive: true });
 
@@ -48,15 +52,23 @@ for (const [index, file] of filesToRun.entries()) {
   console.log(`\n=== Running ${file} (${index + 1}/${filesToRun.length}) ===`);
   fs.rmSync(tempBlobDir, { recursive: true, force: true });
 
+  //console.log(`Command: npx playwright test ${file} --project=${serialProject} --workers=1 --reporter=blob`);
+
   const result = spawnSync(
+    
     process.platform === 'win32' ? 'npx.cmd' : 'npx',
-    ['playwright', 'test', file, `--project=${serialProject}`, '--workers=1', '--reporter=line'],
+    ['playwright', 'test', file, `--project=${serialProject}`, '--workers=1', '--reporter=blob'],
     {
       cwd: projectRoot,
       stdio: 'inherit',
       env: { ...process.env },
+      shell: true,
     },
   );
+
+  // console.log(`Exit code for ${file}: ${result.status}`);
+  // console.log(`Signal for ${file}: ${result.signal}`);
+  // console.log(`Error for ${file}:`, result.error);
 
   const blobFiles = fs.existsSync(tempBlobDir)
     ? fs.readdirSync(tempBlobDir).filter(name => name.endsWith('.zip'))
