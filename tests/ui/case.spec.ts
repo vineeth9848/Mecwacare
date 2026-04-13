@@ -5,7 +5,7 @@ import { TestDataHelper } from '../../src/utils/TestDataHelper';
 import { CasePage } from '../../src/pages/cases/CasePage';
 
 
-test.only('create case from case page', async ({ page }) => {
+test('create case from case page', async ({ page }) => {
   test.setTimeout(180000);
   const homePage = new HomePage(page);
   const casePage = new CasePage(page);
