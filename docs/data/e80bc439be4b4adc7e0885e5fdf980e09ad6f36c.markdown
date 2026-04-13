@@ -1,0 +1,706 @@
+# Page snapshot
+
+```yaml
+- generic [active]:
+  - generic [ref=e2]:
+    - generic [ref=e3]:
+      - link "Skip to Navigation" [ref=e4] [cursor=pointer]:
+        - /url: javascript:void(0);
+      - link "Skip to Main Content" [ref=e5] [cursor=pointer]:
+        - /url: javascript:void(0);
+      - generic [ref=e8]:
+        - img [ref=e12]
+        - generic [ref=e15]: Microsoft is retiring Exchange Web Services (EWS) for Microsoft Office 365. To avoid service disruption, upgrade your Microsoft connection by August 3, 2026.
+        - link "Upgrade Now." [ref=e16] [cursor=pointer]:
+          - /url: /lightning/setup/ActivitySyncEngineSettingsMain/home
+        - link "Close" [ref=e17] [cursor=pointer]:
+          - /url: javascript:void(0);
+          - generic [ref=e19]:
+            - img [ref=e21]
+            - generic [ref=e24]: Close
+      - generic [ref=e28]:
+        - generic [ref=e32]:
+          - button "Toggle Panel" [ref=e36] [cursor=pointer]:
+            - img [ref=e40]
+            - generic [ref=e43]: Menu
+          - generic [ref=e48]:
+            - img [ref=e52]
+            - generic [ref=e56]: Sandbox (UAT)
+        - button "Show menu" [ref=e65] [cursor=pointer]:
+          - img [ref=e67]
+          - generic [ref=e70]: Show menu
+      - generic [ref=e71]:
+        - button "Search" [ref=e77]:
+          - img [ref=e79]
+          - text: Search...
+        - navigation "Global Header" [ref=e82]:
+          - list [ref=e84]:
+            - listitem [ref=e85]:
+              - group [ref=e86]:
+                - button "Remove favorite" [pressed] [ref=e88] [cursor=pointer]:
+                  - generic [ref=e89]:
+                    - img [ref=e93]
+                    - tooltip "Remove favorite"
+                - button "Favorites list" [ref=e97] [cursor=pointer]:
+                  - generic [ref=e98]:
+                    - img [ref=e102]
+                    - tooltip "Favorites list"
+            - listitem [ref=e105]:
+              - button "Global Actions" [ref=e111] [cursor=pointer]:
+                - generic [ref=e112]:
+                  - img [ref=e116]
+                  - tooltip "Global Actions"
+            - listitem [ref=e119]:
+              - button "Guidance Center" [ref=e121] [cursor=pointer]:
+                - generic [ref=e122]:
+                  - img [ref=e126]
+                  - tooltip "Guidance Center"
+            - listitem [ref=e129]:
+              - button "Salesforce Help" [ref=e132] [cursor=pointer]:
+                - generic [ref=e133]:
+                  - img [ref=e137]
+                  - tooltip "Salesforce Help"
+            - listitem [ref=e140]:
+              - button "Setup" [ref=e146] [cursor=pointer]:
+                - generic [ref=e147]:
+                  - img [ref=e151]
+                  - tooltip "Setup"
+            - listitem [ref=e154]:
+              - button "20+ Notifications" [ref=e157] [cursor=pointer]:
+                - generic [ref=e158]:
+                  - generic [ref=e159]:
+                    - img [ref=e163]
+                    - generic [ref=e167]: 20+
+                  - tooltip "Notifications"
+              - generic [ref=e168]: 70 new notifications
+            - listitem [ref=e169]:
+              - button "View profile" [ref=e172] [cursor=pointer]:
+                - generic [ref=e173]:
+                  - tooltip "View profile"
+    - generic [ref=e177]:
+      - generic:
+        - generic [ref=e178]:
+          - generic [ref=e180]:
+            - generic [ref=e181]:
+              - navigation "App" [ref=e182]:
+                - button "App Launcher" [ref=e184] [cursor=pointer]:
+                  - generic [ref=e195]: App Launcher
+              - heading "mCare360" [level=1] [ref=e196]:
+                - generic "mCare360" [ref=e197]
+            - navigation "Global" [ref=e198]:
+              - link "Accounts" [ref=e200] [cursor=pointer]:
+                - /url: /lightning/o/Account/list?filterName=__Recent
+                - generic [ref=e201]: Accounts
+              - button "Show Navigation Menu" [ref=e204] [cursor=pointer]:
+                - img [ref=e206]
+                - generic [ref=e209]: Show Navigation Menu
+          - navigation "Workspaces" [ref=e211]:
+            - tablist [ref=e212]:
+              - generic [ref=e214]: Press Spacebar to reorder tabs.
+              - tab [ref=e215] [cursor=pointer]:
+                - generic [ref=e216]:
+                  - generic:
+                    - generic:
+                      - generic:
+                        - generic:
+                          - img
+                        - generic: Account
+                - generic [ref=e217]: shalini 1 | Account
+              - button [ref=e220] [cursor=pointer]:
+                - img [ref=e222]
+                - generic [ref=e225]: Actions
+              - button [ref=e227] [cursor=pointer]:
+                - img [ref=e229]
+                - generic [ref=e232]: Close Tab
+              - status [ref=e233]
+              - tab [ref=e234] [cursor=pointer]:
+                - generic [ref=e235]:
+                  - generic:
+                    - generic:
+                      - generic:
+                        - generic:
+                          - img
+                        - generic: All OmniScripts
+                - generic [ref=e236]: All OmniScripts
+              - button [ref=e239] [cursor=pointer]:
+                - img [ref=e241]
+                - generic [ref=e244]: Actions
+              - button [ref=e246] [cursor=pointer]:
+                - img [ref=e248]
+                - generic [ref=e251]: Close Tab
+              - status [ref=e252]
+              - tab [ref=e253] [cursor=pointer]:
+                - generic [ref=e254]:
+                  - generic:
+                    - generic:
+                      - generic:
+                        - generic:
+                          - img
+                        - generic: OT Initial Assessment Form c
+                - generic [ref=e255]: OTIA-00003 | AssessmentsOT
+              - button [ref=e258] [cursor=pointer]:
+                - img [ref=e260]
+                - generic [ref=e263]: Actions
+              - button [ref=e265] [cursor=pointer]:
+                - img [ref=e267]
+                - generic [ref=e270]: Close Tab
+              - status [ref=e271]
+              - tab [ref=e272] [cursor=pointer]:
+                - generic [ref=e273]:
+                  - generic:
+                    - generic:
+                      - generic:
+                        - generic:
+                          - img
+                        - generic: Account
+                - generic [ref=e274]: (Effi) Effether | Account
+              - button [ref=e277] [cursor=pointer]:
+                - img [ref=e279]
+                - generic [ref=e282]: Actions
+              - button [ref=e284] [cursor=pointer]:
+                - img [ref=e286]
+                - generic [ref=e289]: Close Tab
+              - status [ref=e290]
+              - tab [ref=e291] [cursor=pointer]:
+                - generic [ref=e292]:
+                  - generic:
+                    - generic:
+                      - generic:
+                        - generic:
+                          - img
+                        - generic: Opportunity
+                - generic [ref=e293]: John Doe321 - HACC-PYP | Opportunity
+              - button [ref=e296] [cursor=pointer]:
+                - img [ref=e298]
+                - generic [ref=e301]: Actions
+              - button [ref=e303] [cursor=pointer]:
+                - img [ref=e305]
+                - generic [ref=e308]: Close Tab
+              - status [ref=e309]
+              - button [ref=e314] [cursor=pointer]:
+                - generic [ref=e315]: More
+                - generic [ref=e317]:
+                  - img [ref=e319]
+                  - generic [ref=e322]: Show additional tabs
+        - main [ref=e325]:
+          - generic [ref=e335]:
+            - generic [ref=e337]:
+              - generic [ref=e338]:
+                - generic [ref=e340]:
+                  - img [ref=e344]
+                  - generic [ref=e345]:
+                    - heading "Accounts" [level=1] [ref=e349]
+                    - generic [ref=e350]:
+                      - generic [ref=e352] [cursor=pointer]:
+                        - heading "Accounts Recently Viewed" [level=1] [ref=e353]:
+                          - generic [ref=e354]: Accounts
+                          - generic [ref=e355]: Recently Viewed
+                        - 'button "Select a List View: Accounts" [ref=e358]':
+                          - img [ref=e360]
+                          - generic [ref=e363]: "Select a List View: Accounts"
+                      - button "This list is pinned." [disabled] [ref=e367] [cursor=pointer]:
+                        - img [ref=e369]
+                        - generic [ref=e372]: This list is pinned.
+                - list [ref=e375]:
+                  - listitem [ref=e376]:
+                    - button "New" [ref=e377] [cursor=pointer]:
+                      - generic "New" [ref=e378]
+                  - listitem [ref=e379]:
+                    - button "Discover Companies" [ref=e380] [cursor=pointer]:
+                      - generic "Discover Companies" [ref=e381]
+                  - listitem [ref=e382]:
+                    - button "New Group" [ref=e383] [cursor=pointer]:
+                      - generic "New Group" [ref=e384]
+                  - listitem [ref=e385]:
+                    - button "Intelligence View" [ref=e386] [cursor=pointer]:
+                      - generic "Intelligence View" [ref=e387]
+              - generic [ref=e388]:
+                - paragraph [ref=e390]:
+                  - generic [ref=e392]:
+                    - status "Recently Viewed" [ref=e393]: 50+ items •
+                    - text: Updated a few seconds ago
+                - generic [ref=e399]:
+                  - generic [ref=e400]: Search this list...
+                  - generic [ref=e401]:
+                    - searchbox "Search this list..." [ref=e402]
+                    - img [ref=e403]
+                - generic [ref=e406]:
+                  - button "List View Controls" [ref=e410] [cursor=pointer]:
+                    - img [ref=e412]
+                    - img [ref=e416]
+                    - generic [ref=e419]: List View Controls
+                  - button "Select list display" [ref=e422] [cursor=pointer]:
+                    - img [ref=e424]
+                    - img [ref=e428]
+                    - generic [ref=e431]: Select list display
+                  - generic [ref=e433]:
+                    - button "Refresh" [ref=e436] [cursor=pointer]:
+                      - img [ref=e438]
+                      - generic [ref=e441]: Refresh
+                    - button "Column sort" [ref=e444] [cursor=pointer]:
+                      - img [ref=e446]
+                      - generic [ref=e449]: Column sort
+                    - button "Inline Edit is disabled. To edit, filter by one record type." [ref=e452] [cursor=pointer]:
+                      - img [ref=e454]
+                      - generic [ref=e457]: Inline Edit is disabled. To edit, filter by one record type.
+                    - group [ref=e458]:
+                      - generic [ref=e460]:
+                        - generic:
+                          - generic:
+                            - button "Charts" [disabled]:
+                              - generic:
+                                - img
+                              - generic: Charts
+                        - generic:
+                          - generic:
+                            - button "Filters" [disabled]:
+                              - generic:
+                                - img
+                              - generic: Filters
+            - generic [ref=e467]:
+              - generic [ref=e468]: Navigation Mode
+              - grid [ref=e472]:
+                - rowgroup:
+                  - row "Row Number Account Name mecwacare Client ID Email Phone Service Delivery Street Address Service Delivery City Service Delivery State Service Delivery Post Code Action":
+                    - columnheader "Row Number":
+                      - generic [ref=e475]:
+                        - generic "Row Number"
+                    - columnheader "Account Name":
+                      - generic [ref=e477]:
+                        - 'button "Sort by: Account Name" [ref=e478] [cursor=pointer]':
+                          - generic [ref=e479]: "Sort by:"
+                          - generic "Account Name" [ref=e480]
+                        - generic [ref=e481]: "Sorted: None"
+                        - button "Show Account Name column actions" [ref=e483] [cursor=pointer]:
+                          - img [ref=e485]
+                          - generic [ref=e488]: Show Account Name column actions
+                        - slider "Account Name column width" [ref=e489]: "156"
+                    - columnheader "mecwacare Client ID":
+                      - generic [ref=e493]:
+                        - 'button "Sort by: mecwacare Client ID" [ref=e494] [cursor=pointer]':
+                          - generic [ref=e495]: "Sort by:"
+                          - generic "mecwacare Client ID" [ref=e496]
+                        - generic [ref=e497]: "Sorted: None"
+                        - button "Show mecwacare Client ID column actions" [ref=e499] [cursor=pointer]:
+                          - img [ref=e501]
+                          - generic [ref=e504]: Show mecwacare Client ID column actions
+                        - slider "mecwacare Client ID column width" [ref=e505]: "97"
+                    - columnheader "Email":
+                      - generic [ref=e509]:
+                        - 'button "Sort by: Email" [ref=e510] [cursor=pointer]':
+                          - generic [ref=e511]: "Sort by:"
+                          - generic "Email" [ref=e512]
+                        - generic [ref=e513]: "Sorted: None"
+                        - button "Show Email column actions" [ref=e515] [cursor=pointer]:
+                          - img [ref=e517]
+                          - generic [ref=e520]: Show Email column actions
+                        - slider "Email column width" [ref=e521]: "292"
+                    - columnheader "Phone":
+                      - generic [ref=e526]:
+                        - generic "Phone" [ref=e527]
+                        - button "Show Phone column actions" [ref=e529] [cursor=pointer]:
+                          - img [ref=e531]
+                          - generic [ref=e534]: Show Phone column actions
+                        - slider "Phone column width" [ref=e535]: "144"
+                    - columnheader "Service Delivery Street Address":
+                      - generic [ref=e539]:
+                        - 'button "Sort by: Service Delivery Street Address" [ref=e540] [cursor=pointer]':
+                          - generic [ref=e541]: "Sort by:"
+                          - generic "Service Delivery Street Address" [ref=e542]
+                        - generic [ref=e543]: "Sorted: None"
+                        - button "Show Service Delivery Street Address column actions" [ref=e545] [cursor=pointer]:
+                          - img [ref=e547]
+                          - generic [ref=e550]: Show Service Delivery Street Address column actions
+                        - slider "Service Delivery Street Address column width" [ref=e551]: "137"
+                    - columnheader "Service Delivery City":
+                      - generic [ref=e555]:
+                        - 'button "Sort by: Service Delivery City" [ref=e556] [cursor=pointer]':
+                          - generic [ref=e557]: "Sort by:"
+                          - generic "Service Delivery City" [ref=e558]
+                        - generic [ref=e559]: "Sorted: None"
+                        - button "Show Service Delivery City column actions" [ref=e561] [cursor=pointer]:
+                          - img [ref=e563]
+                          - generic [ref=e566]: Show Service Delivery City column actions
+                        - slider "Service Delivery City column width" [ref=e567]: "128"
+                    - columnheader "Service Delivery State":
+                      - generic [ref=e571]:
+                        - 'button "Sort by: Service Delivery State" [ref=e572] [cursor=pointer]':
+                          - generic [ref=e573]: "Sort by:"
+                          - generic "Service Delivery State" [ref=e574]
+                        - generic [ref=e575]: "Sorted: None"
+                        - button "Show Service Delivery State column actions" [ref=e577] [cursor=pointer]:
+                          - img [ref=e579]
+                          - generic [ref=e582]: Show Service Delivery State column actions
+                        - slider "Service Delivery State column width" [ref=e583]: "141"
+                    - columnheader "Service Delivery Post Code":
+                      - generic [ref=e587]:
+                        - 'button "Sort by: Service Delivery Post Code" [ref=e588] [cursor=pointer]':
+                          - generic [ref=e589]: "Sort by:"
+                          - generic "Service Delivery Post Code" [ref=e590]
+                        - generic [ref=e591]: "Sorted: None"
+                        - button "Show Service Delivery Post Code column actions" [ref=e593] [cursor=pointer]:
+                          - img [ref=e595]
+                          - generic [ref=e598]: Show Service Delivery Post Code column actions
+                        - slider "Service Delivery Post Code column width" [ref=e599]: "74"
+                    - columnheader "Action":
+                      - generic [ref=e604]:
+                        - generic "Action"
+                - rowgroup [ref=e605]:
+                  - row "John Doe504 139242 john.doe504@example.com 1234567890 80 Alma Rd CLAYFIELD Queensland 4011 Show Actions" [ref=e606]:
+                    - gridcell [ref=e607]
+                    - rowheader "John Doe504" [ref=e611]:
+                      - link "John Doe504" [ref=e618] [cursor=pointer]:
+                        - /url: /lightning/r/001AD00000zprDdYAI/view
+                        - generic [ref=e619]: John Doe504
+                    - gridcell "139242" [ref=e620]:
+                      - generic [ref=e624]: "139242"
+                    - gridcell "john.doe504@example.com" [ref=e625]:
+                      - link "john.doe504@example.com" [ref=e631] [cursor=pointer]:
+                        - /url: mailto:john.doe504@example.com
+                    - gridcell "1234567890" [ref=e632]:
+                      - link "1234567890" [ref=e637] [cursor=pointer]:
+                        - /url: tel:1234567890
+                    - gridcell "80 Alma Rd" [ref=e638]:
+                      - generic [ref=e641]: 80 Alma Rd
+                    - gridcell "CLAYFIELD" [ref=e642]:
+                      - generic [ref=e646]: CLAYFIELD
+                    - gridcell "Queensland" [ref=e647]:
+                      - generic [ref=e651]: Queensland
+                    - gridcell "4011" [ref=e652]:
+                      - generic [ref=e656]: "4011"
+                    - gridcell "Show Actions" [ref=e657]:
+                      - button "Show Actions" [ref=e663] [cursor=pointer]:
+                        - img [ref=e665]
+                        - generic [ref=e668]: Show Actions
+                  - row "John Doe503 139241 john.doe503@example.com 1234567890 80 Alma Rd CLAYFIELD Queensland 4011 Show Actions" [ref=e669]:
+                    - gridcell [ref=e670]
+                    - rowheader "John Doe503" [ref=e674]:
+                      - link "John Doe503" [ref=e681] [cursor=pointer]:
+                        - /url: /lightning/r/001AD00000zpaXuYAI/view
+                        - generic [ref=e682]: John Doe503
+                    - gridcell "139241" [ref=e683]:
+                      - generic [ref=e687]: "139241"
+                    - gridcell "john.doe503@example.com" [ref=e688]:
+                      - link "john.doe503@example.com" [ref=e694] [cursor=pointer]:
+                        - /url: mailto:john.doe503@example.com
+                    - gridcell "1234567890" [ref=e695]:
+                      - link "1234567890" [ref=e700] [cursor=pointer]:
+                        - /url: tel:1234567890
+                    - gridcell "80 Alma Rd" [ref=e701]:
+                      - generic [ref=e704]: 80 Alma Rd
+                    - gridcell "CLAYFIELD" [ref=e705]:
+                      - generic [ref=e709]: CLAYFIELD
+                    - gridcell "Queensland" [ref=e710]:
+                      - generic [ref=e714]: Queensland
+                    - gridcell "4011" [ref=e715]:
+                      - generic [ref=e719]: "4011"
+                    - gridcell "Show Actions" [ref=e720]:
+                      - button "Show Actions" [ref=e726] [cursor=pointer]:
+                        - img [ref=e728]
+                        - generic [ref=e731]: Show Actions
+                  - row "John Doe502 139240 john.doe502@example.com 1234567890 80 Alma Rd CLAYFIELD Queensland 4011 Show Actions" [ref=e732]:
+                    - gridcell [ref=e733]
+                    - rowheader "John Doe502" [ref=e737]:
+                      - link "John Doe502" [ref=e744] [cursor=pointer]:
+                        - /url: /lightning/r/001AD00000zpf1UYAQ/view
+                        - generic [ref=e745]: John Doe502
+                    - gridcell "139240" [ref=e746]:
+                      - generic [ref=e750]: "139240"
+                    - gridcell "john.doe502@example.com" [ref=e751]:
+                      - link "john.doe502@example.com" [ref=e757] [cursor=pointer]:
+                        - /url: mailto:john.doe502@example.com
+                    - gridcell "1234567890" [ref=e758]:
+                      - link "1234567890" [ref=e763] [cursor=pointer]:
+                        - /url: tel:1234567890
+                    - gridcell "80 Alma Rd" [ref=e764]:
+                      - generic [ref=e767]: 80 Alma Rd
+                    - gridcell "CLAYFIELD" [ref=e768]:
+                      - generic [ref=e772]: CLAYFIELD
+                    - gridcell "Queensland" [ref=e773]:
+                      - generic [ref=e777]: Queensland
+                    - gridcell "4011" [ref=e778]:
+                      - generic [ref=e782]: "4011"
+                    - gridcell "Show Actions" [ref=e783]:
+                      - button "Show Actions" [ref=e789] [cursor=pointer]:
+                        - img [ref=e791]
+                        - generic [ref=e794]: Show Actions
+                  - row "John Doe501 139239 john.doe501@example.com 1234567890 80 Alma Rd CLAYFIELD Queensland 4011 Show Actions" [ref=e795]:
+                    - gridcell [ref=e796]
+                    - rowheader "John Doe501" [ref=e800]:
+                      - link "John Doe501" [ref=e807] [cursor=pointer]:
+                        - /url: /lightning/r/001AD00000zpU4pYAE/view
+                        - generic [ref=e808]: John Doe501
+                    - gridcell "139239" [ref=e809]:
+                      - generic [ref=e813]: "139239"
+                    - gridcell "john.doe501@example.com" [ref=e814]:
+                      - link "john.doe501@example.com" [ref=e820] [cursor=pointer]:
+                        - /url: mailto:john.doe501@example.com
+                    - gridcell "1234567890" [ref=e821]:
+                      - link "1234567890" [ref=e826] [cursor=pointer]:
+                        - /url: tel:1234567890
+                    - gridcell "80 Alma Rd" [ref=e827]:
+                      - generic [ref=e830]: 80 Alma Rd
+                    - gridcell "CLAYFIELD" [ref=e831]:
+                      - generic [ref=e835]: CLAYFIELD
+                    - gridcell "Queensland" [ref=e836]:
+                      - generic [ref=e840]: Queensland
+                    - gridcell "4011" [ref=e841]:
+                      - generic [ref=e845]: "4011"
+                    - gridcell "Show Actions" [ref=e846]:
+                      - button "Show Actions" [ref=e852] [cursor=pointer]:
+                        - img [ref=e854]
+                        - generic [ref=e857]: Show Actions
+                  - row "John Doe324 139237 john.doe324@example.com 1234567890 46 Epworth St OCEAN GROVE Victoria 3226 Show Actions" [ref=e858]:
+                    - gridcell [ref=e859]
+                    - rowheader "John Doe324" [ref=e863]:
+                      - link "John Doe324" [ref=e870] [cursor=pointer]:
+                        - /url: /lightning/r/001AD00000zpgjgYAA/view
+                        - generic [ref=e871]: John Doe324
+                    - gridcell "139237" [ref=e872]:
+                      - generic [ref=e876]: "139237"
+                    - gridcell "john.doe324@example.com" [ref=e877]:
+                      - link "john.doe324@example.com" [ref=e883] [cursor=pointer]:
+                        - /url: mailto:john.doe324@example.com
+                    - gridcell "1234567890" [ref=e884]:
+                      - link "1234567890" [ref=e889] [cursor=pointer]:
+                        - /url: tel:1234567890
+                    - gridcell "46 Epworth St" [ref=e890]:
+                      - generic [ref=e893]: 46 Epworth St
+                    - gridcell "OCEAN GROVE" [ref=e894]:
+                      - generic [ref=e898]: OCEAN GROVE
+                    - gridcell "Victoria" [ref=e899]:
+                      - generic [ref=e903]: Victoria
+                    - gridcell "3226" [ref=e904]:
+                      - generic [ref=e908]: "3226"
+                    - gridcell "Show Actions" [ref=e909]:
+                      - button "Show Actions" [ref=e915] [cursor=pointer]:
+                        - img [ref=e917]
+                        - generic [ref=e920]: Show Actions
+                  - row "John Doe324 139238 Show Actions" [ref=e921]:
+                    - gridcell [ref=e922]
+                    - rowheader "John Doe324" [ref=e926]:
+                      - link "John Doe324" [ref=e933] [cursor=pointer]:
+                        - /url: /lightning/r/001AD00000zpV8PYAU/view
+                        - generic [ref=e934]: John Doe324
+                    - gridcell "139238" [ref=e935]:
+                      - generic [ref=e939]: "139238"
+                    - gridcell [ref=e940]
+                    - gridcell [ref=e941]
+                    - gridcell [ref=e942]
+                    - gridcell [ref=e943]
+                    - gridcell [ref=e944]
+                    - gridcell [ref=e945]
+                    - gridcell "Show Actions" [ref=e946]:
+                      - button "Show Actions" [ref=e952] [cursor=pointer]:
+                        - img [ref=e954]
+                        - generic [ref=e957]: Show Actions
+                  - row "John Doe321 139235 john.doe321@example.com 1234567890 46 Epworth St OCEAN GROVE Victoria 3226 Show Actions" [ref=e958]:
+                    - gridcell [ref=e959]
+                    - rowheader "John Doe321" [ref=e963]:
+                      - link "John Doe321" [ref=e970] [cursor=pointer]:
+                        - /url: /lightning/r/001AD00000zpUnNYAU/view
+                        - generic [ref=e971]: John Doe321
+                    - gridcell "139235" [ref=e972]:
+                      - generic [ref=e976]: "139235"
+                    - gridcell "john.doe321@example.com" [ref=e977]:
+                      - link "john.doe321@example.com" [ref=e983] [cursor=pointer]:
+                        - /url: mailto:john.doe321@example.com
+                    - gridcell "1234567890" [ref=e984]:
+                      - link "1234567890" [ref=e989] [cursor=pointer]:
+                        - /url: tel:1234567890
+                    - gridcell "46 Epworth St" [ref=e990]:
+                      - generic [ref=e993]: 46 Epworth St
+                    - gridcell "OCEAN GROVE" [ref=e994]:
+                      - generic [ref=e998]: OCEAN GROVE
+                    - gridcell "Victoria" [ref=e999]:
+                      - generic [ref=e1003]: Victoria
+                    - gridcell "3226" [ref=e1004]:
+                      - generic [ref=e1008]: "3226"
+                    - gridcell "Show Actions" [ref=e1009]:
+                      - button "Show Actions" [ref=e1015] [cursor=pointer]:
+                        - img [ref=e1017]
+                        - generic [ref=e1020]: Show Actions
+                  - row "John Doe321 139236 Show Actions" [ref=e1021]:
+                    - gridcell [ref=e1022]
+                    - rowheader "John Doe321" [ref=e1026]:
+                      - link "John Doe321" [ref=e1033] [cursor=pointer]:
+                        - /url: /lightning/r/001AD00000zpXuwYAE/view
+                        - generic [ref=e1034]: John Doe321
+                    - gridcell "139236" [ref=e1035]:
+                      - generic [ref=e1039]: "139236"
+                    - gridcell [ref=e1040]
+                    - gridcell [ref=e1041]
+                    - gridcell [ref=e1042]
+                    - gridcell [ref=e1043]
+                    - gridcell [ref=e1044]
+                    - gridcell [ref=e1045]
+                    - gridcell "Show Actions" [ref=e1046]:
+                      - button "Show Actions" [ref=e1052] [cursor=pointer]:
+                        - img [ref=e1054]
+                        - generic [ref=e1057]: Show Actions
+                  - row "Test RL Lead 56 139232 yi@gmail.com 6655555555 80 Almond St BALWYN NORTH Victoria 3104 Show Actions" [ref=e1058]:
+                    - gridcell [ref=e1059]
+                    - rowheader "Test RL Lead 56" [ref=e1063]:
+                      - link "Test RL Lead 56" [ref=e1070] [cursor=pointer]:
+                        - /url: /lightning/r/001AD00000zpK6QYAU/view
+                        - generic [ref=e1071]: Test RL Lead 56
+                    - gridcell "139232" [ref=e1072]:
+                      - generic [ref=e1076]: "139232"
+                    - gridcell "yi@gmail.com" [ref=e1077]:
+                      - link "yi@gmail.com" [ref=e1083] [cursor=pointer]:
+                        - /url: mailto:yi@gmail.com
+                    - gridcell "6655555555" [ref=e1084]:
+                      - link "6655555555" [ref=e1089] [cursor=pointer]:
+                        - /url: tel:6655555555
+                    - gridcell "80 Almond St" [ref=e1090]:
+                      - generic [ref=e1093]: 80 Almond St
+                    - gridcell "BALWYN NORTH" [ref=e1094]:
+                      - generic [ref=e1098]: BALWYN NORTH
+                    - gridcell "Victoria" [ref=e1099]:
+                      - generic [ref=e1103]: Victoria
+                    - gridcell "3104" [ref=e1104]:
+                      - generic [ref=e1108]: "3104"
+                    - gridcell "Show Actions" [ref=e1109]:
+                      - button "Show Actions" [ref=e1115] [cursor=pointer]:
+                        - img [ref=e1117]
+                        - generic [ref=e1120]: Show Actions
+                  - row "Test K mI 139231 k@gmail.com 6666688888 80 Almond St BALWYN NORTH Victoria 3104 Show Actions" [ref=e1121]:
+                    - gridcell [ref=e1122]
+                    - rowheader "Test K mI" [ref=e1126]:
+                      - link "Test K mI" [ref=e1133] [cursor=pointer]:
+                        - /url: /lightning/r/001AD00000zpSSJYA2/view
+                        - generic [ref=e1134]: Test K mI
+                    - gridcell "139231" [ref=e1135]:
+                      - generic [ref=e1139]: "139231"
+                    - gridcell "k@gmail.com" [ref=e1140]:
+                      - link "k@gmail.com" [ref=e1146] [cursor=pointer]:
+                        - /url: mailto:k@gmail.com
+                    - gridcell "6666688888" [ref=e1147]:
+                      - link "6666688888" [ref=e1152] [cursor=pointer]:
+                        - /url: tel:6666688888
+                    - gridcell "80 Almond St" [ref=e1153]:
+                      - generic [ref=e1156]: 80 Almond St
+                    - gridcell "BALWYN NORTH" [ref=e1157]:
+                      - generic [ref=e1161]: BALWYN NORTH
+                    - gridcell "Victoria" [ref=e1162]:
+                      - generic [ref=e1166]: Victoria
+                    - gridcell "3104" [ref=e1167]:
+                      - generic [ref=e1171]: "3104"
+                    - gridcell "Show Actions" [ref=e1172]:
+                      - button "Show Actions" [ref=e1178] [cursor=pointer]:
+                        - img [ref=e1180]
+                        - generic [ref=e1183]: Show Actions
+                  - row "John Doe313 139227 john.doe313@example.com 1234567890 80 Alma Rd CLAYFIELD Queensland 4011 Show Actions" [ref=e1184]:
+                    - gridcell [ref=e1185]
+                    - rowheader "John Doe313" [ref=e1189]:
+                      - link "John Doe313" [ref=e1196] [cursor=pointer]:
+                        - /url: /lightning/r/001AD00000zpENbYAM/view
+                        - generic [ref=e1197]: John Doe313
+                    - gridcell "139227" [ref=e1198]:
+                      - generic [ref=e1202]: "139227"
+                    - gridcell "john.doe313@example.com" [ref=e1203]:
+                      - link "john.doe313@example.com" [ref=e1209] [cursor=pointer]:
+                        - /url: mailto:john.doe313@example.com
+                    - gridcell "1234567890" [ref=e1210]:
+                      - link "1234567890" [ref=e1215] [cursor=pointer]:
+                        - /url: tel:1234567890
+                    - gridcell "80 Alma Rd" [ref=e1216]:
+                      - generic [ref=e1219]: 80 Alma Rd
+                    - gridcell "CLAYFIELD" [ref=e1220]:
+                      - generic [ref=e1224]: CLAYFIELD
+                    - gridcell "Queensland" [ref=e1225]:
+                      - generic [ref=e1229]: Queensland
+                    - gridcell "4011" [ref=e1230]:
+                      - generic [ref=e1234]: "4011"
+                    - gridcell "Show Actions" [ref=e1235]:
+                      - button "Show Actions" [ref=e1241] [cursor=pointer]:
+                        - img [ref=e1243]
+                        - generic [ref=e1246]: Show Actions
+                  - row "(Effi) Effether 91572 hcs.noemail@mecwacare.org.au 0415362870 18 Almond Street Balwyn North Victoria 3104 Show Actions" [ref=e1247]:
+                    - gridcell [ref=e1248]
+                    - rowheader "(Effi) Effether" [ref=e1252]:
+                      - link "(Effi) Effether" [ref=e1259] [cursor=pointer]:
+                        - /url: /lightning/r/001AD00000wNmBaYAK/view
+                        - generic [ref=e1260]: (Effi) Effether
+                    - gridcell "91572" [ref=e1261]:
+                      - generic [ref=e1265]: "91572"
+                    - gridcell "hcs.noemail@mecwacare.org.au" [ref=e1266]:
+                      - link "hcs.noemail@mecwacare.org.au" [ref=e1272] [cursor=pointer]:
+                        - /url: mailto:hcs.noemail@mecwacare.org.au
+                    - gridcell "0415362870" [ref=e1273]:
+                      - link "0415362870" [ref=e1278] [cursor=pointer]:
+                        - /url: tel:0415362870
+                    - gridcell "18 Almond Street" [ref=e1279]:
+                      - generic [ref=e1282]: 18 Almond Street
+                    - gridcell "Balwyn North" [ref=e1283]:
+                      - generic [ref=e1287]: Balwyn North
+                    - gridcell "Victoria" [ref=e1288]:
+                      - generic [ref=e1292]: Victoria
+                    - gridcell "3104" [ref=e1293]:
+                      - generic [ref=e1297]: "3104"
+                    - gridcell "Show Actions" [ref=e1298]:
+                      - button "Show Actions" [ref=e1304] [cursor=pointer]:
+                        - img [ref=e1306]
+                        - generic [ref=e1309]: Show Actions
+                  - row "John Doe315 139224 john.doe315@example.com 1234567890 80 Alma Rd CLAYFIELD Queensland 4011 Show Actions" [ref=e1310]:
+                    - gridcell [ref=e1311]
+                    - rowheader "John Doe315" [ref=e1315]:
+                      - link "John Doe315" [ref=e1322] [cursor=pointer]:
+                        - /url: /lightning/r/001AD00000zhdW4YAI/view
+                        - generic [ref=e1323]: John Doe315
+                    - gridcell "139224" [ref=e1324]:
+                      - generic [ref=e1328]: "139224"
+                    - gridcell "john.doe315@example.com" [ref=e1329]:
+                      - link "john.doe315@example.com" [ref=e1335] [cursor=pointer]:
+                        - /url: mailto:john.doe315@example.com
+                    - gridcell "1234567890" [ref=e1336]:
+                      - link "1234567890" [ref=e1341] [cursor=pointer]:
+                        - /url: tel:1234567890
+                    - gridcell "80 Alma Rd" [ref=e1342]:
+                      - generic [ref=e1345]: 80 Alma Rd
+                    - gridcell "CLAYFIELD" [ref=e1346]:
+                      - generic [ref=e1350]: CLAYFIELD
+                    - gridcell "Queensland" [ref=e1351]:
+                      - generic [ref=e1355]: Queensland
+                    - gridcell "4011" [ref=e1356]:
+                      - generic [ref=e1360]: "4011"
+                    - gridcell "Show Actions" [ref=e1361]:
+                      - button "Show Actions" [ref=e1367] [cursor=pointer]:
+                        - img [ref=e1369]
+                        - generic [ref=e1372]: Show Actions
+                  - row "shalini 1 138948 shalini1@gmail.com 0987654321 1 A'Beckett Cl MOUNT MARTHA Victoria 3934 Show Actions" [ref=e1373]:
+                    - gridcell [ref=e1374]
+                    - rowheader "shalini 1" [ref=e1378]:
+                      - link "shalini 1" [ref=e1385] [cursor=pointer]:
+                        - /url: /lightning/r/001AD00000yApqDYAS/view
+                        - generic [ref=e1386]: shalini 1
+                    - gridcell "138948" [ref=e1387]:
+                      - generic [ref=e1391]: "138948"
+                    - gridcell "shalini1@gmail.com" [ref=e1392]:
+                      - link "shalini1@gmail.com" [ref=e1398] [cursor=pointer]:
+                        - /url: mailto:shalini1@gmail.com
+                    - gridcell "0987654321" [ref=e1399]:
+                      - link "0987654321" [ref=e1404] [cursor=pointer]:
+                        - /url: tel:0987654321
+                    - gridcell "1 A'Beckett Cl" [ref=e1405]:
+                      - generic [ref=e1408]: 1 A'Beckett Cl
+                    - gridcell "MOUNT MARTHA" [ref=e1409]:
+                      - generic [ref=e1413]: MOUNT MARTHA
+                    - gridcell "Victoria" [ref=e1414]:
+                      - generic [ref=e1418]: Victoria
+                    - gridcell "3934" [ref=e1419]:
+                      - generic [ref=e1423]: "3934"
+                    - gridcell "Show Actions" [ref=e1424]:
+                      - button "Show Actions" [ref=e1430] [cursor=pointer]:
+                        - img [ref=e1432]
+                        - generic [ref=e1435]: Show Actions
+    - generic:
+      - contentinfo "Utility Bar":
+        - list [ref=e1439]:
+          - listitem [ref=e1440]:
+            - button "Omni-Channel" [ref=e1443] [cursor=pointer]:
+              - img [ref=e1447]
+              - generic [ref=e1451]: Omni-Channel
+  - generic:
+    - status
+```
