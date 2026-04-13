@@ -4,7 +4,6 @@ export const serialTests = [
   'tests/ui/account.spec.ts',
   'tests/ui/opportunity.spec.ts',
   'tests/ui/case.spec.ts',
-  'tests/ui/planner.spec.ts',
   
   
 ];

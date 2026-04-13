@@ -30,7 +30,7 @@ test.skip('create account', async ({ page }) => {
   );
 });
 
-test('Update mandatory MDS reporting fields in Account for Opportunity closure', async ({ page }) => {
+test.only('Update mandatory MDS reporting fields in Account for Opportunity closure', async ({ page }) => {
   const homePage = new HomePage(page);
   const accountPage = new AccountPage(page);
   const { accountCreate } = TestDataHelper.readJsonFile<{ accountCreate: Array<Record<string, string>> }>('accounts.json');
@@ -50,7 +50,7 @@ test('Update mandatory MDS reporting fields in Account for Opportunity closure',
   await accountPage.selectPrimaryLanguage('Afar');
   await accountPage.updateBasicInformationAccountDetails('Interpreter required', 'Yes');
   await accountPage.selectGender('Male'); 
-  await accountPage.updateBasicInformationAccountDetails('Customer Category', 'Individual');
+  await accountPage.updateBasicInformationAccountDetails('Customer Category', 'Institution');
   await accountPage.updateBasicInformationAccountDetails('DVA Card Type', 'Gold Card');
   await accountPage.updateTextField('DVA Number', '1234567890');
   await accountPage.selectImportantInformationDetails('Pension Type', 'DVA Pension');

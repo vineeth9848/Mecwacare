@@ -50,7 +50,7 @@ for (const [index, file] of filesToRun.entries()) {
 
   const result = spawnSync(
     process.platform === 'win32' ? 'npx.cmd' : 'npx',
-    ['playwright', 'test', file, `--project=${serialProject}`, '--workers=1', '--reporter=blob'],
+    ['playwright', 'test', file, `--project=${serialProject}`, '--workers=1', '--reporter=line'],
     {
       cwd: projectRoot,
       stdio: 'inherit',
