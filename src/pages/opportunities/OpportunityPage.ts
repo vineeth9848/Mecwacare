@@ -844,9 +844,15 @@ async fillDate(label: string, date: Date): Promise<void> {
 
   async configureProductManagement(): Promise<void> {
     Logger.step('Select Product Management');
-    const productManagementButton = this.page.getByRole('button', { name: OpportunityLocators.productManagementText, exact: true }).first();
-    await productManagementButton.scrollIntoViewIfNeeded();
-    await productManagementButton.click();
+    const moreActions = this.page.locator(OpportunityLocators.moreActionsButton).first();
+              await this.waitForVisible(moreActions, 30000);
+              await moreActions.click({ force: true });
+
+              const ProductManagementOption = this.page.getByRole('menuitem', { name: 'Product Management' });
+
+              await expect(ProductManagementOption).toBeVisible({ timeout: 30000 });
+
+              await ProductManagementOption.click({ force: true });
     await this.page.waitForTimeout(10000);
 
     const addProductsButton = this.page.getByRole('button', { name: 'Add' });

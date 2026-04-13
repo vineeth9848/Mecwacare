@@ -36,6 +36,37 @@ test('Configure funding source and funding type in first opportunity record', as
   Logger.pass('Opportunity funding configuration test completed successfully');
 });
 
+test('verify Generate Service Agreement functionality on Opportunity', async ({ page }) => {
+  const homePage = new HomePage(page);
+  const opportunityPage = new OpportunityPage(page);
+  const { leadCreate } = TestDataHelper.readJsonFile<{ leadCreate: Array<Record<string, string>> }>('leads.json');
+  const lead = leadCreate[0];
+
+   const today = new Date();
+  const tomorrow = new Date();
+  tomorrow.setDate(today.getDate() + 1);
+
+  Logger.info('Starting service agreement generation validation test');
+  await opportunityPage.refreshPage();
+  await homePage.verifyHomePage();
+  await homePage.selectObjectFromDropdown('Opportunities');
+  await opportunityPage.selectOpportunitiesListView('My Opportunities');
+  await opportunityPage.searchAndOpenOpportunityByLeadName(lead.firstName, lead.lastName);
+  await opportunityPage.configureStage();
+  await opportunityPage.configureStatus();
+  await opportunityPage.fillDate('Agreement Start Date', today);
+  await opportunityPage.fillDate('Agreement End Date', tomorrow);
+  await opportunityPage.saveOpportunityDetails();
+  await opportunityPage.refreshPage();
+  await opportunityPage.verifySignaturevisible();
+  await opportunityPage.generateAgreement();
+  await opportunityPage.refreshPage();
+  await opportunityPage.switchToRelatedTab();
+  await opportunityPage.verifyServiceAgreementFileGenerated();
+  Logger.pass('Service agreement generation validation test completed successfully');
+  
+});
+
 test('Configure PriceBook and Product Management on Opportunity', async ({ page }) => {
   const homePage = new HomePage(page);
   const opportunityPage = new OpportunityPage(page);
@@ -76,37 +107,6 @@ test('Verify Generate Quote functionality and verify Files on Opportunity', asyn
   await opportunityPage.switchToRelatedTab();
   await opportunityPage.verifyFilesGenerated(lead.firstName, lead.lastName);
   Logger.pass('Opportunity quote generation and file verification validated successfully');
-});
-
-test.only('verify Generate Service Agreement functionality on Opportunity', async ({ page }) => {
-  const homePage = new HomePage(page);
-  const opportunityPage = new OpportunityPage(page);
-  const { leadCreate } = TestDataHelper.readJsonFile<{ leadCreate: Array<Record<string, string>> }>('leads.json');
-  const lead = leadCreate[0];
-
-   const today = new Date();
-  const tomorrow = new Date();
-  tomorrow.setDate(today.getDate() + 1);
-
-  Logger.info('Starting service agreement generation validation test');
-  await opportunityPage.refreshPage();
-  await homePage.verifyHomePage();
-  await homePage.selectObjectFromDropdown('Opportunities');
-  await opportunityPage.selectOpportunitiesListView('My Opportunities');
-  await opportunityPage.searchAndOpenOpportunityByLeadName(lead.firstName, lead.lastName);
-  await opportunityPage.configureStage();
-  await opportunityPage.configureStatus();
-  await opportunityPage.fillDate('Agreement Start Date', today);
-  await opportunityPage.fillDate('Agreement End Date', tomorrow);
-  // await opportunityPage.saveOpportunityDetails();
-  // await opportunityPage.refreshPage();
-  // await opportunityPage.verifySignaturevisible();
-  // await opportunityPage.generateAgreement();
-  // await opportunityPage.refreshPage();
-  // await opportunityPage.switchToRelatedTab();
-  // await opportunityPage.verifyServiceAgreementFileGenerated();
-  Logger.pass('Service agreement generation validation test completed successfully');
-  
 });
 
 test('Generate Send For Signature functionality on Opportunity', async ({ page }) => {
