@@ -8,5 +8,12 @@ export const CaseLocators = {
   advancedSearchAccountInput: "input[placeholder='Search Accounts...']",
   advancedSearchFirstRowRadio: "xpath=(//label[contains(@class, 'slds-radio__label')][.//span[text()='Select Item 1']])",
   advancedSearchSelectButton: "lightning-modal-footer button.slds-button_brand:has-text('Select'), button.slds-button_brand:has-text('Select')",
+  listViewDropdown: "[role='button'][aria-haspopup='listbox'], button[title*='List View'], button[aria-label*='List View']",
+  listViewOption: "[role='listbox'] [role='option'], [role='listbox'] li",
+  headerFundingValue:"xpath=(//lightning-formatted-text[text()='HACC-PYP'])[1]",
+  caseClosed:"a[data-tab-name='Closed Resolved']",
+  caseStatus:"button[aria-label='Status']",
+  caseFundingSource:"button[aria-label='Funding Source']",
+  caseFundingType:"button[aria-label='Funding Type']",
   subjectInput: "input[name='Subject']",
 } as const;

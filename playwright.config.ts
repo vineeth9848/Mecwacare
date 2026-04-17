@@ -5,7 +5,7 @@ import { serialTests, parallelTests } from './test-groups';
 const rawBrowser = (PropertyReader.getProperty('browser') || 'chromium').toLowerCase();
 const baseURL = process.env.BASE_URL || process.env.SF_LOGIN_URL || PropertyReader.getBaseUrl();
 const isCI = process.env.CI === 'true';
-const headless = (process.env.HEADLESS || '').toLowerCase() === 'true' ? true : false;
+const headless = (process.env.HEADLESS || 'true').toLowerCase() === 'true' ? true : false;
 const traceMode = process.env.PW_TRACE_MODE || 'on-first-retry';
 
 let browserName: 'chromium' | 'firefox' | 'webkit' = 'chromium';

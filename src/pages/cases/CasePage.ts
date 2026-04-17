@@ -5,6 +5,7 @@ import { CaseLocators } from '../locators/CaseLocators';
 import PropertyReader from '../../utils/PropertyReader';
 import { HomePage } from '../homepage/HomePage';
 import { time } from 'console';
+import { verify } from 'crypto';
 
 export class CasePage extends BasePage {
   constructor(page: Page) {
@@ -136,6 +137,24 @@ async DateField(name: string, date: Date): Promise<void> {
 
         Logger.pass('Clicked New Invoice from search');
   }
+
+  async selectCaseListView(viewName: string): Promise<void> {
+      Logger.step(`Select cases list view: ${viewName}`);
+      const listViewDropdown = this.page.locator(CaseLocators.listViewDropdown).first();
+      await this.waitForVisible(listViewDropdown, 30000);
+      await listViewDropdown.click({ force: true });
+  
+      await this.page.waitForSelector('[role="listbox"]', { timeout: 30000 });
+      const listViewOption = this.page
+        .locator(CaseLocators.listViewOption)
+        .filter({ hasText: viewName })
+        .first();
+      await this.waitForVisible(listViewOption, 30000);
+      await listViewOption.scrollIntoViewIfNeeded().catch(() => {});
+      await listViewOption.click({ force: true });
+      Logger.pass(`Case list view selected: ${viewName}`);
+      await this.page.waitForTimeout(5000);
+    }
 
 
     async selectAccountFromSearch(firstName: string, lastName: string): Promise<void> {
@@ -288,6 +307,16 @@ async DateField(name: string, date: Date): Promise<void> {
   await this.page.keyboard.press('Tab');
 }
 
+async clickOnEditButton(): Promise<void> {
+  Logger.step('Click Edit button in Case page');
+      
+  const EditButton = this.page.getByRole('button', { name: 'Edit' }).first();
+  await this.waitForVisible(EditButton, 30000);
+  await EditButton.click({ force: true });
+  await this.page.waitForTimeout(5000); 
+  Logger.pass('Clicked Edit button in Case page');
+}
+
 async getFormattedDate(offsetDays = 0) {
   const date = new Date();
   date.setDate(date.getDate() + offsetDays);
@@ -348,6 +377,33 @@ try {
       await submitForApprovalButton.click();
 
       Logger.pass('Clicked Submit for Approval button');
+    }
+
+    async verifyCaseClosed(): Promise<void> {
+      Logger.step('Verify case is closed');
+
+      const fundingValue = this.page.locator(CaseLocators.headerFundingValue).first();
+      await this.waitForVisible(fundingValue, 30000);
+      await fundingValue.scrollIntoViewIfNeeded();
+      await expect(fundingValue).toHaveText('HACC-PYP', { timeout: 30000 });
+
+      await this.clickOnEditButton();
+      Logger.info('Clicked Edit button to verify case details');
+      const caseStatus = this.page.locator(CaseLocators.caseStatus).first();
+      await this.waitForVisible(caseStatus, 30000);
+      await expect(caseStatus).toHaveText('Closed Resolved', { timeout: 30000 });
+      Logger.info('Verified case status is Closed Resolved');
+
+      const caseFundingType = this.page.locator(CaseLocators.caseFundingType).first();
+      await this.waitForVisible(caseFundingType, 30000);
+      await expect(caseFundingType).toHaveText('HACC-PYP', { timeout: 30000 });
+
+      const caseFundingSource = this.page.locator(CaseLocators.caseFundingSource).first();
+      await this.waitForVisible(caseFundingSource, 30000);
+      await expect(caseFundingSource).toHaveText('Block Funding', { timeout: 30000 });
+      Logger.info('Verified case funding source is Block Funding');
+
+      Logger.pass('Verified case is closed with correct funding details');
     }
 
     async verifySubmitToProceed(): Promise<void> {

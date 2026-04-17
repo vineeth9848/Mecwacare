@@ -13,4 +13,6 @@ export const PlannerLocators = {
   appointmentTypeSelect: "select",
   titleInput: "input[aria-label='Title'], input[name='Title']",
   submitButton: "button:has-text('Submit')",
+  endTimeInput: "input.slds-combobox__input[name='end']",
+
 } as const;

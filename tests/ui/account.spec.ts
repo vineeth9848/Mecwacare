@@ -48,15 +48,16 @@ test('Update mandatory MDS reporting fields in Account for Opportunity closure',
   await accountPage.updateBasicInformationAccountDetails('Country of Birth', 'Australia');
   await accountPage.updateBasicInformationAccountDetails('Indigenous Status', 'Both Aboriginal and Torres Strait Islander origin');
   await accountPage.selectPrimaryLanguage('Afar');
-  await accountPage.updateBasicInformationAccountDetails('Interpreter required', 'Yes');
+  await accountPage.updateBasicInformationAccountDetails('Interpreter required', '1');
   await accountPage.selectGender('Male'); 
   await accountPage.updateBasicInformationAccountDetails('Customer Category', 'Institution');
-  await accountPage.updateBasicInformationAccountDetails('DVA Card Type', 'Gold Card');
+  await accountPage.updateBasicInformationAccountDetails('DVA Card Type', 'Gold');
   await accountPage.updateTextField('DVA Number', '1234567890');
   await accountPage.selectImportantInformationDetails('Pension Type', 'DVA Pension');
-  await accountPage.selectImportantInformationDetails('Living Arrangements', 'Lives alone');
-  await accountPage.selectImportantInformationDetails('Accommodation/Residential Setting', 'Alcohol and Drugs Treatment Residence');//Alcohol and Drugs Treatment Residence
+  await accountPage.selectImportantInformationDetails('Living Arrangements', 'SINGLE');
+  await accountPage.selectImportantInformationDetails('Accommodation/Residential Setting', 'BOARDING');//Alcohol and Drugs Treatment Residence
   await accountPage.saveAccountDetails();
+  await accountPage.refreshPage();
   
 });
 
@@ -114,5 +115,23 @@ test('Verify Creation of client forms under Accounts', async ({ page }) => {
   const expectedEmail = accountPage.getEmailWithRunNumber(accountData.email);
   await accountPage.searchAndOpenAccountByEmail(expectedEmail);
   await accountPage.createClientForm();
+  
+});
+
+test('Verify Care Plan and Client forms under Account', async ({ page }) => {
+  const homePage = new HomePage(page);
+  const accountPage = new AccountPage(page);
+  const { accountCreate } = TestDataHelper.readJsonFile<{ accountCreate: Array<Record<string, string>> }>('accounts.json');
+  const accountData = accountCreate[0];
+
+  Logger.info('Starting account Care Plan and Client form verification test');
+  await accountPage.refreshPage();
+  await homePage.verifyHomePage();
+  await homePage.selectObjectFromDropdown('Accounts');
+  await accountPage.selectAccountsListView('My Accounts');
+  const expectedEmail = accountPage.getEmailWithRunNumber(accountData.email);
+  await accountPage.searchAndOpenAccountByEmail(expectedEmail);
+  await accountPage.verifyCarePlanCreated(accountData.firstName, accountData.lastName);
+  await accountPage.verifyClientFormCreated(accountData.firstName, accountData.lastName);
   
 });
