@@ -33,6 +33,8 @@ export class OpportunityPage extends BasePage {
     const runNumber = PropertyReader.getRunNumber(1);
     const fullNameWithRunNumber = `${firstName} ${lastName}${runNumber}`;
     Logger.step(`Search and open opportunity for: ${fullNameWithRunNumber}`);
+        await this.page.waitForLoadState('domcontentloaded');
+
 
     const searchInput = this.page.locator(OpportunityLocators.listSearchInput).first();
     await this.waitForVisible(searchInput, 30000);
@@ -475,7 +477,7 @@ export class OpportunityPage extends BasePage {
     Logger.pass(`Funding Administrator selected : ${administratorName}`);
   }
 
-  // ✅ reusable method
+ 
 async fillDate(label: string, date: Date): Promise<void> {
   const formatDate = (date: Date): string => {
     const day = String(date.getDate()).padStart(2, '0');
@@ -504,7 +506,33 @@ async fillDate(label: string, date: Date): Promise<void> {
   await this.page.waitForTimeout(5000);
 }
 
-  async selectFundingProgramBlockTestFundingHacc(): Promise<void> {
+  async fillDateLinkFund(label: string, date: Date): Promise<void> {
+  const formatDate = (date: Date): string => {
+    const day = String(date.getDate()).padStart(2, '0');
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const year = date.getFullYear();
+    return `${day}/${month}/${year}`;
+  };
+
+  const formattedDate = formatDate(date);
+
+  const field = this.page
+    .locator(`input[name="${label}"]`);
+
+  await field.waitFor({ state: 'visible', timeout: 30000 });
+
+  await field.evaluate(el => el.scrollIntoView({ block: 'center' }));
+
+  await field.click();
+  await field.fill('');
+  await field.fill(formattedDate);
+
+  await field.press('Tab');
+
+  await this.page.waitForTimeout(5000);
+}
+
+  async selectFundingProgramHacc(): Promise<void> {
     const today = new Date();
 
     const fundingProgramSearch = 'HACC - Ballarat';
@@ -579,20 +607,37 @@ async fillDate(label: string, date: Date): Promise<void> {
       )
       .toContain(expectedFundingProgram);
 
-      // this.DateField('Start Date', today);
-      // Logger.info(`Filled Start Date with today's date: ${today.toDateString()}`);
-      // this.DateField('End Date', tomorrow);
-      // Logger.info(`Filled End Date with tomorrow's date: ${tomorrow.toDateString()}`);
-
-    Logger.step('Save opportunity details');
-    const saveButton = this.page.getByRole('button', { name: 'Save' }).first();
-    await this.waitForVisible(saveButton, 30000);
-    await saveButton.scrollIntoViewIfNeeded();
-    await saveButton.click();
     await this.page.waitForTimeout(10000);
 
     Logger.pass(`Funding Program selected: ${expectedFundingProgram}`);
   }
+
+  async verifyFundingValue(): Promise<void> {
+    Logger.step('Verify Funding value is populated');
+
+    const fundingDetailsSection = this.page
+      .locator(OpportunityLocators.fundingDetailsSection)
+      .first();
+    await this.waitForVisible(fundingDetailsSection, 30000);
+    await fundingDetailsSection.scrollIntoViewIfNeeded();
+    await this.staticWait(1000);
+   
+    const fundingValue = this.page.getByRole('link', { name: /FUND - /i }).first();
+    await this.waitForVisible(fundingValue, 30000);
+    expect(fundingValue).toBeVisible();
+    
+    Logger.pass('Funding value is populated');
+  }
+
+  async clickOnDoneInLinkFund(): Promise<void> {
+    Logger.step('Click on Done in Link Fund modal');
+    const doneButton = this.page.getByRole('button', { name: 'Done' }).first();
+    await this.waitForVisible(doneButton, 30000);
+    await doneButton.click({ force: true });
+    await this.page.waitForTimeout(5000);
+    Logger.pass('Clicked on Done in Link Fund modal');
+  }
+
 
   async selectNewFundingSourceAndTypeSupportAtHome(): Promise<void> {
     Logger.step('Select New Funding Source as Hacc-PYP Funding');
@@ -722,6 +767,43 @@ async fillDate(label: string, date: Date): Promise<void> {
     await expect(fundingTypeValue).toContainText(expectedFundingType, { timeout: 30000 });
 
     Logger.pass(`Verified header Funding Type is ${expectedFundingType}`);
+  }
+
+  async verifyDefaultDetails(label:string, value:string): Promise<void> {
+    Logger.step('Verify default details in Link Fund section'); 
+
+     const fundingSourceValue = this.page.locator(`input[name="${label}"]`).first();
+    await this.waitForVisible(fundingSourceValue, 30000);
+    await expect(fundingSourceValue).toHaveValue(new RegExp(value, 'i'), { timeout: 30000 });
+
+    Logger.pass(`Verified default value for ${label} is ${value}`);
+  
+  }
+
+  async ClickLinkFund(): Promise<void> {
+    Logger.step("Click link fund and verify funding source and type");
+
+    const fundLink = this.page.getByRole('button', { name: 'Link Fund' }).first();
+    await this.waitForVisible(fundLink, 30000);
+    await fundLink.click();
+    await this.page.waitForTimeout(5000);
+
+    const claimPeriod = this.page.locator("select[name='Claim_Period']").first();
+    await this.waitForVisible(claimPeriod, 30000);
+    await claimPeriod.click({ force: true });
+
+    await claimPeriod.selectOption({ label: 'Monthly' });
+      // const claimPeriodOption = this.page.locator('option', { hasText: 'Monthly' }).first();
+      // await this.waitForVisible(claimPeriodOption, 30000);
+      // await claimPeriodOption.click({ force: true });
+
+    
+    await this.page.waitForTimeout(5000);
+
+    await expect(claimPeriod).toHaveValue('Monthly', { timeout: 15000 });
+
+
+    Logger.pass("Verified funding type in header, now clicking to navigate to fund details");
   }
 
   async verifyQuoteNotGenerated(): Promise<void> {
@@ -1173,12 +1255,6 @@ async setOpportunityToClosedWon(): Promise<void> {
     
         await stageDropdown.click();
 
-        // await this.page.getByText('Closed Won', { exact: true }).click();
-        // const closedWonOption = stageDropdown;
-
-        // await expect(closedWonOption).toBeVisible({ timeout: 30000 });
-        // await expect(closedWonOption).toHaveText('Closed Won');
-        // Logger.pass('Stage set to Closed Won');
 
         const option = this.page.getByRole('option', { name: 'Closed Won' });
         await option.click();
@@ -1188,16 +1264,6 @@ async setOpportunityToClosedWon(): Promise<void> {
 
         await stageDropdown.press('Tab');
 
-        const tomorrow = new Date();
-        tomorrow.setDate(tomorrow.getDate() + 1);
-
-        const date = `${String(tomorrow.getDate()).padStart(2, '0')}/${String(
-          tomorrow.getMonth() + 1
-        ).padStart(2, '0')}/${tomorrow.getFullYear()}`;
-
-
-        await this.page.locator("input[name='Agreement_Start_Date__c']").fill(date);
-        Logger.info(`Filled Agreement Start Date with tomorrow's date: ${date}`);
 
         
       const closeButton = this.page.locator("//button[text()='Cancel']").last();
@@ -1205,7 +1271,7 @@ async setOpportunityToClosedWon(): Promise<void> {
       await closeButton.scrollIntoViewIfNeeded().catch(() => {});
       Logger.info('Confirmed: Record is in edit mode (Cancel button visible).');
 
-const saveButton = this.page.locator("//button[text()='Save']").last();
+        const saveButton = this.page.locator("//button[text()='Save']").last();
         await this.waitForVisible(saveButton, 10000);
         await saveButton.scrollIntoViewIfNeeded().catch(() => {});
         await saveButton.click({ force: true });
@@ -1245,31 +1311,7 @@ async createServiceAgreement(): Promise<void> {
        
         await createServiceAgreementButton.click();
       
-        // const AgreementStartDate = this.page.getByLabel('Agreement Start Date').first();
-        //   await this.waitForVisible(AgreementStartDate, 30000);
-        //     await AgreementStartDate.click(); 
-        //     await AgreementStartDate.clear();   
-
-        //  const todaysDate = new Date();
-        //  const tomorrow = new Date();
-        //  tomorrow.setDate(tomorrow.getDate() + 1);
-        //  const formattedTodaysDate = `${String(todaysDate.getDate()).padStart(2, '0')}/${String(
-        //   todaysDate.getMonth() + 1
-        // ).padStart(2, '0')}/${todaysDate.getFullYear()}`;
-
-        // await AgreementStartDate.fill(formattedTodaysDate);
-
-        // await this.page.waitForTimeout(5000);
-
-        // const formattedTomorrowsDate = `${String(tomorrow.getDate()).padStart(2, '0')}/${String(
-        //   tomorrow.getMonth() + 1
-        // ).padStart(2, '0')}/${tomorrow.getFullYear()}`;
-
-        // const AgreementEndDate = this.page.getByLabel('Agreement End Date').first();
-        // await this.waitForVisible(AgreementEndDate, 30000);
-        // await AgreementEndDate.click(); 
-        // await AgreementEndDate.clear(); 
-        // await AgreementEndDate.fill(formattedTomorrowsDate);
+      
 
         await this.page.waitForTimeout(5000);
 

@@ -314,6 +314,48 @@ export class AccountPage extends BasePage {
     Logger.pass(`Opened account record using email: ${email}`);
   }
 
+  async verifyCarePlanCreated(firstName: string, lastName: string): Promise<void> {
+    const runNumber = PropertyReader.getRunNumber(1);
+    const fullNameWithRunNumber = `${firstName} ${lastName}${runNumber}`;
+    Logger.step('Verify Care Plan record created under Account');
+    const moreTabs = await this.page.locator('button[title="More Tabs"]:visible');
+    await expect(moreTabs).toBeVisible({ timeout: 10000 });
+    await moreTabs.click();
+    Logger.pass('Clicked More Tabs button');
+
+    const carePlanOption = this.page.getByRole('menuitem', { name: 'Care Plan' }).first();
+    await expect(carePlanOption).toBeVisible({ timeout: 10000 });
+    await carePlanOption.click();
+    await this.page.waitForTimeout(5000);
+    Logger.pass('Selected Care Plan from More Tabs');
+
+    const verifyCarePlan = this.page.getByText(`${fullNameWithRunNumber} - Care Plan`).first();
+    await expect(verifyCarePlan).toBeVisible({ timeout: 10000 }); 
+    Logger.pass('Care Plan record verified under Account');
+
+  }
+
+  async verifyClientFormCreated(firstName: string, lastName: string): Promise<void> {
+    const runNumber = PropertyReader.getRunNumber(1);
+    const fullNameWithRunNumber = `${firstName} ${lastName}${runNumber}`;
+    Logger.step('Verify Client Form record created under Account');
+    const moreTabs = await this.page.locator('button[title="More Tabs"]:visible');
+    await expect(moreTabs).toBeVisible({ timeout: 10000 });
+    await moreTabs.click();
+    Logger.pass('Clicked More Tabs button');
+
+    const clientFormsOption = this.page.getByRole('menuitem', { name: 'Client Forms' }).first();
+    await expect(clientFormsOption).toBeVisible({ timeout: 10000 });
+    await clientFormsOption.click();
+    Logger.pass('Selected Client Forms from More Tabs');
+
+    const verifyClientForm = this.page.getByText("HACC Linkage Service Request").first();
+    await expect(verifyClientForm).toBeVisible({ timeout: 10000 }); 
+    Logger.pass('Client Form record verified under Account');
+
+
+  }
+
   async createClientForm(): Promise<void> {
     Logger.step("Create Client form from account record");
     const moreTabs = await this.page.locator('button[title="More Tabs"]:visible');
@@ -321,9 +363,9 @@ export class AccountPage extends BasePage {
     await moreTabs.click();
     Logger.pass('Clicked More Tabs button');
 
-    const carePlanOption = this.page.getByRole('menuitem', { name: 'Client Forms' }).first();
-    await expect(carePlanOption).toBeVisible({ timeout: 10000 });
-    await carePlanOption.click();
+    const clientFormsOption = this.page.getByRole('menuitem', { name: 'Client Forms' }).first();
+    await expect(clientFormsOption).toBeVisible({ timeout: 10000 });
+    await clientFormsOption.click();
     Logger.pass('Selected Client Forms from More Tabs');
 
     const categoryDropdown = this.page.locator(AccountLocators.SelectClientFormCategory).first();

@@ -3,7 +3,7 @@
     {
       "objectName": "Planner",
       "username": "John Doe",
-      "resourceName": "Direct Care Resource QA",
+      "resourceName": "Test QA resource",
       "appointmentService": "Annual review - Community Care",
       "appointmentType": "Clinic",
       "appointmentStatus": "Scheduled",

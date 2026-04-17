@@ -22,7 +22,8 @@ test.only('Create New Appointment', async ({ page }) => {
   await homePage.selectObjectFromDropdown(planner.objectName);
   await plannerPage.clickNewButton();
   await plannerPage.createNewAppointment(planner.username, planner.resourceName);
-  //await plannerPage.setStartDateToTomorrow();
+  await plannerPage.setStartTimePlusTenMinutes();
+
   await plannerPage.selectAppointmentServiceAndClickNext(planner.appointmentService);
   await plannerPage.navigationToNextPages(
     planner.appointmentType,
