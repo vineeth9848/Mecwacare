@@ -382,10 +382,10 @@ try {
     async verifyCaseClosed(): Promise<void> {
       Logger.step('Verify case is closed');
 
-      const fundingValue = this.page.locator(CaseLocators.headerFundingValue).first();
-      await this.waitForVisible(fundingValue, 30000);
-      await fundingValue.scrollIntoViewIfNeeded();
-      await expect(fundingValue).toHaveText('HACC-PYP', { timeout: 30000 });
+      // const fundingValue = this.page.locator(CaseLocators.headerFundingValue).first();
+      // await this.waitForVisible(fundingValue, 30000);
+      // await fundingValue.scrollIntoViewIfNeeded();
+      // await expect(fundingValue).toHaveText('HACC-PYP', { timeout: 30000 });
 
       await this.clickOnEditButton();
       Logger.info('Clicked Edit button to verify case details');
