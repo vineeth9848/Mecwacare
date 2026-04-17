@@ -903,13 +903,15 @@ async fillDate(label: string, date: Date): Promise<void> {
  
   async configurePriceBook(): Promise<void> {
     Logger.step('Select Choose Price Book');
-    const relatedTab = this.page.getByText(OpportunityLocators.choosePriceBookText, { exact: true }).first();
+    const relatedTab = this.page.getByRole('button', { name: 'Choose Price Book' }).first();
+
+    //await relatedTab.waitFor({ state: 'visible', timeout: 15000 });
     await relatedTab.scrollIntoViewIfNeeded();
     await relatedTab.click();
     await this.page.waitForTimeout(5000);
 
     const enterPriceBook = this.page.locator(OpportunityLocators.priceBookInput);
-    await this.waitForVisible(enterPriceBook, 90000);
+    await enterPriceBook.waitFor({ state: 'visible', timeout: 30000 });
     await enterPriceBook.click();
     await enterPriceBook.press('Delete');
     await enterPriceBook.clear();

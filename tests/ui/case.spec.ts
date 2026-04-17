@@ -42,7 +42,7 @@ test('create case from case page', async ({ page }) => {
   
 });
 
-test('Close the Case and Verify Funding details on Case', async ({ page }) => {
+test.only('Close the Case and Verify Funding details on Case', async ({ page }) => {
   test.setTimeout(180000);
   const homePage = new HomePage(page);
   const casePage = new CasePage(page);

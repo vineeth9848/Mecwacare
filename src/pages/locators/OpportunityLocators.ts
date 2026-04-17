@@ -38,6 +38,7 @@ export const OpportunityLocators = {
   choosePriceBookText: 'Choose Price Book',
   choosePriceBookButton: "button:has-text('Choose Price Book'), text=Choose Price Book",
   priceBookInput: 'input[aria-label="Price Book"]',
+  priceBook:'a[title="Choose Price Book"]',
   productManagementText: 'Product Management',
   availableFundingSection: "span[title='Available Funding']",
   supportItemLabel: "label:has-text('Support Item Name (Support Item Number)')",

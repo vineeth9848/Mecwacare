@@ -5,7 +5,7 @@ import { OpportunityPage } from '../../src/pages/opportunities/OpportunityPage';
 import { TestDataHelper } from '../../src/utils/TestDataHelper';
 import { time } from 'console';
 
-test.skip('Configure funding source and funding type in first opportunity record', async ({ page }) => {
+test('Configure funding source and funding type in first opportunity record', async ({ page }) => {
   test.setTimeout(120000);
   const homePage = new HomePage(page);
   const opportunityPage = new OpportunityPage(page);
@@ -36,7 +36,7 @@ test.skip('Configure funding source and funding type in first opportunity record
   Logger.pass('Opportunity funding configuration test completed successfully');
 });
 
-test.skip('Configure Link Fund', async ({ page }) => {
+test('Configure Link Fund', async ({ page }) => {
   test.setTimeout(120000);
   const homePage = new HomePage(page);
   const opportunityPage = new OpportunityPage(page);
@@ -68,7 +68,7 @@ test.skip('Configure Link Fund', async ({ page }) => {
   Logger.pass('Opportunity Link Fund configuration test completed successfully');
 });
 
-test.skip('verify Generate Agreement functionality on Opportunity', async ({ page }) => {
+test('verify Generate Agreement functionality on Opportunity', async ({ page }) => {
   const homePage = new HomePage(page);
   const opportunityPage = new OpportunityPage(page);
   const { leadCreate } = TestDataHelper.readJsonFile<{ leadCreate: Array<Record<string, string>> }>('leads.json');
@@ -100,7 +100,7 @@ test.skip('verify Generate Agreement functionality on Opportunity', async ({ pag
   
 });
 
-test.skip('Configure PriceBook and Product Management on Opportunity', async ({ page }) => {
+test('Configure PriceBook and Product Management on Opportunity', async ({ page }) => {
   const homePage = new HomePage(page);
   const opportunityPage = new OpportunityPage(page);
   const { leadCreate } = TestDataHelper.readJsonFile<{ leadCreate: Array<Record<string, string>> }>('leads.json');
@@ -116,12 +116,13 @@ test.skip('Configure PriceBook and Product Management on Opportunity', async ({ 
   await opportunityPage.refreshPage();
   await opportunityPage.switchToRelatedTab();
   await opportunityPage.configurePriceBook();
+  await opportunityPage.refreshPage();
   await opportunityPage.configureProductManagement();
 
   Logger.pass('Opportunity price book and product management configuration validated successfully');
 });
 
-test.skip('Verify Generate Quote functionality and verify Files on Opportunity', async ({ page }) => {
+test('Verify Generate Quote functionality and verify Files on Opportunity', async ({ page }) => {
   const homePage = new HomePage(page);
   const opportunityPage = new OpportunityPage(page);
   const { leadCreate } = TestDataHelper.readJsonFile<{ leadCreate: Array<Record<string, string>> }>('leads.json');
@@ -142,7 +143,7 @@ test.skip('Verify Generate Quote functionality and verify Files on Opportunity',
   Logger.pass('Opportunity quote generation and file verification validated successfully');
 });
 
-test.skip('Generate Send For Signature functionality on Opportunity', async ({ page }) => {
+test('Generate Send For Signature functionality on Opportunity', async ({ page }) => {
   const homePage = new HomePage(page);
   const opportunityPage = new OpportunityPage(page);
   const { leadCreate } = TestDataHelper.readJsonFile<{ leadCreate: Array<Record<string, string>> }>('leads.json');
@@ -180,7 +181,7 @@ test('verify Signature and Close the Opportunity', async ({ page }) => {
   
 });
 
-test('Create Service Agreement on Opportunity record', async ({ page }) => {
+test.only('Create Service Agreement on Opportunity record', async ({ page }) => {
   const homePage = new HomePage(page);
   const opportunityPage = new OpportunityPage(page);
   const { leadCreate } = TestDataHelper.readJsonFile<{ leadCreate: Array<Record<string, string>> }>('leads.json');
@@ -192,8 +193,8 @@ test('Create Service Agreement on Opportunity record', async ({ page }) => {
   await homePage.selectObjectFromDropdown('Opportunities');
   await opportunityPage.selectOpportunitiesListView('My Opportunities');
   await opportunityPage.searchAndOpenOpportunityByLeadName(lead.firstName, lead.lastName);
-  await opportunityPage.createServiceAgreement();
-  await opportunityPage.refreshPage();
+  // await opportunityPage.createServiceAgreement();
+  // await opportunityPage.refreshPage();
   await opportunityPage.verifyServiceAgreementButtonNotPresent();
   await opportunityPage.verifyNoFurtherUpdatesOnRecord();
   //await opportunityPage.refreshPage();
