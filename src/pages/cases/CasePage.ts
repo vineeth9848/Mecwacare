@@ -329,7 +329,7 @@ async getFormattedDate(offsetDays = 0) {
 }
 
 async saveButtonClick(): Promise<void> {
-  const saveButton = this.page.getByRole('button', { name: 'Save' }).first();
+  const saveButton = this.page.getByRole('button', { name: 'Save' }).last();
 await saveButton.click();
 Logger.info('Clicked Save button');
 

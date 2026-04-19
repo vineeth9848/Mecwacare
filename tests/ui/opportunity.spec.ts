@@ -181,7 +181,7 @@ test('verify Signature and Close the Opportunity', async ({ page }) => {
   
 });
 
-test.only('Create Service Agreement on Opportunity record', async ({ page }) => {
+test('Create Service Agreement on Opportunity record', async ({ page }) => {
   const homePage = new HomePage(page);
   const opportunityPage = new OpportunityPage(page);
   const { leadCreate } = TestDataHelper.readJsonFile<{ leadCreate: Array<Record<string, string>> }>('leads.json');
@@ -193,11 +193,11 @@ test.only('Create Service Agreement on Opportunity record', async ({ page }) => 
   await homePage.selectObjectFromDropdown('Opportunities');
   await opportunityPage.selectOpportunitiesListView('My Opportunities');
   await opportunityPage.searchAndOpenOpportunityByLeadName(lead.firstName, lead.lastName);
-  // await opportunityPage.createServiceAgreement();
-  // await opportunityPage.refreshPage();
+  await opportunityPage.createServiceAgreement();
+  await opportunityPage.refreshPage();
   await opportunityPage.verifyServiceAgreementButtonNotPresent();
   await opportunityPage.verifyNoFurtherUpdatesOnRecord();
-  //await opportunityPage.refreshPage();
+  await opportunityPage.refreshPage();
   await homePage.selectObjectFromDropdown('Service Agreements');
   await opportunityPage.searchAndOpenOpportunityByLeadName(lead.firstName, lead.lastName);
   await opportunityPage.verifyActiveServiceAgreement();

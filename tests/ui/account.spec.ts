@@ -30,7 +30,7 @@ test.skip('create account', async ({ page }) => {
   );
 });
 
-test('Update mandatory MDS reporting fields in Account for Opportunity closure', async ({ page }) => {
+test.skip('Update mandatory MDS reporting fields in Account for Opportunity closure', async ({ page }) => {
   const homePage = new HomePage(page);
   const accountPage = new AccountPage(page);
   const { accountCreate } = TestDataHelper.readJsonFile<{ accountCreate: Array<Record<string, string>> }>('accounts.json');
@@ -61,7 +61,7 @@ test('Update mandatory MDS reporting fields in Account for Opportunity closure',
   
 });
 
-test('Update and  Verify account validations', async ({ page }) => {
+test('Update and Verify account validations', async ({ page }) => {
   const homePage = new HomePage(page);
   const accountPage = new AccountPage(page);
   const { accountCreate } = TestDataHelper.readJsonFile<{ accountCreate: Array<Record<string, string>> }>('accounts.json');

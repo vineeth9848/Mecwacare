@@ -3,8 +3,8 @@
     {
       "objectName": "Planner",
       "username": "John Doe",
-      "resourceName": "Test QA resource",
-      "appointmentService": "Annual review - Community Care",
+      "resourceName": "Test QA resource", 
+      "appointmentService": "Annual review - Community Care",  
       "appointmentType": "Clinic",
       "appointmentStatus": "Scheduled",
       "titlePrefix": "TestUser",

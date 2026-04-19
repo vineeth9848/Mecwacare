@@ -903,10 +903,12 @@ async fillDate(label: string, date: Date): Promise<void> {
  
   async configurePriceBook(): Promise<void> {
     Logger.step('Select Choose Price Book');
-    const relatedTab = this.page.getByRole('button', { name: 'Choose Price Book' }).first();
+    
+    await this.page.mouse.wheel(0, 2000); 
 
-    //await relatedTab.waitFor({ state: 'visible', timeout: 15000 });
-    await relatedTab.scrollIntoViewIfNeeded();
+    const relatedTab = this.page.locator('div[title="Choose Price Book"]');
+
+    await relatedTab.waitFor({ state: 'visible' });
     await relatedTab.click();
     await this.page.waitForTimeout(5000);
 
