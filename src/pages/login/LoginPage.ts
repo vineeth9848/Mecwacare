@@ -11,7 +11,8 @@ export class LoginPage extends BasePage {
 
   async navigateToLogin(): Promise<void> {
     Logger.step('Navigate to login page');
-    await this.gotoBaseUrl();
+    const loginUrl = process.env.SF_LOGIN_URL || PropertyReader.getBaseUrl();
+    await this.navigateToLoginUrl(loginUrl);
     Logger.pass('Login page opened');
   }
 
@@ -31,6 +32,11 @@ export class LoginPage extends BasePage {
   async login(username: string, password: string): Promise<void> {
     const usernameField = this.page.locator(LoginLocators.usernameInput);
     const passwordField = this.page.locator(LoginLocators.passwordInput);
+
+    Logger.step('Wait for login fields to be visible');
+    await this.waitForVisible(usernameField, 30000);
+    await this.waitForVisible(passwordField, 30000);
+    Logger.pass('Login fields are visible');
 
     Logger.step('Clear and enter username');
     await this.safeAction(async () => {
