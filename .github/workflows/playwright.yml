@@ -45,6 +45,8 @@ jobs:
         with:
           node-version: 18
           cache: npm
+        env:
+          NODE_TLS_REJECT_UNAUTHORIZED: 0 
 
       # Step 3: Install dependencies
       - name: Install dependencies
