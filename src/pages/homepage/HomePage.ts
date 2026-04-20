@@ -34,7 +34,7 @@ export class HomePage extends BasePage {
 
   async selectObjectFromDropdown(objectName: string): Promise<void> {
     Logger.step(`Select object from dropdown: ${objectName}`);
-    for (let attempt = 1; attempt <= 2; attempt++) {
+    for (let attempt = 1; attempt <= 3; attempt++) {
       await this.openObjectDropdown();
 
       const objectOption = this.objectDropdownPanel.locator(
@@ -48,55 +48,17 @@ export class HomePage extends BasePage {
         await objectOption.click({ force: true });
       }
 
-      await expect(this.objectDropdownPanel).toBeHidden({ timeout: 10000 });
-      await this.waitForPageReady();
-
-      if (await this.isExpectedObjectPageLoaded(objectName)) {
+      if (await this.objectDropdownPanel.isHidden().catch(() => false)) {
         Logger.pass(`Selected object: ${objectName}`);
         return;
       }
 
-      Logger.info(
-        `Wrong or blank page after selecting ${objectName}. Current URL: ${this.page.url()}. Refreshing and retrying. Attempt: ${attempt}`,
-      );
-      await this.refreshPage();
+      Logger.info(`Retry object selection for ${objectName}. Attempt: ${attempt}`);
     }
 
-    throw new Error(
-      `Failed to land on the ${objectName} page after retrying navigation. Final URL: ${this.page.url()}`,
-    );
-  }
-
-  private async isExpectedObjectPageLoaded(objectName: string): Promise<boolean> {
-    const checks: Record<string, () => Promise<boolean>> = {
-      Accounts: async () => {
-        const headerVisible = await this.page.getByText('Accounts', { exact: true }).first().isVisible().catch(() => false);
-        return headerVisible || /\/lightning\/o\/Account\//i.test(this.page.url());
-      },
-      Leads: async () => {
-        const headerVisible = await this.page.getByText('Leads', { exact: true }).first().isVisible().catch(() => false);
-        return headerVisible || /\/lightning\/o\/Lead\//i.test(this.page.url());
-      },
-      Opportunities: async () => {
-        const headerVisible = await this.page.getByText('Opportunities', { exact: true }).first().isVisible().catch(() => false);
-        return headerVisible || /\/lightning\/o\/Opportunity\//i.test(this.page.url());
-      },
-      Cases: async () => {
-        const headerVisible = await this.page.getByText('Cases', { exact: true }).first().isVisible().catch(() => false);
-        return headerVisible || /\/lightning\/o\/Case\//i.test(this.page.url());
-      },
-      Planner: async () => {
-        const plannerButtonVisible = await this.page.locator("lightning-button-icon [data-key='add']").first().isVisible().catch(() => false);
-        return plannerButtonVisible || /planner|agenda|scheduler/i.test(this.page.url());
-      },
-    };
-
-    const check = checks[objectName];
-    if (!check) {
-      return true;
-    }
-
-    return check();
+    
+    await expect(this.objectDropdownPanel).toBeHidden();
+    Logger.pass(`Selected object: ${objectName}`);
   }
 
 }

@@ -35,7 +35,7 @@ switch (rawBrowser) {
 }
 
 export default defineConfig({
-  globalSetup: undefined,
+  globalSetup: process.env.SKIP_GLOBAL_SETUP === 'true' ? undefined : './global-setup.ts',
   testDir: './tests',
   timeout: 60000,
   expect: {
@@ -51,7 +51,7 @@ export default defineConfig({
   ],
   use: {
     baseURL,
-    storageState: undefined,
+     storageState: 'auth.json',
     headless,
     screenshot: 'on',
     video: 'on',
