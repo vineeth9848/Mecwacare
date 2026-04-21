@@ -1,0 +1,660 @@
+# Page snapshot
+
+```yaml
+- generic:
+  - generic [ref=e2]:
+    - generic [ref=e3]:
+      - link "Skip to Navigation" [ref=e4] [cursor=pointer]:
+        - /url: javascript:void(0);
+      - link "Skip to Main Content" [ref=e5] [cursor=pointer]:
+        - /url: javascript:void(0);
+      - generic [ref=e8]:
+        - img [ref=e12]
+        - generic [ref=e15]: Microsoft is retiring Exchange Web Services (EWS) for Microsoft Office 365. To avoid service disruption, upgrade your Microsoft connection by August 3, 2026.
+        - link "Upgrade Now." [ref=e16] [cursor=pointer]:
+          - /url: /lightning/setup/ActivitySyncEngineSettingsMain/home
+        - link "Close" [ref=e17] [cursor=pointer]:
+          - /url: javascript:void(0);
+          - generic [ref=e19]:
+            - img [ref=e21]
+            - generic [ref=e24]: Close
+      - generic [ref=e28]:
+        - generic [ref=e32]:
+          - button "Toggle Panel" [ref=e36] [cursor=pointer]:
+            - img [ref=e40]
+            - generic [ref=e43]: Menu
+          - generic [ref=e48]:
+            - img [ref=e52]
+            - generic [ref=e56]: Sandbox (UAT)
+        - button "Show menu" [ref=e65] [cursor=pointer]:
+          - img [ref=e67]
+          - generic [ref=e70]: Show menu
+      - generic [ref=e71]:
+        - button "Search" [ref=e77]:
+          - img [ref=e79]
+          - text: Search...
+        - navigation "Global Header" [ref=e82]:
+          - list [ref=e84]:
+            - listitem [ref=e85]:
+              - group [ref=e86]:
+                - button "Add favorite" [ref=e88] [cursor=pointer]:
+                  - generic [ref=e89]:
+                    - img [ref=e93]
+                    - tooltip "Add favorite"
+                - button "Favorites list" [ref=e97] [cursor=pointer]:
+                  - generic [ref=e98]:
+                    - img [ref=e102]
+                    - tooltip "Favorites list"
+            - listitem [ref=e105]:
+              - button "Global Actions" [ref=e111] [cursor=pointer]:
+                - generic [ref=e112]:
+                  - img [ref=e116]
+                  - tooltip "Global Actions"
+            - listitem [ref=e119]:
+              - button "Guidance Center" [ref=e121] [cursor=pointer]:
+                - generic [ref=e122]:
+                  - img [ref=e126]
+                  - tooltip "Guidance Center"
+            - listitem [ref=e129]:
+              - button "Salesforce Help" [ref=e132] [cursor=pointer]:
+                - generic [ref=e133]:
+                  - img [ref=e137]
+                  - tooltip "Salesforce Help"
+            - listitem [ref=e140]:
+              - button "Setup" [ref=e146] [cursor=pointer]:
+                - generic [ref=e147]:
+                  - img [ref=e151]
+                  - tooltip "Setup"
+            - listitem [ref=e154]:
+              - button "17 Notifications" [ref=e157] [cursor=pointer]:
+                - generic [ref=e158]:
+                  - generic [ref=e159]:
+                    - img [ref=e163]
+                    - generic [ref=e167]: "17"
+                  - tooltip "Notifications"
+              - generic [ref=e168]: 17 new notifications
+            - listitem [ref=e169]:
+              - button "View profile" [ref=e172] [cursor=pointer]:
+                - generic [ref=e173]:
+                  - tooltip "View profile"
+    - generic [ref=e177]:
+      - generic:
+        - generic [ref=e178]:
+          - generic [ref=e180]:
+            - generic [ref=e181]:
+              - navigation "App" [ref=e182]:
+                - button "App Launcher" [ref=e184] [cursor=pointer]:
+                  - generic [ref=e195]: App Launcher
+              - heading "mCare360" [level=1] [ref=e196]:
+                - generic "mCare360" [ref=e197]
+            - navigation "Global" [ref=e198]:
+              - link "Planner" [ref=e200] [cursor=pointer]:
+                - /url: /lightning/n/maica_cc__Planner
+                - generic [ref=e201]: Planner
+              - button "Show Navigation Menu" [ref=e204] [cursor=pointer]:
+                - generic [ref=e205]:
+                  - img
+                - generic [ref=e206]: Show Navigation Menu
+          - navigation "Workspaces" [ref=e208]:
+            - tablist "Workspace tabs for mCare360" [ref=e209]:
+              - generic [ref=e211]: Press Spacebar to reorder tabs.
+              - tab "Loading... Loading..." [ref=e212] [cursor=pointer]:
+                - generic [ref=e213]:
+                  - generic:
+                    - generic:
+                      - generic:
+                        - generic:
+                          - img
+                        - generic: Loading...
+                - generic [ref=e214]: Loading...
+              - button "Actions" [ref=e217] [cursor=pointer]:
+                - img [ref=e219]
+                - generic [ref=e222]: Actions
+              - button "Close Tab" [ref=e224] [cursor=pointer]:
+                - img [ref=e226]
+                - generic [ref=e229]: Close Tab
+              - status [ref=e230]
+              - tab "maica cc Appointment c APPT - 7947236 | Appointment" [ref=e231] [cursor=pointer]:
+                - generic [ref=e232]:
+                  - generic:
+                    - generic:
+                      - generic:
+                        - generic:
+                          - img
+                        - generic: maica cc Appointment c
+                - generic [ref=e233]: APPT - 7947236 | Appointment
+              - button "Actions" [ref=e236] [cursor=pointer]:
+                - img [ref=e238]
+                - generic [ref=e241]: Actions
+              - button "Close Tab" [ref=e243] [cursor=pointer]:
+                - img [ref=e245]
+                - generic [ref=e248]: Close Tab
+              - status [ref=e249]
+              - tab "Opportunity Mufasa Testrecord - HACC - Ballarat - Low Fee | Opportunity" [ref=e250] [cursor=pointer]:
+                - generic [ref=e251]:
+                  - generic:
+                    - generic:
+                      - generic:
+                        - generic:
+                          - img
+                        - generic: Opportunity
+                - generic [ref=e252]: Mufasa Testrecord - HACC - Ballarat - Low Fee | Opportunity
+              - button "Actions" [ref=e255] [cursor=pointer]:
+                - img [ref=e257]
+                - generic [ref=e260]: Actions
+              - button "Close Tab" [ref=e262] [cursor=pointer]:
+                - img [ref=e264]
+                - generic [ref=e267]: Close Tab
+              - status [ref=e268]
+              - tab "maica cc Appointment c APPT - 7947238 | Appointment" [ref=e269] [cursor=pointer]:
+                - generic [ref=e270]:
+                  - generic:
+                    - generic:
+                      - generic:
+                        - generic:
+                          - img
+                        - generic: maica cc Appointment c
+                - generic [ref=e271]: APPT - 7947238 | Appointment
+              - button "Actions" [ref=e274] [cursor=pointer]:
+                - img [ref=e276]
+                - generic [ref=e279]: Actions
+              - button "Close Tab" [ref=e281] [cursor=pointer]:
+                - img [ref=e283]
+                - generic [ref=e286]: Close Tab
+              - status [ref=e287]
+              - tab "maica cc Service Agreement c Maureen Banks - CHSP - Southern Metro - Low Fee | Service Agreement" [active] [selected] [ref=e288] [cursor=pointer]:
+                - generic [ref=e289]:
+                  - generic:
+                    - generic:
+                      - generic:
+                        - generic:
+                          - img
+                        - generic: maica cc Service Agreement c
+                - generic [ref=e290]: Maureen Banks - CHSP - Southern Metro - Low Fee | Service Agreement
+              - button "Actions" [ref=e293] [cursor=pointer]:
+                - img [ref=e295]
+                - generic [ref=e298]: Actions
+              - button "Close Tab" [ref=e300] [cursor=pointer]:
+                - img [ref=e302]
+                - generic [ref=e305]: Close Tab
+              - status [ref=e306] [cursor=pointer]
+              - button "More Show additional tabs" [ref=e311] [cursor=pointer]:
+                - generic [ref=e312]: More
+                - generic [ref=e314]:
+                  - img [ref=e316]
+                  - generic [ref=e319]: Show additional tabs
+        - main [ref=e322]:
+          - tabpanel [ref=e323]:
+            - tabpanel [ref=e326]:
+              - generic [ref=e341]:
+                - generic [ref=e350]:
+                  - generic [ref=e351]:
+                    - heading "Service Agreement Maureen Banks - CHSP - Southern Metro - Low Fee" [level=1] [ref=e358]:
+                      - generic [ref=e360]: Service Agreement
+                      - generic [ref=e361]: Maureen Banks - CHSP - Southern Metro - Low Fee
+                    - generic [ref=e366]:
+                      - generic "Manage Services" [ref=e367]:
+                        - button "Manage Services" [ref=e372] [cursor=pointer]
+                      - generic "Financial Hardship" [ref=e373]:
+                        - button "Financial Hardship" [ref=e378] [cursor=pointer]
+                      - generic "Edit" [ref=e379]:
+                        - button "Edit" [ref=e384] [cursor=pointer]
+                      - button "Show more actions" [ref=e386] [cursor=pointer]:
+                        - img [ref=e388]
+                        - generic [ref=e391]: Show more actions
+                  - generic [ref=e392]:
+                    - generic [ref=e394]:
+                      - paragraph [ref=e395]: Active
+                      - paragraph [ref=e396]:
+                        - generic [ref=e402]:
+                          - generic "True" [ref=e403]:
+                            - generic [ref=e404]:
+                              - img [ref=e406]
+                              - generic [ref=e409]: "True"
+                          - generic [ref=e410]: Active
+                    - generic [ref=e412]:
+                      - paragraph [ref=e413]: Funding Source
+                      - paragraph [ref=e414]:
+                        - generic [ref=e415]: Block Funding
+                    - generic [ref=e417]:
+                      - paragraph [ref=e418]: Funding Type
+                      - paragraph [ref=e419]:
+                        - generic [ref=e420]: CHSP
+                    - generic [ref=e422]:
+                      - paragraph [ref=e423]: Budget Status
+                      - paragraph [ref=e424]:
+                        - generic [ref=e430]: "- Budget Completed"
+                - generic [ref=e431]:
+                  - generic [ref=e433]:
+                    - generic [ref=e439]:
+                      - heading "Information" [level=3] [ref=e440]:
+                        - button "Information" [expanded] [ref=e441] [cursor=pointer]:
+                          - img [ref=e445]
+                          - generic "Information" [ref=e448]
+                      - list [ref=e451]:
+                        - generic [ref=e455]:
+                          - listitem [ref=e458]:
+                            - generic [ref=e460]:
+                              - generic [ref=e461]: Service Agreement Name
+                              - generic [ref=e462]:
+                                - generic [ref=e464]: Maureen Banks - CHSP - Southern Metro - Low Fee
+                                - button "Edit Service Agreement Name" [ref=e465] [cursor=pointer]:
+                                  - generic [ref=e467]: Edit Service Agreement Name
+                          - listitem [ref=e470]:
+                            - generic [ref=e472]:
+                              - generic [ref=e473]: Participant
+                              - generic [ref=e474]:
+                                - generic [ref=e480]:
+                                  - link "Maureen Banks" [ref=e481] [cursor=pointer]:
+                                    - /url: /lightning/r/Contact/003AD00000psVNbYAM/view
+                                    - generic [ref=e485]: Maureen Banks
+                                  - button "Open Maureen Banks Preview" [ref=e487] [cursor=pointer]:
+                                    - img [ref=e489]
+                                    - generic [ref=e492]: Open Maureen Banks Preview
+                                - button "Edit Participant" [ref=e493] [cursor=pointer]:
+                                  - generic [ref=e495]: Edit Participant
+                          - listitem [ref=e498]:
+                            - generic [ref=e500]:
+                              - generic [ref=e501]: Price List
+                              - button "Help Price List" [ref=e505] [cursor=pointer]:
+                                - img [ref=e507]
+                                - generic [ref=e510]: Help Price List
+                              - generic [ref=e511]:
+                                - generic [ref=e517]:
+                                  - link "CHSP - Southern Metro - Low Fee" [ref=e518] [cursor=pointer]:
+                                    - /url: /lightning/r/maica_cc__Price_List__c/a0uAD0000046ugPYAQ/view
+                                    - generic [ref=e522]: CHSP - Southern Metro - Low Fee
+                                  - button "Open CHSP - Southern Metro - Low Fee Preview" [ref=e524] [cursor=pointer]:
+                                    - img [ref=e526]
+                                    - generic [ref=e529]: Open CHSP - Southern Metro - Low Fee Preview
+                                - button "Edit Price List" [ref=e530] [cursor=pointer]:
+                                  - generic [ref=e532]: Edit Price List
+                          - listitem [ref=e535]:
+                            - generic [ref=e537]:
+                              - generic [ref=e538]: Service Provider
+                              - generic [ref=e539]:
+                                - generic [ref=e545]:
+                                  - link "mecwacare" [ref=e546] [cursor=pointer]:
+                                    - /url: /lightning/r/Account/001W200000FpT5uIAF/view
+                                    - generic [ref=e550]: mecwacare
+                                  - button "Open mecwacare Preview" [ref=e552] [cursor=pointer]:
+                                    - img [ref=e554]
+                                    - generic [ref=e557]: Open mecwacare Preview
+                                - button "Edit Service Provider" [ref=e558] [cursor=pointer]:
+                                  - generic [ref=e560]: Edit Service Provider
+                          - listitem [ref=e563]:
+                            - generic [ref=e565]:
+                              - generic [ref=e566]: Description
+                              - button "Edit Description" [ref=e568] [cursor=pointer]:
+                                - generic [ref=e570]: Edit Description
+                          - listitem [ref=e573]:
+                            - generic [ref=e576]: Location
+                          - listitem [ref=e580]:
+                            - generic [ref=e582]:
+                              - generic [ref=e583]: Agreement Review Date
+                              - generic [ref=e584]:
+                                - generic [ref=e586]: 1/7/2017
+                                - button "Edit Agreement Review Date" [ref=e587] [cursor=pointer]:
+                                  - generic [ref=e589]: Edit Agreement Review Date
+                          - listitem [ref=e592]:
+                            - generic [ref=e594]:
+                              - generic [ref=e595]: Cost Centre
+                              - generic [ref=e600]: "750.00"
+                    - generic [ref=e606]:
+                      - heading "Agreement Information" [level=3] [ref=e607]:
+                        - button "Agreement Information" [expanded] [ref=e608] [cursor=pointer]:
+                          - img [ref=e612]
+                          - generic "Agreement Information" [ref=e615]
+                      - list [ref=e618]:
+                        - generic [ref=e619]:
+                          - generic [ref=e622]:
+                            - listitem [ref=e625]:
+                              - generic [ref=e627]:
+                                - generic [ref=e628]: Funding
+                                - button "Help Funding" [ref=e632] [cursor=pointer]:
+                                  - img [ref=e634]
+                                  - generic [ref=e637]: Help Funding
+                                - generic [ref=e638]:
+                                  - generic [ref=e644]:
+                                    - link "FUND - 023464" [ref=e645] [cursor=pointer]:
+                                      - /url: /lightning/r/maica_cc__Funding__c/a0SAD000001PchP2AS/view
+                                      - generic [ref=e649]: FUND - 023464
+                                    - button "Open FUND - 023464 Preview" [ref=e651] [cursor=pointer]:
+                                      - img [ref=e653]
+                                      - generic [ref=e656]: Open FUND - 023464 Preview
+                                  - button "Edit Funding" [ref=e657] [cursor=pointer]:
+                                    - generic [ref=e659]: Edit Funding
+                            - listitem [ref=e662]:
+                              - generic [ref=e664]:
+                                - generic [ref=e665]: Funding Source
+                                - button "Help Funding Source" [ref=e669] [cursor=pointer]:
+                                  - img [ref=e671]
+                                  - generic [ref=e674]: Help Funding Source
+                                - generic [ref=e675]:
+                                  - generic [ref=e677]: Block Funding
+                                  - button "Edit Funding Source" [ref=e678] [cursor=pointer]:
+                                    - generic [ref=e680]: Edit Funding Source
+                            - listitem [ref=e683]:
+                              - generic [ref=e685]:
+                                - generic [ref=e686]: Funding Type
+                                - button "Help Funding Type" [ref=e690] [cursor=pointer]:
+                                  - img [ref=e692]
+                                  - generic [ref=e695]: Help Funding Type
+                                - generic [ref=e696]:
+                                  - generic [ref=e698]: CHSP
+                                  - button "Edit Funding Type" [ref=e699] [cursor=pointer]:
+                                    - generic [ref=e701]: Edit Funding Type
+                            - listitem [ref=e704]:
+                              - generic [ref=e706]:
+                                - generic [ref=e707]: Funding Program
+                                - generic [ref=e712]: CHSP - Southern Metro
+                          - generic [ref=e715]:
+                            - listitem [ref=e718]:
+                              - generic [ref=e720]:
+                                - generic [ref=e721]: Status
+                                - generic [ref=e726]: Active
+                            - listitem [ref=e729]:
+                              - generic [ref=e731]:
+                                - generic [ref=e732]: Draft Service Agreement
+                                - generic [ref=e733]:
+                                  - generic [ref=e738]:
+                                    - generic "False" [ref=e739]:
+                                      - generic [ref=e740]:
+                                        - img [ref=e742]
+                                        - generic [ref=e745]: "False"
+                                    - generic [ref=e746]: Draft Service Agreement
+                                  - button "Edit Draft Service Agreement" [ref=e747] [cursor=pointer]:
+                                    - generic [ref=e749]: Edit Draft Service Agreement
+                    - heading "Agreement Period Information" [level=3] [ref=e756]:
+                      - button "Agreement Period Information" [expanded] [ref=e757] [cursor=pointer]:
+                        - img [ref=e761]
+                        - generic "Agreement Period Information" [ref=e764]
+                    - heading "Agreement Financial Information" [level=3] [ref=e774]:
+                      - button "Agreement Financial Information" [expanded] [ref=e775] [cursor=pointer]:
+                        - img [ref=e779]
+                        - generic "Agreement Financial Information" [ref=e782]
+                    - heading "Home Care Agreement" [level=3] [ref=e792]:
+                      - button "Home Care Agreement" [expanded] [ref=e793] [cursor=pointer]:
+                        - img [ref=e797]
+                        - generic "Home Care Agreement" [ref=e800]
+                    - heading "Catchment Area" [level=3] [ref=e810]:
+                      - button "Catchment Area" [expanded] [ref=e811] [cursor=pointer]:
+                        - img [ref=e815]
+                        - generic "Catchment Area" [ref=e818]
+                    - heading "System Information" [level=3] [ref=e828]:
+                      - button "System Information" [expanded] [ref=e829] [cursor=pointer]:
+                        - img [ref=e833]
+                        - generic "System Information" [ref=e836]
+                  - generic [ref=e845]:
+                    - heading "Tabs" [level=2] [ref=e846]
+                    - generic "Tabs" [ref=e847]:
+                      - generic [ref=e848]:
+                        - heading "Tabs" [level=2] [ref=e849]
+                        - tablist "Tabs" [ref=e851]:
+                          - tab "Agreement Items" [selected] [ref=e852] [cursor=pointer]
+                          - tab "Related" [ref=e853] [cursor=pointer]
+                          - tab "Activity" [ref=e854] [cursor=pointer]
+                        - tabpanel "Agreement Items" [ref=e857]:
+                          - article "Agreement Items" [ref=e862]:
+                            - generic [ref=e867]:
+                              - generic [ref=e868]:
+                                - generic [ref=e870]:
+                                  - generic [ref=e871]:
+                                    - generic [ref=e873]:
+                                      - img [ref=e877]
+                                      - heading "Agreement Items (4)" [level=2] [ref=e879]:
+                                        - link "Agreement Items (4)" [ref=e880] [cursor=pointer]:
+                                          - /url: /lightning/cmp/force__dynamicRelatedListViewAll?force__flexipageId=Mecwa_Service_Agreement_Record_Page&force__cmpId=lst_dynamicRelatedList5&force__recordId=a18AD000005QGgPYAW
+                                          - generic "Agreement Items" [ref=e881]
+                                          - generic "(4)" [ref=e882]
+                                    - generic [ref=e884]:
+                                      - button "List View Controls" [ref=e888] [cursor=pointer]:
+                                        - img [ref=e890]
+                                        - img [ref=e894]
+                                        - generic [ref=e897]: List View Controls
+                                      - button "Refresh" [ref=e902] [cursor=pointer]:
+                                        - img [ref=e904]
+                                        - generic [ref=e907]: Refresh
+                                  - paragraph [ref=e910]:
+                                    - generic [ref=e912]:
+                                      - status "Agreement Items" [ref=e913]: 4 items •
+                                      - text: Updated a few seconds ago
+                                - generic [ref=e920]:
+                                  - generic [ref=e921]: Navigation Mode
+                                  - grid [ref=e925]:
+                                    - rowgroup:
+                                      - row "Row Number Agreement Item ID Support Item Start Date End Date Rate Utilisation Financial Hardship Discount Percentage Action":
+                                        - columnheader "Row Number":
+                                          - generic [ref=e928]:
+                                            - generic "Row Number"
+                                        - columnheader "Agreement Item ID":
+                                          - generic [ref=e930]:
+                                            - 'button "Sort by: Agreement Item ID" [ref=e931] [cursor=pointer]':
+                                              - generic [ref=e932]: "Sort by:"
+                                              - generic "Agreement Item ID" [ref=e933]
+                                            - generic [ref=e934]: "Sorted: None"
+                                            - button "Show Agreement Item ID column actions" [ref=e936] [cursor=pointer]:
+                                              - img [ref=e938]
+                                              - generic [ref=e941]: Show Agreement Item ID column actions
+                                            - slider "Agreement Item ID column width" [ref=e942]: "120"
+                                        - columnheader "Support Item":
+                                          - generic [ref=e946]:
+                                            - 'button "Sort by: Support Item" [ref=e947] [cursor=pointer]':
+                                              - generic [ref=e948]: "Sort by:"
+                                              - generic "Support Item" [ref=e949]
+                                            - generic [ref=e950]: "Sorted: None"
+                                            - button "Show Support Item column actions" [ref=e952] [cursor=pointer]:
+                                              - img [ref=e954]
+                                              - generic [ref=e957]: Show Support Item column actions
+                                            - slider "Support Item column width" [ref=e958]: "213"
+                                        - columnheader "Start Date":
+                                          - generic [ref=e962]:
+                                            - 'button "Sort by: Start Date" [ref=e963] [cursor=pointer]':
+                                              - generic [ref=e964]: "Sort by:"
+                                              - generic "Start Date" [ref=e965]
+                                            - generic [ref=e966]: "Sorted: None"
+                                            - button "Show Start Date column actions" [ref=e968] [cursor=pointer]:
+                                              - img [ref=e970]
+                                              - generic [ref=e973]: Show Start Date column actions
+                                            - slider "Start Date column width" [ref=e974]: "141"
+                                        - columnheader "End Date":
+                                          - generic [ref=e978]:
+                                            - 'button "Sort by: End Date" [ref=e979] [cursor=pointer]':
+                                              - generic [ref=e980]: "Sort by:"
+                                              - generic "End Date" [ref=e981]
+                                            - generic [ref=e982]: "Sorted: None"
+                                            - button "Show End Date column actions" [ref=e984] [cursor=pointer]:
+                                              - img [ref=e986]
+                                              - generic [ref=e989]: Show End Date column actions
+                                            - slider "End Date column width" [ref=e990]: "153"
+                                        - columnheader "Rate":
+                                          - generic [ref=e994]:
+                                            - 'button "Sort by: Rate" [ref=e995] [cursor=pointer]':
+                                              - generic [ref=e996]: "Sort by:"
+                                              - generic "Rate" [ref=e997]
+                                            - generic [ref=e998]: "Sorted: None"
+                                            - button "Show Rate column actions" [ref=e1000] [cursor=pointer]:
+                                              - img [ref=e1002]
+                                              - generic [ref=e1005]: Show Rate column actions
+                                            - slider "Rate column width" [ref=e1006]: "120"
+                                        - columnheader "Utilisation":
+                                          - generic [ref=e1010]:
+                                            - 'button "Sort by: Utilisation" [ref=e1011] [cursor=pointer]':
+                                              - generic [ref=e1012]: "Sort by:"
+                                              - generic "Utilisation" [ref=e1013]
+                                            - generic [ref=e1014]: "Sorted: None"
+                                            - button "Show Utilisation column actions" [ref=e1016] [cursor=pointer]:
+                                              - img [ref=e1018]
+                                              - generic [ref=e1021]: Show Utilisation column actions
+                                            - slider "Utilisation column width" [ref=e1022]: "120"
+                                        - columnheader "Financial Hardship":
+                                          - generic [ref=e1026]:
+                                            - 'button "Sort by: Financial Hardship" [ref=e1027] [cursor=pointer]':
+                                              - generic [ref=e1028]: "Sort by:"
+                                              - generic "Financial Hardship" [ref=e1029]
+                                            - generic [ref=e1030]: "Sorted: None"
+                                            - button "Show Financial Hardship column actions" [ref=e1032] [cursor=pointer]:
+                                              - img [ref=e1034]
+                                              - generic [ref=e1037]: Show Financial Hardship column actions
+                                            - slider "Financial Hardship column width" [ref=e1038]: "120"
+                                        - columnheader "Discount Percentage":
+                                          - generic [ref=e1042]:
+                                            - 'button "Sort by: Discount Percentage" [ref=e1043] [cursor=pointer]':
+                                              - generic [ref=e1044]: "Sort by:"
+                                              - generic "Discount Percentage" [ref=e1045]
+                                            - generic [ref=e1046]: "Sorted: None"
+                                            - button "Show Discount Percentage column actions" [ref=e1048] [cursor=pointer]:
+                                              - img [ref=e1050]
+                                              - generic [ref=e1053]: Show Discount Percentage column actions
+                                            - slider "Discount Percentage column width" [ref=e1054]: "120"
+                                        - columnheader "Action":
+                                          - generic [ref=e1059]:
+                                            - generic "Action"
+                                    - rowgroup [ref=e1060]:
+                                      - row "ITEM - 237278 Open ITEM - 237278 Preview Annual Review - Domestic Assistance 23/3/2020 31/12/2030 0% False Financial Hardship Show Actions" [ref=e1061]:
+                                        - gridcell [ref=e1062]
+                                        - rowheader "ITEM - 237278 Open ITEM - 237278 Preview" [ref=e1067]:
+                                          - generic [ref=e1076]:
+                                            - link "ITEM - 237278" [ref=e1077] [cursor=pointer]:
+                                              - /url: /lightning/r/a02AD00000H6GjOYAV/view
+                                              - generic [ref=e1081]: ITEM - 237278
+                                            - button "Open ITEM - 237278 Preview" [ref=e1083] [cursor=pointer]:
+                                              - img [ref=e1085]
+                                              - generic [ref=e1088]: Open ITEM - 237278 Preview
+                                        - gridcell "Annual Review - Domestic Assistance" [ref=e1089]:
+                                          - link "Annual Review - Domestic Assistance" [ref=e1096] [cursor=pointer]:
+                                            - /url: /lightning/r/a1EAD000002qxFo2AI/view
+                                            - generic [ref=e1097]: Annual Review - Domestic Assistance
+                                        - gridcell "23/3/2020" [ref=e1098]:
+                                          - generic [ref=e1102]: 23/3/2020
+                                        - gridcell "31/12/2030" [ref=e1103]:
+                                          - generic [ref=e1107]: 31/12/2030
+                                        - gridcell [ref=e1108]
+                                        - gridcell "0%" [ref=e1109]:
+                                          - generic [ref=e1113]: 0%
+                                        - gridcell "False Financial Hardship" [ref=e1114]:
+                                          - generic [ref=e1122]:
+                                            - generic "False" [ref=e1123]:
+                                              - generic [ref=e1124]:
+                                                - img [ref=e1126]
+                                                - generic [ref=e1129]: "False"
+                                            - generic [ref=e1130]: Financial Hardship
+                                        - gridcell [ref=e1131]
+                                        - gridcell "Show Actions" [ref=e1132]:
+                                          - button "Show Actions" [ref=e1139] [cursor=pointer]:
+                                            - img [ref=e1141]
+                                            - generic [ref=e1144]: Show Actions
+                                      - row "ITEM - 246867 Open ITEM - 246867 Preview Care Coordination - Domestic Assistance 1/7/2016 31/12/2030 0% False Financial Hardship Show Actions" [ref=e1145]:
+                                        - gridcell [ref=e1146]
+                                        - rowheader "ITEM - 246867 Open ITEM - 246867 Preview" [ref=e1151]:
+                                          - generic [ref=e1160]:
+                                            - link "ITEM - 246867" [ref=e1161] [cursor=pointer]:
+                                              - /url: /lightning/r/a02AD00000H6JP7YAN/view
+                                              - generic [ref=e1165]: ITEM - 246867
+                                            - button "Open ITEM - 246867 Preview" [ref=e1167] [cursor=pointer]:
+                                              - img [ref=e1169]
+                                              - generic [ref=e1172]: Open ITEM - 246867 Preview
+                                        - gridcell "Care Coordination - Domestic Assistance" [ref=e1173]:
+                                          - link "Care Coordination - Domestic Assistance" [ref=e1180] [cursor=pointer]:
+                                            - /url: /lightning/r/a1EAD000002qxGD2AY/view
+                                            - generic [ref=e1181]: Care Coordination - Domestic Assistance
+                                        - gridcell "1/7/2016" [ref=e1182]:
+                                          - generic [ref=e1186]: 1/7/2016
+                                        - gridcell "31/12/2030" [ref=e1187]:
+                                          - generic [ref=e1191]: 31/12/2030
+                                        - gridcell [ref=e1192]
+                                        - gridcell "0%" [ref=e1193]:
+                                          - generic [ref=e1197]: 0%
+                                        - gridcell "False Financial Hardship" [ref=e1198]:
+                                          - generic [ref=e1206]:
+                                            - generic "False" [ref=e1207]:
+                                              - generic [ref=e1208]:
+                                                - img [ref=e1210]
+                                                - generic [ref=e1213]: "False"
+                                            - generic [ref=e1214]: Financial Hardship
+                                        - gridcell [ref=e1215]
+                                        - gridcell "Show Actions" [ref=e1216]:
+                                          - button "Show Actions" [ref=e1223] [cursor=pointer]:
+                                            - img [ref=e1225]
+                                            - generic [ref=e1228]: Show Actions
+                                      - row "ITEM - 255744 Open ITEM - 255744 Preview Domestic Assistance 1/7/2016 31/12/2030 0% False Financial Hardship Show Actions" [ref=e1229]:
+                                        - gridcell [ref=e1230]
+                                        - rowheader "ITEM - 255744 Open ITEM - 255744 Preview" [ref=e1235]:
+                                          - generic [ref=e1244]:
+                                            - link "ITEM - 255744" [ref=e1245] [cursor=pointer]:
+                                              - /url: /lightning/r/a02AD00000H6MARYA3/view
+                                              - generic [ref=e1249]: ITEM - 255744
+                                            - button "Open ITEM - 255744 Preview" [ref=e1251] [cursor=pointer]:
+                                              - img [ref=e1253]
+                                              - generic [ref=e1256]: Open ITEM - 255744 Preview
+                                        - gridcell "Domestic Assistance" [ref=e1257]:
+                                          - link "Domestic Assistance" [ref=e1264] [cursor=pointer]:
+                                            - /url: /lightning/r/a1EAD000002qxGR2AY/view
+                                            - generic [ref=e1265]: Domestic Assistance
+                                        - gridcell "1/7/2016" [ref=e1266]:
+                                          - generic [ref=e1270]: 1/7/2016
+                                        - gridcell "31/12/2030" [ref=e1271]:
+                                          - generic [ref=e1275]: 31/12/2030
+                                        - gridcell [ref=e1276]
+                                        - gridcell "0%" [ref=e1277]:
+                                          - generic [ref=e1281]: 0%
+                                        - gridcell "False Financial Hardship" [ref=e1282]:
+                                          - generic [ref=e1290]:
+                                            - generic "False" [ref=e1291]:
+                                              - generic [ref=e1292]:
+                                                - img [ref=e1294]
+                                                - generic [ref=e1297]: "False"
+                                            - generic [ref=e1298]: Financial Hardship
+                                        - gridcell [ref=e1299]
+                                        - gridcell "Show Actions" [ref=e1300]:
+                                          - button "Show Actions" [ref=e1307] [cursor=pointer]:
+                                            - img [ref=e1309]
+                                            - generic [ref=e1312]: Show Actions
+                                      - row "ITEM - 269619 Open ITEM - 269619 Preview OHS_HC 5/8/2024 31/12/2030 0% False Financial Hardship Show Actions" [ref=e1313]:
+                                        - gridcell [ref=e1314]
+                                        - rowheader "ITEM - 269619 Open ITEM - 269619 Preview" [ref=e1319]:
+                                          - generic [ref=e1328]:
+                                            - link "ITEM - 269619" [ref=e1329] [cursor=pointer]:
+                                              - /url: /lightning/r/a02AD00000H6RG2YAN/view
+                                              - generic [ref=e1333]: ITEM - 269619
+                                            - button "Open ITEM - 269619 Preview" [ref=e1335] [cursor=pointer]:
+                                              - img [ref=e1337]
+                                              - generic [ref=e1340]: Open ITEM - 269619 Preview
+                                        - gridcell "OHS_HC" [ref=e1341]:
+                                          - link "OHS_HC" [ref=e1348] [cursor=pointer]:
+                                            - /url: /lightning/r/a1EAD000002qxGi2AI/view
+                                            - generic [ref=e1349]: OHS_HC
+                                        - gridcell "5/8/2024" [ref=e1350]:
+                                          - generic [ref=e1354]: 5/8/2024
+                                        - gridcell "31/12/2030" [ref=e1355]:
+                                          - generic [ref=e1359]: 31/12/2030
+                                        - gridcell [ref=e1360]
+                                        - gridcell "0%" [ref=e1361]:
+                                          - generic [ref=e1365]: 0%
+                                        - gridcell "False Financial Hardship" [ref=e1366]:
+                                          - generic [ref=e1374]:
+                                            - generic "False" [ref=e1375]:
+                                              - generic [ref=e1376]:
+                                                - img [ref=e1378]
+                                                - generic [ref=e1381]: "False"
+                                            - generic [ref=e1382]: Financial Hardship
+                                        - gridcell [ref=e1383]
+                                        - gridcell "Show Actions" [ref=e1384]:
+                                          - button "Show Actions" [ref=e1391] [cursor=pointer]:
+                                            - img [ref=e1393]
+                                            - generic [ref=e1396]: Show Actions
+                              - link "View All Agreement Items" [ref=e1397] [cursor=pointer]:
+                                - /url: /lightning/cmp/force__dynamicRelatedListViewAll?force__flexipageId=Mecwa_Service_Agreement_Record_Page&force__cmpId=lst_dynamicRelatedList5&force__recordId=a18AD000005QGgPYAW
+                                - generic [ref=e1398]:
+                                  - text: View All
+                                  - generic [ref=e1399]: Agreement Items
+    - generic:
+      - contentinfo "Utility Bar":
+        - list [ref=e1403]:
+          - listitem [ref=e1404]:
+            - button "Omni-Channel" [ref=e1407] [cursor=pointer]:
+              - img [ref=e1411]
+              - generic [ref=e1415]: Omni-Channel
+  - generic:
+    - status
+```
