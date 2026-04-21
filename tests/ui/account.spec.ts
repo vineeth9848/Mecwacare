@@ -51,7 +51,7 @@ test('Update mandatory MDS reporting fields in Account for Opportunity closure',
   await accountPage.updateBasicInformationAccountDetails('Interpreter required', 'Yes');
   await accountPage.selectGender('Male'); 
   await accountPage.updateBasicInformationAccountDetails('Customer Category', 'Individual');
-  await accountPage.updateBasicInformationAccountDetails('DVA Card Type', 'Gold');
+  await accountPage.updateBasicInformationAccountDetails('DVA Card Type', 'GOLD');
   await accountPage.updateTextField('DVA Number', '1234567890');
   await accountPage.selectImportantInformationDetails('Pension Type', '1');
   await accountPage.selectImportantInformationDetails('Living Arrangements', 'SINGLE');
@@ -135,6 +135,7 @@ test('Verify Care Plan and Client forms under Account', async ({ page }) => {
   await homePage.verifyHomePage();
   await homePage.selectObjectFromDropdown('Accounts');
   await accountPage.selectAccountsListView('My Accounts');
+  await accountPage.refreshPage();
   const expectedEmail = accountPage.getEmailWithRunNumber(accountData.email);
   await accountPage.searchAndOpenAccountByEmail(expectedEmail);
   await accountPage.verifyCarePlanCreated(accountData.firstName, accountData.lastName);

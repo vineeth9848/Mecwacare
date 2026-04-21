@@ -1,0 +1,186 @@
+# Page snapshot
+
+```yaml
+- generic:
+  - generic [ref=e2]:
+    - generic [ref=e3]:
+      - link "Skip to Navigation" [ref=e4] [cursor=pointer]:
+        - /url: javascript:void(0);
+      - link "Skip to Main Content" [ref=e5] [cursor=pointer]:
+        - /url: javascript:void(0);
+      - generic [ref=e8]:
+        - img [ref=e12]
+        - generic [ref=e15]: Microsoft is retiring Exchange Web Services (EWS) for Microsoft Office 365. To avoid service disruption, upgrade your Microsoft connection by August 3, 2026.
+        - link "Upgrade Now." [ref=e16] [cursor=pointer]:
+          - /url: /lightning/setup/ActivitySyncEngineSettingsMain/home
+        - link "Close" [ref=e17] [cursor=pointer]:
+          - /url: javascript:void(0);
+          - generic [ref=e19]:
+            - img [ref=e21]
+            - generic [ref=e24]: Close
+      - generic [ref=e28]:
+        - generic [ref=e32]:
+          - button "Toggle Panel" [ref=e36] [cursor=pointer]:
+            - img [ref=e40]
+            - generic [ref=e43]: Menu
+          - generic [ref=e48]:
+            - img [ref=e52]
+            - generic [ref=e56]: Sandbox (UAT)
+        - button "Show menu" [ref=e65] [cursor=pointer]:
+          - img [ref=e67]
+          - generic [ref=e70]: Show menu
+      - generic [ref=e71]:
+        - button "Search" [ref=e77]:
+          - img [ref=e79]
+          - text: Search...
+        - navigation "Global Header" [ref=e82]:
+          - list [ref=e84]:
+            - listitem [ref=e85]:
+              - group [ref=e86]:
+                - button "This item doesn't support favorites" [ref=e88] [cursor=pointer]:
+                  - generic [ref=e89]:
+                    - img [ref=e93]
+                    - tooltip "This item doesn't support favorites"
+                - button "Favorites list" [ref=e97] [cursor=pointer]:
+                  - generic [ref=e98]:
+                    - img [ref=e102]
+                    - tooltip "Favorites list"
+            - listitem [ref=e105]:
+              - button "Global Actions" [ref=e111] [cursor=pointer]:
+                - generic [ref=e112]:
+                  - img [ref=e116]
+                  - tooltip "Global Actions"
+            - listitem [ref=e119]:
+              - button "Guidance Center" [ref=e121] [cursor=pointer]:
+                - generic [ref=e122]:
+                  - img [ref=e126]
+                  - tooltip "Guidance Center"
+            - listitem [ref=e129]:
+              - button "Salesforce Help" [ref=e132] [cursor=pointer]:
+                - generic [ref=e133]:
+                  - img [ref=e137]
+                  - tooltip "Salesforce Help"
+            - listitem [ref=e140]:
+              - button "Setup" [ref=e146] [cursor=pointer]:
+                - generic [ref=e147]:
+                  - img [ref=e151]
+                  - tooltip "Setup"
+            - listitem [ref=e154]:
+              - button "2 Notifications" [ref=e157] [cursor=pointer]:
+                - generic [ref=e158]:
+                  - generic [ref=e159]:
+                    - img [ref=e163]
+                    - generic [ref=e167]: "2"
+                  - tooltip "Notifications"
+              - generic [ref=e168]: 2 new notifications
+            - listitem [ref=e169]:
+              - button "View profile" [ref=e172] [cursor=pointer]:
+                - generic [ref=e173]:
+                  - tooltip "View profile"
+    - generic [ref=e177]:
+      - generic:
+        - generic [ref=e178]:
+          - generic [ref=e180]:
+            - generic [ref=e181]:
+              - navigation "App" [ref=e182]:
+                - button "App Launcher" [ref=e184] [cursor=pointer]:
+                  - generic [ref=e195]: App Launcher
+              - heading "mCare360" [level=1] [ref=e196]:
+                - generic "mCare360" [ref=e197]
+            - navigation "Global" [ref=e198]:
+              - link "Opportunities" [ref=e200] [cursor=pointer]:
+                - /url: /lightning/o/Opportunity/list?filterName=My_Opportunity
+                - generic [ref=e201]: Opportunities
+              - button "Show Navigation Menu" [ref=e204] [cursor=pointer]:
+                - img [ref=e206]
+                - generic [ref=e209]: Show Navigation Menu
+          - navigation "Workspaces" [ref=e211]:
+            - tablist "Workspace tabs for mCare360" [ref=e212]:
+              - generic [ref=e214]: Press Spacebar to reorder tabs.
+              - tab "Account John Doe514 | Account" [ref=e215] [cursor=pointer]:
+                - generic [ref=e216]:
+                  - generic:
+                    - generic:
+                      - generic:
+                        - generic:
+                          - img
+                        - generic: Account
+                - generic [ref=e217]: John Doe514 | Account
+              - button "Actions" [ref=e220] [cursor=pointer]:
+                - img [ref=e222]
+                - generic [ref=e225]: Actions
+              - button "Close Tab" [ref=e227] [cursor=pointer]:
+                - img [ref=e229]
+                - generic [ref=e232]: Close Tab
+              - status [ref=e233]
+              - tab "Opportunity John Doe514 - HACC - Ballarat - Low Fee | Opportunity" [selected] [ref=e234] [cursor=pointer]:
+                - generic [ref=e235]:
+                  - generic:
+                    - generic:
+                      - generic:
+                        - generic:
+                          - img
+                        - generic: Opportunity
+                - generic [ref=e236]: John Doe514 - HACC - Ballarat - Low Fee | Opportunity
+              - generic "Actions for John Doe514 - HACC - Ballarat - Low Fee | Opportunity" [ref=e238] [cursor=pointer]:
+                - button "Actions for John Doe514 - HACC - Ballarat - Low Fee | Opportunity" [ref=e239]:
+                  - img [ref=e241]
+                  - generic [ref=e244]: Actions for John Doe514 - HACC - Ballarat - Low Fee | Opportunity
+              - button "Close John Doe514 - HACC - Ballarat - Low Fee | Opportunity" [ref=e246] [cursor=pointer]:
+                - img [ref=e248]
+                - generic [ref=e251]: Close John Doe514 - HACC - Ballarat - Low Fee | Opportunity
+              - status [ref=e252] [cursor=pointer]
+        - generic [ref=e254]:
+          - button "Split view mode" [ref=e258] [cursor=pointer]:
+            - img [ref=e260]
+            - generic [ref=e263]: Split view mode
+          - main [ref=e264]:
+            - tabpanel [ref=e265]:
+              - generic [ref=e267]:
+                - navigation "Active Workspace Subtabs" [ref=e268]:
+                  - tablist "Subtabs for John Doe514 - HACC - Ballarat - Low Fee | Opportunity" [ref=e269]:
+                    - generic [ref=e271]: Press Spacebar to reorder tabs.
+                    - tab "Opportunity John Doe514 - HACC - Ballarat - Low Fee | Opportunity" [ref=e272] [cursor=pointer]:
+                      - generic [ref=e273]:
+                        - generic:
+                          - generic:
+                            - generic:
+                              - generic:
+                                - img
+                              - generic: Opportunity
+                      - generic [ref=e274]: John Doe514 - HACC - Ballarat - Low Fee | Opportunity
+                    - status [ref=e275]
+                    - tab "Send with Docusign Send with Docusign" [active] [selected] [ref=e276] [cursor=pointer]:
+                      - generic "Send with Docusign" [ref=e277]:
+                        - generic:
+                          - generic "Send with Docusign":
+                            - generic:
+                              - generic:
+                                - img
+                              - generic: Send with Docusign
+                      - generic [ref=e278]: Send with Docusign
+                    - generic "Actions for Send with Docusign" [ref=e280]:
+                      - button "Actions for Send with Docusign" [ref=e281] [cursor=pointer]:
+                        - img [ref=e283]
+                        - generic [ref=e286]: Actions for Send with Docusign
+                    - button "Close Send with Docusign" [ref=e288] [cursor=pointer]:
+                      - img [ref=e290]
+                      - generic [ref=e293]: Close Send with Docusign
+                    - status [ref=e294]
+                - tabpanel [ref=e296]:
+                  - iframe [ref=e304]:
+                    - generic [active]:
+                      - img "Content Starts Here" [ref=f10e1] [cursor=pointer]
+                      - generic [ref=f10e2]:
+                        - status:
+                          - generic [ref=f10e3]: Loading
+    - generic:
+      - contentinfo "Utility Bar":
+        - list [ref=e307]:
+          - listitem [ref=e308]:
+            - button "Omni-Channel" [ref=e311] [cursor=pointer]:
+              - img [ref=e315]
+              - generic [ref=e319]: Omni-Channel
+  - generic:
+    - status
+```
