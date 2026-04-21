@@ -8,9 +8,9 @@
       "appointmentType": "Clinic",
       "appointmentStatus": "Scheduled",
       "titlePrefix": "TestUser",
-      "secondaryLoginUrl": "https://mecwacare--mecwar2qa.sandbox.lightning.force.com/",
-      "secondaryUsername": "directcareteammember@mecwacare.org.au",
-      "secondaryPassword": "Test@12345"
+      "secondaryLoginUrl": "https://mecwacare--uat.sandbox.lightning.force.com/",
+      "secondaryUsername": "directcareteammember2@mecwacare.org.au.uat",
+      "secondaryPassword": "Salesforce@123"
     }
   ]
 }

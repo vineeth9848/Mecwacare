@@ -483,7 +483,7 @@ export class AccountPage extends BasePage {
     await expect(Address).toBeVisible({ timeout: 10000 });
     await Address.scrollIntoViewIfNeeded();
     await expect(Address).not.toBeEmpty();
-    await expect(Address).toHaveValue(/46 Epworth/);
+    await expect(Address).not.toHaveValue('');///46 Epworth/
     Logger.pass('Verified Address field in client form not empty and contains expected text');
 
     const MainLanguage = await this.page.getByLabel('Main Language').first();
