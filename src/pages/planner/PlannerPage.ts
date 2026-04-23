@@ -51,7 +51,7 @@ await this.safeAction(async () => {
     Logger.pass(`Selected participant: ${participantName}`);
 
     const resourceInput = this.page.locator(PlannerLocators.participantInput).nth(1);
-    await this.selectLookupOption(resourceInput, resourceName, resourceName);
+    await this.LookupOption(resourceInput, resourceName, resourceName);
     Logger.pass(`Selected direct care resource: ${resourceName}`);
   }
 
@@ -69,7 +69,7 @@ await this.safeAction(async () => {
 
   const now = new Date();
   
-  now.setMinutes(now.getMinutes() + 10);
+  now.setMinutes(now.getMinutes() + 15);
 
   const tenMinsLater = now.toLocaleString('en-US', {
     hour: 'numeric',
@@ -98,7 +98,7 @@ await this.safeAction(async () => {
     Logger.step(`Select appointment service: ${serviceName}`);
     const appointmentServiceInput = this.page.locator(PlannerLocators.appointmentServiceInput).first();
     await this.scrollIntoView(appointmentServiceInput);
-    await this.selectLookupOption(appointmentServiceInput, serviceName, serviceName);
+    await this.LookupOption(appointmentServiceInput, serviceName, serviceName);
 
     await this.page.waitForTimeout(10000);
 
@@ -114,18 +114,21 @@ await this.safeAction(async () => {
   async navigationToNextPages(appointmentType: string, appointmentStatus: string, titlePrefix: string): Promise<void> {
     Logger.step('Navigate through remaining Planner pages');
 
-    //await this.selectParticipantLocationAndClickNext();
-    //await this.clickNextButton('schedule');
+    await this.selectParticipantLocationAndClickNext();
+    await this.clickNextButton('schedule');
 
-    Logger.step("Select appointment type and status, then click Next on schedule page");
-    const nextButton = this.page.getByRole('button', { name: 'Next' }).first();
-    await nextButton.waitFor({ state: 'visible', timeout: 30000 });
-    await nextButton.scrollIntoViewIfNeeded();
-    await this.safeAction(async () => {
-      await nextButton.click({ force: true });
-    });
+    // Logger.step("Select appointment type and status, then click Next on schedule page");
+    // const NextButton = this.page.locator("button:has-text('Next')").first();
+    // await this.waitForVisible(NextButton, 15000);
+    // await NextButton.scrollIntoViewIfNeeded();
+    // // await NextButton.waitFor({ state: 'visible', timeout: 30000 });
+    // // await NextButton.scrollIntoViewIfNeeded();
+   
+    // await NextButton.click({ force: true });
+   
     // await this.waitForPageReady();
     Logger.pass("Clicked Next on schedule page");
+    await this.page.waitForTimeout(5000);
 
     const appointmentTypeSelect = this.page.locator(PlannerLocators.appointmentTypeSelect).first();
     await this.selectDropdownByLabel(appointmentTypeSelect, appointmentType);
@@ -226,15 +229,15 @@ await this.safeAction(async () => {
 
   private async selectParticipantLocationAndClickNext(): Promise<void> {
     Logger.step('Select participant location and click Next');
-    const participantLocationSelect = this.page.locator(PlannerLocators.participantLocationSelect).last();
-    await this.scrollIntoView(participantLocationSelect);
-    await this.waitForVisible(participantLocationSelect, 15000);
+    // const participantLocationSelect = this.page.locator(PlannerLocators.participantLocationSelect).last();
+    // await this.scrollIntoView(participantLocationSelect);
+    // await this.waitForVisible(participantLocationSelect, 15000);
 
-    await this.safeAction(async () => {
-      await participantLocationSelect.click();
-      await participantLocationSelect.press('ArrowDown');
-      await participantLocationSelect.press('Enter');
-    });
+    // await this.safeAction(async () => {
+    //   await participantLocationSelect.click();
+    //   await participantLocationSelect.press('ArrowDown');
+    //   await participantLocationSelect.press('Enter');
+    // });
 
     await this.clickNextButton('participant location');
     Logger.pass('Participant location selected');
@@ -242,8 +245,9 @@ await this.safeAction(async () => {
 
   async clickNextButton(stepName: string): Promise<void> {
     Logger.step(`Click Next button on ${stepName} page`);
-    const nextButton = this.page.getByRole('button', { name: 'Next' }).first();
+    const nextButton = this.page.locator("//button[text()='Next']").first();
     await this.waitForVisible(nextButton, 15000);
+    await nextButton.scrollIntoViewIfNeeded();
     await this.safeAction(async () => {
       await nextButton.click({ force: true });
     });

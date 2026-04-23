@@ -24,6 +24,60 @@ export class HomePage extends BasePage {
     Logger.pass('Homepage is loaded and m360Care branding is visible');
   }
 
+  async closeAllSubTabs(): Promise<void> {
+    Logger.step('Close all open sub-tabs in Salesforce (optional)');
+    try {
+      // Try multiple locator strategies to handle Shadow DOM and various Salesforce versions
+      let closeButtons = this.page.locator('button[title="Close Tab"]');
+      let count = await closeButtons.count();
+      Logger.info(`Strategy 1: Found ${count} close buttons with title attribute`);
+      
+      if (count === 0) {
+        // Try with specific class that matches the close button icon
+        closeButtons = this.page.locator('button.slds-button_icon-x-small');
+        count = await closeButtons.count();
+        Logger.info(`Strategy 2: Found ${count} buttons with slds-button_icon-x-small class`);
+      }
+      
+      if (count === 0) {
+        Logger.info('No sub-tabs to close');
+        return;
+      }
+      
+      Logger.info(`Total close buttons found: ${count}`);
+      for (let i = 0; i < count; i++) {
+        try {
+          const button = closeButtons.nth(i);
+          Logger.info(`Attempting to close tab ${i + 1}/${count}`);
+          
+          // Check if button is visible and enabled
+          const isVisible = await button.isVisible().catch(() => false);
+          Logger.info(`Button ${i + 1} visible: ${isVisible}`);
+          
+          if (isVisible) {
+            // Scroll into view if needed
+            await button.scrollIntoViewIfNeeded().catch(() => {});
+            await this.page.waitForTimeout(300);
+            
+            // Try force click
+            await button.click({ force: true, timeout: 5000 });
+            Logger.info(`Clicked close button ${i + 1}`);
+            await this.page.waitForTimeout(500); // Delay between closes
+          } else {
+            Logger.info(`Button ${i + 1} is not visible, skipping`);
+          }
+        } catch (error) {
+          const errorMessage = error instanceof Error ? error.message : String(error);
+          Logger.info(`Failed to close tab ${i + 1}: ${errorMessage}`);
+        }
+      }
+      await this.page.waitForTimeout(1000); // Wait after closing all tabs
+      Logger.pass('Closed all open sub-tabs');
+    } catch (error) {
+      const errorMessage = error instanceof Error ? error.message : String(error);
+      Logger.info(`Error in closeAllSubTabs: ${errorMessage}`);
+    }
+  }
 
   async openObjectDropdown(): Promise<void> {
     Logger.step('Open object dropdown');

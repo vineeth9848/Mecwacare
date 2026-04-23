@@ -15,6 +15,7 @@ test('create lead from leads page', async ({ page }) => {
   Logger.info(`Lead Create Data: ${JSON.stringify(lead)}`);
   await homePage.verifyHomePage();
   await homePage.selectObjectFromDropdown('Leads');
+  //await homePage.closeAllSubTabs();
 
   await leadPage.clickNewButton();
   await leadPage.createLead(

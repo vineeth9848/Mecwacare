@@ -54,7 +54,7 @@ export const OpportunityLocators = {
   generateQuoteDialogButton: "xpath=(//button[text()='Generate'])[last()]",
   filesHeaderWithCount: "h2:has-text('Files (')",
   stageEditButton: 'xpath=(//button[@title="Edit Stage"])',
-  moreActionsButton: 'xpath=(//span[text()="Show more actions"])',
+  moreActionsButton: 'xpath=((//button[.//span[text()="Show more actions"]])[1])',
   GenerateAgreementText: "text=Generate the Service Agreement for",
   GenerateAgreementsuccessMessage: "text=Agreement Generated Successfully. Check the Files related list on this Opportunity",
   ServiceAgreementtext:'xpath=(//lightning-base-formatted-text[text()="Service Agreement"])[1]',

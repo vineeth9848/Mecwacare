@@ -1,0 +1,17 @@
+{
+  "opportunity": [
+    {
+      "HACCfundingType": "HACC-PYP",
+      "CHSPfundingType": "CHSP",
+      "HACCfundingProgram":"HACC - Ballarat",
+      "CHSPfundingProgram":"CHSP - Rivendell",
+      "HACCpriceBook": "HACC - Ballarat - Low Fee",
+      "CHSPpriceBook": "CHSP - Rivendell - High Fee",
+      "HACCproduct": "Annual review - Home Maintenance",    
+      "CHSPproduct": "Annual Review - Centre Based Respite",
+      "HACCserviceagreementListView":"All HACC Service Agreements",
+      "CHSPserviceagreementListView":"All CHSP Service Agreements"
+    }
+  ]
+
+}
