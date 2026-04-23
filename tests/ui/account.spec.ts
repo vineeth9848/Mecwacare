@@ -30,7 +30,7 @@ test.skip('create account', async ({ page }) => {
   );
 });
 
-test('Update mandatory MDS reporting fields in Account for Opportunity closure', async ({ page }) => {
+test.only('Update mandatory MDS reporting fields in Account for Opportunity closure', async ({ page }) => {
   const homePage = new HomePage(page);
   const accountPage = new AccountPage(page);
   const { accountCreate } = TestDataHelper.readJsonFile<{ accountCreate: Array<Record<string, string>> }>('accounts.json');
@@ -53,7 +53,7 @@ test('Update mandatory MDS reporting fields in Account for Opportunity closure',
   await accountPage.updateBasicInformationAccountDetails('Customer Category', 'Individual');
   await accountPage.updateBasicInformationAccountDetails('DVA Card Type', 'GOLD');
   await accountPage.updateTextField('DVA Number', '1234567890');
-  await accountPage.selectImportantInformationDetails('Pension Type', '1');
+  await accountPage.selectImportantInformationDetails('Pension Type', 'Age Pension');
   await accountPage.selectImportantInformationDetails('Living Arrangements', 'SINGLE');
   await accountPage.selectImportantInformationDetails('Accommodation/Residential Setting', 'BOARDING');//Alcohol and Drugs Treatment Residence
   await accountPage.saveAccountDetails();

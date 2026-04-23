@@ -298,6 +298,7 @@ export class AccountPage extends BasePage {
 
   async searchAndOpenAccountByEmail(email: string): Promise<void> {
     Logger.step(`Search and open account by email: ${email}`);
+    await this.page.waitForTimeout(5000);
     const searchInput = this.page.locator(AccountLocators.listSearchInput).first();
     await this.waitForVisible(searchInput, 30000);
     await searchInput.fill(email);

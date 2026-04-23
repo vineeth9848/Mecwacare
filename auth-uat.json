@@ -1,0 +1,402 @@
+{
+  "cookies": [
+    {
+      "name": "CookieConsentPolicy",
+      "value": "0:1",
+      "domain": "mecwacare--uat.sandbox.my.salesforce.com",
+      "path": "/",
+      "expires": 1808500313.597555,
+      "httpOnly": false,
+      "secure": true,
+      "sameSite": "None"
+    },
+    {
+      "name": "LSKey-c$CookieConsentPolicy",
+      "value": "0:1",
+      "domain": "mecwacare--uat.sandbox.my.salesforce.com",
+      "path": "/",
+      "expires": 1808500313.597729,
+      "httpOnly": false,
+      "secure": true,
+      "sameSite": "None"
+    },
+    {
+      "name": "BrowserId",
+      "value": "hmeMFT83EfGeTClprhjX5g",
+      "domain": ".salesforce.com",
+      "path": "/",
+      "expires": 1808500313.597774,
+      "httpOnly": false,
+      "secure": true,
+      "sameSite": "None"
+    },
+    {
+      "name": "CookieConsentPolicy",
+      "value": "0:0",
+      "domain": "test.salesforce.com",
+      "path": "/",
+      "expires": 1808500314.060925,
+      "httpOnly": false,
+      "secure": true,
+      "sameSite": "Lax"
+    },
+    {
+      "name": "LSKey-c$CookieConsentPolicy",
+      "value": "0:0",
+      "domain": "test.salesforce.com",
+      "path": "/",
+      "expires": 1808500314.061029,
+      "httpOnly": false,
+      "secure": true,
+      "sameSite": "Lax"
+    },
+    {
+      "name": "session",
+      "value": "1776964314337",
+      "domain": "test.salesforce.com",
+      "path": "/",
+      "expires": -1,
+      "httpOnly": false,
+      "secure": true,
+      "sameSite": "None"
+    },
+    {
+      "name": "sfdcConsent",
+      "value": "1%2C3%2C4",
+      "domain": ".salesforce.com",
+      "path": "/",
+      "expires": 1808500314,
+      "httpOnly": false,
+      "secure": false,
+      "sameSite": "Lax"
+    },
+    {
+      "name": "cvtdt",
+      "value": "SFDC%20Network",
+      "domain": ".c.salesforce.com",
+      "path": "/",
+      "expires": 1811524314.984042,
+      "httpOnly": false,
+      "secure": true,
+      "sameSite": "Lax"
+    },
+    {
+      "name": "v0",
+      "value": "SFDC%20Network%7C%5BSalesforce.com%20App%5D",
+      "domain": ".c.salesforce.com",
+      "path": "/",
+      "expires": -1,
+      "httpOnly": false,
+      "secure": true,
+      "sameSite": "Lax"
+    },
+    {
+      "name": "v20",
+      "value": "Direct%20Landing",
+      "domain": ".c.salesforce.com",
+      "path": "/",
+      "expires": -1,
+      "httpOnly": false,
+      "secure": true,
+      "sameSite": "Lax"
+    },
+    {
+      "name": "OptanonConsent",
+      "value": "isGpcEnabled=0&datestamp=Fri+Apr+24+2026+03%3A11%3A55+GMT%2B1000+(Australian+Eastern+Standard+Time)&version=202408.1.0&browserGpcFlag=0&isIABGlobal=false&hosts=&consentId=3c5b3d1b-52c0-4b45-a268-1818fe5d89d1&interactionCount=0&isAnonUser=1&landingPath=https%3A%2F%2Fc.salesforce.com%2Flogin-messages%2Fpromos.html&groups=1%3A1%2C3%3A1%2C4%3A1",
+      "domain": ".salesforce.com",
+      "path": "/",
+      "expires": 1808500315,
+      "httpOnly": false,
+      "secure": false,
+      "sameSite": "Lax"
+    },
+    {
+      "name": "gtm_session_start",
+      "value": "1776964315306",
+      "domain": "c.salesforce.com",
+      "path": "/",
+      "expires": 1776966115,
+      "httpOnly": false,
+      "secure": false,
+      "sameSite": "Lax"
+    },
+    {
+      "name": "inst",
+      "value": "APP_AD",
+      "domain": ".salesforce.com",
+      "path": "/",
+      "expires": -1,
+      "httpOnly": false,
+      "secure": true,
+      "sameSite": "None"
+    },
+    {
+      "name": "rememberUn",
+      "value": "false",
+      "domain": ".salesforce.com",
+      "path": "/",
+      "expires": 1782148315.350466,
+      "httpOnly": false,
+      "secure": true,
+      "sameSite": "None"
+    },
+    {
+      "name": "com.salesforce.LocaleInfo",
+      "value": "au",
+      "domain": ".salesforce.com",
+      "path": "/",
+      "expires": 1782148315.350549,
+      "httpOnly": false,
+      "secure": true,
+      "sameSite": "None"
+    },
+    {
+      "name": "oinfo",
+      "value": "c3RhdHVzPURFTU8mdHlwZT02Jm9pZD0wMERBRDAwMDAwOXJkRTk=",
+      "domain": ".salesforce.com",
+      "path": "/",
+      "expires": 1782148315.350607,
+      "httpOnly": false,
+      "secure": true,
+      "sameSite": "None"
+    },
+    {
+      "name": "sfdc_lv2",
+      "value": "KxG83HKigs5HOmoMwee13BVN+4O8qL3KhV+on75TVvRclRNcQs/O19Cj++y4kXu0E=",
+      "domain": ".salesforce.com",
+      "path": "/",
+      "expires": 1808500315.541634,
+      "httpOnly": false,
+      "secure": true,
+      "sameSite": "None"
+    },
+    {
+      "name": "disco",
+      "value": "AD:00DAD000009rdE9:005AD00000LIch8:2",
+      "domain": ".salesforce.com",
+      "path": "/",
+      "expires": -1,
+      "httpOnly": false,
+      "secure": true,
+      "sameSite": "None"
+    },
+    {
+      "name": "autocomplete",
+      "value": "1",
+      "domain": ".salesforce.com",
+      "path": "/",
+      "expires": 1782148315.541762,
+      "httpOnly": false,
+      "secure": true,
+      "sameSite": "None"
+    },
+    {
+      "name": "sid",
+      "value": "00DAD000009rdE9!AQEAQPZzJSyYqqOzqCsHSUova5yFx9Wf1ZSXHXElZfBrw.M58XzMIXIrd56Z6GPPHhVWnbrZyjOSU5voRRnV7ynxCn95mgb6",
+      "domain": "mecwacare--uat.sandbox.my.salesforce.com",
+      "path": "/",
+      "expires": -1,
+      "httpOnly": false,
+      "secure": true,
+      "sameSite": "None"
+    },
+    {
+      "name": "sid_Client",
+      "value": "D00000LIch8D000009rdE9",
+      "domain": "mecwacare--uat.sandbox.my.salesforce.com",
+      "path": "/",
+      "expires": -1,
+      "httpOnly": false,
+      "secure": true,
+      "sameSite": "None"
+    },
+    {
+      "name": "clientSrc",
+      "value": "203.43.83.202",
+      "domain": "mecwacare--uat.sandbox.my.salesforce.com",
+      "path": "/",
+      "expires": -1,
+      "httpOnly": false,
+      "secure": true,
+      "sameSite": "None"
+    },
+    {
+      "name": "oid",
+      "value": "00DAD000009rdE9",
+      "domain": "mecwacare--uat.sandbox.my.salesforce.com",
+      "path": "/",
+      "expires": 1808500315.541943,
+      "httpOnly": false,
+      "secure": true,
+      "sameSite": "None"
+    },
+    {
+      "name": "CookieConsentPolicy",
+      "value": "0:1",
+      "domain": "mecwacare--uat.sandbox.file.force.com",
+      "path": "/",
+      "expires": 1808500315.84928,
+      "httpOnly": false,
+      "secure": true,
+      "sameSite": "None"
+    },
+    {
+      "name": "LSKey-c$CookieConsentPolicy",
+      "value": "0:1",
+      "domain": "mecwacare--uat.sandbox.file.force.com",
+      "path": "/",
+      "expires": 1808500315.849392,
+      "httpOnly": false,
+      "secure": true,
+      "sameSite": "None"
+    },
+    {
+      "name": "BrowserId",
+      "value": "h67_aT83EfGeTClprhjX5g",
+      "domain": ".force.com",
+      "path": "/",
+      "expires": 1808500315.849423,
+      "httpOnly": false,
+      "secure": true,
+      "sameSite": "None"
+    },
+    {
+      "name": "sid",
+      "value": "00DAD000009rdE9!AQEAQL_njdIBP0ednT0Uvvpm8iLIW7Y.hFVet6iMTSmJK2P51rTSX_kDUfXateuKTfAtX6zBtFqdKQ4MqB2d34CuBYVr.K.w",
+      "domain": "mecwacare--uat.sandbox.file.force.com",
+      "path": "/",
+      "expires": -1,
+      "httpOnly": false,
+      "secure": true,
+      "sameSite": "None"
+    },
+    {
+      "name": "sid_Client",
+      "value": "D00000LIch8D000009rdE9",
+      "domain": "mecwacare--uat.sandbox.file.force.com",
+      "path": "/",
+      "expires": -1,
+      "httpOnly": false,
+      "secure": true,
+      "sameSite": "None"
+    },
+    {
+      "name": "clientSrc",
+      "value": "203.43.83.202",
+      "domain": "mecwacare--uat.sandbox.file.force.com",
+      "path": "/",
+      "expires": -1,
+      "httpOnly": false,
+      "secure": true,
+      "sameSite": "None"
+    },
+    {
+      "name": "inst",
+      "value": "APP_AD",
+      "domain": ".force.com",
+      "path": "/",
+      "expires": -1,
+      "httpOnly": false,
+      "secure": true,
+      "sameSite": "None"
+    },
+    {
+      "name": "CookieConsentPolicy",
+      "value": "0:1",
+      "domain": "mecwacare--uat.sandbox.lightning.force.com",
+      "path": "/",
+      "expires": 1808500316.101824,
+      "httpOnly": false,
+      "secure": true,
+      "sameSite": "None"
+    },
+    {
+      "name": "LSKey-c$CookieConsentPolicy",
+      "value": "0:1",
+      "domain": "mecwacare--uat.sandbox.lightning.force.com",
+      "path": "/",
+      "expires": 1808500316.101939,
+      "httpOnly": false,
+      "secure": true,
+      "sameSite": "None"
+    },
+    {
+      "name": "79eb100099b9a8bf",
+      "value": "3:false:.sandbox.my.salesforce.com",
+      "domain": ".sandbox.my.salesforce.com",
+      "path": "/",
+      "expires": -1,
+      "httpOnly": false,
+      "secure": true,
+      "sameSite": "None"
+    },
+    {
+      "name": "sid",
+      "value": "00DAD000009rdE9!AQEAQMHzyzOtRy4ofUs9pC8eovfY_PWeHRHp7Jxgbtsvb3rpEUGYCFavG4ORB0CpbNxQGjwXozLnTJP_SK.GXhsqpzNC.p44",
+      "domain": "mecwacare--uat.sandbox.lightning.force.com",
+      "path": "/",
+      "expires": -1,
+      "httpOnly": false,
+      "secure": true,
+      "sameSite": "None"
+    },
+    {
+      "name": "sid_Client",
+      "value": "D00000LIch8D000009rdE9",
+      "domain": "mecwacare--uat.sandbox.lightning.force.com",
+      "path": "/",
+      "expires": -1,
+      "httpOnly": false,
+      "secure": true,
+      "sameSite": "None"
+    },
+    {
+      "name": "clientSrc",
+      "value": "203.43.83.202",
+      "domain": "mecwacare--uat.sandbox.lightning.force.com",
+      "path": "/",
+      "expires": -1,
+      "httpOnly": false,
+      "secure": true,
+      "sameSite": "None"
+    },
+    {
+      "name": "79eb100099b9a8bf",
+      "value": "3:false:.sandbox.lightning.force.com",
+      "domain": ".sandbox.lightning.force.com",
+      "path": "/",
+      "expires": -1,
+      "httpOnly": false,
+      "secure": true,
+      "sameSite": "None"
+    }
+  ],
+  "origins": [
+    {
+      "origin": "https://mecwacare--uat.sandbox.lightning.force.com",
+      "localStorage": [
+        {
+          "name": "$AuraClientService.token$one:one",
+          "value": "eyJub25jZSI6IkpMdXZ5M0RZQzhGSFpiZjR2Rlo2eGlSTWpob001SU1KU1VlNHJlQTFHUEFcdTAwM2QiLCJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiIsImtpZCI6IntcInRcIjpcIjAwREFEMDAwMDAwMDAwMVwiLFwidlwiOlwiMDJHQUQwMDAwMDAwMDFkXCIsXCJhXCI6XCJjYWltYW5zaWduZXJcIn0iLCJjcml0IjpbImlhdCJdLCJpYXQiOjE3NzY5NjQzMTYzMTMsImV4cCI6MH0=..ZzmUX8W7AP9eLT0BQfqEc4W3pem6_-XFJoqrfHqGLcQ="
+        },
+        {
+          "name": "GlobalValueProviders__MUTEX_X",
+          "value": "734800000a03765c2581aa8|1776964317964"
+        },
+        {
+          "name": "appContextId",
+          "value": "06mAD000002prE1YAI"
+        }
+      ]
+    },
+    {
+      "origin": "https://c.salesforce.com",
+      "localStorage": [
+        {
+          "name": "webactls",
+          "value": "{\"lastvaliddriver\":\"SFDC Network|[Salesforce.com App]\"}"
+        }
+      ]
+    }
+  ]
+}

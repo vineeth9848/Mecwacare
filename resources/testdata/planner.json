@@ -3,14 +3,15 @@
     {
       "objectName": "Planner",
       "username": "John Doe",
-      "resourceName": "Direct care team member testing 2",
-      "appointmentService": "Annual review - Community Care",  
+      "resourceName": "Automation QA DCW",
+      "HACCappointmentService": "Annual review - Home Maintenance",  
+      "CHSPappointmentService": "Annual Review - Centre Based Respite",
       "appointmentType": "Clinic",
       "appointmentStatus": "Scheduled",
       "titlePrefix": "TestUser",
       "secondaryLoginUrl": "https://mecwacare--uat.sandbox.lightning.force.com/",
-      "secondaryUsername": "directcareteammember2@mecwacare.org.au.uat",
-      "secondaryPassword": "Salesforce@123"
+      "secondaryUsername": "padurivineeth.reddy@mecwacare.org.au.dcwuat",
+      "secondaryPassword": "mecwa@123"
     }
   ]
 }

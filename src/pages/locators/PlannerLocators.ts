@@ -11,7 +11,7 @@ export const PlannerLocators = {
   participantLocationSelect: "select",
   nextButton: "button:has-text('Next')",
   appointmentTypeSelect: "select",
-  titleInput: "input[aria-label='Title'], input[name='Title']",
+  titleInput: "input[name='Title__c']",
   submitButton: "button:has-text('Submit')",
   endTimeInput: "input.slds-combobox__input[name='end']",
 

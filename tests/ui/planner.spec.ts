@@ -8,7 +8,7 @@ import { existsSync } from 'fs';
 
 const secondaryAuthPath = 'auth-uat.json';
 
-test.only('Create New Appointment', async ({ page }) => {
+test('Create New Appointment', async ({ page }) => {
   test.setTimeout(180000);
 
   const homePage = new HomePage(page);
@@ -24,7 +24,7 @@ test.only('Create New Appointment', async ({ page }) => {
   await plannerPage.createNewAppointment(planner.username, planner.resourceName);
   await plannerPage.setStartTimePlusTenMinutes();
 
-  await plannerPage.selectAppointmentServiceAndClickNext(planner.appointmentService);
+  await plannerPage.selectAppointmentServiceAndClickNext(planner.HACCappointmentService);
   await plannerPage.navigationToNextPages(
     planner.appointmentType,
     planner.appointmentStatus,

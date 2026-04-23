@@ -5,22 +5,24 @@ import { OpportunityPage } from '../../src/pages/opportunities/OpportunityPage';
 import { TestDataHelper } from '../../src/utils/TestDataHelper';
 import { time } from 'console';
 
-test('Configure funding source and funding type in first opportunity record', async ({ page }) => {
+test('Configure "Block Funding" funding source and "HACC-PYP" funding type in first opportunity record', async ({ page }) => {
   test.setTimeout(120000);
   const homePage = new HomePage(page);
   const opportunityPage = new OpportunityPage(page);
   const { leadCreate } = TestDataHelper.readJsonFile<{ leadCreate: Array<Record<string, string>> }>('leads.json');
   const lead = leadCreate[0];
+    const { opportunity } = TestDataHelper.readJsonFile<{ opportunity: Array<Record<string, string>> }>('opportunity.json');
+  const opportunityData = opportunity[0];
 
 
   Logger.info('Starting opportunity funding validation test');
   await opportunityPage.refreshPage();
   await homePage.verifyHomePage();
   await homePage.selectObjectFromDropdown('Opportunities');
-  await opportunityPage.selectOpportunitiesListView('My Opportunities');
+  await opportunityPage.selectOpportunitiesListView('All Opportunities');
   await opportunityPage.searchAndOpenOpportunityByLeadName(lead.firstName, lead.lastName);
   await opportunityPage.openDetailsTab();
-  await opportunityPage.selectBlockFundingForFundingSourceAndType();
+  await opportunityPage.selectBlockFundingForFundingSourceAndType(opportunityData.HACCfundingType);
   //await opportunityPage.clickSearchFundingAndAddNewFunding();
   // await opportunityPage.selectParticipantInNewFunding(lead.firstName, lead.lastName);
   // await opportunityPage.selectNewFundingSourceAndTypeSupportAtHome();
@@ -32,40 +34,102 @@ test('Configure funding source and funding type in first opportunity record', as
   await opportunityPage.selectReferrerTypeFamilyViolencePrograms();
   await opportunityPage.saveOpportunityDetails();
   await opportunityPage.refreshPage();
-  await opportunityPage.verifyHeaderFundingType('HACC-PYP');
+  await opportunityPage.verifyHeaderFundingType(opportunityData.HACCfundingType);
   Logger.pass('Opportunity funding configuration test completed successfully');
 });
 
-test('Configure Link Fund', async ({ page }) => {
+test('Configure "Block Funding" funding source and "CHSP" funding type in first opportunity record', async ({ page }) => {
+  test.setTimeout(120000);
+  const homePage = new HomePage(page);
+  const opportunityPage = new OpportunityPage(page);
+  const { leadCreate } = TestDataHelper.readJsonFile<{ leadCreate: Array<Record<string, string>> }>('leads.json');
+  const { opportunity } = TestDataHelper.readJsonFile<{ opportunity: Array<Record<string, string>> }>('opportunity.json');
+
+  const lead = leadCreate[0];
+  const opportunityData = opportunity[0];
+
+  Logger.info('Starting opportunity funding validation test for CHSP funding type');
+  await opportunityPage.refreshPage();
+  await homePage.verifyHomePage();
+  await homePage.selectObjectFromDropdown('Opportunities');
+  await opportunityPage.selectOpportunitiesListView('All Opportunities');
+  await opportunityPage.searchAndOpenOpportunityByLeadName(lead.firstName, lead.lastName);
+  await opportunityPage.openDetailsTab();
+  await opportunityPage.selectBlockFundingForFundingSourceAndType(opportunityData.CHSPfundingType);
+  await opportunityPage.selectFundingAdministrator(lead.firstName, lead.lastName);
+  await opportunityPage.selectAssessmentVisitPreferenceInPerson();
+  await opportunityPage.selectServiceAgreementStatus();
+  await opportunityPage.selectReferrerTypeFamilyViolencePrograms();
+  await opportunityPage.saveOpportunityDetails();
+  await opportunityPage.refreshPage();
+  await opportunityPage.verifyHeaderFundingType(opportunityData.CHSPfundingType);
+  Logger.pass('Opportunity funding configuration test for CHSP funding type completed successfully');
+});
+
+test('Configure HACC-PYP Link Fund', async ({ page }) => {
   test.setTimeout(120000);
   const homePage = new HomePage(page);
   const opportunityPage = new OpportunityPage(page);
   const { leadCreate } = TestDataHelper.readJsonFile<{ leadCreate: Array<Record<string, string>> }>('leads.json');
   const lead = leadCreate[0];
+    const { opportunity } = TestDataHelper.readJsonFile<{ opportunity: Array<Record<string, string>> }>('opportunity.json');
+  const opportunityData = opportunity[0];
 
   const today = new Date();
   const tomorrow = new Date();
-  tomorrow.setDate(today.getDate() + 1);
+  tomorrow.setDate(today.getDate() + 30);
 
-
-  Logger.info('Starting Configuring Link Fund on opportunity test');
+  Logger.info('Starting Configuring HACC-PYP Link Fund on opportunity test');
   await opportunityPage.refreshPage();
   await homePage.verifyHomePage();
   await homePage.selectObjectFromDropdown('Opportunities');
-  await opportunityPage.selectOpportunitiesListView('My Opportunities');
+  await opportunityPage.selectOpportunitiesListView('All Opportunities');
   await opportunityPage.searchAndOpenOpportunityByLeadName(lead.firstName, lead.lastName);
   await opportunityPage.openDetailsTab();
   await opportunityPage.ClickLinkFund();
-  await opportunityPage.verifyDefaultDetails("Funding_Type", "HACC-PYP");
+  await opportunityPage.verifyDefaultDetails("Funding_Type", opportunityData.HACCfundingType);
   await opportunityPage.verifyDefaultDetails("Funding_Source", "Block Funding");
   await opportunityPage.fillDateLinkFund('StartDate', today);
   await opportunityPage.fillDateLinkFund('EndDate', tomorrow);
-  await opportunityPage.selectFundingProgramHacc();
+  await opportunityPage.selectFundingProgramHacc(opportunityData.HACCfundingProgram);
   await opportunityPage.clickOnDoneInLinkFund();
   await opportunityPage.refreshPage();
   await opportunityPage.verifyFundingValue();
   await opportunityPage.refreshPage();
-  Logger.pass('Opportunity Link Fund configuration test completed successfully');
+  Logger.pass('Opportunity HACC-PYP Link Fund configuration test completed successfully');
+});
+
+test('Configure CHSP Link Fund', async ({ page }) => {
+  test.setTimeout(120000);
+  const homePage = new HomePage(page);
+  const opportunityPage = new OpportunityPage(page);
+  const { leadCreate } = TestDataHelper.readJsonFile<{ leadCreate: Array<Record<string, string>> }>('leads.json');
+  const lead = leadCreate[0];
+  const { opportunity } = TestDataHelper.readJsonFile<{ opportunity: Array<Record<string, string>> }>('opportunity.json');
+  const opportunityData = opportunity[0];
+
+  const today = new Date();
+  const tomorrow = new Date();
+  tomorrow.setDate(today.getDate() + 30);
+
+  Logger.info('Starting Configuring CHSP Link Fund on opportunity test');
+  await opportunityPage.refreshPage();
+  await homePage.verifyHomePage();
+  await homePage.selectObjectFromDropdown('Opportunities');
+  await opportunityPage.selectOpportunitiesListView('All Opportunities');
+  await opportunityPage.searchAndOpenOpportunityByLeadName(lead.firstName, lead.lastName);
+  await opportunityPage.openDetailsTab();
+  await opportunityPage.ClickLinkFund();
+  await opportunityPage.verifyDefaultDetails("Funding_Type", opportunityData.CHSPfundingType);
+  await opportunityPage.verifyDefaultDetails("Funding_Source", "Block Funding");
+  await opportunityPage.fillDateLinkFund('StartDate', today);
+  await opportunityPage.fillDateLinkFund('EndDate', tomorrow);
+  await opportunityPage.selectFundingProgramHacc(opportunityData.CHSPfundingProgram);
+  await opportunityPage.clickOnDoneInLinkFund();
+  await opportunityPage.refreshPage();
+  await opportunityPage.verifyFundingValue();
+  await opportunityPage.refreshPage();
+  Logger.pass('Opportunity CHSP Link Fund configuration test completed successfully');
 });
 
 test('verify Generate Agreement functionality on Opportunity', async ({ page }) => {
@@ -75,15 +139,15 @@ test('verify Generate Agreement functionality on Opportunity', async ({ page }) 
   const lead = leadCreate[0];
 
    const today = new Date();
-   today.setDate(today.getDate() + 1);
+   today.setDate(today.getDate());
   const tomorrow = new Date();
-  tomorrow.setDate(today.getDate() + 2);
+  tomorrow.setDate(today.getDate() + 30);
 
   Logger.info('Starting agreement generation validation test');
   await opportunityPage.refreshPage();
   await homePage.verifyHomePage();
   await homePage.selectObjectFromDropdown('Opportunities');
-  await opportunityPage.selectOpportunitiesListView('My Opportunities');
+  await opportunityPage.selectOpportunitiesListView('All Opportunities');
   await opportunityPage.searchAndOpenOpportunityByLeadName(lead.firstName, lead.lastName);
   await opportunityPage.configureStage();
   await opportunityPage.configureStatus();
@@ -96,31 +160,63 @@ test('verify Generate Agreement functionality on Opportunity', async ({ page }) 
   await opportunityPage.refreshPage();
   await opportunityPage.switchToRelatedTab();
   await opportunityPage.verifyServiceAgreementFileGenerated();
+  await opportunityPage.refreshPage();
   Logger.pass('Agreement generation validation test completed successfully');
   
 });
 
-test('Configure PriceBook and Product Management on Opportunity', async ({ page }) => {
+test('Configure HACC-PYP PriceBook and Product Management on Opportunity', async ({ page }) => {
   const homePage = new HomePage(page);
   const opportunityPage = new OpportunityPage(page);
   const { leadCreate } = TestDataHelper.readJsonFile<{ leadCreate: Array<Record<string, string>> }>('leads.json');
   const lead = leadCreate[0];
+  const { opportunity } = TestDataHelper.readJsonFile<{ opportunity: Array<Record<string, string>> }>('opportunity.json');
+  const opportunityData = opportunity[0];
 
-  Logger.info('Starting opportunity price book and product management configuration test');
+  Logger.info('Starting opportunity HACC-PYP price book and product management configuration test');
   await opportunityPage.refreshPage();
   await homePage.verifyHomePage();
   await homePage.selectObjectFromDropdown('Opportunities');
-  await opportunityPage.selectOpportunitiesListView('My Opportunities');
+  await opportunityPage.selectOpportunitiesListView('All Opportunities');
   await opportunityPage.searchAndOpenOpportunityByLeadName(lead.firstName, lead.lastName);
   //await opportunityPage.verifyQuoteNotGenerated();
   await opportunityPage.refreshPage();
   await opportunityPage.switchToRelatedTab();
-  await opportunityPage.configurePriceBook();
+  await opportunityPage.configurePriceBook(opportunityData.HACCpriceBook);
   await opportunityPage.refreshPage();
-  await opportunityPage.configureProductManagement();
+  await opportunityPage.configureProductManagement(opportunityData.HACCproduct);
 
-  Logger.pass('Opportunity price book and product management configuration validated successfully');
+  Logger.pass('Opportunity HACC-PYP price book and product management configuration validated successfully');
+  await opportunityPage.refreshPage();
 });
+
+
+test('Configure CHSP PriceBook and Product Management on Opportunity', async ({ page }) => {
+  const homePage = new HomePage(page);
+  const opportunityPage = new OpportunityPage(page);
+  const { leadCreate } = TestDataHelper.readJsonFile<{ leadCreate: Array<Record<string, string>> }>('leads.json');
+  const lead = leadCreate[0];
+   const { opportunity } = TestDataHelper.readJsonFile<{ opportunity: Array<Record<string, string>> }>('opportunity.json');
+  const opportunityData = opportunity[0];
+
+  Logger.info('Starting opportunity CHSP price book and product management configuration test');
+  await opportunityPage.refreshPage();
+  await homePage.verifyHomePage();
+  await homePage.selectObjectFromDropdown('Opportunities');
+  await opportunityPage.selectOpportunitiesListView('All Opportunities');
+  await opportunityPage.searchAndOpenOpportunityByLeadName(lead.firstName, lead.lastName);
+  //await opportunityPage.verifyQuoteNotGenerated();
+  await opportunityPage.refreshPage();
+  await opportunityPage.switchToRelatedTab();
+  await opportunityPage.configurePriceBook(opportunityData.CHSPpriceBook);
+  await opportunityPage.refreshPage();
+  await opportunityPage.configureProductManagement(opportunityData.CHSPproduct);
+
+  Logger.pass('Opportunity CHSP price book and product management configuration validated successfully');
+  await opportunityPage.refreshPage();
+});
+
+
 
 test('Verify Generate Quote functionality and verify Files on Opportunity', async ({ page }) => {
   const homePage = new HomePage(page);
@@ -132,7 +228,7 @@ test('Verify Generate Quote functionality and verify Files on Opportunity', asyn
   await opportunityPage.refreshPage();
   await homePage.verifyHomePage();
   await homePage.selectObjectFromDropdown('Opportunities');
-  await opportunityPage.selectOpportunitiesListView('My Opportunities');
+  await opportunityPage.selectOpportunitiesListView('All Opportunities');
   await opportunityPage.searchAndOpenOpportunityByLeadName(lead.firstName, lead.lastName);
   await opportunityPage.refreshPage();
   await opportunityPage.switchToRelatedTab();
@@ -153,7 +249,7 @@ test('Generate Send For Signature functionality on Opportunity', async ({ page }
   await opportunityPage.refreshPage();
   await homePage.verifyHomePage();
   await homePage.selectObjectFromDropdown('Opportunities');
-  await opportunityPage.selectOpportunitiesListView('My Opportunities');
+  await opportunityPage.selectOpportunitiesListView('All Opportunities');
   await opportunityPage.searchAndOpenOpportunityByLeadName(lead.firstName, lead.lastName);
   await opportunityPage.clickSignaturevisible();
   await opportunityPage.configureSignature();
@@ -171,7 +267,7 @@ test('verify Signature and Close the Opportunity', async ({ page }) => {
   await opportunityPage.refreshPage();
   await homePage.verifyHomePage();
   await homePage.selectObjectFromDropdown('Opportunities');
-  await opportunityPage.selectOpportunitiesListView('My Opportunities');
+  await opportunityPage.selectOpportunitiesListView('All Opportunities');
   await opportunityPage.searchAndOpenOpportunityByLeadName(lead.firstName, lead.lastName);
   await opportunityPage.refreshPage();
   await opportunityPage.setOpportunityToClosedWon();
@@ -191,16 +287,53 @@ test('Create Service Agreement on Opportunity record', async ({ page }) => {
   await opportunityPage.refreshPage();
   await homePage.verifyHomePage();
   await homePage.selectObjectFromDropdown('Opportunities');
-  await opportunityPage.selectOpportunitiesListView('My Opportunities');
+  await opportunityPage.selectOpportunitiesListView('All Opportunities');
   await opportunityPage.searchAndOpenOpportunityByLeadName(lead.firstName, lead.lastName);
   await opportunityPage.createServiceAgreement();
   await opportunityPage.refreshPage();
   await opportunityPage.verifyServiceAgreementButtonNotPresent();
   await opportunityPage.verifyNoFurtherUpdatesOnRecord();
   await opportunityPage.refreshPage();
+  Logger.pass('Service agreement creation on opportunity record validated successfully');
+  
+});
+
+test('Verify HACC Service Agreement status under Service Agreements Object', async ({ page }) => {
+  const homePage = new HomePage(page);
+  const opportunityPage = new OpportunityPage(page);
+  const { leadCreate } = TestDataHelper.readJsonFile<{ leadCreate: Array<Record<string, string>> }>('leads.json');
+  const lead = leadCreate[0];
+  const { opportunity } = TestDataHelper.readJsonFile<{ opportunity: Array<Record<string, string>> }>('opportunity.json');
+  const opportunityData = opportunity[0];
+
+  Logger.info('Verifying HACC Service Agreement status under Service Agreements Object');
+  await opportunityPage.refreshPage();
+  await homePage.verifyHomePage();
+  await opportunityPage.refreshPage();
   await homePage.selectObjectFromDropdown('Service Agreements');
+  await opportunityPage.selectOpportunitiesListView(opportunityData.HACCserviceagreementListView);
   await opportunityPage.searchAndOpenOpportunityByLeadName(lead.firstName, lead.lastName);
   await opportunityPage.verifyActiveServiceAgreement();
-  Logger.pass('Service agreement creation on opportunity record validated successfully');
+  Logger.pass(' HACC Service Agreement status under Service Agreements Object verified successfully');
+  
+});
+
+test('Verify CHSP Service Agreement status under Service Agreements Object', async ({ page }) => {
+  const homePage = new HomePage(page);
+  const opportunityPage = new OpportunityPage(page);
+  const { leadCreate } = TestDataHelper.readJsonFile<{ leadCreate: Array<Record<string, string>> }>('leads.json');
+  const lead = leadCreate[0];
+  const { opportunity } = TestDataHelper.readJsonFile<{ opportunity: Array<Record<string, string>> }>('opportunity.json');
+  const opportunityData = opportunity[0];
+
+  Logger.info('Verifying CHSP Service Agreement status under Service Agreements Object');
+  await opportunityPage.refreshPage();
+  await homePage.verifyHomePage();
+  await opportunityPage.refreshPage();
+  await homePage.selectObjectFromDropdown('Service Agreements');
+  await opportunityPage.selectOpportunitiesListView(opportunityData.CHSPserviceagreementListView);
+  await opportunityPage.searchAndOpenOpportunityByLeadName(lead.firstName, lead.lastName);
+  await opportunityPage.verifyActiveServiceAgreement();
+  Logger.pass(' CHSP Service Agreement status under Service Agreements Object verified successfully');
   
 });

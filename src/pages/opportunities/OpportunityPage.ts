@@ -16,7 +16,7 @@ export class OpportunityPage extends BasePage {
     Logger.step(`Select opportunities list view: ${viewName}`);
     const listViewDropdown = this.page.locator(OpportunityLocators.listViewDropdown).first();
     await this.waitForVisible(listViewDropdown, 30000);
-    await listViewDropdown.click({ force: true });
+    await listViewDropdown.click();
 
     await this.page.waitForSelector('[role="listbox"]', { timeout: 30000 });
     const listViewOption = this.page
@@ -38,6 +38,7 @@ export class OpportunityPage extends BasePage {
 
     const searchInput = this.page.locator(OpportunityLocators.listSearchInput).first();
     await this.waitForVisible(searchInput, 30000);
+    await searchInput.click({ force: true });
     await searchInput.fill(fullNameWithRunNumber);
     await searchInput.press('Enter');
     await this.staticWait(3000);
@@ -85,7 +86,7 @@ export class OpportunityPage extends BasePage {
     Logger.pass('Opportunity details tab opened');
   }
 
-  async selectBlockFundingForFundingSourceAndType(): Promise<void> {
+  async selectBlockFundingForFundingSourceAndType(type: string): Promise<void> {
     Logger.step('Update Funding Source to Block Funding');
 
     const fundingDetailsSection = this.page
@@ -177,14 +178,14 @@ export class OpportunityPage extends BasePage {
 
     await fundingTypeDropdown.click();
 
-    const option = this.page.getByRole('option', { name: 'HACC-PYP' });
+    const option = this.page.getByRole('option', { name: type });
     await option.waitFor({ state: 'visible' });
     await option.click();
-    await expect(fundingTypeDropdown).toContainText('HACC-PYP', { timeout: 30000 });
+    await expect(fundingTypeDropdown).toContainText(type, { timeout: 30000 });
     await this.page.waitForTimeout(5000);
 
     await this.staticWait(1200);
-    Logger.pass('Funding Type updated to HACC-PYP');
+    Logger.pass('Funding Type updated to ' + type);
   }
 
   async clickSearchFundingAndAddNewFunding(): Promise<void> {
@@ -532,11 +533,11 @@ async fillDate(label: string, date: Date): Promise<void> {
   await this.page.waitForTimeout(5000);
 }
 
-  async selectFundingProgramHacc(): Promise<void> {
+  async selectFundingProgramHacc(program: string): Promise<void> {
     const today = new Date();
 
-    const fundingProgramSearch = 'HACC - Ballarat';
-    const expectedFundingProgram = 'HACC - Ballarat';
+    const fundingProgramSearch = program;
+    const expectedFundingProgram = program;
 
     Logger.step(`Select Funding Program: ${expectedFundingProgram}`);
     const fundingProgramInput = this.page.locator(OpportunityLocators.fundingProgramInput).first();
@@ -901,7 +902,7 @@ async fillDate(label: string, date: Date): Promise<void> {
     Logger.pass(`Verified generated file: ${expectedFileText}`);
   }
  
-  async configurePriceBook(): Promise<void> {
+  async configurePriceBook(pricebook: string): Promise<void> {
     Logger.step('Select Choose Price Book');
     
     await this.page.mouse.wheel(0, 2000); 
@@ -917,9 +918,9 @@ async fillDate(label: string, date: Date): Promise<void> {
     await enterPriceBook.click();
     await enterPriceBook.press('Delete');
     await enterPriceBook.clear();
-    await enterPriceBook.fill('HACC - Ballarat - Low Fee');
+    await enterPriceBook.fill(pricebook);
 
-    const option = this.page.getByText('HACC - Ballarat - Low Fee', { exact: true });
+    const option = this.page.getByText(pricebook, { exact: true });
     await option.waitFor();
     await option.click();
     await this.page.getByRole('button', { name: 'Save' }).click();
@@ -928,10 +929,10 @@ async fillDate(label: string, date: Date): Promise<void> {
     Logger.pass('Price Book configured Successfully');
   }
 
-  async configureProductManagement(): Promise<void> {
+  async configureProductManagement(product: string): Promise<void> {
     Logger.step('Select Product Management');
-    const moreActions = this.page.locator(OpportunityLocators.moreActionsButton).first();
-              await this.waitForVisible(moreActions, 30000);
+    const moreActions = this.page.locator(OpportunityLocators.moreActionsButton).last();
+              await moreActions.waitFor({ state: 'visible', timeout: 30000 });
               await moreActions.click({ force: true });
 
               const ProductManagementOption = this.page.getByRole('menuitem', { name: 'Product Management' });
@@ -946,32 +947,32 @@ async fillDate(label: string, date: Date): Promise<void> {
     await addProductsButton.click();
     await this.page.waitForTimeout(5000);
 
-    const customPeriodOption = this.page.getByText('Custom', { exact: true });
-    await this.waitForVisible(customPeriodOption, 90000);
-    await customPeriodOption.click();
+    // const customPeriodOption = this.page.getByText('Custom', { exact: true });
+    // await this.waitForVisible(customPeriodOption, 90000);
+    // await customPeriodOption.click();
     
-    const endDateInput = this.page.getByLabel('End Date').first();
-    await this.waitForVisible(endDateInput, 90000);
+    // const endDateInput = this.page.getByLabel('End Date').first();
+    // await this.waitForVisible(endDateInput, 90000);
 
-    const today = new Date();
+    // const today = new Date();
 
-    today.setDate(today.getDate() + 10);
+    // today.setDate(today.getDate() + 10);
 
-    const formattedDate = today.toLocaleDateString('en-GB', {
-      day: 'numeric',
-      month: 'short',
-      year: 'numeric'
-    });
+    // const formattedDate = today.toLocaleDateString('en-GB', {
+    //   day: 'numeric',
+    //   month: 'short',
+    //   year: 'numeric'
+    // });
 
-    await endDateInput.click();
-    await endDateInput.press('Backspace');
-    await endDateInput.clear();
-    await endDateInput.fill('');
-    await endDateInput.fill(formattedDate);
+    // await endDateInput.click();
+    // await endDateInput.press('Backspace');
+    // await endDateInput.clear();
+    // await endDateInput.fill('');
+    // await endDateInput.fill(formattedDate);
 
-    const serviceDay = this.page.locator( "(//span[text()='Anytime'])[1]");
-    await this.waitForVisible(serviceDay, 90000);
-    await serviceDay.click();
+    const serviceTime = this.page.locator( "(//span[text()='Daytime'])[1]");
+    await this.waitForVisible(serviceTime, 90000);
+    await serviceTime.click();
 
     const availableFundingSection = this.page.locator(OpportunityLocators.availableFundingSection).first();
     await this.waitForVisible(availableFundingSection, 90000);
@@ -983,7 +984,7 @@ async fillDate(label: string, date: Date): Promise<void> {
 
     const searchBox = this.page.locator(OpportunityLocators.searchSupportItemInput).first();
     await this.waitForVisible(searchBox, 90000);
-    await searchBox.fill('Annual review - Community Care');
+    await searchBox.fill(product);
     await this.staticWait(1500);
 
     const firstCheckbox = this.page.locator(OpportunityLocators.availableFundingFirstRowCheckbox).first();
@@ -1073,7 +1074,7 @@ async fillDate(label: string, date: Date): Promise<void> {
       async clickSignaturevisible(): Promise<void> {
               Logger.step('Click signature option');
               const moreActions = this.page.locator(OpportunityLocators.moreActionsButton).first();
-              await this.waitForVisible(moreActions, 30000);
+              await moreActions.waitFor({ state: 'visible', timeout: 30000 });
               await moreActions.click({ force: true });
 
               const signatureOption = this.page.getByRole('menuitem', { name: 'Send for Signature' });
