@@ -1,15 +1,85 @@
 import { test } from '../../src/fixtures/testFixtures';
 import { Logger } from '../../src/utils/Logger';
-import { Page } from '@playwright/test';
+import { expect, Locator, Page } from '@playwright/test';
 import PropertyReader from '../../src/utils/PropertyReader';
 
-test.describe('Salesforce Password Update - Batch Users 4-500', () => {
+test.describe('Salesforce Password Update - Batch Users 5-500', () => {
   const BASE_EMAIL = 'msouser';
   const DOMAIN = '@mecwacare.org.au.nft';
   const CURRENT_PASSWORD = 'Nft@2026_Test!';
   const NEW_PASSWORD = 'Ptexecution1';
   const SECURITY_ANSWER = 'hyderabad';
   const LOGIN_URL = PropertyReader.getBaseUrl();
+
+  function passwordResetLocators(page: Page) {
+    return {
+      currentPassword: page.locator('input[name="currentpassword"], input[type="password"][name*="current"]').first(),
+      newPassword: page.locator('input[name="newpassword"], input[type="password"][name*="new"]').first(),
+      confirmPassword: page.locator('input[name="confirmpassword"], input[type="password"][name*="confirm"]').first(),
+      answer: page.locator('input[name="answer"], input[name*="answer"], input[aria-label*="Answer"]').first(),
+      saveButton: page.locator('button[name="save"], input[name="save"], input[type="submit"][value*="Change"], button:has-text("Change Password"), button:has-text("Save")').first(),
+    };
+  }
+
+  async function fillFieldReliably(field: Locator, value: string, fieldName: string): Promise<void> {
+    await field.waitFor({ state: 'visible', timeout: 30000 });
+    await field.scrollIntoViewIfNeeded().catch(() => {});
+    await field.click({ force: true });
+    await field.fill('');
+    await field.fill(value);
+
+    const entered = await field.inputValue().catch(() => '');
+    if (entered !== value) {
+      await field.evaluate((element, nextValue) => {
+        const input = element as HTMLInputElement;
+        input.value = nextValue as string;
+        input.dispatchEvent(new Event('input', { bubbles: true }));
+        input.dispatchEvent(new Event('change', { bubbles: true }));
+      }, value);
+    }
+
+    await expect(field).toHaveValue(value, { timeout: 10000 });
+    Logger.step(`Entered ${fieldName}`);
+  }
+
+  async function isVisible(locator: Locator, timeout = 5000): Promise<boolean> {
+    return locator.isVisible({ timeout }).catch(() => false);
+  }
+
+  async function waitForPostLoginPage(page: Page): Promise<'change-password' | 'home' | 'login'> {
+    const locators = passwordResetLocators(page);
+    const usernameField = page.locator('#username');
+
+    await page.waitForLoadState('domcontentloaded', { timeout: 60000 }).catch(() => {});
+    await page.waitForTimeout(2000);
+
+    if (await isVisible(locators.currentPassword, 10000)) {
+      return 'change-password';
+    }
+
+    if (/(lightning\.force\.com|\/one\/one\.app)/i.test(page.url())) {
+      return 'home';
+    }
+
+    if (await isVisible(usernameField, 5000)) {
+      return 'login';
+    }
+
+    const changePasswordAppeared = await Promise.race([
+      locators.currentPassword.waitFor({ state: 'visible', timeout: 30000 }).then(() => 'change-password').catch(() => null),
+      page.waitForURL(/(lightning\.force\.com|\/one\/one\.app)/, { timeout: 30000 }).then(() => 'home').catch(() => null),
+      usernameField.waitFor({ state: 'visible', timeout: 30000 }).then(() => 'login').catch(() => null),
+    ]);
+
+    return changePasswordAppeared || 'login';
+  }
+
+  async function logoutFromCurrentSession(page: Page): Promise<void> {
+    const logoutUrl = `${LOGIN_URL.split('?')[0].replace(/\/lightning.*/, '')}/secur/logout.jsp`;
+    await page.goto(logoutUrl, { waitUntil: 'domcontentloaded', timeout: 60000 }).catch(() => {});
+    await page.waitForTimeout(2000);
+    Logger.step('Logged out');
+  }
 
   async function updatePasswordForUser(page: Page, userNumber: number): Promise<void> {
     const username = `${BASE_EMAIL}${userNumber}${DOMAIN}`;
@@ -22,253 +92,60 @@ test.describe('Salesforce Password Update - Batch Users 4-500', () => {
       await page.goto(LOGIN_URL, { waitUntil: 'domcontentloaded' });
       Logger.step('Navigated to login page');
 
-      // Fill username (same locator as global-setup.ts)
-      await page.locator('#username').fill(username);
-      Logger.step('Entered username');
+      const usernameField = page.locator('#username');
+      const passwordField = page.locator('#password');
 
-      // Fill password (same locator as global-setup.ts)
-      await page.locator('#password').fill(CURRENT_PASSWORD);
-      Logger.step('Entered password');
-
-      // Click login button (same locator as global-setup.ts)
-      await page.locator('#Login').click();
-      Logger.step('Clicked login button');
-
-      // Wait for login to complete (same pattern as global-setup.ts)
-      const isLoggedIn = await page
-        .waitForURL(/(lightning\.force\.com|\/one\/one\.app)/, { timeout: 120000 })
-        .then(() => true)
-        .catch(() => false);
-
-      if (!isLoggedIn) {
-        Logger.warn(`User ${username} login timed out or did not reach expected page`);
-        return;
+      if (await isVisible(usernameField, 15000)) {
+        await fillFieldReliably(usernameField, username, 'username');
+        await fillFieldReliably(passwordField, CURRENT_PASSWORD, 'password');
+        await page.locator('#Login').click();
+        Logger.step('Clicked login button');
+      } else {
+        Logger.info(`Login form not shown immediately for ${username}. Continuing with current page state.`);
       }
 
-      Logger.step('Login successful - waiting for page load');
+      const postLoginPage = await waitForPostLoginPage(page);
+      Logger.step(`Post-login state for ${username}: ${postLoginPage}`);
 
-      // Verify page title/heading to confirm we're on change password page
-    //   const changePasswordHeading = page.locator('text=Change Your Password');
-    //   const headingVisible = await changePasswordHeading.isVisible({ timeout: 15000 }).catch(() => false);
-
-    //   if (!headingVisible) {
-    //     Logger.warn(`User ${username} - "Change Your Password" heading not found`);
-    //   } else {
-    //     Logger.step('Verified: Change Your Password page heading is visible');
-    //   }
-
-      // Check if we're on password change page
-      const currentPasswordField = page.locator('input[name="currentpassword"]').first();
-      const isPasswordChangePage = await currentPasswordField.isVisible({ timeout: 15000 }).catch(() => false);
-
-      if (isPasswordChangePage) {
+      if (postLoginPage === 'change-password') {
         Logger.step('On password change page - filling fields');
-
-        // Wait for page to be fully loaded
         await page.waitForLoadState('domcontentloaded', { timeout: 30000 });
         await page.waitForLoadState('networkidle', { timeout: 30000 }).catch(() => {});
-        
-        // Extra wait for page stability
         await page.waitForTimeout(2000);
         Logger.step('Waited 2 seconds for page stability');
 
-        // Fill current password
-        try {
-          const currentPasswordField = page.locator('input[name="currentpassword"]');
-          const currentPasswordCount = await currentPasswordField.count();
-          Logger.step(`Found ${currentPasswordCount} current password field(s)`);
-          
-          await currentPasswordField.scrollIntoViewIfNeeded();
-          await currentPasswordField.waitFor({ state: 'visible', timeout: 20000 });
-          await page.waitForTimeout(1000);
-          await currentPasswordField.fill(CURRENT_PASSWORD);
-          Logger.step('Entered current password');
-        } catch (error) {
-          Logger.error(`Error filling current password: ${error}`);
-          throw error;
-        }
+        const locators = passwordResetLocators(page);
+        await fillFieldReliably(locators.currentPassword, CURRENT_PASSWORD, 'current password');
+        await fillFieldReliably(locators.newPassword, NEW_PASSWORD, 'new password');
+        await fillFieldReliably(locators.confirmPassword, NEW_PASSWORD, 'confirm password');
+        await fillFieldReliably(locators.answer, SECURITY_ANSWER, 'security answer');
 
-        await page.waitForTimeout(1000);
-
-        // Fill new password
-        try {
-          const newPasswordField = page.locator('input[name="newpassword"]');
-          const newPasswordCount = await newPasswordField.count();
-          Logger.step(`Found ${newPasswordCount} new password field(s)`);
-          
-          await newPasswordField.scrollIntoViewIfNeeded();
-          await newPasswordField.waitFor({ state: 'visible', timeout: 20000 });
-          await page.waitForTimeout(1000);
-          await newPasswordField.fill(NEW_PASSWORD);
-          Logger.step('Entered new password');
-        } catch (error) {
-          Logger.error(`Error filling new password: ${error}`);
-          throw error;
-        }
-
-        await page.waitForTimeout(1000);
-
-        // Fill confirm password
-        try {
-          const confirmPasswordField = page.locator('input[name="confirmpassword"]');
-          const confirmPasswordCount = await confirmPasswordField.count();
-          Logger.step(`Found ${confirmPasswordCount} confirm password field(s)`);
-          
-          await confirmPasswordField.scrollIntoViewIfNeeded();
-          await confirmPasswordField.waitFor({ state: 'visible', timeout: 20000 });
-          await page.waitForTimeout(1000);
-          await confirmPasswordField.fill(NEW_PASSWORD);
-          Logger.step('Entered confirm password');
-        } catch (error) {
-          Logger.error(`Error filling confirm password: ${error}`);
-          throw error;
-        }
-
-        await page.waitForTimeout(1000);
-
-        // Fill security answer
-        try {
-          const answerField = page.locator('input[name="answer"]');
-          const answerCount = await answerField.count();
-          Logger.step(`Found ${answerCount} answer field(s)`);
-          
-          await answerField.scrollIntoViewIfNeeded();
-          await answerField.waitFor({ state: 'visible', timeout: 20000 });
-          await page.waitForTimeout(1000);
-          await answerField.fill(SECURITY_ANSWER);
-          Logger.step('Entered security answer');
-        } catch (error) {
-          Logger.error(`Error filling security answer: ${error}`);
-          throw error;
-        }
-
-        // Wait before clicking save
         await page.waitForTimeout(2000);
         Logger.step('Waited 2 seconds before clicking save button');
 
-        // Click change password button
-        try {
-          const changePasswordButton = page.locator('button[name="save"]');
-          const saveButtonCount = await changePasswordButton.count();
-          Logger.step(`Found ${saveButtonCount} save button(s)`);
-          
-          await changePasswordButton.scrollIntoViewIfNeeded();
-          await changePasswordButton.waitFor({ state: 'visible', timeout: 20000 });
-          await page.waitForTimeout(500);
-          await changePasswordButton.click();
-          Logger.step('Clicked change password button');
-        } catch (error) {
-          Logger.error(`Error clicking save button: ${error}`);
-          throw error;
-        }
+        await locators.saveButton.waitFor({ state: 'visible', timeout: 30000 });
+        await locators.saveButton.scrollIntoViewIfNeeded().catch(() => {});
+        await locators.saveButton.click({ force: true });
+        Logger.step('Clicked change password button');
 
-        // Wait for password change to complete
         await page.waitForTimeout(3000);
         Logger.step('Waited 3 seconds for password change to process');
-        await page.waitForLoadState('load', { timeout: 120000 });
+        await page.waitForLoadState('load', { timeout: 120000 }).catch(() => {});
         Logger.step('Password change completed');
 
-        // Refresh page
         await page.reload({ waitUntil: 'domcontentloaded', timeout: 120000 });
         Logger.step('Page refreshed');
         await page.waitForLoadState('domcontentloaded', { timeout: 60000 });
         await page.waitForTimeout(3000);
         Logger.step('Waited 3 seconds after page refresh');
-
-        // Find and click logout button
-        // Try multiple logout button selectors
-        let logoutClicked = false;
-
-        // Attempt 1: Direct logout button with target="_self"
-        try {
-          const logoutButton = page.locator('a[target="_self"]');
-          const logoutCount = await logoutButton.count();
-          Logger.step(`Found ${logoutCount} logout button(s)`);
-          
-          if (await logoutButton.isVisible({ timeout: 10000 }).catch(() => false)) {
-            await logoutButton.scrollIntoViewIfNeeded();
-            await page.waitForTimeout(500);
-            await logoutButton.waitFor({ state: 'visible', timeout: 20000 });
-            await page.waitForTimeout(500);
-            await logoutButton.click();
-            Logger.step('Clicked logout button');
-            logoutClicked = true;
-            await page.waitForTimeout(2000);
-            Logger.step('Waited 2 seconds after logout click');
-          }
-        } catch (e) {
-          Logger.warn(`Attempt 1 (direct logout) failed: ${e}`);
-        }
-
-        // Attempt 2: User profile menu
-        if (!logoutClicked) {
-          try {
-            const userMenu = page.locator('button[aria-label*="User"], button[aria-label*="Profile"]').first();
-            if (await userMenu.isVisible({ timeout: 10000 }).catch(() => false)) {
-              await userMenu.scrollIntoViewIfNeeded();
-              await page.waitForTimeout(500);
-              await userMenu.click();
-              Logger.step('Opened user menu');
-              await page.waitForTimeout(1000);
-              const logoutOption = page.locator('a[target="_self"]').first();
-              if (await logoutOption.isVisible({ timeout: 20000 }).catch(() => false)) {
-                await logoutOption.scrollIntoViewIfNeeded();
-                await page.waitForTimeout(500);
-                await logoutOption.click();
-                Logger.step('Clicked logout from menu');
-                logoutClicked = true;
-                await page.waitForTimeout(2000);
-                Logger.step('Waited 2 seconds after logout from menu');
-              }
-            }
-          } catch (e) {
-            Logger.warn(`Attempt 2 (menu logout) failed: ${e}`);
-          }
-        }
-
-        // Attempt 3: Navigate to logout URL directly
-        if (!logoutClicked) {
-          try {
-            await page.goto(`${LOGIN_URL.split('?')[0].replace(/\/lightning.*/, '')}/secur/logout.jsp`, { 
-              waitUntil: 'domcontentloaded', 
-              timeout: 60000 
-            }).catch(() => {});
-            Logger.step('Navigated to logout URL');
-            await page.waitForTimeout(2000);
-            Logger.step('Waited 2 seconds after logout URL navigation');
-            logoutClicked = true;
-          } catch (e) {
-            Logger.warn(`Attempt 3 (logout URL) failed: ${e}`);
-          }
-        }
-
-        if (!logoutClicked) {
-          Logger.warn('Logout may not have completed successfully, but password change was successful');
-        }
-
-        await page.waitForLoadState('domcontentloaded', { timeout: 60000 }).catch(() => {});
-        await page.waitForTimeout(1000);
-        Logger.step('Final wait and page stability check completed');
+        await logoutFromCurrentSession(page);
 
         Logger.pass(`Successfully updated password for user ${userNumber}`);
+      } else if (postLoginPage === 'home') {
+        Logger.warn(`User ${username} reached Salesforce home instead of password reset page. Logging out.`);
+        await logoutFromCurrentSession(page);
       } else {
-        Logger.warn(`User ${username} did not show password change page - may already have updated password`);
-        
-        // Try to logout anyway
-        try {
-          const logoutButton = page.locator('a[target="_self"]');
-          if (await logoutButton.isVisible({ timeout: 10000 }).catch(() => false)) {
-            await logoutButton.scrollIntoViewIfNeeded();
-            await page.waitForTimeout(500);
-            await logoutButton.click();
-            Logger.step('Clicked logout button (from no password change page)');
-            await page.waitForLoadState('domcontentloaded', { timeout: 60000 }).catch(() => {});
-            await page.waitForTimeout(2000);
-            Logger.step('Waited 2 seconds after logout');
-          }
-        } catch (e) {
-          Logger.warn(`Could not logout after skipping password change: ${e}`);
-        }
+        throw new Error(`User ${username} stayed on the login page or did not reach the password reset form.`);
       }
     } catch (error) {
       Logger.error(`Failed to update password for user ${userNumber}: ${error}`);
@@ -279,8 +156,8 @@ test.describe('Salesforce Password Update - Batch Users 4-500', () => {
   test('Update password for users 4 to 500', async ({ browser }) => {
     Logger.info('Starting batch password update process');
     
-    const START_USER = 8;
-    const END_USER = 8;
+    const START_USER = Number(process.env.START_USER || 5);
+    const END_USER = Number(process.env.END_USER || 500);
     let successCount = 0;
     let failureCount = 0;
     const failedUsers: number[] = [];
