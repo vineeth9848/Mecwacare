@@ -1060,9 +1060,9 @@ async fillDate(label: string, date: Date): Promise<void> {
 
       async verifySignaturevisible(): Promise<void> {
         Logger.step('Verify signature is visible');
-        const moreActions = this.page.locator(OpportunityLocators.moreActionsButton).first();
-        await this.waitForVisible(moreActions, 30000);
-        await moreActions.click({ force: true });
+        const moreActions = this.page.locator(OpportunityLocators.moreActionsButton).last();
+              await moreActions.waitFor({ state: 'visible', timeout: 30000 });
+              await moreActions.click({ force: true });
 
         const signatureOption = this.page.getByRole('menuitem', { name: 'Send for Signature' });
 
