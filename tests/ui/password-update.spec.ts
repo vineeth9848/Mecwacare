@@ -1,6 +1,5 @@
-import { test } from '@playwright/test';
+import { test, expect, Locator, Page } from '@playwright/test';
 import { Logger } from '../../src/utils/Logger';
-import { expect, Locator, Page } from '@playwright/test';
 import PropertyReader from '../../src/utils/PropertyReader';
 
 test.describe('Salesforce Password Update - Batch Users 5-500', () => {
@@ -9,7 +8,9 @@ test.describe('Salesforce Password Update - Batch Users 5-500', () => {
   const CURRENT_PASSWORD = 'Nft@2026_Test!';
   const NEW_PASSWORD = 'Ptexecution1';
   const SECURITY_ANSWER = 'hyderabad';
-  const LOGIN_URL = PropertyReader.getBaseUrl();
+  const LOGIN_URL = (process.env.SF_LOGIN_URL || PropertyReader.getBaseUrl()).includes('.lightning.force.com')
+    ? (process.env.SF_LOGIN_URL || PropertyReader.getBaseUrl()).replace('.lightning.force.com', '.my.salesforce.com')
+    : (process.env.SF_LOGIN_URL || PropertyReader.getBaseUrl());
 
   function passwordResetLocators(page: Page) {
     return {
@@ -85,7 +86,7 @@ test.describe('Salesforce Password Update - Batch Users 5-500', () => {
   async function updatePasswordForUser(page: Page, userNumber: number): Promise<void> {
     const username = `${BASE_EMAIL}${userNumber}${DOMAIN}`;
     
-    Logger.info(`\n========== Updating password for user ${userNumber}/${500} ==========`);
+    Logger.info(`\n========== Updating password for user ${userNumber} ==========`);
     Logger.step(`Username: ${username}`);
 
     try {
@@ -95,14 +96,22 @@ test.describe('Salesforce Password Update - Batch Users 5-500', () => {
 
       const usernameField = page.locator('#username');
       const passwordField = page.locator('#password');
+      const currentPasswordField = passwordResetLocators(page).currentPassword;
 
-      if (await isVisible(usernameField, 15000)) {
+      await Promise.race([
+        usernameField.waitFor({ state: 'visible', timeout: 30000 }).catch(() => null),
+        currentPasswordField.waitFor({ state: 'visible', timeout: 30000 }).catch(() => null),
+      ]);
+
+      if (await isVisible(currentPasswordField, 5000)) {
+        Logger.info(`User ${username} is already on Change Your Password page. Skipping login entry.`);
+      } else if (await isVisible(usernameField, 10000)) {
         await fillFieldReliably(usernameField, username, 'username');
         await fillFieldReliably(passwordField, CURRENT_PASSWORD, 'password');
         await page.locator('#Login').click();
         Logger.step('Clicked login button');
       } else {
-        Logger.info(`Login form not shown immediately for ${username}. Continuing with current page state.`);
+        throw new Error(`Neither login page nor change password page became visible for ${username}. Current URL: ${page.url()}`);
       }
 
       const postLoginPage = await waitForPostLoginPage(page);
@@ -158,7 +167,7 @@ test.describe('Salesforce Password Update - Batch Users 5-500', () => {
     }
   }
 
-  test('Update password for users 4 to 500', async ({ browser }) => {
+  test('Update password for users 5 to 500', async ({ browser }) => {
     Logger.info('Starting batch password update process');
     
     const START_USER = Number(process.env.START_USER || 5);
