@@ -1,4 +1,4 @@
-import { test } from '../../src/fixtures/testFixtures';
+import { test } from '@playwright/test';
 import { Logger } from '../../src/utils/Logger';
 import { expect, Locator, Page } from '@playwright/test';
 import PropertyReader from '../../src/utils/PropertyReader';
