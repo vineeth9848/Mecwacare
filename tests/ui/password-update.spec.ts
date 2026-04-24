@@ -24,6 +24,7 @@ test.describe('Salesforce Password Update - Batch Users 5-500', () => {
   async function fillFieldReliably(field: Locator, value: string, fieldName: string): Promise<void> {
     await field.waitFor({ state: 'visible', timeout: 30000 });
     await field.scrollIntoViewIfNeeded().catch(() => {});
+    await field.page().waitForTimeout(500);
     await field.click({ force: true });
     await field.fill('');
     await field.fill(value);
@@ -115,6 +116,9 @@ test.describe('Salesforce Password Update - Batch Users 5-500', () => {
         Logger.step('Waited 2 seconds for page stability');
 
         const locators = passwordResetLocators(page);
+        await locators.currentPassword.scrollIntoViewIfNeeded().catch(() => {});
+        await page.waitForTimeout(1000);
+        Logger.step('Scrolled to change password form');
         await fillFieldReliably(locators.currentPassword, CURRENT_PASSWORD, 'current password');
         await fillFieldReliably(locators.newPassword, NEW_PASSWORD, 'new password');
         await fillFieldReliably(locators.confirmPassword, NEW_PASSWORD, 'confirm password');
@@ -125,6 +129,7 @@ test.describe('Salesforce Password Update - Batch Users 5-500', () => {
 
         await locators.saveButton.waitFor({ state: 'visible', timeout: 30000 });
         await locators.saveButton.scrollIntoViewIfNeeded().catch(() => {});
+        await page.waitForTimeout(1000);
         await locators.saveButton.click({ force: true });
         Logger.step('Clicked change password button');
 
