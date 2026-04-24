@@ -879,7 +879,6 @@ async selectImportantInformationDetails(label: string | RegExp, value: string) {
 
   await this.page.keyboard.press('Enter');
   await expect(field).toContainText(value, { timeout: 10000 });
-  await this.page.waitForTimeout(5000);
 
   Logger.pass(`Selected ${label}: ${value} from dropdown in bottom section`);
 

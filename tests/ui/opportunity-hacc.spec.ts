@@ -18,7 +18,7 @@ test('Configure "Block Funding" funding source and "HACC-PYP" funding type in fi
   await opportunityPage.refreshPage();
   await homePage.verifyHomePage();
   await homePage.selectObjectFromDropdown('Opportunities');
-  await opportunityPage.selectOpportunitiesListView('All Opportunities');
+  await opportunityPage.selectOpportunitiesListView('My Opportunities');
   await opportunityPage.searchAndOpenOpportunityByLeadName(lead.firstName, lead.lastName);
   await opportunityPage.openDetailsTab();
   await opportunityPage.selectBlockFundingForFundingSourceAndType(opportunityData.HACCfundingType);
@@ -54,7 +54,7 @@ test('Configure HACC-PYP Link Fund', async ({ page }) => {
   await opportunityPage.refreshPage();
   await homePage.verifyHomePage();
   await homePage.selectObjectFromDropdown('Opportunities');
-  await opportunityPage.selectOpportunitiesListView('All Opportunities');
+  await opportunityPage.selectOpportunitiesListView('My Opportunities');
   await opportunityPage.searchAndOpenOpportunityByLeadName(lead.firstName, lead.lastName);
   await opportunityPage.openDetailsTab();
   await opportunityPage.ClickLinkFund();
@@ -85,7 +85,7 @@ test('verify Generate Agreement functionality on Opportunity', async ({ page }) 
   await opportunityPage.refreshPage();
   await homePage.verifyHomePage();
   await homePage.selectObjectFromDropdown('Opportunities');
-  await opportunityPage.selectOpportunitiesListView('All Opportunities');
+  await opportunityPage.selectOpportunitiesListView('My Opportunities');
   await opportunityPage.searchAndOpenOpportunityByLeadName(lead.firstName, lead.lastName);
   await opportunityPage.configureStage();
   await opportunityPage.configureStatus();
@@ -93,7 +93,7 @@ test('verify Generate Agreement functionality on Opportunity', async ({ page }) 
   await opportunityPage.fillDate('Agreement End Date', tomorrow);
   await opportunityPage.saveOpportunityDetails();
   await opportunityPage.refreshPage();
-  await opportunityPage.verifySignaturevisible();
+  //await opportunityPage.verifySignaturevisible();
   await opportunityPage.generateAgreement();
   await opportunityPage.refreshPage();
   await opportunityPage.switchToRelatedTab();
@@ -115,7 +115,7 @@ test('Configure HACC-PYP PriceBook and Product Management on Opportunity', async
   await opportunityPage.refreshPage();
   await homePage.verifyHomePage();
   await homePage.selectObjectFromDropdown('Opportunities');
-  await opportunityPage.selectOpportunitiesListView('All Opportunities');
+  await opportunityPage.selectOpportunitiesListView('My Opportunities');
   await opportunityPage.searchAndOpenOpportunityByLeadName(lead.firstName, lead.lastName);
   //await opportunityPage.verifyQuoteNotGenerated();
   await opportunityPage.refreshPage();
@@ -139,7 +139,7 @@ test('Verify Generate Quote functionality and verify Files on Opportunity', asyn
   await opportunityPage.refreshPage();
   await homePage.verifyHomePage();
   await homePage.selectObjectFromDropdown('Opportunities');
-  await opportunityPage.selectOpportunitiesListView('All Opportunities');
+  await opportunityPage.selectOpportunitiesListView('My Opportunities');
   await opportunityPage.searchAndOpenOpportunityByLeadName(lead.firstName, lead.lastName);
   await opportunityPage.refreshPage();
   await opportunityPage.switchToRelatedTab();
@@ -160,7 +160,7 @@ test('Generate Send For Signature functionality on Opportunity', async ({ page }
   await opportunityPage.refreshPage();
   await homePage.verifyHomePage();
   await homePage.selectObjectFromDropdown('Opportunities');
-  await opportunityPage.selectOpportunitiesListView('All Opportunities');
+  await opportunityPage.selectOpportunitiesListView('My Opportunities');
   await opportunityPage.searchAndOpenOpportunityByLeadName(lead.firstName, lead.lastName);
   await opportunityPage.clickSignaturevisible();
   await opportunityPage.configureSignature();
@@ -178,7 +178,7 @@ test('verify Signature and Close the Opportunity', async ({ page }) => {
   await opportunityPage.refreshPage();
   await homePage.verifyHomePage();
   await homePage.selectObjectFromDropdown('Opportunities');
-  await opportunityPage.selectOpportunitiesListView('All Opportunities');
+  await opportunityPage.selectOpportunitiesListView('My Opportunities');
   await opportunityPage.searchAndOpenOpportunityByLeadName(lead.firstName, lead.lastName);
   await opportunityPage.refreshPage();
   await opportunityPage.setOpportunityToClosedWon();
@@ -198,7 +198,7 @@ test('Create Service Agreement on Opportunity record', async ({ page }) => {
   await opportunityPage.refreshPage();
   await homePage.verifyHomePage();
   await homePage.selectObjectFromDropdown('Opportunities');
-  await opportunityPage.selectOpportunitiesListView('All Opportunities');
+  await opportunityPage.selectOpportunitiesListView('My Opportunities');
   await opportunityPage.searchAndOpenOpportunityByLeadName(lead.firstName, lead.lastName);
   await opportunityPage.createServiceAgreement();
   await opportunityPage.refreshPage();

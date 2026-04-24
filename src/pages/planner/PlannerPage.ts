@@ -148,12 +148,12 @@ await this.safeAction(async () => {
 
     await this.clickNextButton('other information');
 
-    // const submitButton = this.page.getByRole('button', { name: 'Submit' }).first();
-    // await this.waitForVisible(submitButton, 15000);
-    // await this.safeAction(async () => {
-    //   await submitButton.click({ force: true });
-    // });
-    // await this.waitForPageReady();
+    const submitButton = this.page.getByRole('button', { name: 'Submit' }).first();
+    await this.waitForVisible(submitButton, 15000);
+    await this.safeAction(async () => {
+      await submitButton.click({ force: true });
+    });
+    await this.waitForPageReady();
     Logger.pass('Submitted planner appointment');
   }
 

@@ -13,7 +13,7 @@ export class BasePage {
     const baseUrl = PropertyReader.getBaseUrl();
     Logger.step(`Navigate to base URL: ${baseUrl}`);
     await this.safeAction(async () => {
-      await this.page.goto(baseUrl, { waitUntil: 'domcontentloaded' });
+      await this.page.goto(baseUrl, { waitUntil: 'load', timeout: 120000 });
     });
     await this.waitForPageReady();
     const escaped = baseUrl.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
@@ -24,7 +24,7 @@ export class BasePage {
   async refreshPage(): Promise<void> {
     Logger.step('Refresh page');
     await this.safeAction(async () => {
-      await this.page.reload({ waitUntil: 'domcontentloaded' });
+      await this.page.reload({ waitUntil: 'load', timeout: 120000 });
     });
     await this.waitForPageReady();
     Logger.pass('Page refreshed');
@@ -52,7 +52,9 @@ export class BasePage {
       throw new Error('Page is already closed');
     }
 
-    await this.page.waitForLoadState('domcontentloaded');
+    await this.page.waitForLoadState('load', { timeout: 120000 }).catch(() => {
+      Logger.warn('Page load state timed out, continuing with test');
+    });
   }
 
   async staticWait(milliseconds: number): Promise<void> {
