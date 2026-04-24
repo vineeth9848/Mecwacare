@@ -5,3 +5,5 @@ reports/junit/
 reports/allure-results/
 .env
 auth.json
+auth-uat.json
+auth.json
