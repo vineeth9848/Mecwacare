@@ -4,7 +4,7 @@ import { Logger } from '../../src/utils/Logger';
 import { HomePage } from '../../src/pages/homepage/HomePage';
 import { LeadPage } from '../../src/pages/leads/LeadPage';
 
-test('create lead from leads page', async ({ page }) => {
+test.only('create lead from leads page', async ({ page }) => {
   test.setTimeout(180000);
   const homePage = new HomePage(page);
   const leadPage = new LeadPage(page);
@@ -43,7 +43,10 @@ test('verify lead validations', async ({ page }) => {
 
   Logger.info('Starting lead validation test');
   //await homePage.verifyHomePage();
+  await leadPage.hardRefreshPageWithRetry();
+  await leadPage.hardRefreshPageWithRetry();
   await homePage.selectObjectFromDropdown('Leads');
+  await homePage.refreshPage();
   await leadPage.selectLeadsListView("Today's Leads");
 
   const expectedEmail = leadPage.getEmailWithRunNumber(lead.email);

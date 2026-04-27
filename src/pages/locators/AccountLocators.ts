@@ -54,6 +54,7 @@ export const AccountLocators = {
     addressInformationText: "button:has-text('Address Information')",
       addressValue: "[data-target-selection-name='sfdc:RecordField.Lead.Address']",
       SelectClientFormCategory: "button[aria-label='Select Category']",
+      listviewdropdownaccount:"button[title='Select a List View: Accounts']"
 
 
 } as const;

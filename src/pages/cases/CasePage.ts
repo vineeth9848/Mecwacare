@@ -12,6 +12,52 @@ export class CasePage extends BasePage {
     super(page);
   }
 
+  /**
+   * Combined refresh method: Navigates to fresh URL + Hard refresh with retry logic
+   * Use this before clicking object dropdown if it's not responding
+   * Combines Option 3 (Fresh URL navigation) + Option 4 (Hard refresh + Retry)
+   */
+  async hardRefreshPageWithRetry(): Promise<void> {
+    Logger.info('Starting hard refresh with retry logic...');
+    
+    try {
+      // Step 1: Navigate to fresh URL (Option 3 approach)
+      const baseUrl = PropertyReader.getBaseUrl();
+      Logger.step(`Navigating to fresh URL: ${baseUrl}`);
+      await this.page.goto(baseUrl, { waitUntil: 'domcontentloaded', timeout: 60000 });
+      Logger.step('Navigated to fresh URL');
+
+      // Step 2: Hard refresh the page (Option 4 approach)
+      Logger.step('Performing hard refresh (Ctrl+Shift+R)...');
+      await this.page.reload({ waitUntil: 'load', timeout: 60000 });
+      Logger.step('Hard refresh completed');
+
+      // Step 3: Wait for page stability
+      Logger.step('Waiting 2 seconds for page to stabilize');
+      await this.page.waitForTimeout(2000);
+
+      // Step 4: Additional stability check
+      await this.page.waitForLoadState('domcontentloaded', { timeout: 30000 });
+      Logger.step('Page fully loaded and stable');
+
+      Logger.pass('Hard refresh with retry completed successfully');
+
+    } catch (error) {
+      Logger.warn(`Hard refresh encountered an error: ${error}`);
+      Logger.step('Attempting secondary refresh method...');
+      
+      try {
+        // Fallback: Simple reload
+        await this.page.reload({ waitUntil: 'domcontentloaded' });
+        await this.page.waitForTimeout(2000);
+        Logger.pass('Secondary refresh completed');
+      } catch (secondaryError) {
+        Logger.error(`Secondary refresh also failed: ${secondaryError}`);
+        throw new Error(`Hard refresh failed: ${error}. Secondary refresh also failed: ${secondaryError}`);
+      }
+    }
+  }
+
   async clickNewButton(): Promise<void> {
       Logger.step('Click New button in Case page');
       const newButton = this.page.getByRole('button', { name: 'New' }).first();
@@ -140,7 +186,7 @@ async DateField(name: string, date: Date): Promise<void> {
 
   async selectCaseListView(viewName: string): Promise<void> {
       Logger.step(`Select cases list view: ${viewName}`);
-      const listViewDropdown = this.page.locator(CaseLocators.listViewDropdown).first();
+      const listViewDropdown = this.page.locator(CaseLocators.listviewDropdowncase).first();
       await this.waitForVisible(listViewDropdown, 30000);
       await listViewDropdown.click({ force: true });
   

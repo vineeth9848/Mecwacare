@@ -11,12 +11,57 @@ export class OpportunityPage extends BasePage {
     super(page);
   }
 
+  /**
+   * Combined refresh method: Navigates to fresh URL + Hard refresh with retry logic
+   * Use this before clicking Opportunity object if it's not responding
+   * Combines Option 3 (Fresh URL navigation) + Option 4 (Hard refresh + Retry)
+   */
+  async hardRefreshPageWithRetry(): Promise<void> {
+    Logger.info('Starting hard refresh with retry logic...');
+    
+    try {
+      // Step 1: Navigate to fresh URL (Option 3 approach)
+      const baseUrl = PropertyReader.getBaseUrl();
+      Logger.step(`Navigating to fresh URL: ${baseUrl}`);
+      await this.page.goto(baseUrl, { waitUntil: 'domcontentloaded', timeout: 60000 });
+      Logger.step('Navigated to fresh URL');
+
+      // Step 2: Hard refresh the page (Option 4 approach)
+      Logger.step('Performing hard refresh (Ctrl+Shift+R)...');
+      await this.page.reload({ waitUntil: 'load', timeout: 60000 });
+      Logger.step('Hard refresh completed');
+
+      // Step 3: Wait for page stability
+      Logger.step('Waiting 2 seconds for page to stabilize');
+      await this.page.waitForTimeout(2000);
+
+      // Step 4: Additional stability check
+      await this.page.waitForLoadState('domcontentloaded', { timeout: 30000 });
+      Logger.step('Page fully loaded and stable');
+
+      Logger.pass('Hard refresh with retry completed successfully');
+
+    } catch (error) {
+      Logger.warn(`Hard refresh encountered an error: ${error}`);
+      Logger.step('Attempting secondary refresh method...');
+      
+      try {
+        // Fallback: Simple reload
+        await this.page.reload({ waitUntil: 'domcontentloaded' });
+        await this.page.waitForTimeout(2000);
+        Logger.pass('Secondary refresh completed');
+      } catch (secondaryError) {
+        Logger.error(`Secondary refresh also failed: ${secondaryError}`);
+        throw new Error(`Hard refresh failed: ${error}. Secondary refresh also failed: ${secondaryError}`);
+      }
+    }
+  }
 
   async selectOpportunitiesListView(viewName: string): Promise<void> {
     Logger.step(`Select opportunities list view: ${viewName}`);
-    const listViewDropdown = this.page.locator(OpportunityLocators.listViewDropdown).first();
+    const listViewDropdown = this.page.locator(OpportunityLocators.listviewDropdownopp).first();
     await this.waitForVisible(listViewDropdown, 30000);
-    await listViewDropdown.click();
+    await listViewDropdown.click({ force: true });
 
     await this.page.waitForSelector('[role="listbox"]', { timeout: 30000 });
     const listViewOption = this.page
@@ -27,6 +72,23 @@ export class OpportunityPage extends BasePage {
     await listViewOption.scrollIntoViewIfNeeded().catch(() => {});
     await listViewOption.click({ force: true });
     Logger.pass(`Opportunities list view selected: ${viewName}`);
+  }
+
+  async selectServiceAgreementListView(viewName: string): Promise<void> {
+    Logger.step(`Select service agreements list view: ${viewName}`);
+    const listViewDropdown = this.page.locator(OpportunityLocators.listviewDropdownServiceAgreement).first();
+    await this.waitForVisible(listViewDropdown, 30000);
+    await listViewDropdown.click({ force: true });
+
+    await this.page.waitForSelector('[role="listbox"]', { timeout: 30000 });
+    const listViewOption = this.page
+      .locator(OpportunityLocators.listViewOption)
+      .filter({ hasText: viewName })
+      .first();
+    await this.waitForVisible(listViewOption, 30000);
+    await listViewOption.scrollIntoViewIfNeeded().catch(() => {});
+    await listViewOption.click({ force: true });
+    Logger.pass(`Service Agreements list view selected: ${viewName}`);
   }
 
   async searchAndOpenOpportunityByLeadName(firstName: string, lastName: string): Promise<void> {

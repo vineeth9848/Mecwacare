@@ -19,6 +19,8 @@ test('Create New Appointment', async ({ page }) => {
   Logger.info(`Planner Data: ${JSON.stringify(planner)}`);
 
   await homePage.verifyHomePage();
+  await plannerPage.hardRefreshPageWithRetry();
+  await plannerPage.hardRefreshPageWithRetry();
   await homePage.selectObjectFromDropdown(planner.objectName);
   await plannerPage.clickNewButton();
   await plannerPage.createNewAppointment(planner.username, planner.resourceName);
