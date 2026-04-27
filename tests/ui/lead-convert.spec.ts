@@ -19,7 +19,10 @@ test('convert lead and verify conversion details', async ({ page }) => {
   //await leadPage.staticWait(10000);
   await leadPage.refreshPage();
   await homePage.verifyHomePage();
+  await leadPage.hardRefreshPageWithRetry();
+  await leadPage.hardRefreshPageWithRetry();
   await homePage.selectObjectFromDropdown('Leads');
+  await leadPage.refreshPage();
   await leadPage.selectLeadsListView("Today's Leads");
   await leadPage.staticWait(3000);
 

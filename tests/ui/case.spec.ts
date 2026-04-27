@@ -17,6 +17,8 @@ test('create case from case page', async ({ page }) => {
 
   Logger.info(`Case Create Data: ${JSON.stringify(cases)}`);
   await homePage.verifyHomePage();
+  await casePage.hardRefreshPageWithRetry();
+  await casePage.hardRefreshPageWithRetry();
   await homePage.selectObjectFromDropdown('Cases');
 
   const today = new Date();
@@ -55,7 +57,10 @@ test('Close the Case and Verify Funding details on Case', async ({ page }) => {
 
   Logger.info(`Case Update Data: ${JSON.stringify(cases)}`);
   await homePage.verifyHomePage();
+  await casePage.hardRefreshPageWithRetry();
+  await casePage.hardRefreshPageWithRetry();
   await homePage.selectObjectFromDropdown('Cases');
+  await casePage.refreshPage();
   await casePage.selectCaseListView("All Cases");
   await opportunityPage.searchAndOpenOpportunityByLeadName(lead.firstName, lead.lastName);
   await casePage.clickOnEditButton();

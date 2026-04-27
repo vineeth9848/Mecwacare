@@ -17,7 +17,10 @@ test('Configure "Block Funding" funding source and "HACC-PYP" funding type in fi
   Logger.info('Starting opportunity funding validation test');
   await opportunityPage.refreshPage();
   await homePage.verifyHomePage();
+  await opportunityPage.hardRefreshPageWithRetry();  // Hard refresh before clicking dropdown
+  await opportunityPage.hardRefreshPageWithRetry();
   await homePage.selectObjectFromDropdown('Opportunities');
+  await opportunityPage.refreshPage();
   await opportunityPage.selectOpportunitiesListView('My Opportunities');
   await opportunityPage.searchAndOpenOpportunityByLeadName(lead.firstName, lead.lastName);
   await opportunityPage.openDetailsTab();
@@ -53,7 +56,10 @@ test('Configure HACC-PYP Link Fund', async ({ page }) => {
   Logger.info('Starting Configuring HACC-PYP Link Fund on opportunity test');
   await opportunityPage.refreshPage();
   await homePage.verifyHomePage();
+  await opportunityPage.hardRefreshPageWithRetry();  // Hard refresh before clicking dropdown
+  await opportunityPage.hardRefreshPageWithRetry();
   await homePage.selectObjectFromDropdown('Opportunities');
+  await opportunityPage.refreshPage();
   await opportunityPage.selectOpportunitiesListView('My Opportunities');
   await opportunityPage.searchAndOpenOpportunityByLeadName(lead.firstName, lead.lastName);
   await opportunityPage.openDetailsTab();
@@ -84,7 +90,10 @@ test('verify Generate Agreement functionality on Opportunity', async ({ page }) 
   Logger.info('Starting agreement generation validation test');
   await opportunityPage.refreshPage();
   await homePage.verifyHomePage();
+  await opportunityPage.hardRefreshPageWithRetry();  // Hard refresh before clicking dropdown
+  await opportunityPage.hardRefreshPageWithRetry();
   await homePage.selectObjectFromDropdown('Opportunities');
+  await opportunityPage.refreshPage();
   await opportunityPage.selectOpportunitiesListView('My Opportunities');
   await opportunityPage.searchAndOpenOpportunityByLeadName(lead.firstName, lead.lastName);
   await opportunityPage.configureStage();
@@ -114,7 +123,10 @@ test('Configure HACC-PYP PriceBook and Product Management on Opportunity', async
   Logger.info('Starting opportunity HACC-PYP price book and product management configuration test');
   await opportunityPage.refreshPage();
   await homePage.verifyHomePage();
+  await opportunityPage.hardRefreshPageWithRetry();  // Hard refresh before clicking dropdown
+  await opportunityPage.hardRefreshPageWithRetry();
   await homePage.selectObjectFromDropdown('Opportunities');
+  await opportunityPage.refreshPage();
   await opportunityPage.selectOpportunitiesListView('My Opportunities');
   await opportunityPage.searchAndOpenOpportunityByLeadName(lead.firstName, lead.lastName);
   //await opportunityPage.verifyQuoteNotGenerated();
@@ -138,7 +150,10 @@ test('Verify Generate Quote functionality and verify Files on Opportunity', asyn
   Logger.info('Starting opportunity quote generation validation test');
   await opportunityPage.refreshPage();
   await homePage.verifyHomePage();
+  await opportunityPage.hardRefreshPageWithRetry();  // Hard refresh before clicking dropdown
+  await opportunityPage.hardRefreshPageWithRetry();
   await homePage.selectObjectFromDropdown('Opportunities');
+  await opportunityPage.refreshPage();
   await opportunityPage.selectOpportunitiesListView('My Opportunities');
   await opportunityPage.searchAndOpenOpportunityByLeadName(lead.firstName, lead.lastName);
   await opportunityPage.refreshPage();
@@ -159,7 +174,10 @@ test('Generate Send For Signature functionality on Opportunity', async ({ page }
   Logger.info('Starting sending for signature validation test');
   await opportunityPage.refreshPage();
   await homePage.verifyHomePage();
+  await opportunityPage.hardRefreshPageWithRetry();  // Hard refresh before clicking dropdown
+  await opportunityPage.hardRefreshPageWithRetry();
   await homePage.selectObjectFromDropdown('Opportunities');
+  await opportunityPage.refreshPage();
   await opportunityPage.selectOpportunitiesListView('My Opportunities');
   await opportunityPage.searchAndOpenOpportunityByLeadName(lead.firstName, lead.lastName);
   await opportunityPage.clickSignaturevisible();
@@ -177,7 +195,10 @@ test('verify Signature and Close the Opportunity', async ({ page }) => {
   Logger.info('Verifying signature and closing opportunity');
   await opportunityPage.refreshPage();
   await homePage.verifyHomePage();
+  await opportunityPage.hardRefreshPageWithRetry();  // Hard refresh before clicking dropdown
+  await opportunityPage.hardRefreshPageWithRetry();
   await homePage.selectObjectFromDropdown('Opportunities');
+  await opportunityPage.refreshPage();
   await opportunityPage.selectOpportunitiesListView('My Opportunities');
   await opportunityPage.searchAndOpenOpportunityByLeadName(lead.firstName, lead.lastName);
   await opportunityPage.refreshPage();
@@ -197,7 +218,10 @@ test('Create Service Agreement on Opportunity record', async ({ page }) => {
   Logger.info('Creating service agreement on opportunity record');
   await opportunityPage.refreshPage();
   await homePage.verifyHomePage();
+  await opportunityPage.hardRefreshPageWithRetry();
+  await opportunityPage.hardRefreshPageWithRetry();
   await homePage.selectObjectFromDropdown('Opportunities');
+  await opportunityPage.refreshPage();
   await opportunityPage.selectOpportunitiesListView('My Opportunities');
   await opportunityPage.searchAndOpenOpportunityByLeadName(lead.firstName, lead.lastName);
   await opportunityPage.createServiceAgreement();
@@ -220,8 +244,10 @@ test('Verify HACC Service Agreement status under Service Agreements Object', asy
   Logger.info('Verifying HACC Service Agreement status under Service Agreements Object');
   await opportunityPage.refreshPage();
   await homePage.verifyHomePage();
-  await opportunityPage.refreshPage();
+  await opportunityPage.hardRefreshPageWithRetry();  // Hard refresh before clicking dropdown
+  await opportunityPage.hardRefreshPageWithRetry();
   await homePage.selectObjectFromDropdown('Service Agreements');
+  await opportunityPage.refreshPage();
   await opportunityPage.selectOpportunitiesListView(opportunityData.HACCserviceagreementListView);
   await opportunityPage.searchAndOpenOpportunityByLeadName(lead.firstName, lead.lastName);
   await opportunityPage.verifyActiveServiceAgreement();

@@ -13,6 +13,7 @@ test.skip('create account', async ({ page }) => {
   Logger.info('Starting account creation test');
   await homePage.verifyHomePage();
   await homePage.selectObjectFromDropdown('Accounts');
+  await accountPage.refreshPage();
 
   await accountPage.clickNewButton();
   await accountPage.selectPersonAccount();
@@ -39,7 +40,10 @@ test('Update mandatory MDS reporting fields in Account for Opportunity closure',
   Logger.info('Starting account update for opportunity closure test');
   await accountPage.refreshPage();
   await homePage.verifyHomePage();
+  await accountPage.hardRefreshPageWithRetry();
+  await accountPage.hardRefreshPageWithRetry();
   await homePage.selectObjectFromDropdown('Accounts');
+  await accountPage.refreshPage();
   await accountPage.selectAccountsListView('My Accounts');
   const expectedEmail = accountPage.getEmailWithRunNumber(accountData.email);
   await accountPage.searchAndOpenAccountByEmail(expectedEmail);
@@ -47,15 +51,19 @@ test('Update mandatory MDS reporting fields in Account for Opportunity closure',
   await accountPage.updateBasicInformationAccountDetails('Salutation', 'Mr.');
   await accountPage.updateBasicInformationAccountDetails('Country of Birth', 'Australia');
   await accountPage.updateBasicInformationAccountDetails('Indigenous Status', 'Both Aboriginal and Torres Strait Islander origin');
+  await accountPage.updateBasicInformationAccountDetails('Cultural Background / Ethnicity', 'Akan');
   await accountPage.selectPrimaryLanguage('Afar');
   await accountPage.updateBasicInformationAccountDetails('Interpreter required', 'Yes');
   await accountPage.selectGender('Male'); 
   await accountPage.updateBasicInformationAccountDetails('Customer Category', 'Individual');
+  await accountPage.updateBasicInformationAccountDetails('Carer availability', 'Has a carer');
   await accountPage.updateBasicInformationAccountDetails('DVA Card Type', 'GOLD');
   await accountPage.updateTextField('DVA Number', '1234567890');
+  await accountPage.updateTextField('MAC Number', '123456789');
   await accountPage.selectImportantInformationDetails('Pension Type', 'Age Pension');
   await accountPage.selectImportantInformationDetails('Living Arrangements', 'SINGLE');
   await accountPage.selectImportantInformationDetails('Accommodation/Residential Setting', 'BOARDING');//Alcohol and Drugs Treatment Residence
+  await accountPage.selectImportantInformationDetails('Disability Code', 'No Disability');//Alcohol and Drugs Treatment Residence
   await accountPage.saveAccountDetails();
   await accountPage.refreshPage();
   
@@ -72,7 +80,10 @@ test('Update and Verify account validations', async ({ page }) => {
   const birthYear = Number(accountData.dob.split('/')[2]);
   await accountPage.refreshPage();
   await homePage.verifyHomePage();
+  await accountPage.hardRefreshPageWithRetry();
+  await accountPage.hardRefreshPageWithRetry();
   await homePage.selectObjectFromDropdown('Accounts');
+  await accountPage.refreshPage();
   await accountPage.selectAccountsListView('My Accounts');
   await accountPage.refreshPage();
   await accountPage.searchAndOpenAccountByEmail(expectedEmail);
@@ -95,7 +106,10 @@ test('Verify Creation of care plan form under Accounts', async ({ page }) => {
   Logger.info('Starting account Care Plan creation test');
   await accountPage.refreshPage();
   await homePage.verifyHomePage();
+  await accountPage.hardRefreshPageWithRetry();
+  await accountPage.hardRefreshPageWithRetry();
   await homePage.selectObjectFromDropdown('Accounts');
+  await accountPage.refreshPage();
   await accountPage.selectAccountsListView('My Accounts');
   await accountPage.refreshPage();
   const expectedEmail = accountPage.getEmailWithRunNumber(accountData.email);
@@ -114,7 +128,10 @@ test('Verify Creation of client forms under Accounts', async ({ page }) => {
   Logger.info('Starting account Client form creation test');
   await accountPage.refreshPage();
   await homePage.verifyHomePage();
+  await accountPage.hardRefreshPageWithRetry();
+  await accountPage.hardRefreshPageWithRetry();
   await homePage.selectObjectFromDropdown('Accounts');
+  await accountPage.refreshPage();
   await accountPage.selectAccountsListView('My Accounts');
   await accountPage.refreshPage();
   const expectedEmail = accountPage.getEmailWithRunNumber(accountData.email);
@@ -133,9 +150,11 @@ test('Verify Care Plan and Client forms under Account', async ({ page }) => {
   Logger.info('Starting account Care Plan and Client form verification test');
   await accountPage.refreshPage();
   await homePage.verifyHomePage();
+  await accountPage.hardRefreshPageWithRetry();
+  await accountPage.hardRefreshPageWithRetry();
   await homePage.selectObjectFromDropdown('Accounts');
-  await accountPage.selectAccountsListView('My Accounts');
   await accountPage.refreshPage();
+  await accountPage.selectAccountsListView('My Accounts');
   const expectedEmail = accountPage.getEmailWithRunNumber(accountData.email);
   await accountPage.searchAndOpenAccountByEmail(expectedEmail);
   await accountPage.verifyCarePlanCreated(accountData.firstName, accountData.lastName);

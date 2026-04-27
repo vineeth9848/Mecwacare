@@ -22,4 +22,5 @@ export const AppointmentLocators = {
   billingFundingSection: "xpath=//*[normalize-space()='Billing and Funding Information']",
   invoiceLineItemValue: "xpath=//*[normalize-space()='Invoice Line Item']/following::*[self::a or self::lightning-formatted-text][1]",
   agreementItemValue: "xpath=//*[normalize-space()='Agreement Item']/following::*[self::a or self::lightning-formatted-text][1]",
+  listviewDropdownappointment: "button[title='Select a List View: Appointments']",
 } as const;

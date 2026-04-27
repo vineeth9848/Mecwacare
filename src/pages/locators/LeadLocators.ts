@@ -55,4 +55,6 @@ export const LeadLocators = {
   search_address: "Search Address Here",
   lead_Score: "Lead Score",
   save_button: "Save",
+  listviewDropdown: "button[title='Select a List View: Leads']",
+  categoryDropdown: "input[aria-label='Waiting for Package']",  
 } as const;
