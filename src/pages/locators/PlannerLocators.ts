@@ -14,5 +14,7 @@ export const PlannerLocators = {
   titleInput: "input[name='Title__c']",
   submitButton: "button:has-text('Submit')",
   endTimeInput: "input.slds-combobox__input[name='end']",
+  checkOutButtonFirst: "xpath=(//button[contains(text(), 'Check-Out')])[1]",
+  checkOutButtonSecond: "xpath=(//button[contains(text(), 'Check-Out')])[2]",
 
 } as const;

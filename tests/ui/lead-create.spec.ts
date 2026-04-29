@@ -4,7 +4,7 @@ import { Logger } from '../../src/utils/Logger';
 import { HomePage } from '../../src/pages/homepage/HomePage';
 import { LeadPage } from '../../src/pages/leads/LeadPage';
 
-test.only('create lead from leads page', async ({ page }) => {
+test('create lead from leads page', async ({ page }) => {
   test.setTimeout(180000);
   const homePage = new HomePage(page);
   const leadPage = new LeadPage(page);
@@ -15,6 +15,7 @@ test.only('create lead from leads page', async ({ page }) => {
   Logger.info(`Lead Create Data: ${JSON.stringify(lead)}`);
   await homePage.verifyHomePage();
   await homePage.selectObjectFromDropdown('Leads');
+  await homePage.closeAllOpenSubTabs();  // Ensure no sub-tabs are open before starting lead creation
   //await homePage.closeAllSubTabs();
 
   await leadPage.clickNewButton();
@@ -46,6 +47,7 @@ test('verify lead validations', async ({ page }) => {
   await leadPage.hardRefreshPageWithRetry();
   await leadPage.hardRefreshPageWithRetry();
   await homePage.selectObjectFromDropdown('Leads');
+  //await homePage.closeAllOpenSubTabs();  // Close any open sub-tabs before proceeding
   await homePage.refreshPage();
   await leadPage.selectLeadsListView("Today's Leads");
 

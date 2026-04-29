@@ -306,12 +306,12 @@ export class LeadPage extends BasePage {
         await this.staticWait(1500);
 
         const packageOption = this.page.getByRole('option', {
-          name: '1 month'
+          name: 'Package Assigned'
         });
         await packageOption.scrollIntoViewIfNeeded();
         await this.waitForVisible(packageOption, 10000);
         await packageOption.click();
-        await expect(packagepreference).toHaveValue(/1 month/);
+        await expect(packagepreference).toHaveValue(/Package Assigned/);
         Logger.info("Selected package preference option: 1 month");
 
 
