@@ -276,7 +276,7 @@ await this.safeAction(async () => {
     const agendaEvent = this.page
       .locator(PlannerLocators.agendaEventText)
       .filter({ hasText: expectedAccountName })
-      .first();
+      .last();
 
     await this.waitForVisible(agendaEvent, 15000);
     await agendaEvent.scrollIntoViewIfNeeded();
