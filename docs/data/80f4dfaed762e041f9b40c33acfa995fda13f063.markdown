@@ -1,0 +1,445 @@
+# Page snapshot
+
+```yaml
+- generic:
+  - generic [ref=e2]:
+    - generic [ref=e3]:
+      - link "Skip to Navigation" [ref=e4] [cursor=pointer]:
+        - /url: javascript:void(0);
+      - link "Skip to Main Content" [ref=e5] [cursor=pointer]:
+        - /url: javascript:void(0);
+      - generic [ref=e9]:
+        - generic [ref=e13]:
+          - button "Toggle Panel" [ref=e17] [cursor=pointer]:
+            - img [ref=e21]
+            - generic [ref=e24]: Menu
+          - generic [ref=e29]:
+            - img [ref=e33]
+            - generic [ref=e37]: Sandbox (UAT)
+        - button "Show menu" [ref=e46] [cursor=pointer]:
+          - img [ref=e48]
+          - generic [ref=e51]: Show menu
+      - generic [ref=e52]:
+        - button "Search" [ref=e58]:
+          - img [ref=e60]
+          - text: Search...
+        - navigation "Global Header" [ref=e63]:
+          - list [ref=e65]:
+            - listitem [ref=e66]:
+              - group [ref=e67]:
+                - button "Add favorite" [ref=e69] [cursor=pointer]:
+                  - generic [ref=e70]:
+                    - img [ref=e74]
+                    - tooltip "Add favorite"
+                - button "Favorites list" [ref=e78] [cursor=pointer]:
+                  - generic [ref=e79]:
+                    - img [ref=e83]
+                    - tooltip "Favorites list"
+            - listitem [ref=e86]:
+              - button "Global Actions" [ref=e92] [cursor=pointer]:
+                - generic [ref=e93]:
+                  - img [ref=e97]
+                  - tooltip "Global Actions"
+            - listitem [ref=e100]:
+              - button "Guidance Center" [ref=e102] [cursor=pointer]:
+                - generic [ref=e103]:
+                  - img [ref=e107]
+                  - tooltip "Guidance Center"
+            - listitem [ref=e110]:
+              - button "Salesforce Help" [ref=e113] [cursor=pointer]:
+                - generic [ref=e114]:
+                  - img [ref=e118]
+                  - tooltip "Salesforce Help"
+            - listitem [ref=e121]:
+              - button "Setup" [ref=e127] [cursor=pointer]:
+                - generic [ref=e128]:
+                  - img [ref=e132]
+                  - tooltip "Setup"
+            - listitem [ref=e135]:
+              - button "9 Notifications" [ref=e138] [cursor=pointer]:
+                - generic [ref=e139]:
+                  - generic [ref=e140]:
+                    - img [ref=e144]
+                    - generic [ref=e148]: "9"
+                  - tooltip "Notifications"
+              - generic [ref=e149]: 9 new notifications
+            - listitem [ref=e150]:
+              - button "View profile" [ref=e153] [cursor=pointer]:
+                - generic [ref=e154]:
+                  - tooltip "View profile"
+    - generic [ref=e158]:
+      - generic:
+        - generic [ref=e159]:
+          - generic [ref=e161]:
+            - generic [ref=e162]:
+              - navigation "App" [ref=e163]:
+                - button "App Launcher" [ref=e165] [cursor=pointer]:
+                  - generic [ref=e176]: App Launcher
+              - heading "mCare360" [level=1] [ref=e177]:
+                - generic "mCare360" [ref=e178]
+            - navigation "Global" [ref=e179]:
+              - link "Cases" [ref=e181] [cursor=pointer]:
+                - /url: /lightning/o/Case/list?filterName=__Recent
+                - generic [ref=e182]: Cases
+              - button "Show Navigation Menu" [ref=e185] [cursor=pointer]:
+                - img [ref=e187]
+                - generic [ref=e190]: Show Navigation Menu
+          - navigation "Workspaces" [ref=e192]:
+            - tablist "Workspace tabs for mCare360" [ref=e193]:
+              - generic [ref=e195]: Press Spacebar to reorder tabs.
+              - tab "Opportunity John Doe811 - HACC - Ballarat - Low Fee | Opportunity" [ref=e196] [cursor=pointer]:
+                - generic [ref=e197]:
+                  - generic:
+                    - generic:
+                      - generic:
+                        - generic:
+                          - img
+                        - generic: Opportunity
+                - generic [ref=e198]: John Doe811 - HACC - Ballarat - Low Fee | Opportunity
+              - button "Actions" [ref=e201] [cursor=pointer]:
+                - img [ref=e203]
+                - generic [ref=e206]: Actions
+              - button "Close Tab" [ref=e208] [cursor=pointer]:
+                - img [ref=e210]
+                - generic [ref=e213]: Close Tab
+              - status [ref=e214]
+        - main [ref=e217]:
+          - generic [ref=e227]:
+            - generic [ref=e229]:
+              - generic [ref=e230]:
+                - generic [ref=e232]:
+                  - img [ref=e236]
+                  - generic [ref=e237]:
+                    - heading "Cases" [level=1] [ref=e241]
+                    - generic [ref=e242]:
+                      - generic [ref=e244] [cursor=pointer]:
+                        - heading "Cases Recently Viewed" [level=1] [ref=e245]:
+                          - generic [ref=e246]: Cases
+                          - generic [ref=e247]: Recently Viewed
+                        - 'button "Select a List View: Cases" [ref=e250]':
+                          - img [ref=e252]
+                          - generic [ref=e255]: "Select a List View: Cases"
+                      - button "This list is pinned." [disabled] [ref=e259] [cursor=pointer]:
+                        - img [ref=e261]
+                        - generic [ref=e264]: This list is pinned.
+                - list [ref=e267]:
+                  - listitem [ref=e268]:
+                    - button "Change Owner" [ref=e269] [cursor=pointer]:
+                      - generic "Change Owner" [ref=e270]
+                  - listitem [ref=e271]:
+                    - button "New" [ref=e272] [cursor=pointer]:
+                      - generic "New" [ref=e273]
+              - generic [ref=e274]:
+                - paragraph [ref=e276]:
+                  - generic [ref=e278]:
+                    - status "Recently Viewed" [ref=e279]: 2 items •
+                    - text: Updated a few seconds ago
+                - generic [ref=e285]:
+                  - generic [ref=e286]: Search this list...
+                  - generic [ref=e287]:
+                    - searchbox "Search this list..." [ref=e288]
+                    - img [ref=e289]
+                - generic [ref=e292]:
+                  - button "List View Controls" [ref=e296] [cursor=pointer]:
+                    - img [ref=e298]
+                    - img [ref=e302]
+                    - generic [ref=e305]: List View Controls
+                  - button "Select list display" [ref=e308] [cursor=pointer]:
+                    - img [ref=e310]
+                    - img [ref=e314]
+                    - generic [ref=e317]: Select list display
+                  - generic [ref=e319]:
+                    - button "Refresh" [ref=e322] [cursor=pointer]:
+                      - img [ref=e324]
+                      - generic [ref=e327]: Refresh
+                    - button "Column sort" [ref=e330] [cursor=pointer]:
+                      - img [ref=e332]
+                      - generic [ref=e335]: Column sort
+                    - button "Inline Edit is disabled. To edit, filter by one record type." [ref=e338] [cursor=pointer]:
+                      - img [ref=e340]
+                      - generic [ref=e343]: Inline Edit is disabled. To edit, filter by one record type.
+                    - group [ref=e344]:
+                      - generic [ref=e346]:
+                        - generic:
+                          - generic:
+                            - button "Charts" [disabled]:
+                              - generic:
+                                - img
+                              - generic: Charts
+                        - generic:
+                          - generic:
+                            - button "Filters" [disabled]:
+                              - generic:
+                                - img
+                              - generic: Filters
+            - generic [ref=e353]:
+              - generic [ref=e354]: Navigation Mode
+              - grid [ref=e358]:
+                - rowgroup:
+                  - row "Row Number Choose a Row Select 2 items Case Number Subject Status Priority Type Location Accommodation Date/Time Opened Action":
+                    - columnheader "Row Number":
+                      - generic [ref=e361]:
+                        - generic "Row Number"
+                    - gridcell "Choose a Row Select 2 items":
+                      - generic [ref=e362]:
+                        - generic [ref=e363]: Choose a Row
+                        - generic [ref=e365]:
+                          - checkbox "Select 2 items" [ref=e366]
+                          - generic [ref=e369]: Select 2 items
+                    - columnheader "Case Number":
+                      - generic [ref=e371]:
+                        - 'button "Sort by: Case Number" [ref=e372] [cursor=pointer]':
+                          - generic [ref=e373]: "Sort by:"
+                          - generic "Case Number" [ref=e374]
+                        - generic [ref=e375]: "Sorted: None"
+                        - button "Show Case Number column actions" [ref=e377] [cursor=pointer]:
+                          - img [ref=e379]
+                          - generic [ref=e382]: Show Case Number column actions
+                        - slider "Case Number column width" [ref=e383]: "113"
+                    - columnheader "Subject":
+                      - generic [ref=e387]:
+                        - 'button "Sort by: Subject" [ref=e388] [cursor=pointer]':
+                          - generic [ref=e389]: "Sort by:"
+                          - generic "Subject" [ref=e390]
+                        - generic [ref=e391]: "Sorted: None"
+                        - button "Show Subject column actions" [ref=e393] [cursor=pointer]:
+                          - img [ref=e395]
+                          - generic [ref=e398]: Show Subject column actions
+                        - slider "Subject column width" [ref=e399]: "398"
+                    - columnheader "Status":
+                      - generic [ref=e403]:
+                        - 'button "Sort by: Status" [ref=e404] [cursor=pointer]':
+                          - generic [ref=e405]: "Sort by:"
+                          - generic "Status" [ref=e406]
+                        - generic [ref=e407]: "Sorted: None"
+                        - button "Show Status column actions" [ref=e409] [cursor=pointer]:
+                          - img [ref=e411]
+                          - generic [ref=e414]: Show Status column actions
+                        - slider "Status column width" [ref=e415]: "178"
+                    - columnheader "Priority":
+                      - generic [ref=e419]:
+                        - 'button "Sort by: Priority" [ref=e420] [cursor=pointer]':
+                          - generic [ref=e421]: "Sort by:"
+                          - generic "Priority" [ref=e422]
+                        - generic [ref=e423]: "Sorted: None"
+                        - button "Show Priority column actions" [ref=e425] [cursor=pointer]:
+                          - img [ref=e427]
+                          - generic [ref=e430]: Show Priority column actions
+                        - slider "Priority column width" [ref=e431]: "61"
+                    - columnheader "Type":
+                      - generic [ref=e435]:
+                        - 'button "Sort by: Type" [ref=e436] [cursor=pointer]':
+                          - generic [ref=e437]: "Sort by:"
+                          - generic "Type" [ref=e438]
+                        - generic [ref=e439]: "Sorted: None"
+                        - button "Show Type column actions" [ref=e441] [cursor=pointer]:
+                          - img [ref=e443]
+                          - generic [ref=e446]: Show Type column actions
+                        - slider "Type column width" [ref=e447]: "60"
+                    - columnheader "Location":
+                      - generic [ref=e451]:
+                        - 'button "Sort by: Location" [ref=e452] [cursor=pointer]':
+                          - generic [ref=e453]: "Sort by:"
+                          - generic "Location" [ref=e454]
+                        - generic [ref=e455]: "Sorted: None"
+                        - button "Show Location column actions" [ref=e457] [cursor=pointer]:
+                          - img [ref=e459]
+                          - generic [ref=e462]: Show Location column actions
+                        - slider "Location column width" [ref=e463]: "60"
+                    - columnheader "Accommodation":
+                      - generic [ref=e467]:
+                        - 'button "Sort by: Accommodation" [ref=e468] [cursor=pointer]':
+                          - generic [ref=e469]: "Sort by:"
+                          - generic "Accommodation" [ref=e470]
+                        - generic [ref=e471]: "Sorted: None"
+                        - button "Show Accommodation column actions" [ref=e473] [cursor=pointer]:
+                          - img [ref=e475]
+                          - generic [ref=e478]: Show Accommodation column actions
+                        - slider "Accommodation column width" [ref=e479]: "60"
+                    - columnheader "Date/Time Opened":
+                      - generic [ref=e483]:
+                        - 'button "Sort by: Date/Time Opened" [ref=e484] [cursor=pointer]':
+                          - generic [ref=e485]: "Sort by:"
+                          - generic "Date/Time Opened" [ref=e486]
+                        - generic [ref=e487]: "Sorted: None"
+                        - button "Show Date/Time Opened column actions" [ref=e489] [cursor=pointer]:
+                          - img [ref=e491]
+                          - generic [ref=e494]: Show Date/Time Opened column actions
+                        - slider "Date/Time Opened column width" [ref=e495]: "211"
+                    - columnheader "Action":
+                      - generic [ref=e500]:
+                        - generic "Action"
+                - rowgroup [ref=e501]:
+                  - row "Select Item 1 Choose a Row CS - 0493 John Doe809 - Departure - HACC-PYP Open John Doe809 - Departure - HACC-PYP Preview Closed Resolved High 28/4/2026, 6:47 pm Show Actions" [ref=e502]:
+                    - gridcell [ref=e503]
+                    - gridcell "Select Item 1 Choose a Row" [ref=e507]:
+                      - generic [ref=e508]:
+                        - checkbox "Select Item 1 Choose a Row" [ref=e509]
+                        - generic [ref=e512]: Select Item 1
+                    - rowheader "CS - 0493" [ref=e513]:
+                      - link "CS - 0493" [ref=e520] [cursor=pointer]:
+                        - /url: /lightning/r/500AD00000VgNWQYA3/view
+                        - generic [ref=e521]: CS - 0493
+                    - gridcell "John Doe809 - Departure - HACC-PYP Open John Doe809 - Departure - HACC-PYP Preview" [ref=e522]:
+                      - generic [ref=e532]:
+                        - link "John Doe809 - Departure - HACC-PYP" [ref=e533] [cursor=pointer]:
+                          - /url: /lightning/r/500AD00000VgNWQYA3/view
+                          - generic [ref=e537]: John Doe809 - Departure - HACC-PYP
+                        - button "Open John Doe809 - Departure - HACC-PYP Preview" [ref=e539] [cursor=pointer]:
+                          - img [ref=e541]
+                          - generic [ref=e544]: Open John Doe809 - Departure - HACC-PYP Preview
+                    - gridcell "Closed Resolved" [ref=e545]:
+                      - generic [ref=e549]: Closed Resolved
+                    - gridcell "High" [ref=e550]:
+                      - generic [ref=e554]: High
+                    - gridcell [ref=e555]
+                    - gridcell [ref=e556]
+                    - gridcell [ref=e558]
+                    - gridcell "28/4/2026, 6:47 pm" [ref=e560]:
+                      - generic [ref=e564]: 28/4/2026, 6:47 pm
+                    - gridcell "Show Actions" [ref=e565]:
+                      - button "Show Actions" [ref=e571] [cursor=pointer]:
+                        - img [ref=e573]
+                        - generic [ref=e576]: Show Actions
+                  - row "Select Item 2 CS - 0492 John Doe806 - Departure - HACC-PYP Open John Doe806 - Departure - HACC-PYP Preview Closed Resolved High 24/4/2026, 11:39 pm Show Actions" [ref=e577]:
+                    - gridcell [ref=e578]
+                    - gridcell "Select Item 2" [ref=e582]:
+                      - generic [ref=e583]:
+                        - checkbox "Select Item 2" [ref=e584]
+                        - generic [ref=e587]: Select Item 2
+                    - rowheader "CS - 0492" [ref=e588]:
+                      - link "CS - 0492" [ref=e595] [cursor=pointer]:
+                        - /url: /lightning/r/500AD00000VbFxZYAV/view
+                        - generic [ref=e596]: CS - 0492
+                    - gridcell "John Doe806 - Departure - HACC-PYP Open John Doe806 - Departure - HACC-PYP Preview" [ref=e597]:
+                      - generic [ref=e607]:
+                        - link "John Doe806 - Departure - HACC-PYP" [ref=e608] [cursor=pointer]:
+                          - /url: /lightning/r/500AD00000VbFxZYAV/view
+                          - generic [ref=e612]: John Doe806 - Departure - HACC-PYP
+                        - button "Open John Doe806 - Departure - HACC-PYP Preview" [ref=e614] [cursor=pointer]:
+                          - img [ref=e616]
+                          - generic [ref=e619]: Open John Doe806 - Departure - HACC-PYP Preview
+                    - gridcell "Closed Resolved" [ref=e620]:
+                      - generic [ref=e624]: Closed Resolved
+                    - gridcell "High" [ref=e625]:
+                      - generic [ref=e629]: High
+                    - gridcell [ref=e630]
+                    - gridcell [ref=e631]
+                    - gridcell [ref=e633]
+                    - gridcell "24/4/2026, 11:39 pm" [ref=e635]:
+                      - generic [ref=e639]: 24/4/2026, 11:39 pm
+                    - gridcell "Show Actions" [ref=e640]:
+                      - button "Show Actions" [ref=e646] [cursor=pointer]:
+                        - img [ref=e648]
+                        - generic [ref=e651]: Show Actions
+    - generic:
+      - contentinfo "Utility Bar":
+        - list [ref=e655]:
+          - listitem [ref=e656]:
+            - button "Omni-Channel" [ref=e659] [cursor=pointer]:
+              - img [ref=e663]
+              - generic [ref=e667]: Omni-Channel
+        - dialog "New Task" [ref=e670]:
+          - generic [ref=e672] [cursor=pointer]:
+            - generic [ref=e673]:
+              - img [ref=e678]
+              - heading "New Task" [level=2] [ref=e682]
+            - generic [ref=e683]:
+              - button "Minimize" [ref=e685]:
+                - img [ref=e687]
+                - generic [ref=e690]: Minimize
+              - button "Maximize" [ref=e692]:
+                - img [ref=e694]
+                - generic [ref=e697]: Maximize
+              - button "Close" [ref=e699]:
+                - img [ref=e701]
+                - generic [ref=e704]: Close
+          - generic [ref=e705]: Start of Dialog
+          - generic [ref=e709]:
+            - group [ref=e716]:
+              - list [ref=e718]:
+                - generic [ref=e719]:
+                  - generic [ref=e723]:
+                    - generic [ref=e724]: "*Title"
+                    - generic [ref=e729]:
+                      - combobox "Title" [active] [ref=e732]
+                      - img [ref=e736]
+                    - status
+                  - generic [ref=e742]:
+                    - generic [ref=e743]:
+                      - text: Priority
+                      - generic "required" [ref=e744]: "*"
+                    - button "Priority" [ref=e749] [cursor=pointer]: Normal
+                - generic [ref=e750]:
+                  - generic [ref=e754]:
+                    - generic [ref=e755]: Due Date
+                    - generic [ref=e757]:
+                      - group [ref=e758]:
+                        - generic [ref=e759]: Due Date
+                        - generic [ref=e760]:
+                          - textbox "Due Date" [ref=e761]
+                          - button "Select a date for Due Date" [ref=e763] [cursor=pointer]:
+                            - img [ref=e765]
+                            - generic [ref=e768]: Select a date for Due Date
+                      - generic [ref=e769]: "Format: 31/12/2024"
+                  - generic [ref=e773]:
+                    - generic [ref=e774]:
+                      - text: Assigned To
+                      - generic "required" [ref=e775]: "*"
+                    - generic [ref=e776]:
+                      - generic [ref=e778]:
+                        - generic [ref=e779]: "Assigned To - Current Selection: Vineeth Paduri (User)"
+                        - application [ref=e781]:
+                          - generic [ref=e782]: "Assigned To - Current Selection: Vineeth Paduri (User)"
+                          - 'list "Assigned To - Current Selection: Vineeth Paduri (User)" [ref=e783]':
+                            - listitem [ref=e784]:
+                              - generic [ref=e785]:
+                                - generic [ref=e788]: Vineeth Paduri
+                                - button "Press delete or backspace to remove" [ref=e789]:
+                                  - generic [ref=e790]: ✕
+                                  - generic [ref=e791]: Press delete or backspace to remove
+                            - listitem
+                      - generic [ref=e792]: Assigned To
+                - generic [ref=e793]:
+                  - generic [ref=e797]:
+                    - generic [ref=e798]: Name
+                    - generic [ref=e801]:
+                      - 'button "—Current Selection: Contacts, Pick an object" [ref=e806] [cursor=pointer]':
+                        - img "Contacts" [ref=e809]
+                        - generic [ref=e811]:
+                          - img [ref=e813]
+                          - generic [ref=e816]: Pick an object
+                      - combobox "Name" [ref=e818]
+                      - img [ref=e822]
+                  - generic [ref=e829]:
+                    - generic [ref=e830]: Description
+                    - generic [ref=e831]:
+                      - text: "Tip: Type Control + period to insert quick text."
+                      - textbox "Description" [ref=e832]:
+                        - /placeholder: ""
+                - generic [ref=e837]:
+                  - generic [ref=e838]: Reminder Set
+                  - generic [ref=e842]:
+                    - checkbox "Reminder Set" [checked] [ref=e843]
+                    - generic [ref=e846]: Reminder Set
+                  - group [ref=e852]:
+                    - generic [ref=e856]:
+                      - generic [ref=e857]:
+                        - group [ref=e858]:
+                          - generic [ref=e859]: Date
+                          - generic [ref=e860]:
+                            - textbox "Date" [ref=e861]: 29/4/2026
+                            - button "Select a date for Date" [ref=e863] [cursor=pointer]:
+                              - img [ref=e865]
+                              - generic [ref=e868]: Select a date for Date
+                        - generic [ref=e869]: "Format: 31/12/2024"
+                      - generic [ref=e870]:
+                        - generic [ref=e871]: Time
+                        - generic [ref=e875]:
+                          - combobox "Time" [ref=e878]: 3:00 pm
+                          - img [ref=e882]
+            - button "Save" [ref=e888] [cursor=pointer]:
+              - generic [ref=e889]: Save
+  - generic:
+    - status
+```

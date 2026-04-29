@@ -1,0 +1,208 @@
+# Page snapshot
+
+```yaml
+- generic [active]:
+  - generic [ref=e2]:
+    - generic [ref=e3]:
+      - link "Skip to Navigation" [ref=e4] [cursor=pointer]:
+        - /url: javascript:void(0);
+      - link "Skip to Main Content" [ref=e5] [cursor=pointer]:
+        - /url: javascript:void(0);
+      - generic [ref=e9]:
+        - generic [ref=e13]:
+          - button "Toggle Panel" [ref=e17] [cursor=pointer]:
+            - img [ref=e21]
+            - generic [ref=e24]: Menu
+          - generic [ref=e29]:
+            - img [ref=e33]
+            - generic [ref=e37]: Sandbox (UAT)
+        - button "Show menu" [ref=e46] [cursor=pointer]:
+          - img [ref=e48]
+          - generic [ref=e51]: Show menu
+      - generic [ref=e52]:
+        - button "Search" [ref=e58]:
+          - img [ref=e60]
+          - text: Search...
+        - navigation "Global Header" [ref=e63]:
+          - list [ref=e65]:
+            - listitem [ref=e66]:
+              - group [ref=e67]:
+                - button "Add favorite" [ref=e69] [cursor=pointer]:
+                  - generic [ref=e70]:
+                    - img [ref=e74]
+                    - tooltip "Add favorite"
+                - button "Favorites list" [ref=e78] [cursor=pointer]:
+                  - generic [ref=e79]:
+                    - img [ref=e83]
+                    - tooltip "Favorites list"
+            - listitem [ref=e86]:
+              - button "Global Actions" [ref=e92] [cursor=pointer]:
+                - generic [ref=e93]:
+                  - img [ref=e97]
+                  - tooltip "Global Actions"
+            - listitem [ref=e100]:
+              - button "Guidance Center" [ref=e102] [cursor=pointer]:
+                - generic [ref=e103]:
+                  - img [ref=e107]
+                  - tooltip "Guidance Center"
+            - listitem [ref=e110]:
+              - button "Salesforce Help" [ref=e113] [cursor=pointer]:
+                - generic [ref=e114]:
+                  - img [ref=e118]
+                  - tooltip "Salesforce Help"
+            - listitem [ref=e121]:
+              - button "Setup" [ref=e127] [cursor=pointer]:
+                - generic [ref=e128]:
+                  - img [ref=e132]
+                  - tooltip "Setup"
+            - listitem [ref=e135]:
+              - button "9 Notifications" [ref=e138] [cursor=pointer]:
+                - generic [ref=e139]:
+                  - generic [ref=e140]:
+                    - img [ref=e144]
+                    - generic [ref=e148]: "9"
+                  - tooltip "Notifications"
+              - generic [ref=e149]: 9 new notifications
+            - listitem [ref=e150]:
+              - button "View profile" [ref=e153] [cursor=pointer]:
+                - generic [ref=e154]:
+                  - tooltip "View profile"
+    - generic [ref=e158]:
+      - generic:
+        - generic [ref=e159]:
+          - generic [ref=e161]:
+            - generic [ref=e162]:
+              - navigation "App" [ref=e163]:
+                - button "App Launcher" [ref=e165] [cursor=pointer]:
+                  - generic [ref=e176]: App Launcher
+              - heading "mCare360" [level=1] [ref=e177]:
+                - generic "mCare360" [ref=e178]
+            - navigation "Global" [ref=e179]:
+              - link "Planner" [ref=e181] [cursor=pointer]:
+                - /url: /lightning/n/maica_cc__Planner
+                - generic [ref=e182]: Planner
+              - button "Show Navigation Menu" [ref=e185] [cursor=pointer]:
+                - img [ref=e187]
+                - generic [ref=e190]: Show Navigation Menu
+          - navigation "Workspaces" [ref=e192]:
+            - tablist [ref=e193]:
+              - generic [ref=e195]: Press Spacebar to reorder tabs.
+              - tab [ref=e196] [cursor=pointer]:
+                - generic [ref=e197]:
+                  - generic:
+                    - generic:
+                      - generic:
+                        - generic:
+                          - img
+                        - generic: Opportunity
+                - generic [ref=e198]: John Doe811 - HACC - Ballarat - Low Fee | Opportunity
+              - button [ref=e201] [cursor=pointer]:
+                - img [ref=e203]
+                - generic [ref=e206]: Actions
+              - button [ref=e208] [cursor=pointer]:
+                - img [ref=e210]
+                - generic [ref=e213]: Close Tab
+              - status [ref=e214]
+        - main [ref=e217]:
+          - generic [ref=e224]:
+            - generic [ref=e225]:
+              - generic [ref=e227]:
+                - generic [ref=e228]:
+                  - button [ref=e230] [cursor=pointer]:
+                    - img [ref=e232]
+                  - generic [ref=e235]:
+                    - button [ref=e237] [cursor=pointer]:
+                      - img [ref=e239]
+                    - button [ref=e243] [cursor=pointer]:
+                      - img [ref=e245]
+                    - button [ref=e249] [cursor=pointer]:
+                      - img [ref=e251]
+                  - generic [ref=e254]:
+                    - button "Previous" [ref=e256] [cursor=pointer]:
+                      - img [ref=e258]
+                    - button "Date Picker" [ref=e262] [cursor=pointer]:
+                      - img [ref=e264]
+                    - button "TODAY" [ref=e268] [cursor=pointer]
+                    - button "Next" [ref=e270] [cursor=pointer]:
+                      - img [ref=e272]
+                  - generic [ref=e275]:
+                    - button [ref=e277] [cursor=pointer]:
+                      - img [ref=e279]
+                    - button [ref=e283] [cursor=pointer]:
+                      - img [ref=e285]
+                  - button "Sydney" [ref=e290] [cursor=pointer]:
+                    - generic [ref=e291]:
+                      - img [ref=e292]
+                      - text: Sydney
+                - generic [ref=e295]: 27 Apr 2026 – 3 May 2026
+                - generic [ref=e296]:
+                  - generic [ref=e297]:
+                    - button [ref=e299] [cursor=pointer]:
+                      - img [ref=e301]
+                    - button [ref=e305] [cursor=pointer]:
+                      - img [ref=e307]
+                  - generic [ref=e310]:
+                    - button "Schedule Show menu" [ref=e312] [cursor=pointer]:
+                      - generic [ref=e313]:
+                        - img [ref=e314]
+                        - text: Schedule
+                      - img [ref=e318]
+                      - generic [ref=e321]: Show menu
+                    - button "Week Show menu" [ref=e323] [cursor=pointer]:
+                      - generic [ref=e324]:
+                        - img [ref=e325]
+                        - text: Week
+                      - img [ref=e329]
+                      - generic [ref=e332]: Show menu
+                    - button [ref=e334] [cursor=pointer]:
+                      - img [ref=e336]
+              - generic [ref=e339]:
+                - button [ref=e342] [cursor=pointer]:
+                  - img [ref=e344]
+                - application [ref=e348]:
+                  - generic [ref=e349]:
+                    - generic [ref=e350]:
+                      - generic [ref=e351]: Mon, April 27
+                      - generic [ref=e352]: Tue, April 28
+                      - generic [ref=e353]: Wed, April 29
+                      - generic [ref=e354]: Thu, April 30
+                      - generic [ref=e355]: Fri, May 01
+                      - generic [ref=e356]: Sat, May 02
+                      - generic [ref=e357]: Sun, May 03
+                    - generic:
+                      - generic "08:00" [ref=e358]
+                      - generic "09:00" [ref=e359]
+                      - generic "10:00" [ref=e360]
+                      - generic "11:00" [ref=e361]
+                      - generic "12:00" [ref=e362]
+                      - generic "13:00" [ref=e363]
+                      - generic "14:00" [ref=e364]
+                      - generic "15:00" [ref=e365]
+                      - generic "16:00" [ref=e366]
+                      - generic "17:00" [ref=e367]
+                      - generic "08:00" [ref=e368]
+                      - generic "09:00" [ref=e369]
+                      - generic "10:00" [ref=e370]
+                      - generic "11:00" [ref=e371]
+                      - generic "12:00" [ref=e372]
+                      - generic "13:00" [ref=e373]
+                      - generic "14:00" [ref=e374]
+                      - generic "15:00" [ref=e375]
+                      - generic "16:00" [ref=e376]
+                      - generic "17:00" [ref=e377]
+                      - generic "08:00" [ref=e378]
+                  - generic [ref=e385]: Resources
+            - generic [ref=e386]:
+              - separator [ref=e387]
+              - button [ref=e389] [cursor=pointer]:
+                - img [ref=e391]
+    - generic:
+      - contentinfo "Utility Bar":
+        - list [ref=e396]:
+          - listitem [ref=e397]:
+            - button "Omni-Channel" [ref=e400] [cursor=pointer]:
+              - img [ref=e404]
+              - generic [ref=e408]: Omni-Channel
+  - generic:
+    - status
+```
