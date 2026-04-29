@@ -1,0 +1,189 @@
+# Page snapshot
+
+```yaml
+- generic:
+  - generic [ref=e2]:
+    - generic [ref=e3]:
+      - link "Skip to Navigation" [ref=e4] [cursor=pointer]:
+        - /url: javascript:void(0);
+      - link "Skip to Main Content" [ref=e5] [cursor=pointer]:
+        - /url: javascript:void(0);
+      - generic [ref=e9]:
+        - generic [ref=e13]:
+          - button "Toggle Panel" [ref=e17] [cursor=pointer]:
+            - img [ref=e21]
+            - generic [ref=e24]: Menu
+          - generic [ref=e29]:
+            - img [ref=e33]
+            - generic [ref=e37]: Sandbox (UAT)
+        - button "Show menu" [ref=e46] [cursor=pointer]:
+          - img [ref=e48]
+          - generic [ref=e51]: Show menu
+      - generic [ref=e52]:
+        - button "Search" [ref=e58]:
+          - img [ref=e60]
+          - text: Search...
+        - navigation "Global Header" [ref=e63]:
+          - list [ref=e65]:
+            - listitem [ref=e66]:
+              - group [ref=e67]:
+                - button "Add favorite" [ref=e69] [cursor=pointer]:
+                  - generic [ref=e70]:
+                    - img [ref=e74]
+                    - tooltip "Add favorite"
+                - button "Favorites list" [ref=e78] [cursor=pointer]:
+                  - generic [ref=e79]:
+                    - img [ref=e83]
+                    - tooltip "Favorites list"
+            - listitem [ref=e86]:
+              - button "Global Actions" [ref=e92] [cursor=pointer]:
+                - generic [ref=e93]:
+                  - img [ref=e97]
+                  - tooltip "Global Actions"
+            - listitem [ref=e100]:
+              - button "Guidance Center" [ref=e102] [cursor=pointer]:
+                - generic [ref=e103]:
+                  - img [ref=e107]
+                  - tooltip "Guidance Center"
+            - listitem [ref=e110]:
+              - button "Salesforce Help" [ref=e113] [cursor=pointer]:
+                - generic [ref=e114]:
+                  - img [ref=e118]
+                  - tooltip "Salesforce Help"
+            - listitem [ref=e121]:
+              - button "Setup" [ref=e127] [cursor=pointer]:
+                - generic [ref=e128]:
+                  - img [ref=e132]
+                  - tooltip "Setup"
+            - listitem [ref=e135]:
+              - button "9 Notifications" [ref=e138] [cursor=pointer]:
+                - generic [ref=e139]:
+                  - generic [ref=e140]:
+                    - img [ref=e144]
+                    - generic [ref=e148]: "9"
+                  - tooltip "Notifications"
+              - generic [ref=e149]: 9 new notifications
+            - listitem [ref=e150]:
+              - button "View profile" [ref=e153] [cursor=pointer]:
+                - generic [ref=e154]:
+                  - tooltip "View profile"
+    - generic [ref=e158]:
+      - generic:
+        - generic [ref=e159]:
+          - generic [ref=e161]:
+            - generic [ref=e162]:
+              - navigation "App" [ref=e163]:
+                - button "App Launcher" [ref=e165] [cursor=pointer]:
+                  - generic [ref=e176]: App Launcher
+              - heading "mCare360" [level=1] [ref=e177]:
+                - generic "mCare360" [ref=e178]
+            - navigation "Global" [ref=e179]:
+              - link "Cases" [ref=e181] [cursor=pointer]:
+                - /url: /lightning/o/Case/list?filterName=All_Cases
+                - generic [ref=e182]: Cases
+              - button "Show Navigation Menu" [ref=e185] [cursor=pointer]:
+                - img [ref=e187]
+                - generic [ref=e190]: Show Navigation Menu
+          - navigation "Workspaces" [ref=e192]:
+            - tablist [ref=e193]:
+              - generic [ref=e195]: Press Spacebar to reorder tabs.
+              - tab [ref=e196] [cursor=pointer]:
+                - generic [ref=e197]:
+                  - generic:
+                    - generic:
+                      - generic:
+                        - generic:
+                          - img
+                        - generic: Opportunity
+                - generic [ref=e198]: John Doe811 - HACC - Ballarat - Low Fee | Opportunity
+              - button [ref=e201] [cursor=pointer]:
+                - img [ref=e203]
+                - generic [ref=e206]: Actions
+              - button [ref=e208] [cursor=pointer]:
+                - img [ref=e210]
+                - generic [ref=e213]: Close Tab
+              - status [ref=e214]
+        - main [ref=e217]:
+          - generic [ref=e227]:
+            - generic [ref=e229]:
+              - generic [ref=e230]:
+                - generic [ref=e232]:
+                  - img [ref=e236]
+                  - generic [ref=e237]:
+                    - heading "Cases" [level=1] [ref=e241]
+                    - generic [ref=e242]:
+                      - generic [ref=e244] [cursor=pointer]:
+                        - heading "Cases All Cases" [level=1] [ref=e245]:
+                          - generic [ref=e246]: Cases
+                          - generic [ref=e247]: All Cases
+                        - 'button "Select a List View: Cases" [ref=e250]':
+                          - img [ref=e252]
+                          - generic [ref=e255]: "Select a List View: Cases"
+                      - button "Pin this list view." [ref=e259] [cursor=pointer]:
+                        - img [ref=e261]
+                        - generic [ref=e264]: Pin this list view.
+                - list [ref=e267]:
+                  - listitem [ref=e268]:
+                    - button "Change Owner" [ref=e269] [cursor=pointer]:
+                      - generic "Change Owner" [ref=e270]
+                  - listitem [ref=e271]:
+                    - button "Printable View" [ref=e272] [cursor=pointer]:
+                      - generic "Printable View" [ref=e273]
+                  - listitem [ref=e274]:
+                    - button "New" [ref=e275] [cursor=pointer]:
+                      - generic "New" [ref=e276]
+              - generic [ref=e277]:
+                - paragraph [ref=e279]:
+                  - generic [ref=e281]:
+                    - status "All Cases" [ref=e282]: 0 items • Sorted by Case Number •
+                    - text: Updated a few seconds ago
+                - generic [ref=e288]:
+                  - generic [ref=e289]: Search this list...
+                  - generic [ref=e290]:
+                    - searchbox "Search this list..." [active] [ref=e291]: John Doe811
+                    - img [ref=e292]
+                    - button "Clear" [ref=e295] [cursor=pointer]:
+                      - img [ref=e297]
+                      - generic [ref=e300]: Clear
+                - generic [ref=e301]:
+                  - button "List View Controls" [ref=e305] [cursor=pointer]:
+                    - img [ref=e307]
+                    - img [ref=e311]
+                    - generic [ref=e314]: List View Controls
+                  - button "Select list display" [ref=e317] [cursor=pointer]:
+                    - img [ref=e319]
+                    - img [ref=e323]
+                    - generic [ref=e326]: Select list display
+                  - generic [ref=e328]:
+                    - button "Refresh" [ref=e331] [cursor=pointer]:
+                      - img [ref=e333]
+                      - generic [ref=e336]: Refresh
+                    - button "Column sort is disabled. To sort columns, a list view needs at least one row and two columns." [ref=e339] [cursor=pointer]:
+                      - img [ref=e341]
+                      - generic [ref=e344]: Column sort is disabled. To sort columns, a list view needs at least one row and two columns.
+                    - button "Inline Edit is disabled. To edit, filter by one record type." [ref=e347] [cursor=pointer]:
+                      - img [ref=e349]
+                      - generic [ref=e352]: Inline Edit is disabled. To edit, filter by one record type.
+                    - group [ref=e353]:
+                      - generic [ref=e355]:
+                        - button "Charts" [ref=e358] [cursor=pointer]:
+                          - img [ref=e360]
+                          - generic [ref=e363]: Charts
+                        - button "Filters" [ref=e366] [cursor=pointer]:
+                          - img [ref=e368]
+                          - generic [ref=e371]: Filters
+            - generic [ref=e379]:
+              - img [ref=e380]
+              - generic [ref=e447]:
+                - paragraph [ref=e448]: Nothing to see here
+                - paragraph [ref=e449]: There's nothing in your list yet. Try adding a new record.
+    - generic:
+      - contentinfo "Utility Bar":
+        - list [ref=e453]:
+          - listitem [ref=e454]:
+            - button "Omni-Channel" [ref=e457] [cursor=pointer]:
+              - img [ref=e461]
+              - generic [ref=e465]: Omni-Channel
+  - generic:
+    - status
+```
