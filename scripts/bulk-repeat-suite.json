@@ -11,23 +11,35 @@
     "grep": "Update mandatory MDS reporting fields in Account for Opportunity closure"
   },
   {
-    "file": "tests/ui/opportunity.spec.ts",
-    "grep": "Configure funding source and funding type in first opportunity record"
+    "file": "tests/ui/opportunity-hacc.spec.ts",
+    "grep": "Configure \"Block Funding\" funding source and \"HACC-PYP\" funding type in first opportunity record"
   },
   {
-    "file": "tests/ui/opportunity.spec.ts",
-    "grep": "Configure PriceBook and Product Management on Opportunity"
+    "file": "tests/ui/opportunity-hacc.spec.ts",
+    "grep": "Configure HACC-PYP Link Fund"
   },
   {
-    "file": "tests/ui/opportunity.spec.ts",
-    "grep": "verify Generate Service Agreement functionality on Opportunity"
+    "file": "tests/ui/opportunity-hacc.spec.ts",
+    "grep": "verify Generate Agreement functionality on Opportunity"
   },
   {
-    "file": "tests/ui/opportunity.spec.ts",
-    "grep": "Verifying signature and closing opportunity"
+    "file": "tests/ui/opportunity-hacc.spec.ts",
+    "grep": "Configure HACC-PYP PriceBook and Product Management on Opportunity"
   },
   {
-    "file": "tests/ui/opportunity.spec.ts",
+    "file": "tests/ui/opportunity-hacc.spec.ts",
+    "grep": "Verify Generate Quote functionality and verify Files on Opportunity"
+  },
+  {
+    "file": "tests/ui/opportunity-hacc.spec.ts",
+    "grep": "verify Signature and Close the Opportunity"
+  },
+  {
+    "file": "tests/ui/opportunity-hacc.spec.ts",
+    "grep": "Create Service Agreement on Opportunity record"
+  },
+  {
+    "file": "tests/ui/opportunity-hacc.spec.ts",
     "grep": "Create Service Agreement on Opportunity record"
   }
 ]
