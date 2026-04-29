@@ -128,7 +128,7 @@ test('Configure HACC-PYP PriceBook and Product Management on Opportunity', async
   await opportunityPage.hardRefreshPageWithRetry();
   await homePage.selectObjectFromDropdown('Opportunities');
   await opportunityPage.refreshPage();
-  await opportunityPage.selectOpportunitiesListView('My Opportunities');
+  await opportunityPage.selectOpportunitiesListView('Recently Viewed');
   await opportunityPage.searchAndOpenOpportunityByLeadName(lead.firstName, lead.lastName);
   //await opportunityPage.verifyQuoteNotGenerated();
   await opportunityPage.refreshPage();
@@ -205,7 +205,7 @@ test('verify Signature and Close the Opportunity', async ({ page }) => {
   await opportunityPage.refreshPage();
   await opportunityPage.setOpportunityToClosedWon();
   await opportunityPage.refreshPage();
-  //await opportunityPage.verifySentForSignature();
+  await opportunityPage.verifySentForSignature();
   Logger.pass('Signature verification and opportunity closure validated successfully');
   
 });

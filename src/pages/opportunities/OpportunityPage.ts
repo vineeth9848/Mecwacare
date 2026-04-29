@@ -1032,7 +1032,13 @@ async fillDate(label: string, date: Date): Promise<void> {
     // await endDateInput.fill('');
     // await endDateInput.fill(formattedDate);
 
-    const serviceTime = this.page.locator( "(//span[text()='Daytime'])[1]");
+    const serviceDay = this.page.locator( "(//span[text()='Anytime'])[1]");
+    await this.waitForVisible(serviceDay, 90000);
+    await serviceDay.click();
+
+    await this.page.waitForTimeout(2000);
+
+    const serviceTime = this.page.locator( "(//span[text()='Anytime'])[2]");
     await this.waitForVisible(serviceTime, 90000);
     await serviceTime.click();
 
@@ -1046,6 +1052,7 @@ async fillDate(label: string, date: Date): Promise<void> {
 
     const searchBox = this.page.locator(OpportunityLocators.searchSupportItemInput).first();
     await this.waitForVisible(searchBox, 90000);
+    await this.page.waitForTimeout(5000);
     await searchBox.fill(product);
     await this.staticWait(1500);
 
