@@ -60,7 +60,7 @@ export class CasePage extends BasePage {
 
   async clickNewButton(): Promise<void> {
       Logger.step('Click New button in Case page');
-      const newButton = this.page.getByRole('button', { name: 'New' }).first();
+      const newButton = this.page.locator(CaseLocators.caseNewButton).first();
       await this.waitForVisible(newButton, 30000);
       await newButton.click({ force: true });
       Logger.pass('Clicked New button in Case page');
