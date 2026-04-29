@@ -18,7 +18,8 @@ test('Configure "Block Funding" funding source and "CHSP" funding type in first 
   await opportunityPage.refreshPage();
   await homePage.verifyHomePage();
   await opportunityPage.hardRefreshPageWithRetry();
-  await opportunityPage.hardRefreshPageWithRetry();  // Extra refresh right before clicking dropdown
+  await opportunityPage.hardRefreshPageWithRetry();
+  await homePage.resetObjectSelectionState();  // Extra refresh right before clicking dropdown
   await homePage.selectObjectFromDropdown('Opportunities');
   await opportunityPage.selectOpportunitiesListView('My Opportunities');
   await opportunityPage.searchAndOpenOpportunityByLeadName(lead.firstName, lead.lastName);
@@ -52,6 +53,7 @@ test('Configure CHSP Link Fund', async ({ page }) => {
   await homePage.verifyHomePage();
   await opportunityPage.hardRefreshPageWithRetry();  
   await opportunityPage.hardRefreshPageWithRetry();
+  await homePage.resetObjectSelectionState();
   await homePage.selectObjectFromDropdown('Opportunities');
   await opportunityPage.refreshPage();
   await opportunityPage.selectOpportunitiesListView('My Opportunities');
@@ -86,6 +88,7 @@ test('verify Generate Agreement functionality on Opportunity', async ({ page }) 
   await homePage.verifyHomePage();
   await opportunityPage.hardRefreshPageWithRetry();
   await opportunityPage.hardRefreshPageWithRetry();  // Hard refresh before clicking dropdown
+  await homePage.resetObjectSelectionState();
   await homePage.selectObjectFromDropdown('Opportunities');
   await opportunityPage.selectOpportunitiesListView('My Opportunities');
   await opportunityPage.searchAndOpenOpportunityByLeadName(lead.firstName, lead.lastName);
@@ -118,6 +121,7 @@ test('Configure CHSP PriceBook and Product Management on Opportunity', async ({ 
   await homePage.verifyHomePage();
     await opportunityPage.hardRefreshPageWithRetry();  // Hard refresh before clicking dropdown
   await opportunityPage.hardRefreshPageWithRetry();
+  await homePage.resetObjectSelectionState();
   await homePage.selectObjectFromDropdown('Opportunities');
     await opportunityPage.refreshPage();
   await opportunityPage.selectOpportunitiesListView('My Opportunities');
@@ -144,6 +148,7 @@ test('Verify Generate Quote functionality and verify Files on Opportunity', asyn
   await homePage.verifyHomePage();
   await opportunityPage.hardRefreshPageWithRetry();  // Hard refresh before clicking dropdown
   await opportunityPage.hardRefreshPageWithRetry();
+  await homePage.resetObjectSelectionState();
   await homePage.selectObjectFromDropdown('Opportunities');
   await homePage.verifyHomePage();
   await opportunityPage.selectOpportunitiesListView('My Opportunities');
@@ -168,6 +173,7 @@ test('Generate Send For Signature functionality on Opportunity', async ({ page }
   await homePage.verifyHomePage();
   await opportunityPage.hardRefreshPageWithRetry();  // Hard refresh before clicking dropdown
   await opportunityPage.hardRefreshPageWithRetry();
+  await homePage.resetObjectSelectionState();
   await homePage.selectObjectFromDropdown('Opportunities');
   await opportunityPage.refreshPage();
   await opportunityPage.selectOpportunitiesListView('My Opportunities');
@@ -189,6 +195,7 @@ test('verify Signature and Close the Opportunity', async ({ page }) => {
   await homePage.verifyHomePage();
   await opportunityPage.hardRefreshPageWithRetry();  // Hard refresh before clicking dropdown
   await opportunityPage.hardRefreshPageWithRetry();
+  await homePage.resetObjectSelectionState();
   await homePage.selectObjectFromDropdown('Opportunities');
   await opportunityPage.refreshPage();
   await opportunityPage.selectOpportunitiesListView('My Opportunities');
@@ -212,6 +219,7 @@ test('Create Service Agreement on Opportunity record', async ({ page }) => {
   await homePage.verifyHomePage();
   await opportunityPage.hardRefreshPageWithRetry();  // Hard refresh before clicking dropdown
   await opportunityPage.hardRefreshPageWithRetry();
+  await homePage.resetObjectSelectionState();
   await homePage.selectObjectFromDropdown('Opportunities');
   await opportunityPage.refreshPage();
   await opportunityPage.selectOpportunitiesListView('My Opportunities');
@@ -239,6 +247,7 @@ test('Verify CHSP Service Agreement status under Service Agreements Object', asy
   await homePage.verifyHomePage();
   await opportunityPage.hardRefreshPageWithRetry();  // Hard refresh before clicking dropdown
   await opportunityPage.hardRefreshPageWithRetry();
+  await homePage.resetObjectSelectionState();
   await homePage.selectObjectFromDropdown('Service Agreements');
   await opportunityPage.refreshPage();
   await opportunityPage.selectServiceAgreementListView(opportunityData.CHSPserviceagreementListView);

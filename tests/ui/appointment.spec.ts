@@ -20,13 +20,15 @@ test('Open Appointment object and record scaffold', async ({ page }) => {
 
   await homePage.verifyHomePage();
   await homePage.selectObjectFromDropdown('Appointments');
-  await appointmentPage.selectListView(appointment.listView);
+  await appointmentPage.selectListView('All');
+  await appointmentPage.hardRefreshPageWithRetry();
   await appointmentPage.searchAndOpenFirstRecordByName(appointment.username);
   await appointmentPage.verifyRecordOpened();
   await appointmentPage.clickonConfirm();
   await appointmentPage.refreshPage();
   await homePage.selectObjectFromDropdown('Appointments');
-  await appointmentPage.selectListView(appointment.listView);
+  await appointmentPage.selectListView('All');
+  await appointmentPage.hardRefreshPageWithRetry();
   await appointmentPage.searchAndOpenFirstRecordByName(appointment.username);
   await appointmentPage.verifyCompletedClinicTravelBracketAndDeliveryActivities();
 
@@ -47,6 +49,7 @@ test('Run the Maica Billing', async ({ page }) => {
 
   await homePage.verifyHomePage();
   await homePage.refreshPage();
+  await appointmentPage.hardRefreshPageWithRetry();
   await appointmentPage.openMaicaSettings();
   await appointmentPage.openBillingManagement();
   await appointmentPage.clickRunNowAndWait();
@@ -70,6 +73,7 @@ test.only('Verify the Invoice Line Items', async ({ page }) => {
   await appointmentPage.refreshPage();
   await homePage.selectObjectFromDropdown('Appointments');
   await appointmentPage.selectListView(appointment.listView);
+  await appointmentPage.hardRefreshPageWithRetry();
   await appointmentPage.searchAndOpenFirstRecordByName(appointment.username);
   await appointmentPage.verifyRecordOpened();
   await appointmentPage.verifyCompletedClinicTravelBracketAndDeliveryActivities();

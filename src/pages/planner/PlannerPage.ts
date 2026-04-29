@@ -213,37 +213,51 @@ await this.safeAction(async () => {
     Logger.step('Perform double Check-In and double Check-Out');
 
     const checkInButton = this.page.getByRole('button', { name: 'Check-In' }).first();
-    const SecondheckInButton = this.page.getByRole('button', { name: 'Check In' }).first();
+    const secondcheckInButton = this.page.getByRole('button', { name: 'Check-In' }).last();
+    
     await this.waitForVisible(checkInButton, 15000);
     await checkInButton.scrollIntoViewIfNeeded();
     await this.safeAction(async () => {
       await checkInButton.click({ force: true });
     });
     await this.waitForPageReady();
-
-    await this.waitForVisible(SecondheckInButton, 15000);
-    await SecondheckInButton.scrollIntoViewIfNeeded();
+    Logger.pass('First Check-In completed');
+    
+    await secondcheckInButton.waitFor({ state: 'visible', timeout: 15000 });
+    await secondcheckInButton.scrollIntoViewIfNeeded();
     await this.safeAction(async () => {
-      await SecondheckInButton.click({ force: true });
+      await secondcheckInButton.click({ force: true });
     });
-    await this.waitForPageReady();
+    //await this.waitForPageReady();
     Logger.pass('Completed Check-In twice');
 
-    const checkOutButton = this.page.getByRole('button', { name: 'Check-Out' }).first();
+    // Click first Check-Out button
+    const checkOutButton = this.page.locator(PlannerLocators.checkOutButtonFirst);
 
-    await this.waitForVisible(checkOutButton, 15000);
+    await checkOutButton.waitFor({ state: 'visible', timeout: 15000 });
     await checkOutButton.scrollIntoViewIfNeeded();
     await this.safeAction(async () => {
       await checkOutButton.click({ force: true });
     });
-    await this.waitForPageReady();
-
-    await this.waitForVisible(checkOutButton, 15000);
-    await checkOutButton.scrollIntoViewIfNeeded();
+    Logger.pass('First Check-Out clicked');
+    
+    // Click second Check-Out button using unique XPath locator
+    const secondcheckOutButton = this.page.locator(PlannerLocators.checkOutButtonSecond);
+    
+    Logger.step('Waiting for second Check-Out button to be visible');
+    await secondcheckOutButton.waitFor({ state: 'visible', timeout: 15000 });
+    
+    Logger.step('Validating second Check-Out button is visible and enabled');
+    await expect(secondcheckOutButton).toBeVisible({ timeout: 15000 });
+    await expect(secondcheckOutButton).toBeEnabled({ timeout: 15000 });
+    
+    Logger.step('Scrolling second Check-Out button into view');
+    await secondcheckOutButton.scrollIntoViewIfNeeded();
+    
+    Logger.step('Clicking second Check-Out button');
     await this.safeAction(async () => {
-      await checkOutButton.click({ force: true });
+      await secondcheckOutButton.click({ force: true });
     });
-    await this.waitForPageReady();
     Logger.pass('Completed Check-Out twice');
 
     const appointmentCompletedText = this.page.getByText('Appointment Completed', { exact: true });
@@ -253,7 +267,7 @@ await this.safeAction(async () => {
 
   async clickAgendaEventByAccountName(accountName: string): Promise<void> {
     const runNumber = PropertyReader.getRunNumber(1);
-    const expectedAccountName = `${accountName}${runNumber}`;
+    const expectedAccountName = `${accountName}`;
 
     Logger.step(`Click first planner agenda event for account ${expectedAccountName}`);
 

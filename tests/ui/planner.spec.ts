@@ -70,7 +70,7 @@ test('Planner secondary account isolated login flow', async ({ page, browser }) 
 
     await isolatedPlannerPage.verifyHomePage();
     await isolatedHomePage.selectObjectFromDropdown(planner.objectName);
-    await isolatedPlannerPage.clickAgendaEventByAccountName(planner.username);
+    await isolatedPlannerPage.clickAgendaEventByAccountName(planner.resourceName);
     await isolatedPlannerPage.performCheckInAndCheckOut();
     await isolatedPlannerPage.runSecondaryAccountStepsPlaceholder();
   } finally {

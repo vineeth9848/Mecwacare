@@ -42,6 +42,7 @@ test('Update mandatory MDS reporting fields in Account for Opportunity closure',
   await homePage.verifyHomePage();
   await accountPage.hardRefreshPageWithRetry();
   await accountPage.hardRefreshPageWithRetry();
+  await homePage.resetObjectSelectionState();
   await homePage.selectObjectFromDropdown('Accounts');
   await accountPage.refreshPage();
   await accountPage.selectAccountsListView('My Accounts');
@@ -82,6 +83,7 @@ test('Update and Verify account validations', async ({ page }) => {
   await homePage.verifyHomePage();
   await accountPage.hardRefreshPageWithRetry();
   await accountPage.hardRefreshPageWithRetry();
+  await homePage.resetObjectSelectionState();
   await homePage.selectObjectFromDropdown('Accounts');
   await accountPage.refreshPage();
   await accountPage.selectAccountsListView('My Accounts');
@@ -108,6 +110,7 @@ test('Verify Creation of care plan form under Accounts', async ({ page }) => {
   await homePage.verifyHomePage();
   await accountPage.hardRefreshPageWithRetry();
   await accountPage.hardRefreshPageWithRetry();
+  await homePage.resetObjectSelectionState();
   await homePage.selectObjectFromDropdown('Accounts');
   await accountPage.refreshPage();
   await accountPage.selectAccountsListView('My Accounts');
@@ -130,6 +133,7 @@ test('Verify Creation of client forms under Accounts', async ({ page }) => {
   await homePage.verifyHomePage();
   await accountPage.hardRefreshPageWithRetry();
   await accountPage.hardRefreshPageWithRetry();
+  await homePage.resetObjectSelectionState();
   await homePage.selectObjectFromDropdown('Accounts');
   await accountPage.refreshPage();
   await accountPage.selectAccountsListView('My Accounts');
@@ -152,6 +156,7 @@ test('Verify Care Plan and Client forms under Account', async ({ page }) => {
   await homePage.verifyHomePage();
   await accountPage.hardRefreshPageWithRetry();
   await accountPage.hardRefreshPageWithRetry();
+  await homePage.resetObjectSelectionState();
   await homePage.selectObjectFromDropdown('Accounts');
   await accountPage.refreshPage();
   await accountPage.selectAccountsListView('My Accounts');

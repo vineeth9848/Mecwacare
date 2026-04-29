@@ -19,6 +19,7 @@ test('Configure "Block Funding" funding source and "HACC-PYP" funding type in fi
   await homePage.verifyHomePage();
   await opportunityPage.hardRefreshPageWithRetry();  // Hard refresh before clicking dropdown
   await opportunityPage.hardRefreshPageWithRetry();
+  await homePage.resetObjectSelectionState();
   await homePage.selectObjectFromDropdown('Opportunities');
   await opportunityPage.refreshPage();
   await opportunityPage.selectOpportunitiesListView('My Opportunities');
@@ -248,7 +249,7 @@ test('Verify HACC Service Agreement status under Service Agreements Object', asy
   await opportunityPage.hardRefreshPageWithRetry();
   await homePage.selectObjectFromDropdown('Service Agreements');
   await opportunityPage.refreshPage();
-  await opportunityPage.selectOpportunitiesListView(opportunityData.HACCserviceagreementListView);
+  await opportunityPage.selectServiceAgreementListView(opportunityData.HACCserviceagreementListView);
   await opportunityPage.searchAndOpenOpportunityByLeadName(lead.firstName, lead.lastName);
   await opportunityPage.verifyActiveServiceAgreement();
   Logger.pass(' HACC Service Agreement status under Service Agreements Object verified successfully');

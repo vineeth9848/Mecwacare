@@ -3,6 +3,7 @@ import { BasePage } from '../common/BasePage';
 import { Logger } from '../../utils/Logger';
 import { AppointmentLocators } from '../locators/AppointmentLocators';
 import PropertyReader from '../../utils/PropertyReader';
+import { OpportunityLocators } from '../locators/OpportunityLocators';
 
 export class AppointmentPage extends BasePage {
   constructor(page: Page) {
@@ -70,19 +71,16 @@ export class AppointmentPage extends BasePage {
     Logger.step(`Select Appointment list view: ${viewName}`);
     const listViewDropdown = this.page.locator(AppointmentLocators.listviewDropdownappointment).first();
     await this.waitForVisible(listViewDropdown, 30000);
-    await this.safeAction(async () => {
-      await listViewDropdown.click({ force: true });
-    });
+    await listViewDropdown.click({ force: true });
 
-    const option = this.page
-      .locator(AppointmentLocators.listViewOption)
-      .filter({ hasText: viewName })
-      .first();
-    await this.waitForVisible(option, 15000);
-    await this.safeAction(async () => {
-      await option.click({ force: true });
-    });
-    await this.waitForPageReady();
+    await this.page.waitForSelector('[role="listbox"]', { timeout: 30000 });
+        const listViewOption = this.page
+          .locator(OpportunityLocators.listViewOption)
+          .filter({ hasText: viewName })
+          .first();
+        await this.waitForVisible(listViewOption, 30000);
+        await listViewOption.scrollIntoViewIfNeeded().catch(() => {});
+        await listViewOption.click({ force: true });
     Logger.pass(`Selected Appointment list view: ${viewName}`);
   }
 

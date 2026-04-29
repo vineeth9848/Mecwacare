@@ -70,58 +70,98 @@ export class HomePage extends BasePage {
     Logger.pass('Homepage is loaded and m360Care branding is visible');
   }
 
+  /**
+   * Close all open sub-tabs after opening an object
+   * Uses multiple strategies to find and close tabs (SVG, buttons, links)
+   * OPTIONAL - Will not fail if no tabs are found
+   * Call this after selectObjectFromDropdown() to clean up sub-tabs
+   */
   async closeAllSubTabs(): Promise<void> {
-    Logger.step('Close all open sub-tabs in Salesforce (optional)');
+    Logger.step('Close all open sub-tabs (optional - will not fail if none found)');
     try {
-      // Try multiple locator strategies to handle Shadow DOM and various Salesforce versions
-      let closeButtons = this.page.locator('button[title="Close Tab"]');
+      // Strategy 1: Find buttons that contain SVG with data-key="close" (Lightning tabs)
+      let closeButtons = this.page.locator('button:has(svg[data-key="close"])');
       let count = await closeButtons.count();
-      Logger.info(`Strategy 1: Found ${count} close buttons with title attribute`);
+      Logger.info(`Strategy 1 (Button with SVG close icon): Found ${count} close buttons`);
       
       if (count === 0) {
-        // Try with specific class that matches the close button icon
-        closeButtons = this.page.locator('button.slds-button_icon-x-small');
+        // Strategy 2: Find buttons with title starting with "Close" (standard Salesforce)
+        closeButtons = this.page.locator('button[title^="Close"]');
         count = await closeButtons.count();
-        Logger.info(`Strategy 2: Found ${count} buttons with slds-button_icon-x-small class`);
+        Logger.info(`Strategy 2 (Title starts with Close): Found ${count} close buttons`);
       }
       
       if (count === 0) {
-        Logger.info('No sub-tabs to close');
+        // Strategy 3: Try with button[title="Close Tab"]
+        closeButtons = this.page.locator('button[title="Close Tab"]');
+        count = await closeButtons.count();
+        Logger.info(`Strategy 3 (Exact title Close Tab): Found ${count} close buttons`);
+      }
+
+      if (count === 0) {
+        // Strategy 4: Find buttons with SLDS close button class and ARIA close label
+        closeButtons = this.page.locator('button.slds-button_icon-x-small[aria-label*="Close"]');
+        count = await closeButtons.count();
+        Logger.info(`Strategy 4 (SLDS close button with ARIA): Found ${count} close buttons`);
+      }
+
+      if (count === 0) {
+        // Strategy 5: Generic approach - any button with close-related class
+        closeButtons = this.page.locator('button.slds-button_icon-x-small');
+        count = await closeButtons.count();
+        Logger.info(`Strategy 5 (SLDS close button class): Found ${count} close buttons`);
+      }
+      
+      if (count === 0) {
+        Logger.info('✓ No open sub-tabs found - continuing without error');
+        Logger.pass('Sub-tab close check completed (no tabs to close)');
         return;
       }
       
       Logger.info(`Total close buttons found: ${count}`);
+      let closedCount = 0;
+
+      // Close each tab with retry logic
       for (let i = 0; i < count; i++) {
         try {
           const button = closeButtons.nth(i);
-          Logger.info(`Attempting to close tab ${i + 1}/${count}`);
-          
-          // Check if button is visible and enabled
-          const isVisible = await button.isVisible().catch(() => false);
-          Logger.info(`Button ${i + 1} visible: ${isVisible}`);
+          const isVisible = await button.isVisible({ timeout: 3000 }).catch(() => false);
           
           if (isVisible) {
-            // Scroll into view if needed
+            Logger.info(`Closing tab ${i + 1}/${count}`);
             await button.scrollIntoViewIfNeeded().catch(() => {});
             await this.page.waitForTimeout(300);
             
-            // Try force click
-            await button.click({ force: true, timeout: 5000 });
-            Logger.info(`Clicked close button ${i + 1}`);
+            // Use force click to handle any overlay issues
+            try {
+              await button.click({ force: true, timeout: 5000 });
+              closedCount++;
+              Logger.info(`Successfully closed tab ${i + 1}`);
+            } catch (clickError) {
+              // Retry once with delay
+              Logger.info(`First click attempt failed, retrying tab ${i + 1}...`);
+              await this.page.waitForTimeout(500);
+              await button.click({ force: true, timeout: 5000 });
+              closedCount++;
+              Logger.info(`Successfully closed tab ${i + 1} on retry`);
+            }
+            
             await this.page.waitForTimeout(500); // Delay between closes
           } else {
-            Logger.info(`Button ${i + 1} is not visible, skipping`);
+            Logger.info(`Tab ${i + 1} not visible, skipping`);
           }
         } catch (error) {
-          const errorMessage = error instanceof Error ? error.message : String(error);
-          Logger.info(`Failed to close tab ${i + 1}: ${errorMessage}`);
+          Logger.info(`Could not close tab ${i + 1}, continuing...`);
         }
       }
-      await this.page.waitForTimeout(1000); // Wait after closing all tabs
-      Logger.pass('Closed all open sub-tabs');
+
+      await this.page.waitForTimeout(1000);
+      Logger.pass(`Successfully closed ${closedCount}/${count} sub-tabs`);
+
     } catch (error) {
       const errorMessage = error instanceof Error ? error.message : String(error);
-      Logger.info(`Error in closeAllSubTabs: ${errorMessage}`);
+      Logger.info(`✓ Sub-tab close check completed gracefully: ${errorMessage}`);
+      Logger.pass('Sub-tab close check completed (optional, no failure)');
     }
   }
 
