@@ -992,7 +992,7 @@ async fillDate(label: string, date: Date): Promise<void> {
   }
 
   async configureProductManagement(product: string): Promise<void> {
-    Logger.step('Select Product Management');
+    Logger.step('Select HACC-PYP Product Management');
     const moreActions = this.page.locator(OpportunityLocators.moreActionsButton).last();
               await moreActions.waitFor({ state: 'visible', timeout: 30000 });
               await moreActions.click({ force: true });
@@ -1081,7 +1081,94 @@ async fillDate(label: string, date: Date): Promise<void> {
     await Submit.scrollIntoViewIfNeeded();
     await Submit.isVisible({ timeout: 30000 });
     await Submit.click();
-        Logger.pass('Product Management configured Successfully');
+        Logger.pass('HACC-PYP Product Management configured Successfully');
+      }
+
+      async configureCHSPProductManagement(product: string): Promise<void> {
+    Logger.step('Select CHSP Product Management');
+    const moreActions = this.page.locator(OpportunityLocators.moreActionsButton).last();
+              await moreActions.waitFor({ state: 'visible', timeout: 30000 });
+              await moreActions.click({ force: true });
+
+              const ProductManagementOption = this.page.getByRole('menuitem', { name: 'Product Management' });
+
+              await expect(ProductManagementOption).toBeVisible({ timeout: 30000 });
+
+              await ProductManagementOption.click({ force: true });
+    await this.page.waitForTimeout(10000);
+
+    const addProductsButton = this.page.getByRole('button', { name: 'Add' });
+    await this.waitForVisible(addProductsButton, 90000);
+    await addProductsButton.click();
+    await this.page.waitForTimeout(5000);
+
+    // const customPeriodOption = this.page.getByText('Custom', { exact: true });
+    // await this.waitForVisible(customPeriodOption, 90000);
+    // await customPeriodOption.click();
+    
+    // const endDateInput = this.page.getByLabel('End Date').first();
+    // await this.waitForVisible(endDateInput, 90000);
+
+    // const today = new Date();
+
+    // today.setDate(today.getDate() + 10);
+
+    // const formattedDate = today.toLocaleDateString('en-GB', {
+    //   day: 'numeric',
+    //   month: 'short',
+    //   year: 'numeric'
+    // });
+
+    // await endDateInput.click();
+    // await endDateInput.press('Backspace');
+    // await endDateInput.clear();
+    // await endDateInput.fill('');
+    // await endDateInput.fill(formattedDate);
+
+    const serviceTime = this.page.locator( "(//span[text()='Daytime'])[1]");
+    await this.waitForVisible(serviceTime, 90000);
+    await serviceTime.click();
+
+    const availableFundingSection = this.page.locator(OpportunityLocators.availableFundingSection).first();
+    await this.waitForVisible(availableFundingSection, 90000);
+    await availableFundingSection.scrollIntoViewIfNeeded();
+
+    const supportItemsLabel = this.page.locator(OpportunityLocators.supportItemLabel).first();
+    await this.waitForVisible(supportItemsLabel, 90000);
+    await supportItemsLabel.scrollIntoViewIfNeeded();
+
+    const searchBox = this.page.locator(OpportunityLocators.searchSupportItemInput).first();
+    await this.waitForVisible(searchBox, 90000);
+    await this.page.waitForTimeout(5000);
+    await searchBox.fill(product);
+    await this.staticWait(1500);
+
+    const firstCheckbox = this.page.locator(OpportunityLocators.availableFundingFirstRowCheckbox).first();
+    await this.waitForVisible(firstCheckbox, 90000);
+    await firstCheckbox.scrollIntoViewIfNeeded();
+    try {
+      await firstCheckbox.check({ force: true });
+    } catch {
+      const firstCheckboxLabel = this.page.locator(OpportunityLocators.availableFundingFirstRowCheckboxLabel).first();
+      if (await firstCheckboxLabel.isVisible().catch(() => false)) {
+        await firstCheckboxLabel.click({ force: true });
+      }
+      await firstCheckbox.evaluate((node) => {
+        const input = node as HTMLInputElement;
+        input.checked = true;
+        input.dispatchEvent(new Event('input', { bubbles: true }));
+        input.dispatchEvent(new Event('change', { bubbles: true }));
+      });
+    }
+    await expect(firstCheckbox).toBeChecked({ timeout: 30000 });
+
+    await this.page.getByRole('button', { name: 'Add' }).click();
+
+    const Submit = this.page.getByRole('button', { name: 'Submit' });
+    await Submit.scrollIntoViewIfNeeded();
+    await Submit.isVisible({ timeout: 30000 });
+    await Submit.click();
+        Logger.pass(' CHSP Product Management configured Successfully');
       }
 
 
@@ -1319,6 +1406,8 @@ async verifySentForSignature(): Promise<void> {
 
 async setOpportunityToClosedWon(): Promise<void> {
         Logger.step('Set opportunity to Closed Won');
+
+        await this.page.mouse.wheel(0, 2000);
 
         const EditstageDropdown = this.page.locator(OpportunityLocators.EditStageDropdown);
         await EditstageDropdown.scrollIntoViewIfNeeded().catch(() => {});

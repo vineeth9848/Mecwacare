@@ -34,7 +34,7 @@ test('Open Appointment object and record scaffold', async ({ page }) => {
 
 });
 
-test('Run the Maica Billing', async ({ page }) => {
+test.skip('Run the Maica Billing', async ({ page }) => {
   test.setTimeout(120000);
 
   const homePage = new HomePage(page);

@@ -47,7 +47,7 @@ test('Configure HACC-PYP Link Fund', async ({ page }) => {
   const opportunityPage = new OpportunityPage(page);
   const { leadCreate } = TestDataHelper.readJsonFile<{ leadCreate: Array<Record<string, string>> }>('leads.json');
   const lead = leadCreate[0];
-    const { opportunity } = TestDataHelper.readJsonFile<{ opportunity: Array<Record<string, string>> }>('opportunity.json');
+  const { opportunity } = TestDataHelper.readJsonFile<{ opportunity: Array<Record<string, string>> }>('opportunity.json');
   const opportunityData = opportunity[0];
 
   const today = new Date();
@@ -202,10 +202,11 @@ test('verify Signature and Close the Opportunity', async ({ page }) => {
   await opportunityPage.refreshPage();
   await opportunityPage.selectOpportunitiesListView('My Opportunities');
   await opportunityPage.searchAndOpenOpportunityByLeadName(lead.firstName, lead.lastName);
+  await opportunityPage.verifySentForSignature();
   await opportunityPage.refreshPage();
   await opportunityPage.setOpportunityToClosedWon();
   await opportunityPage.refreshPage();
-  await opportunityPage.verifySentForSignature();
+
   Logger.pass('Signature verification and opportunity closure validated successfully');
   
 });

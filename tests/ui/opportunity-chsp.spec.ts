@@ -46,7 +46,7 @@ test('Configure CHSP Link Fund', async ({ page }) => {
 
   const today = new Date();
   const tomorrow = new Date();
-  tomorrow.setDate(today.getDate() + 30);
+  tomorrow.setDate(today.getDate() + 60);
 
   Logger.info('Starting Configuring CHSP Link Fund on opportunity test');
   await opportunityPage.refreshPage();
@@ -81,7 +81,7 @@ test('verify Generate Agreement functionality on Opportunity', async ({ page }) 
    const today = new Date();
    today.setDate(today.getDate());
   const tomorrow = new Date();
-  tomorrow.setDate(today.getDate() + 30);
+  tomorrow.setDate(today.getDate() + 60);
 
   Logger.info('Starting agreement generation validation test');
   await opportunityPage.refreshPage();
@@ -131,7 +131,7 @@ test('Configure CHSP PriceBook and Product Management on Opportunity', async ({ 
   await opportunityPage.switchToRelatedTab();
   await opportunityPage.configurePriceBook(opportunityData.CHSPpriceBook);
   await opportunityPage.refreshPage();
-  await opportunityPage.configureProductManagement(opportunityData.CHSPproduct);
+  await opportunityPage.configureCHSPProductManagement(opportunityData.CHSPproduct);
 
   Logger.pass('Opportunity CHSP price book and product management configuration validated successfully');
   await opportunityPage.refreshPage();
@@ -200,10 +200,10 @@ test('verify Signature and Close the Opportunity', async ({ page }) => {
   await opportunityPage.refreshPage();
   await opportunityPage.selectOpportunitiesListView('My Opportunities');
   await opportunityPage.searchAndOpenOpportunityByLeadName(lead.firstName, lead.lastName);
+  await opportunityPage.verifySentForSignature();
   await opportunityPage.refreshPage();
   await opportunityPage.setOpportunityToClosedWon();
   await opportunityPage.refreshPage();
-  await opportunityPage.verifySentForSignature();
   Logger.pass('Signature verification and opportunity closure validated successfully');
   
 });
