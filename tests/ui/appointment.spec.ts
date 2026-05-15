@@ -56,7 +56,7 @@ test.skip('Run the Maica Billing', async ({ page }) => {
 
 });
 
-test.only('Verify the Invoice Line Items', async ({ page }) => {
+test('Verify the Invoice Line Items', async ({ page }) => {
   test.setTimeout(120000);
 
   const homePage = new HomePage(page);
