@@ -1,9 +1,11 @@
 const fs = require('fs');
 const path = require('path');
 
-const projectRoot = path.resolve(__dirname, '..');
-const sourceDir = path.join(projectRoot, 'playwright-report');
-const docsDir = path.join(projectRoot, 'docs');
+const root = path.resolve(__dirname, '..');
+const sourceDir = path.join(root, 'playwright-report');
+const blobDir = path.join(root, 'blob-report-sequential');
+const tempBlobDir = path.join(root, 'blob-report-temp');
+const docsDir = path.join(root, 'docs');
 const reportsDir = path.join(docsDir, 'reports');
 
 function getTimestampFolderName() {
@@ -60,6 +62,7 @@ if (!fs.existsSync(sourceDir)) {
 const timestampFolder = process.env.REPORT_NAME || getTimestampFolderName();
 const historicalTargetDir = path.join(reportsDir, timestampFolder);
 
+// Keep docs clean: latest report at /docs + historical copies in /docs/reports/<timestamp>
 ensureDirectory(docsDir);
 clearDirectoryExcept(docsDir, ['reports']);
 copyDirectory(sourceDir, docsDir);
@@ -69,6 +72,11 @@ ensureDirectory(reportsDir);
 fs.rmSync(historicalTargetDir, { recursive: true, force: true });
 copyDirectory(sourceDir, historicalTargetDir);
 fs.writeFileSync(path.join(historicalTargetDir, '.nojekyll'), '');
+
+// Optional cleanup to avoid workspace growth after publish.
+fs.rmSync(sourceDir, { recursive: true, force: true });
+fs.rmSync(blobDir, { recursive: true, force: true });
+fs.rmSync(tempBlobDir, { recursive: true, force: true });
 
 console.log(`Published latest Playwright report to ${docsDir}`);
 console.log(`Published timestamped Playwright report to ${historicalTargetDir}`);

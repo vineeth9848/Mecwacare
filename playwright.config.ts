@@ -1,6 +1,50 @@
 import { defineConfig } from '@playwright/test';
+import fs from 'fs';
+import path from 'path';
 import PropertyReader from './src/utils/PropertyReader';
-import { serialTests, parallelTests } from './test-groups';
+
+type SuiteEntry = string | { file: string } | { parallel: Array<string | { file: string }> };
+
+function toFile(entry: string | { file: string }): string {
+  return typeof entry === 'string' ? entry : entry.file;
+}
+
+function readSuiteConfig(): SuiteEntry[] {
+  const suitePath = path.join(__dirname, 'scripts', 'serial-suite-files.json');
+  const text = fs.readFileSync(suitePath, 'utf-8');
+  return JSON.parse(text) as SuiteEntry[];
+}
+
+function buildTestGroups() {
+  const suite = readSuiteConfig();
+  const serial: string[] = [];
+  const parallel: string[] = [];
+
+  for (const entry of suite) {
+    if (typeof entry === 'string' || ('file' in entry && entry.file)) {
+      serial.push(toFile(entry as string | { file: string }));
+      continue;
+    }
+
+    if ('parallel' in entry && Array.isArray(entry.parallel)) {
+      for (const item of entry.parallel) {
+        const file = toFile(item);
+        serial.push(file);
+        parallel.push(file);
+      }
+    }
+  }
+
+  // Keep login spec available for explicit parallel runs.
+  parallel.push('tests/ui/login.spec.ts');
+
+  return {
+    serialTests: Array.from(new Set(serial)),
+    parallelTests: Array.from(new Set(parallel)),
+  };
+}
+
+const { serialTests, parallelTests } = buildTestGroups();
 
 const rawBrowser = (PropertyReader.getProperty('browser') || 'chromium').toLowerCase();
 const baseURL = process.env.BASE_URL || process.env.SF_LOGIN_URL || PropertyReader.getBaseUrl();

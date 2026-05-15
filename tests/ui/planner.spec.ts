@@ -4,9 +4,6 @@ import { HomePage } from '../../src/pages/homepage/HomePage';
 import { PlannerPage } from '../../src/pages/planner/PlannerPage';
 import { TestDataHelper } from '../../src/utils/TestDataHelper';
 import { LoginPage } from '../../src/pages/login/LoginPage';
-import { existsSync } from 'fs';
-
-const secondaryAuthPath = 'auth-uat.json';
 
 test('Create New Appointment', async ({ page }) => {
   test.setTimeout(180000);
@@ -44,7 +41,8 @@ test('Planner secondary account isolated login flow', async ({ page, browser }) 
 
   const isolatedContext = await browser.newContext({
     baseURL: planner.secondaryLoginUrl,
-    storageState: existsSync(secondaryAuthPath) ? secondaryAuthPath : undefined,
+    // Always start fresh for secondary account flow and login with JSON credentials.
+    storageState: undefined,
   });
   const isolatedPage = await isolatedContext.newPage();
   const isolatedLoginPage = new LoginPage(isolatedPage);
@@ -52,21 +50,13 @@ test('Planner secondary account isolated login flow', async ({ page, browser }) 
   const isolatedHomePage = new HomePage(isolatedPage);
 
   try {
-    if (existsSync(secondaryAuthPath)) {
-      Logger.info(`Reusing saved secondary session from ${secondaryAuthPath}`);
-      await isolatedPage.goto(planner.secondaryLoginUrl, { waitUntil: 'domcontentloaded' });
-      await isolatedLoginPage.waitForSalesforceHome();
-    } else {
-      Logger.info(`No saved secondary session found. Logging in and saving ${secondaryAuthPath}`);
-      await isolatedLoginPage.loginToUrl(
-        planner.secondaryLoginUrl,
-        planner.secondaryUsername,
-        planner.secondaryPassword,
-      );
-      await isolatedPlannerPage.verifyHomePage();
-      await isolatedLoginPage.saveSessionStorageState(secondaryAuthPath);
-      Logger.info(`Secondary session saved to ${secondaryAuthPath}`);
-    }
+    Logger.info('Logging into secondary account with planner JSON credentials');
+    await isolatedLoginPage.loginToUrl(
+      planner.secondaryLoginUrl,
+      planner.secondaryUsername,
+      planner.secondaryPassword,
+    );
+    await isolatedLoginPage.waitForSalesforceHome(120000);
 
     await isolatedPlannerPage.verifyHomePage();
     await isolatedHomePage.selectObjectFromDropdown(planner.objectName);

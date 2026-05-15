@@ -1,106 +1,160 @@
-const { spawnSync } = require('child_process');
+const { spawn } = require('child_process');
 const fs = require('fs');
 const path = require('path');
 
-const projectRoot = path.resolve(__dirname, '..');
-const orderedFiles = JSON.parse(
-  fs.readFileSync(path.join(__dirname, 'serial-suite-files.json'), 'utf-8'),
-);
+const root = path.resolve(__dirname, '..');
+const suitePath = path.join(__dirname, 'serial-suite-files.json');
+const blobRoot = path.join(root, 'blob-report-temp');
+const mergedBlobDir = path.join(root, 'blob-report-sequential');
 
-const selectedFiles = process.argv.slice(2);
-const filesToRun = selectedFiles.length ? selectedFiles : orderedFiles;
-const aggregateBlobDir = path.join(projectRoot, 'blob-report-sequential');
-const tempBlobDir = path.join(projectRoot, 'blob-report');
+const runCmd = process.platform === 'win32' ? 'npx.cmd' : 'npx';
 
-function resolveSerialProject() {
-  if (process.env.CI === 'true') {
-    return 'ci-sequential';
-  }
-
-  const configPath = path.join(projectRoot, 'resources', 'config.properties');
-  const configText = fs.existsSync(configPath) ? fs.readFileSync(configPath, 'utf-8') : '';
-  const browserMatch = configText.match(/^\s*browser\s*=\s*(.+)\s*$/m);
-  const rawBrowser = (process.env.BROWSER || (browserMatch ? browserMatch[1] : 'chromium')).trim().toLowerCase();
-
-  switch (rawBrowser) {
-    case 'chrome':
-      return 'chrome-serial';
-    case 'edge':
-    case 'msedge':
-      return 'edge-serial';
-    case 'firefox':
-      return 'firefox-serial';
-    case 'webkit':
-      return 'webkit-serial';
-    default:
-      return 'chromium-serial';
-  }
+// Read test order/grouping from serial-suite-files.json
+function readSuite() {
+  return JSON.parse(fs.readFileSync(suitePath, 'utf-8'));
 }
 
-const serialProject = resolveSerialProject();
+function normalizeSingle(entry) {
+  if (typeof entry === 'string') {
+    return { file: entry, mode: 'serial', workers: 1 };
+  }
+  return {
+    file: entry.file,
+    mode: entry.mode || 'serial',
+    workers: Number(entry.workers || 1),
+  };
+}
 
-// console.log(`Using serial project: ${serialProject}`);
-// console.log(`Project root: ${projectRoot}`);
-// console.log(`Files to run: ${filesToRun.join(', ')}`);
+function normalizeStep(step) {
+  if (step && Array.isArray(step.parallel)) {
+    return { kind: 'parallel', entries: step.parallel.map(normalizeSingle) };
+  }
+  return { kind: 'single', entry: normalizeSingle(step) };
+}
 
-fs.rmSync(aggregateBlobDir, { recursive: true, force: true });
-fs.mkdirSync(aggregateBlobDir, { recursive: true });
+// Decide which Playwright serial project to use from config.properties/browser env
+function resolveSerialProject() {
+  if (process.env.CI === 'true') return 'ci-sequential';
 
-let hadFailure = false;
+  const configFile = path.join(root, 'resources', 'config.properties');
+  const text = fs.existsSync(configFile) ? fs.readFileSync(configFile, 'utf-8') : '';
+  const match = text.match(/^\s*browser\s*=\s*(.+)\s*$/m);
+  const browser = (process.env.BROWSER || (match ? match[1] : 'chromium')).trim().toLowerCase();
 
-for (const [index, file] of filesToRun.entries()) {
-  console.log(`\n=== Running ${file} (${index + 1}/${filesToRun.length}) ===`);
-  fs.rmSync(tempBlobDir, { recursive: true, force: true });
+  if (browser === 'chrome') return 'chrome-serial';
+  if (browser === 'edge' || browser === 'msedge') return 'edge-serial';
+  if (browser === 'firefox') return 'firefox-serial';
+  if (browser === 'webkit') return 'webkit-serial';
+  return 'chromium-serial';
+}
 
-  //console.log(`Command: npx playwright test ${file} --project=${serialProject} --workers=1 --reporter=blob`);
+function resolveProject(serialProject, mode) {
+  if (mode !== 'parallel') return serialProject;
+  if (serialProject === 'ci-sequential') return serialProject;
+  return serialProject.replace(/-serial$/, '-parallel');
+}
 
-  const result = spawnSync(
-    
-    process.platform === 'win32' ? 'npx.cmd' : 'npx',
-    ['playwright', 'test', file, `--project=${serialProject}`, '--workers=1', '--reporter=blob'],
-    {
-      cwd: projectRoot,
-      stdio: 'inherit',
-      env: { ...process.env },
-      shell: true,
-    },
-  );
+function runPlaywrightTest(file, project, workers, blobDir) {
+  return new Promise(resolve => {
+    const child = spawn(
+      runCmd,
+      ['playwright', 'test', file, `--project=${project}`, `--workers=${workers}`, '--reporter=blob'],
+      {
+        cwd: root,
+        stdio: 'inherit',
+        shell: true,
+        env: { ...process.env, PLAYWRIGHT_BLOB_OUTPUT_DIR: blobDir },
+      },
+    );
 
-  // console.log(`Exit code for ${file}: ${result.status}`);
-  // console.log(`Signal for ${file}: ${result.signal}`);
-  // console.log(`Error for ${file}:`, result.error);
+    child.on('close', code => resolve(code || 0));
+    child.on('error', () => resolve(1));
+  });
+}
 
-  const blobFiles = fs.existsSync(tempBlobDir)
-    ? fs.readdirSync(tempBlobDir).filter(name => name.endsWith('.zip'))
-    : [];
-
-  for (const blobFile of blobFiles) {
-    const source = path.join(tempBlobDir, blobFile);
+function copyBlob(stepNo, file, fromDir) {
+  if (!fs.existsSync(fromDir)) return;
+  const zips = fs.readdirSync(fromDir).filter(name => name.endsWith('.zip'));
+  for (const zip of zips) {
+    const source = path.join(fromDir, zip);
     const target = path.join(
-      aggregateBlobDir,
-      `${String(index + 1).padStart(2, '0')}-${path.basename(file, '.spec.ts')}-${blobFile}`,
+      mergedBlobDir,
+      `${String(stepNo).padStart(2, '0')}-${path.basename(file, '.spec.ts')}-${zip}`,
     );
     fs.copyFileSync(source, target);
   }
+}
 
-  if (result.status !== 0) {
-    hadFailure = true;
+async function runEntry(stepNo, idxInGroup, totalInGroup, entry, serialProject) {
+  const project = resolveProject(serialProject, entry.mode);
+  const workers = Number.isInteger(entry.workers) && entry.workers > 0 ? entry.workers : 1;
+  const blobDir = path.join(blobRoot, `${stepNo}-${idxInGroup}`);
+
+  fs.rmSync(blobDir, { recursive: true, force: true });
+  fs.mkdirSync(blobDir, { recursive: true });
+
+  const header =
+    totalInGroup > 1
+      ? `Starting ${entry.file} [project=${project}, workers=${workers}]`
+      : `\n=== Running ${entry.file} (${stepNo}) [project=${project}, workers=${workers}] ===`;
+  console.log(header);
+
+  const status = await runPlaywrightTest(entry.file, project, workers, blobDir);
+  copyBlob(stepNo, entry.file, blobDir);
+  return status;
+}
+
+async function mergeReport() {
+  return new Promise(resolve => {
+    const child = spawn(runCmd, ['playwright', 'merge-reports', '--reporter=html', mergedBlobDir], {
+      cwd: root,
+      stdio: 'inherit',
+      shell: true,
+      env: { ...process.env },
+    });
+    child.on('close', code => resolve(code || 0));
+    child.on('error', () => resolve(1));
+  });
+}
+
+function resetReportFolders() {
+  fs.rmSync(mergedBlobDir, { recursive: true, force: true });
+  fs.mkdirSync(mergedBlobDir, { recursive: true });
+  fs.rmSync(blobRoot, { recursive: true, force: true });
+  fs.mkdirSync(blobRoot, { recursive: true });
+}
+
+async function main() {
+  const serialProject = resolveSerialProject();
+  const cliFiles = process.argv.slice(2);
+  const rawSteps = cliFiles.length ? cliFiles : readSuite();
+  const steps = rawSteps.map(normalizeStep);
+
+  resetReportFolders();
+
+  let failed = false;
+
+  for (let i = 0; i < steps.length; i += 1) {
+    const stepNo = i + 1;
+    const step = steps[i];
+
+    if (step.kind === 'parallel') {
+      console.log(`\n=== Running parallel group (${stepNo}/${steps.length}) ===`);
+      const results = await Promise.all(
+        step.entries.map((entry, idx) => runEntry(stepNo, idx + 1, step.entries.length, entry, serialProject)),
+      );
+      if (results.some(code => code !== 0)) failed = true;
+      continue;
+    }
+
+    const code = await runEntry(stepNo, 1, 1, step.entry, serialProject);
+    if (code !== 0) failed = true;
   }
+
+  console.log('\n=== Merging ordered HTML report ===');
+  const mergeCode = await mergeReport();
+  if (mergeCode !== 0) process.exit(mergeCode);
+  process.exit(failed ? 1 : 0);
 }
 
-console.log('\n=== Merging ordered HTML report ===');
-const merge = spawnSync(
-  process.platform === 'win32' ? 'npx.cmd' : 'npx',
-  ['playwright', 'merge-reports', '--reporter=html', aggregateBlobDir],
-  {
-    cwd: projectRoot,
-    stdio: 'inherit',
-    env: { ...process.env },
-  },
-);
-
-if (merge.status !== 0) {
-  process.exit(merge.status || 1);
-}
-
-process.exit(hadFailure ? 1 : 0);
+main();
