@@ -1,0 +1,881 @@
+# Page snapshot
+
+```yaml
+- generic:
+  - generic [ref=e2]:
+    - generic [ref=e3]:
+      - link "Skip to Navigation" [ref=e4] [cursor=pointer]:
+        - /url: javascript:void(0);
+      - link "Skip to Main Content" [ref=e5] [cursor=pointer]:
+        - /url: javascript:void(0);
+      - generic [ref=e9]:
+        - generic [ref=e13]:
+          - button "Toggle Panel" [ref=e17] [cursor=pointer]:
+            - img [ref=e21]
+            - generic [ref=e24]: Menu
+          - generic [ref=e29]:
+            - img [ref=e33]
+            - generic [ref=e37]: Sandbox (UAT)
+        - button "Show menu" [ref=e46] [cursor=pointer]:
+          - img [ref=e48]
+          - generic [ref=e51]: Show menu
+      - generic [ref=e52]:
+        - button "Search" [ref=e58]:
+          - img [ref=e60]
+          - text: Search...
+        - navigation "Global Header" [ref=e63]:
+          - list [ref=e65]:
+            - listitem [ref=e66]:
+              - group [ref=e67]:
+                - button "Add favorite" [ref=e69] [cursor=pointer]:
+                  - generic [ref=e70]:
+                    - img [ref=e74]
+                    - tooltip "Add favorite"
+                - button "Favorites list" [ref=e78] [cursor=pointer]:
+                  - generic [ref=e79]:
+                    - img [ref=e83]
+                    - tooltip "Favorites list"
+            - listitem [ref=e86]:
+              - button "Global Actions" [ref=e92] [cursor=pointer]:
+                - generic [ref=e93]:
+                  - img [ref=e97]
+                  - tooltip "Global Actions"
+            - listitem [ref=e100]:
+              - button "Guidance Center" [ref=e102] [cursor=pointer]:
+                - generic [ref=e103]:
+                  - img [ref=e107]
+                  - tooltip "Guidance Center"
+            - listitem [ref=e110]:
+              - button "Salesforce Help" [ref=e113] [cursor=pointer]:
+                - generic [ref=e114]:
+                  - img [ref=e118]
+                  - tooltip "Salesforce Help"
+            - listitem [ref=e121]:
+              - button "Setup" [ref=e127] [cursor=pointer]:
+                - generic [ref=e128]:
+                  - img [ref=e132]
+                  - tooltip "Setup"
+            - listitem [ref=e135]:
+              - button "20+ Notifications" [ref=e138] [cursor=pointer]:
+                - generic [ref=e139]:
+                  - generic [ref=e140]:
+                    - img [ref=e144]
+                    - generic [ref=e148]: 20+
+                  - tooltip "Notifications"
+              - generic [ref=e149]: 21 new notifications
+            - listitem [ref=e150]:
+              - button "View profile" [ref=e153] [cursor=pointer]:
+                - generic [ref=e154]:
+                  - tooltip "View profile"
+    - generic [ref=e158]:
+      - generic:
+        - generic [ref=e159]:
+          - generic [ref=e161]:
+            - generic [ref=e162]:
+              - navigation "App" [ref=e163]:
+                - button "App Launcher" [ref=e165] [cursor=pointer]:
+                  - generic [ref=e176]: App Launcher
+              - heading "mCare360" [level=1] [ref=e177]:
+                - generic "mCare360" [ref=e178]
+            - navigation "Global" [ref=e179]:
+              - link "Accounts" [ref=e181] [cursor=pointer]:
+                - /url: /lightning/o/Account/list?filterName=MyAccounts
+                - generic [ref=e182]: Accounts
+              - button "Show Navigation Menu" [ref=e185] [cursor=pointer]:
+                - img [ref=e187]
+                - generic [ref=e190]: Show Navigation Menu
+          - navigation "Workspaces" [ref=e192]:
+            - tablist "Workspace tabs for mCare360" [ref=e193]:
+              - generic [ref=e195]: Press Spacebar to reorder tabs.
+              - tab "Account John Doe820 | Account" [selected] [ref=e196] [cursor=pointer]:
+                - generic "Account" [ref=e197]:
+                  - generic:
+                    - generic "Account":
+                      - generic:
+                        - generic:
+                          - img
+                        - generic: Account
+                - generic [ref=e198]: John Doe820 | Account
+              - generic "Actions for John Doe820 | Account" [ref=e200] [cursor=pointer]:
+                - button "Actions for John Doe820 | Account" [ref=e201]:
+                  - img [ref=e203]
+                  - generic [ref=e206]: Actions for John Doe820 | Account
+              - button "Close John Doe820 | Account" [ref=e208] [cursor=pointer]:
+                - img [ref=e210]
+                - generic [ref=e213]: Close John Doe820 | Account
+              - status [ref=e214] [cursor=pointer]
+        - generic [ref=e216]:
+          - button "Split view mode" [ref=e220] [cursor=pointer]:
+            - img [ref=e222]
+            - generic [ref=e225]: Split view mode
+          - main [ref=e226]:
+            - tabpanel [ref=e227]:
+              - tabpanel [ref=e230]:
+                - generic [ref=e246]:
+                  - generic [ref=e249]:
+                    - generic [ref=e259]:
+                      - generic [ref=e266]: John Doe820
+                      - generic [ref=e272]:
+                        - generic [ref=e273]: Date of Birth
+                        - generic [ref=e274]: 01/01/1990
+                        - generic [ref=e275]: ( 36 Years )
+                      - generic [ref=e280]:
+                        - generic [ref=e281]: Gender
+                        - generic [ref=e282]: Male
+                    - article "Opportunities" [ref=e299]:
+                      - generic [ref=e300]:
+                        - generic [ref=e301]:
+                          - generic [ref=e304]:
+                            - generic [ref=e306]:
+                              - img [ref=e310]
+                              - heading "Opportunities (1)" [level=2] [ref=e312]:
+                                - link "Opportunities (1)" [ref=e313] [cursor=pointer]:
+                                  - /url: /lightning/r/Account/001AD000011dV2sYAE/related/Opportunities/view
+                                  - generic "Opportunities" [ref=e314]
+                                  - generic "(1)" [ref=e315]
+                            - button "Show actions for Opportunities" [ref=e320] [cursor=pointer]:
+                              - img [ref=e322]
+                              - generic [ref=e325]: Show actions for Opportunities
+                          - article "John Doe820" [ref=e336]:
+                            - generic [ref=e337]:
+                              - heading "John Doe820 Open John Doe820 Preview" [level=3] [ref=e339]:
+                                - generic [ref=e345]:
+                                  - link "John Doe820" [ref=e346] [cursor=pointer]:
+                                    - /url: /lightning/r/006AD00000Nov4HYAR/view
+                                    - generic [ref=e350]: John Doe820
+                                  - button "Open John Doe820 Preview" [ref=e352] [cursor=pointer]:
+                                    - img [ref=e354]
+                                    - generic [ref=e357]: Open John Doe820 Preview
+                              - generic [ref=e359]:
+                                - term [ref=e360]: "Stage:"
+                                - definition [ref=e361]:
+                                  - generic [ref=e363]: New
+                                - term [ref=e364]: "Amount:"
+                                - definition
+                                - term [ref=e365]: "Close Date:"
+                                - definition [ref=e366]:
+                                  - generic [ref=e367]: 13/9/2026
+                            - button "Show Actions" [ref=e372] [cursor=pointer]:
+                              - img [ref=e374]
+                              - generic [ref=e377]: Show Actions
+                        - link "View All Opportunities" [ref=e378] [cursor=pointer]:
+                          - /url: /lightning/r/Account/001AD000011dV2sYAE/related/Opportunities/view
+                          - generic [ref=e379]:
+                            - text: View All
+                            - generic [ref=e380]: Opportunities
+                    - generic [ref=e386]:
+                      - heading "Key Details" [level=3] [ref=e387]:
+                        - button "Key Details" [expanded] [ref=e388] [cursor=pointer]:
+                          - img [ref=e392]
+                          - generic "Key Details" [ref=e395]
+                      - list [ref=e398]:
+                        - generic [ref=e402]:
+                          - listitem [ref=e405]:
+                            - generic [ref=e407]:
+                              - generic [ref=e408]: mecwacare Client ID
+                              - button "Help mecwacare Client ID" [ref=e412] [cursor=pointer]:
+                                - img [ref=e414]
+                                - generic [ref=e417]: Help mecwacare Client ID
+                              - generic [ref=e420]: "142735"
+                          - listitem [ref=e423]:
+                            - generic [ref=e425]:
+                              - generic [ref=e426]: Account Owner
+                              - generic [ref=e431]:
+                                - generic [ref=e438]:
+                                  - link "Vineeth Paduri" [ref=e439] [cursor=pointer]:
+                                    - /url: /lightning/r/User/005AD00000KNa8xYAD/view
+                                    - generic [ref=e443]: Vineeth Paduri
+                                  - button "Open Vineeth Paduri Preview" [ref=e445] [cursor=pointer]:
+                                    - img [ref=e447]
+                                    - generic [ref=e450]: Open Vineeth Paduri Preview
+                                - button "Change Owner" [ref=e452] [cursor=pointer]:
+                                  - img [ref=e454]
+                                  - generic [ref=e457]: Change Owner
+                          - listitem [ref=e460]:
+                            - generic [ref=e462]:
+                              - generic [ref=e463]: Email
+                              - generic [ref=e464]:
+                                - link "john.doe820@example.com" [ref=e470] [cursor=pointer]:
+                                  - /url: mailto:john.doe820@example.com
+                                - button "Edit Email" [ref=e471] [cursor=pointer]:
+                                  - generic [ref=e473]: Edit Email
+                          - listitem [ref=e476]:
+                            - generic [ref=e478]:
+                              - generic [ref=e479]: Phone
+                              - button "Help Phone" [ref=e483] [cursor=pointer]:
+                                - img [ref=e485]
+                                - generic [ref=e488]: Help Phone
+                              - generic [ref=e489]:
+                                - link "1234567890" [ref=e494] [cursor=pointer]:
+                                  - /url: tel:1234567890
+                                - button "Edit Phone" [ref=e495] [cursor=pointer]:
+                                  - generic [ref=e497]: Edit Phone
+                          - listitem [ref=e500]:
+                            - generic [ref=e502]:
+                              - generic [ref=e503]: Mobile
+                              - button "Help Mobile" [ref=e507] [cursor=pointer]:
+                                - img [ref=e509]
+                                - generic [ref=e512]: Help Mobile
+                              - button "Edit Mobile" [ref=e514] [cursor=pointer]:
+                                - generic [ref=e516]: Edit Mobile
+                          - listitem [ref=e519]:
+                            - generic [ref=e521]:
+                              - generic [ref=e522]: Date of Birth
+                              - button "Help Date of Birth" [ref=e526] [cursor=pointer]:
+                                - img [ref=e528]
+                                - generic [ref=e531]: Help Date of Birth
+                              - generic [ref=e532]:
+                                - generic [ref=e534]: 1/1/1990
+                                - button "Edit Date of Birth" [ref=e535] [cursor=pointer]:
+                                  - generic [ref=e537]: Edit Date of Birth
+                          - listitem [ref=e540]:
+                            - generic [ref=e542]:
+                              - generic [ref=e543]: Marital Status
+                              - button "Edit Marital Status" [ref=e545] [cursor=pointer]:
+                                - generic [ref=e547]: Edit Marital Status
+                          - listitem [ref=e550]:
+                            - generic [ref=e552]:
+                              - generic [ref=e553]: Primary Language
+                              - button "Help Primary Language" [ref=e557] [cursor=pointer]:
+                                - img [ref=e559]
+                                - generic [ref=e562]: Help Primary Language
+                              - button "Edit Primary Language" [ref=e564] [cursor=pointer]:
+                                - generic [ref=e566]: Edit Primary Language
+                          - listitem [ref=e569]:
+                            - generic [ref=e571]:
+                              - generic [ref=e572]: Best Time to call
+                              - button "Help Best Time to call" [ref=e576] [cursor=pointer]:
+                                - img [ref=e578]
+                                - generic [ref=e581]: Help Best Time to call
+                              - button "Edit Best Time to call" [ref=e583] [cursor=pointer]:
+                                - generic [ref=e585]: Edit Best Time to call
+                  - generic [ref=e586]:
+                    - generic [ref=e589]:
+                      - generic [ref=e593]:
+                        - generic [ref=e595]:
+                          - generic [ref=e607]:
+                            - generic [ref=e611]: Account
+                            - heading "Mr. John Doe820" [level=1] [ref=e612]:
+                              - generic [ref=e625]: Mr. John Doe820
+                          - generic [ref=e627]:
+                            - generic "Edit" [ref=e628]:
+                              - button "Edit" [ref=e633] [cursor=pointer]
+                            - generic "Manage Preferences" [ref=e634]:
+                              - button "Manage Preferences" [ref=e639] [cursor=pointer]
+                            - generic "Manage Alerts" [ref=e640]:
+                              - button "Manage Alerts" [ref=e645] [cursor=pointer]
+                            - button "Show more actions" [ref=e647] [cursor=pointer]:
+                              - img [ref=e649]
+                              - generic [ref=e652]: Show more actions
+                        - generic [ref=e654]:
+                          - generic [ref=e659]:
+                            - generic [ref=e660]: Account Owner
+                            - generic [ref=e665]:
+                              - generic [ref=e672]:
+                                - link "Vineeth Paduri" [ref=e673] [cursor=pointer]:
+                                  - /url: /lightning/r/User/005AD00000KNa8xYAD/view
+                                  - generic [ref=e677]: Vineeth Paduri
+                                - button "Open Vineeth Paduri Preview" [ref=e679] [cursor=pointer]:
+                                  - img [ref=e681]
+                                  - generic [ref=e684]: Open Vineeth Paduri Preview
+                              - button "Change Owner" [ref=e686] [cursor=pointer]:
+                                - img [ref=e688]
+                                - generic [ref=e691]: Change Owner
+                          - generic [ref=e696]:
+                            - generic [ref=e697]: Email
+                            - link "john.doe820@example.com" [ref=e704] [cursor=pointer]:
+                              - /url: mailto:john.doe820@example.com
+                          - generic [ref=e709]:
+                            - generic [ref=e710]: Phone
+                            - link "1234567890" [ref=e716] [cursor=pointer]:
+                              - /url: tel:1234567890
+                          - generic [ref=e721]:
+                            - generic [ref=e722]: Account Status
+                            - generic [ref=e725]: Enquiry
+                      - generic [ref=e729]:
+                        - heading "Tabs" [level=2] [ref=e730]
+                        - generic "Tabs" [ref=e731]:
+                          - generic [ref=e732]:
+                            - heading "Tabs" [level=2] [ref=e733]
+                            - tablist "Tabs" [ref=e735]:
+                              - tab "Details" [selected] [ref=e736] [cursor=pointer]
+                              - tab "Related" [ref=e737] [cursor=pointer]
+                              - tab "Client Party Relationships" [ref=e738] [cursor=pointer]
+                              - tab "More Tabs" [ref=e739]:
+                                - button "More Tabs" [ref=e741] [cursor=pointer]:
+                                  - text: More
+                                  - img [ref=e743]
+                                  - generic [ref=e746]: Tabs
+                            - tabpanel "Details" [ref=e749]:
+                              - generic [ref=e750]:
+                                - generic [ref=e756]:
+                                  - heading "Basic Information" [level=3] [ref=e757]:
+                                    - button "Basic Information" [expanded] [ref=e758] [cursor=pointer]:
+                                      - img [ref=e762]
+                                      - generic "Basic Information" [ref=e765]
+                                  - list [ref=e768]:
+                                    - generic [ref=e769]:
+                                      - generic [ref=e772]:
+                                        - listitem [ref=e775]:
+                                          - generic [ref=e777]:
+                                            - generic [ref=e778]: Account Name
+                                            - generic [ref=e779]:
+                                              - generic [ref=e782]: Mr. John Doe820
+                                              - button "Edit Account Name" [ref=e783] [cursor=pointer]:
+                                                - generic [ref=e785]: Edit Account Name
+                                        - listitem [ref=e788]:
+                                          - generic [ref=e790]:
+                                            - generic [ref=e791]: Date of Birth
+                                            - button "Help Date of Birth" [ref=e795] [cursor=pointer]:
+                                              - img [ref=e797]
+                                              - generic [ref=e800]: Help Date of Birth
+                                            - generic [ref=e801]:
+                                              - generic [ref=e803]: 1/1/1990
+                                              - button "Edit Date of Birth" [ref=e804] [cursor=pointer]:
+                                                - generic [ref=e806]: Edit Date of Birth
+                                        - listitem [ref=e809]:
+                                          - generic [ref=e811]:
+                                            - generic [ref=e812]: Estimated Date of Birth
+                                            - button "Help Estimated Date of Birth" [ref=e816] [cursor=pointer]:
+                                              - img [ref=e818]
+                                              - generic [ref=e821]: Help Estimated Date of Birth
+                                            - generic [ref=e822]:
+                                              - generic [ref=e827]:
+                                                - generic "False" [ref=e828]:
+                                                  - generic [ref=e829]:
+                                                    - img [ref=e831]
+                                                    - generic [ref=e834]: "False"
+                                                - generic [ref=e835]: Estimated Date of Birth
+                                              - button "Edit Estimated Date of Birth" [ref=e836] [cursor=pointer]:
+                                                - generic [ref=e838]: Edit Estimated Date of Birth
+                                        - listitem [ref=e841]:
+                                          - generic [ref=e843]:
+                                            - generic [ref=e844]: Age
+                                            - generic [ref=e849]: "36"
+                                        - listitem [ref=e852]:
+                                          - generic [ref=e854]:
+                                            - generic [ref=e855]: Gender
+                                            - button "Help Gender" [ref=e859] [cursor=pointer]:
+                                              - img [ref=e861]
+                                              - generic [ref=e864]: Help Gender
+                                            - generic [ref=e865]:
+                                              - generic [ref=e867]: Male
+                                              - button "Edit Gender" [ref=e868] [cursor=pointer]:
+                                                - generic [ref=e870]: Edit Gender
+                                        - listitem [ref=e873]:
+                                          - generic [ref=e875]:
+                                            - generic [ref=e876]: Pronouns
+                                            - button "Edit Pronouns" [ref=e878] [cursor=pointer]:
+                                              - generic [ref=e880]: Edit Pronouns
+                                        - listitem [ref=e883]:
+                                          - generic [ref=e885]:
+                                            - generic [ref=e886]: Employment Status
+                                            - button "Edit Employment Status" [ref=e888] [cursor=pointer]:
+                                              - generic [ref=e890]: Edit Employment Status
+                                      - generic [ref=e893]:
+                                        - listitem [ref=e896]:
+                                          - generic [ref=e898]:
+                                            - generic [ref=e899]: Marital Status
+                                            - button "Edit Marital Status" [ref=e901] [cursor=pointer]:
+                                              - generic [ref=e903]: Edit Marital Status
+                                        - listitem [ref=e906]:
+                                          - generic [ref=e908]:
+                                            - generic [ref=e909]: Country of Birth
+                                            - generic [ref=e910]:
+                                              - generic [ref=e912]: Australia
+                                              - button "Edit Country of Birth" [ref=e913] [cursor=pointer]:
+                                                - generic [ref=e915]: Edit Country of Birth
+                                        - listitem [ref=e918]:
+                                          - generic [ref=e920]:
+                                            - generic [ref=e921]: Indigenous Status
+                                            - generic [ref=e922]:
+                                              - generic [ref=e924]: Both Aboriginal and Torres Strait Islander origin
+                                              - button "Edit Indigenous Status" [ref=e925] [cursor=pointer]:
+                                                - generic [ref=e927]: Edit Indigenous Status
+                                        - listitem [ref=e930]:
+                                          - generic [ref=e932]:
+                                            - generic [ref=e933]: Cultural Background / Ethnicity
+                                            - generic [ref=e934]:
+                                              - generic [ref=e936]: Akan
+                                              - button "Edit Cultural Background / Ethnicity" [ref=e937] [cursor=pointer]:
+                                                - generic [ref=e939]: Edit Cultural Background / Ethnicity
+                                        - listitem [ref=e942]:
+                                          - generic [ref=e944]:
+                                            - generic [ref=e945]: Primary Language
+                                            - generic [ref=e946]:
+                                              - generic [ref=e948]: Afar
+                                              - button "Edit Primary Language" [ref=e949] [cursor=pointer]:
+                                                - generic [ref=e951]: Edit Primary Language
+                                        - listitem [ref=e954]:
+                                          - generic [ref=e956]:
+                                            - generic [ref=e957]: Secondary Language
+                                            - button "Help Secondary Language" [ref=e961] [cursor=pointer]:
+                                              - img [ref=e963]
+                                              - generic [ref=e966]: Help Secondary Language
+                                            - generic [ref=e967]:
+                                              - generic [ref=e969]: Arabic
+                                              - button "Edit Secondary Language" [ref=e970] [cursor=pointer]:
+                                                - generic [ref=e972]: Edit Secondary Language
+                                        - listitem [ref=e975]:
+                                          - generic [ref=e977]:
+                                            - generic [ref=e978]: Interpreter required
+                                            - generic [ref=e979]:
+                                              - generic [ref=e981]: "Yes"
+                                              - button "Edit Interpreter required" [ref=e982] [cursor=pointer]:
+                                                - generic [ref=e984]: Edit Interpreter required
+                                - heading "Account Information" [level=3] [ref=e991]:
+                                  - button "Account Information" [expanded] [ref=e992] [cursor=pointer]:
+                                    - img [ref=e996]
+                                    - generic "Account Information" [ref=e999]
+                                - heading "Contact Information" [level=3] [ref=e1009]:
+                                  - button "Contact Information" [expanded] [ref=e1010] [cursor=pointer]:
+                                    - img [ref=e1014]
+                                    - generic "Contact Information" [ref=e1017]
+                                - generic [ref=e1026]:
+                                  - heading "Address Information" [level=3] [ref=e1027]:
+                                    - button "Address Information" [expanded] [ref=e1028] [cursor=pointer]:
+                                      - img [ref=e1032]
+                                      - generic "Address Information" [ref=e1035]
+                                  - list [ref=e1038]:
+                                    - generic [ref=e1039]:
+                                      - listitem [ref=e1045]:
+                                        - generic [ref=e1047]:
+                                          - generic [ref=e1048]: Billing Address
+                                          - generic [ref=e1049]:
+                                            - link "80 Alma Rd CLAYFIELD Queensland 4011 Australia" [ref=e1053] [cursor=pointer]:
+                                              - /url: https://www.google.com/maps?q=80%20Alma%20Rd%0ACLAYFIELD%20Queensland%204011%0AAustralia
+                                              - generic [ref=e1054]: 80 Alma Rd
+                                              - generic [ref=e1055]: CLAYFIELD Queensland 4011
+                                              - generic [ref=e1056]: Australia
+                                              - iframe [ref=e1060]:
+                                                - img "Map" [ref=f17e2]
+                                            - button "Edit Billing Address" [ref=e1062] [cursor=pointer]:
+                                              - generic [ref=e1064]: Edit Billing Address
+                                      - listitem [ref=e1070]:
+                                        - generic [ref=e1072]:
+                                          - generic [ref=e1073]: Service Delivery Address
+                                          - generic [ref=e1074]:
+                                            - link "80 Alma Rd CLAYFIELD Queensland 4011 Australia" [ref=e1078] [cursor=pointer]:
+                                              - /url: https://www.google.com/maps?q=80%20Alma%20Rd%0ACLAYFIELD%20Queensland%204011%0AAustralia
+                                              - generic [ref=e1079]: 80 Alma Rd
+                                              - generic [ref=e1080]: CLAYFIELD Queensland 4011
+                                              - generic [ref=e1081]: Australia
+                                              - iframe [ref=e1085]:
+                                                - img "Map" [ref=f18e2]
+                                            - button "Edit Service Delivery Address" [ref=e1087] [cursor=pointer]:
+                                              - generic [ref=e1089]: Edit Service Delivery Address
+                                - article [ref=e1098]:
+                                  - generic [ref=e1099]:
+                                    - generic [ref=e1100]:
+                                      - heading "Address Verification" [level=2] [ref=e1102]
+                                      - generic [ref=e1105]:
+                                        - generic [ref=e1111]:
+                                          - generic [ref=e1117]:
+                                            - generic [ref=e1118]:
+                                              - generic [ref=e1119]: Search Billing Address Here
+                                              - button "Search Billing Address Here Help" [ref=e1123] [cursor=pointer]:
+                                                - img [ref=e1125]
+                                            - generic [ref=e1129]:
+                                              - combobox "Search Billing Address Here" [ref=e1132]
+                                              - status
+                                          - generic [ref=e1137]:
+                                            - generic [ref=e1139]: Billing Country
+                                            - generic [ref=e1140]:
+                                              - generic [ref=e1141]:
+                                                - combobox "Billing Country" [ref=e1142] [cursor=pointer]: "-- No Value --"
+                                                - img [ref=e1145]
+                                              - status
+                                          - generic [ref=e1152]:
+                                            - generic [ref=e1154]: Billing Street
+                                            - textbox "Billing Street" [ref=e1156]:
+                                              - /placeholder: ""
+                                            - status
+                                          - generic [ref=e1160]:
+                                            - generic [ref=e1162]: Billing City
+                                            - textbox "Billing City" [ref=e1164]:
+                                              - /placeholder: ""
+                                            - status
+                                          - generic [ref=e1168]:
+                                            - generic [ref=e1170]: Billing State/Province
+                                            - textbox "Billing State/Province" [ref=e1172]:
+                                              - /placeholder: ""
+                                            - status
+                                          - generic [ref=e1176]:
+                                            - generic [ref=e1178]: Billing PostalCode
+                                            - textbox "Billing PostalCode" [ref=e1180]:
+                                              - /placeholder: ""
+                                            - status
+                                        - generic [ref=e1183]:
+                                          - generic [ref=e1189]:
+                                            - generic [ref=e1190]:
+                                              - generic [ref=e1191]: Search Service Delivery Address Here
+                                              - button "Search Service Delivery Address Here Help" [ref=e1195] [cursor=pointer]:
+                                                - img [ref=e1197]
+                                            - generic [ref=e1201]:
+                                              - combobox "Search Service Delivery Address Here" [active] [ref=e1204]: 46 Epworth St OCEAN GROVE VIC 3226
+                                              - status
+                                          - generic [ref=e1209]:
+                                            - generic [ref=e1211]: Service Delivery Country
+                                            - generic [ref=e1212]:
+                                              - generic [ref=e1213]:
+                                                - combobox "Service Delivery Country" [ref=e1214] [cursor=pointer]: Australia
+                                                - img [ref=e1217]
+                                              - status
+                                          - generic [ref=e1224]:
+                                            - generic [ref=e1226]: Service Delivery Street
+                                            - textbox "Service Delivery Street" [ref=e1228]:
+                                              - /placeholder: ""
+                                              - text: 46 Epworth St
+                                            - status
+                                          - generic [ref=e1232]:
+                                            - generic [ref=e1234]: Service Delivery City
+                                            - textbox "Service Delivery City" [ref=e1236]:
+                                              - /placeholder: ""
+                                              - text: OCEAN GROVE
+                                            - status
+                                          - generic [ref=e1240]:
+                                            - generic [ref=e1242]: Service Delivery State
+                                            - textbox "Service Delivery State" [ref=e1244]:
+                                              - /placeholder: ""
+                                              - text: VIC
+                                            - status
+                                          - generic [ref=e1248]:
+                                            - generic [ref=e1250]: Service Delivery Postcode
+                                            - textbox "Service Delivery Postcode" [ref=e1252]:
+                                              - /placeholder: ""
+                                              - text: "3226"
+                                            - status
+                                    - generic [ref=e1256]:
+                                      - button "Cancel" [ref=e1261] [cursor=pointer]:
+                                        - generic [ref=e1262]: Cancel
+                                      - button "Verify & Save" [ref=e1266] [cursor=pointer]:
+                                        - generic [ref=e1267]: Verify & Save
+                                - generic [ref=e1273]:
+                                  - heading "Catchment Area" [level=3] [ref=e1274]:
+                                    - button "Catchment Area" [expanded] [ref=e1275] [cursor=pointer]:
+                                      - img [ref=e1279]
+                                      - generic "Catchment Area" [ref=e1282]
+                                  - list [ref=e1285]:
+                                    - generic [ref=e1286]:
+                                      - generic [ref=e1289]:
+                                        - listitem [ref=e1292]:
+                                          - generic [ref=e1295]: Region
+                                        - listitem [ref=e1299]:
+                                          - generic [ref=e1302]: Pod
+                                      - generic [ref=e1306]:
+                                        - listitem [ref=e1309]:
+                                          - generic [ref=e1312]: Hub
+                                        - listitem [ref=e1316]:
+                                          - generic [ref=e1319]: CHSP Region
+                                - generic [ref=e1326]:
+                                  - heading "Important Information" [level=3] [ref=e1327]:
+                                    - button "Important Information" [expanded] [ref=e1328] [cursor=pointer]:
+                                      - img [ref=e1332]
+                                      - generic "Important Information" [ref=e1335]
+                                  - list [ref=e1338]:
+                                    - generic [ref=e1339]:
+                                      - generic [ref=e1342]:
+                                        - listitem [ref=e1345]:
+                                          - generic [ref=e1347]:
+                                            - generic [ref=e1348]: Health Care Card Holder Status
+                                            - button "Edit Health Care Card Holder Status" [ref=e1350] [cursor=pointer]:
+                                              - generic [ref=e1352]: Edit Health Care Card Holder Status
+                                        - listitem [ref=e1355]:
+                                          - generic [ref=e1357]:
+                                            - generic [ref=e1358]: MAC number
+                                            - button "Help MAC number" [ref=e1362] [cursor=pointer]:
+                                              - img [ref=e1364]
+                                              - generic [ref=e1367]: Help MAC number
+                                            - generic [ref=e1368]:
+                                              - generic [ref=e1370]: "123456789"
+                                              - button "Edit MAC number" [ref=e1371] [cursor=pointer]:
+                                                - generic [ref=e1373]: Edit MAC number
+                                        - listitem [ref=e1376]:
+                                          - generic [ref=e1378]:
+                                            - generic [ref=e1379]: NDIS Number
+                                            - button "Edit NDIS Number" [ref=e1381] [cursor=pointer]:
+                                              - generic [ref=e1383]: Edit NDIS Number
+                                        - listitem [ref=e1386]:
+                                          - generic [ref=e1388]:
+                                            - generic [ref=e1389]: Medicare Reference Number
+                                            - button "Help Medicare Reference Number" [ref=e1393] [cursor=pointer]:
+                                              - img [ref=e1395]
+                                              - generic [ref=e1398]: Help Medicare Reference Number
+                                            - button "Edit Medicare Reference Number" [ref=e1400] [cursor=pointer]:
+                                              - generic [ref=e1402]: Edit Medicare Reference Number
+                                        - listitem [ref=e1405]:
+                                          - generic [ref=e1407]:
+                                            - generic [ref=e1408]: Medicare Number
+                                            - button "Help Medicare Number" [ref=e1412] [cursor=pointer]:
+                                              - img [ref=e1414]
+                                              - generic [ref=e1417]: Help Medicare Number
+                                            - button "Edit Medicare Number" [ref=e1419] [cursor=pointer]:
+                                              - generic [ref=e1421]: Edit Medicare Number
+                                        - listitem [ref=e1424]:
+                                          - generic [ref=e1426]:
+                                            - generic [ref=e1427]: Medicare Expiry Month
+                                            - button "Help Medicare Expiry Month" [ref=e1431] [cursor=pointer]:
+                                              - img [ref=e1433]
+                                              - generic [ref=e1436]: Help Medicare Expiry Month
+                                            - button "Edit Medicare Expiry Month" [ref=e1438] [cursor=pointer]:
+                                              - generic [ref=e1440]: Edit Medicare Expiry Month
+                                        - listitem [ref=e1443]:
+                                          - generic [ref=e1445]:
+                                            - generic [ref=e1446]: Medicare Expiry Year
+                                            - button "Help Medicare Expiry Year" [ref=e1450] [cursor=pointer]:
+                                              - img [ref=e1452]
+                                              - generic [ref=e1455]: Help Medicare Expiry Year
+                                            - button "Edit Medicare Expiry Year" [ref=e1457] [cursor=pointer]:
+                                              - generic [ref=e1459]: Edit Medicare Expiry Year
+                                        - listitem [ref=e1462]:
+                                          - generic [ref=e1464]:
+                                            - generic [ref=e1465]: Care Recipient ID
+                                            - button "Help Care Recipient ID" [ref=e1469] [cursor=pointer]:
+                                              - img [ref=e1471]
+                                              - generic [ref=e1474]: Help Care Recipient ID
+                                            - button "Edit Care Recipient ID" [ref=e1476] [cursor=pointer]:
+                                              - generic [ref=e1478]: Edit Care Recipient ID
+                                        - listitem [ref=e1481]:
+                                          - generic [ref=e1483]:
+                                            - generic [ref=e1484]: NAPS ID
+                                            - button "Edit NAPS ID" [ref=e1486] [cursor=pointer]:
+                                              - generic [ref=e1488]: Edit NAPS ID
+                                      - generic [ref=e1491]:
+                                        - listitem [ref=e1494]:
+                                          - generic [ref=e1496]:
+                                            - generic [ref=e1497]: Customer Reference Number (CRN)
+                                            - button "Help Customer Reference Number (CRN)" [ref=e1501] [cursor=pointer]:
+                                              - img [ref=e1503]
+                                              - generic [ref=e1506]: Help Customer Reference Number (CRN)
+                                            - generic [ref=e1507]:
+                                              - generic [ref=e1509]: "544368"
+                                              - button "Edit Customer Reference Number (CRN)" [ref=e1510] [cursor=pointer]:
+                                                - generic [ref=e1512]: Edit Customer Reference Number (CRN)
+                                        - listitem [ref=e1515]:
+                                          - generic [ref=e1517]:
+                                            - generic [ref=e1518]: DVA Number
+                                            - button "Help DVA Number" [ref=e1522] [cursor=pointer]:
+                                              - img [ref=e1524]
+                                              - generic [ref=e1527]: Help DVA Number
+                                            - generic [ref=e1528]:
+                                              - generic [ref=e1530]: "1234567890"
+                                              - button "Edit DVA Number" [ref=e1531] [cursor=pointer]:
+                                                - generic [ref=e1533]: Edit DVA Number
+                                        - listitem [ref=e1536]:
+                                          - generic [ref=e1538]:
+                                            - generic [ref=e1539]: DVA Card Type
+                                            - generic [ref=e1540]:
+                                              - generic [ref=e1542]: DVA Gold Card
+                                              - button "Edit DVA Card Type" [ref=e1543] [cursor=pointer]:
+                                                - generic [ref=e1545]: Edit DVA Card Type
+                                        - listitem [ref=e1548]:
+                                          - generic [ref=e1550]:
+                                            - generic [ref=e1551]: VX Number
+                                            - button "Edit VX Number" [ref=e1553] [cursor=pointer]:
+                                              - generic [ref=e1555]: Edit VX Number
+                                        - listitem [ref=e1558]:
+                                          - generic [ref=e1560]:
+                                            - generic [ref=e1561]: Living Arrangements
+                                            - generic [ref=e1562]:
+                                              - generic [ref=e1564]: Couple with dependant(s)
+                                              - button "Edit Living Arrangements" [ref=e1565] [cursor=pointer]:
+                                                - generic [ref=e1567]: Edit Living Arrangements
+                                        - listitem [ref=e1570]:
+                                          - generic [ref=e1572]:
+                                            - generic [ref=e1573]: Accommodation/Residential Setting
+                                            - generic [ref=e1574]:
+                                              - generic [ref=e1576]: Boarding house
+                                              - button "Edit Accommodation/Residential Setting" [ref=e1577] [cursor=pointer]:
+                                                - generic [ref=e1579]: Edit Accommodation/Residential Setting
+                                        - listitem [ref=e1582]:
+                                          - generic [ref=e1584]:
+                                            - generic [ref=e1585]: Pension
+                                            - button "Edit Pension" [ref=e1587] [cursor=pointer]:
+                                              - generic [ref=e1589]: Edit Pension
+                                        - listitem [ref=e1592]:
+                                          - generic [ref=e1594]:
+                                            - generic [ref=e1595]: Pension Type
+                                            - generic [ref=e1596]:
+                                              - generic [ref=e1598]: Age Pension
+                                              - button "Edit Pension Type" [ref=e1599] [cursor=pointer]:
+                                                - generic [ref=e1601]: Edit Pension Type
+                                        - listitem [ref=e1604]:
+                                          - generic [ref=e1606]:
+                                            - generic [ref=e1607]: Disability Code
+                                            - generic [ref=e1608]:
+                                              - generic [ref=e1610]: No Disability
+                                              - button "Edit Disability Code" [ref=e1611] [cursor=pointer]:
+                                                - generic [ref=e1613]: Edit Disability Code
+                                        - listitem [ref=e1616]:
+                                          - generic [ref=e1618]:
+                                            - generic [ref=e1619]: Comments
+                                            - button "Edit Comments" [ref=e1621] [cursor=pointer]:
+                                              - generic [ref=e1623]: Edit Comments
+                                - heading "ACVVS" [level=3] [ref=e1630]:
+                                  - button "ACVVS" [expanded] [ref=e1631] [cursor=pointer]:
+                                    - img [ref=e1635]
+                                    - generic "ACVVS" [ref=e1638]
+                                - heading "Referral" [level=3] [ref=e1648]:
+                                  - button "Referral" [expanded] [ref=e1649] [cursor=pointer]:
+                                    - img [ref=e1653]
+                                    - generic "Referral" [ref=e1656]
+                                - heading "System Information" [level=3] [ref=e1666]:
+                                  - button "System Information" [expanded] [ref=e1667] [cursor=pointer]:
+                                    - img [ref=e1671]
+                                    - generic "System Information" [ref=e1674]
+                    - generic [ref=e1680]:
+                      - generic [ref=e1684]:
+                        - heading "Tabs" [level=2] [ref=e1685]
+                        - generic "Tabs" [ref=e1686]:
+                          - generic [ref=e1687]:
+                            - heading "Tabs" [level=2] [ref=e1688]
+                            - tablist "Tabs" [ref=e1690]:
+                              - tab "Activity" [selected] [ref=e1691] [cursor=pointer]
+                              - tab "Chatter" [ref=e1692] [cursor=pointer]
+                            - tabpanel "Activity" [ref=e1695]:
+                              - generic [ref=e1696]:
+                                - article [ref=e1701]:
+                                  - generic [ref=e1702]:
+                                    - generic [ref=e1703]:
+                                      - img [ref=e1708]
+                                      - heading "We found 55 potential duplicates of this Account." [level=2] [ref=e1712]:
+                                        - generic "We found 55 potential duplicates of this Account." [ref=e1713]
+                                    - link "View Duplicates" [ref=e1715] [cursor=pointer]:
+                                      - /url: javascript:void(0);
+                                - generic [ref=e1720]:
+                                  - heading "Activity Publisher" [level=2] [ref=e1721]
+                                  - generic [ref=e1722]:
+                                    - group [ref=e1723]:
+                                      - generic [ref=e1725]:
+                                        - button "New Event" [ref=e1726] [cursor=pointer]:
+                                          - generic [ref=e1728]:
+                                            - img [ref=e1730]
+                                            - generic [ref=e1733]: New Event
+                                          - generic: New Event
+                                        - button "More New Event Actions" [ref=e1735] [cursor=pointer]:
+                                          - img [ref=e1737]
+                                          - generic [ref=e1740]: More New Event Actions
+                                    - group [ref=e1741]:
+                                      - generic [ref=e1743]:
+                                        - button "Email" [ref=e1744] [cursor=pointer]:
+                                          - generic [ref=e1746]:
+                                            - img [ref=e1748]
+                                            - generic [ref=e1751]: Email
+                                          - generic: Email
+                                        - button "More Email Actions" [ref=e1753] [cursor=pointer]:
+                                          - img [ref=e1755]
+                                          - generic [ref=e1758]: More Email Actions
+                                    - group [ref=e1759]:
+                                      - generic [ref=e1761]:
+                                        - button "New Task" [ref=e1762] [cursor=pointer]:
+                                          - generic [ref=e1764]:
+                                            - img [ref=e1766]
+                                            - generic [ref=e1769]: New Task
+                                          - generic: New Task
+                                        - generic [ref=e1770]:
+                                          - button "No Additional New Task Actions" [disabled]:
+                                            - generic:
+                                              - img
+                                            - generic: No Additional New Task Actions
+                                    - group [ref=e1771]:
+                                      - generic [ref=e1773]:
+                                        - button "Log a Call" [ref=e1774] [cursor=pointer]:
+                                          - generic [ref=e1776]:
+                                            - img [ref=e1778]
+                                            - generic [ref=e1781]: Log a Call
+                                          - generic: Log a Call
+                                        - button "More Log a Call Actions" [ref=e1783] [cursor=pointer]:
+                                          - img [ref=e1785]
+                                          - generic [ref=e1788]: More Log a Call Actions
+                                  - heading "Activity Timeline" [level=2] [ref=e1789]
+                                  - generic [ref=e1791]:
+                                    - link "Skip to the bottom of the activity timeline" [ref=e1792] [cursor=pointer]:
+                                      - /url: javascript:void(0);
+                                    - generic [ref=e1794]:
+                                      - generic [ref=e1796]: "Filters: Within 2 months • All activities • All types"
+                                      - button "Timeline Settings" [ref=e1797] [cursor=pointer]:
+                                        - img [ref=e1799]
+                                        - generic [ref=e1802]: Timeline Settings
+                                    - generic [ref=e1805]:
+                                      - button "Refresh" [ref=e1806] [cursor=pointer]
+                                      - text: •
+                                      - button "Expand All. Show details for activities in the timeline." [ref=e1807] [cursor=pointer]: Expand All
+                                      - text: •
+                                      - button "View All" [ref=e1808] [cursor=pointer]
+                                    - generic [ref=e1810]:
+                                      - heading "Upcoming & Overdue" [level=3] [ref=e1811]:
+                                        - button "Upcoming & Overdue" [expanded] [ref=e1812] [cursor=pointer]:
+                                          - img [ref=e1814]
+                                          - text: Upcoming & Overdue
+                                      - generic [ref=e1817]:
+                                        - generic:
+                                          - list
+                                        - generic [ref=e1820]:
+                                          - text: No activities to show.
+                                          - text: Get started by sending an email, scheduling a task, and more.
+                                    - generic [ref=e1825]:
+                                      - heading "May • 2026 This Month" [level=3] [ref=e1826]:
+                                        - button "May • 2026 This Month" [expanded] [ref=e1827] [cursor=pointer]:
+                                          - img [ref=e1829]
+                                          - generic [ref=e1832]: May • 2026
+                                          - generic [ref=e1833]: This Month
+                                      - list [ref=e1835]:
+                                        - listitem [ref=e1836]:
+                                          - generic [ref=e1838]:
+                                            - button "Show details for Thank You for Your Enquiry" [ref=e1841] [cursor=pointer]:
+                                              - generic "Details for Thank You for Your Enquiry" [ref=e1842]:
+                                                - generic [ref=e1843]:
+                                                  - img [ref=e1845]
+                                                  - generic [ref=e1848]: Details for
+                                            - generic [ref=e1849]:
+                                              - img "Email" [ref=e1854]
+                                              - generic [ref=e1855]:
+                                                - generic [ref=e1856]:
+                                                  - link "Thank You for Your Enquiry" [ref=e1862] [cursor=pointer]:
+                                                    - /url: /lightning/r/02sAD000009YhrlYAC/view
+                                                  - generic [ref=e1864]:
+                                                    - generic [ref=e1865]: 2:41 AM | Today
+                                                    - button "Show more actions - Thank You for Your Enquiry" [ref=e1868] [cursor=pointer]:
+                                                      - generic [ref=e1869]:
+                                                        - generic [ref=e1870]:
+                                                          - img
+                                                        - generic [ref=e1871]: Show more actions - Thank You for Your Enquiry
+                                                - generic [ref=e1876]:
+                                                  - link "padurivineeth.reddy@mecwacare.org.au" [ref=e1877] [cursor=pointer]:
+                                                    - /url: mailto:padurivineeth.reddy@mecwacare.org.au
+                                                  - text: sent an email to
+                                                  - link "John Doe820" [ref=e1879] [cursor=pointer]:
+                                                    - /url: /lightning/r/00QAD00000PR64X2AT/view
+                                                - generic "Unopened" [ref=e1883]:
+                                                  - img [ref=e1886]
+                                                  - text: Unopened
+                                    - status [ref=e1888]:
+                                      - generic [ref=e1890]:
+                                        - img [ref=e1894]
+                                        - generic [ref=e1897]: information
+                                      - paragraph [ref=e1899]: To change what's shown, try changing your filters.
+                                    - button "Show All Activities" [ref=e1901] [cursor=pointer]
+                                    - link "Skip to the top of the activity timeline" [ref=e1902] [cursor=pointer]:
+                                      - /url: javascript:void(0);
+                      - article [ref=e1909]:
+                        - generic:
+                          - generic:
+                            - generic:
+                              - heading [level=2]
+                        - generic [ref=e1910]:
+                          - generic [ref=e1912]:
+                            - img [ref=e1914]
+                            - heading "Docusign Envelope Status" [level=2] [ref=e1916]
+                          - generic [ref=e1918]:
+                            - img [ref=e1920]
+                            - generic [ref=e1921]: Send an envelope to view its status
+    - generic:
+      - contentinfo "Utility Bar":
+        - list [ref=e1925]:
+          - listitem [ref=e1926]:
+            - button "Omni-Channel" [ref=e1929] [cursor=pointer]:
+              - img [ref=e1933]
+              - generic [ref=e1937]: Omni-Channel
+  - generic:
+    - status
+```
