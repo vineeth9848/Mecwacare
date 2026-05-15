@@ -67,7 +67,7 @@ function runPlaywrightTest(file, project, workers, blobDir) {
       },
     );
 
-    child.on('close', code => resolve(code || 0));
+    child.on('close', code => resolve(code === 0 ? 0 : 1));
     child.on('error', () => resolve(1));
   });
 }
@@ -112,7 +112,7 @@ async function mergeReport() {
       shell: true,
       env: { ...process.env },
     });
-    child.on('close', code => resolve(code || 0));
+    child.on('close', code => resolve(code === 0 ? 0 : 1));
     child.on('error', () => resolve(1));
   });
 }
