@@ -275,23 +275,50 @@ export class AccountPage extends BasePage {
               // STEP 6: wait for value to reflect in input
               await this.page.waitForTimeout(2000);
 
-              // STEP 6: copy buttons
-              const copyToHome = this.page.getByText('Copy to Home Address', { exact: true });
-              const copyToBilling = this.page.getByText('Copy to Billing Address', { exact: true });
-              const copyToPostal = this.page.getByText('Copy to Postal Address', { exact: true });
+              const searchInput2 = this.page
+                .locator('text=Search Billing Address Here')
+                .locator('xpath=following::input[1]');
 
-              await copyToHome.waitFor({ state: 'visible' });
-              await copyToHome.click();
+              await searchInput2.waitFor({ state: 'visible', timeout: 30000 });
+              await searchInput2.click();
 
-              await copyToBilling.waitFor({ state: 'visible' });
-              await copyToBilling.click();
 
-              await copyToPostal.waitFor({ state: 'visible' });
-              await copyToPostal.click();
+              // STEP 3: type (important for SF)
+              await searchInput2.type(addressToSearch, { delay: 100 });
 
-              Logger.info('Clicked all Copy buttons');
 
-              Logger.info('Waiting for address to be updated after clicking Copy buttons');
+              // STEP 4: wait for dropdown option with same text
+              const option2 = this.page.getByRole('option', {
+                name: new RegExp(addressToSearch, 'i')
+              });
+
+              await option2.waitFor({ state: 'visible', timeout: 10000 });
+
+
+              // STEP 5: click exact option
+              await option2.click();
+
+
+              // STEP 6: wait for value to reflect in input
+              await this.page.waitForTimeout(2000);
+
+              // // STEP 6: copy buttons
+              // const copyToHome = this.page.getByText('Copy to Home Address', { exact: true });
+              // const copyToBilling = this.page.getByText('Copy to Billing Address', { exact: true });
+              // const copyToPostal = this.page.getByText('Copy to Postal Address', { exact: true });
+
+              // await copyToHome.waitFor({ state: 'visible' });
+              // await copyToHome.click();
+
+              // await copyToBilling.waitFor({ state: 'visible' });
+              // await copyToBilling.click();
+
+              // await copyToPostal.waitFor({ state: 'visible' });
+              // await copyToPostal.click();
+
+              // Logger.info('Clicked all Copy buttons');
+
+              // Logger.info('Waiting for address to be updated after clicking Copy buttons');
 
                         
             const buttons = this.page.locator('button:has-text("Verify & Save")');

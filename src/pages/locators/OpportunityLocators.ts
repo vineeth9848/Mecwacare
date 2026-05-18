@@ -26,7 +26,7 @@ export const OpportunityLocators = {
   newFundingSaveButtonInModal: "xpath=(//button[text()='Save'])[2]",
   assessmentVisitPreferenceDropdownByAria: "button[aria-label='Assessment visit preference?']",
   inPersonOptionText: "In-Person",
-  serviceAgreementStatusDropdown: "button[aria-label='Service Agreement Status']",
+  serviceAgreementStatusDropdown: "button[aria-label='Service Agreement Status'][type='button']",
   serviceAgreementSignedOptionText: "Signed",
   referrerTypeDropdownByAria: "xpath=(//button[@aria-label='Referrer Type'])",
   referrerTypeFamilyViolenceOptionText: "Family violence programs",

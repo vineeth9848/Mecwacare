@@ -17,5 +17,5 @@ export const CaseLocators = {
   caseFundingType:"button[aria-label='Funding Type']",
   subjectInput: "input[name='Subject']",
   listviewDropdowncase: "button[title='Select a List View: Cases']",  
-  caseNewButton: "a[title='New'][role='button']",
+  caseNewButton: "a[title='New'][role='button'][class='forceActionLink']",
 } as const;

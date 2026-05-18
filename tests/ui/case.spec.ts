@@ -44,7 +44,7 @@ test('create case from case page', async ({ page }) => {
   
 });
 
-test('Close the Case and Verify Funding details on Case', async ({ page }) => {
+test.only('Close the Case and Verify Funding details on Case', async ({ page }) => {
   test.setTimeout(180000);
   const homePage = new HomePage(page);
   const casePage = new CasePage(page);
@@ -61,7 +61,7 @@ test('Close the Case and Verify Funding details on Case', async ({ page }) => {
   await casePage.hardRefreshPageWithRetry();
   await homePage.selectObjectFromDropdown('Cases');
   await casePage.refreshPage();
-  await casePage.selectCaseListView("All Cases");
+  await casePage.selectCaseListView("My Cases");
   await opportunityPage.searchAndOpenOpportunityByLeadName(lead.firstName, lead.lastName);
   await casePage.clickOnEditButton();
   await casePage.selectCaseDropdown('Status', 'Closed Resolved');

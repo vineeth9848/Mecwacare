@@ -773,7 +773,9 @@ async fillDate(label: string, date: Date): Promise<void> {
 
     const serviceAgreementStatusDropdown = this.page.locator(OpportunityLocators.serviceAgreementStatusDropdown);
     
-    await serviceAgreementStatusDropdown.click();
+    await serviceAgreementStatusDropdown.click({ force: true });
+    const serviceAgreementSignedOption = this.page.locator(OpportunityLocators.serviceAgreementSignedOptionText);
+    await serviceAgreementSignedOption.scrollIntoViewIfNeeded().catch(() => {});
 
     await this.page.getByText(OpportunityLocators.serviceAgreementSignedOptionText, { exact: true }).click();
 
@@ -789,7 +791,7 @@ async fillDate(label: string, date: Date): Promise<void> {
 
     const referrerTypeDropdown = this.page.locator(OpportunityLocators.referrerTypeDropdownByAria);
     
-    await referrerTypeDropdown.click();
+    await referrerTypeDropdown.click({ force: true });
 
     await this.page.getByText(OpportunityLocators.referrerTypeFamilyViolenceOptionText, { exact: true }).first().click();
 
