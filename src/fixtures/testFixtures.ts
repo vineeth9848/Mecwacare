@@ -26,9 +26,9 @@ export const test = base.extend({
   },
 });
 
-test.afterEach(async ({ page }) => {
-  if (!page.isClosed() && gapMs > 0) {
-    await page.waitForTimeout(gapMs);
+test.afterEach(async () => {
+  if (gapMs > 0) {
+    await new Promise(resolve => setTimeout(resolve, gapMs));
   }
 });
 

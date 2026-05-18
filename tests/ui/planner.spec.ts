@@ -31,11 +31,8 @@ test('Create New Appointment', async ({ page }) => {
   );
 });
 
-test('Planner secondary account isolated login flow', async ({ page, browser }) => {
+test('Planner secondary account isolated login flow', async ({ browser }) => {
   test.setTimeout(180000);
-
-  await page.waitForTimeout(120000);
-  
 
   const { plannerData } = TestDataHelper.readJsonFile<{ plannerData: Array<Record<string, string>> }>('planner.json');
   const planner = plannerData[0];
