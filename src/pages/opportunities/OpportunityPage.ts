@@ -773,9 +773,7 @@ async fillDate(label: string, date: Date): Promise<void> {
 
     const serviceAgreementStatusDropdown = this.page.locator(OpportunityLocators.serviceAgreementStatusDropdown);
     
-    await serviceAgreementStatusDropdown.click({ force: true });
-    const serviceAgreementSignedOption = this.page.locator(OpportunityLocators.serviceAgreementSignedOptionText);
-    await serviceAgreementSignedOption.scrollIntoViewIfNeeded().catch(() => {});
+    await serviceAgreementStatusDropdown.click();
 
     await this.page.getByText(OpportunityLocators.serviceAgreementSignedOptionText, { exact: true }).click();
 

@@ -1,0 +1,452 @@
+# Page snapshot
+
+```yaml
+- generic [active]:
+  - generic [ref=e2]:
+    - generic [ref=e3]:
+      - link "Skip to Navigation" [ref=e4] [cursor=pointer]:
+        - /url: javascript:void(0);
+      - link "Skip to Main Content" [ref=e5] [cursor=pointer]:
+        - /url: javascript:void(0);
+      - generic [ref=e9]:
+        - generic [ref=e13]:
+          - button "Toggle Panel" [ref=e17] [cursor=pointer]:
+            - img [ref=e21]
+            - generic [ref=e24]: Menu
+          - generic [ref=e29]:
+            - img [ref=e33]
+            - generic [ref=e37]: Sandbox (UAT)
+        - button "Show menu" [ref=e46] [cursor=pointer]:
+          - img [ref=e48]
+          - generic [ref=e51]: Show menu
+      - generic [ref=e52]:
+        - button "Search" [ref=e58]:
+          - img [ref=e60]
+          - text: Search...
+        - navigation "Global Header" [ref=e63]:
+          - list [ref=e65]:
+            - listitem [ref=e66]:
+              - group [ref=e67]:
+                - button "Add favorite" [ref=e69] [cursor=pointer]:
+                  - generic [ref=e70]:
+                    - img [ref=e74]
+                    - tooltip "Add favorite"
+                - button "Favorites list" [ref=e78] [cursor=pointer]:
+                  - generic [ref=e79]:
+                    - img [ref=e83]
+                    - tooltip "Favorites list"
+            - listitem [ref=e86]:
+              - button "Global Actions" [ref=e92] [cursor=pointer]:
+                - generic [ref=e93]:
+                  - img [ref=e97]
+                  - tooltip "Global Actions"
+            - listitem [ref=e100]:
+              - button "Guidance Center" [ref=e102] [cursor=pointer]:
+                - generic [ref=e103]:
+                  - img [ref=e107]
+                  - tooltip "Guidance Center"
+            - listitem [ref=e110]:
+              - button "Salesforce Help" [ref=e113] [cursor=pointer]:
+                - generic [ref=e114]:
+                  - img [ref=e118]
+                  - tooltip "Salesforce Help"
+            - listitem [ref=e121]:
+              - button "Setup" [ref=e127] [cursor=pointer]:
+                - generic [ref=e128]:
+                  - img [ref=e132]
+                  - tooltip "Setup"
+            - listitem [ref=e135]:
+              - button "20+ Notifications" [ref=e138] [cursor=pointer]:
+                - generic [ref=e139]:
+                  - generic [ref=e140]:
+                    - img [ref=e144]
+                    - generic [ref=e148]: 20+
+                  - tooltip "Notifications"
+              - generic [ref=e149]: 31 new notifications
+            - listitem [ref=e150]:
+              - button "View profile" [ref=e153] [cursor=pointer]:
+                - generic [ref=e154]:
+                  - tooltip "View profile"
+    - generic [ref=e158]:
+      - generic:
+        - generic [ref=e159]:
+          - generic [ref=e161]:
+            - generic [ref=e162]:
+              - navigation "App" [ref=e163]:
+                - button "App Launcher" [ref=e165] [cursor=pointer]:
+                  - generic [ref=e176]: App Launcher
+              - heading "mCare360" [level=1] [ref=e177]:
+                - generic "mCare360" [ref=e178]
+            - navigation "Global" [ref=e179]:
+              - link "Opportunities" [ref=e181] [cursor=pointer]:
+                - /url: /lightning/o/Opportunity/list?filterName=__Recent
+                - generic [ref=e182]: Opportunities
+              - button "Show Navigation Menu" [ref=e185] [cursor=pointer]:
+                - img [ref=e187]
+                - generic [ref=e190]: Show Navigation Menu
+          - navigation "Workspaces" [ref=e192]:
+            - tablist "Workspace tabs for mCare360" [ref=e193]:
+              - generic [ref=e195]: Press Spacebar to reorder tabs.
+              - tab "Opportunity John Doe827 - HACC - Ballarat - Low Fee | Opportunity" [selected] [ref=e196] [cursor=pointer]:
+                - generic "Opportunity" [ref=e197]:
+                  - generic:
+                    - generic "Opportunity":
+                      - generic:
+                        - generic:
+                          - img
+                        - generic: Opportunity
+                - generic [ref=e198]: John Doe827 - HACC - Ballarat - Low Fee | Opportunity
+              - generic "Actions for John Doe827 - HACC - Ballarat - Low Fee | Opportunity" [ref=e200] [cursor=pointer]:
+                - button "Actions for John Doe827 - HACC - Ballarat - Low Fee | Opportunity" [ref=e201]:
+                  - img [ref=e203]
+                  - generic [ref=e206]: Actions for John Doe827 - HACC - Ballarat - Low Fee | Opportunity
+              - button "Close John Doe827 - HACC - Ballarat - Low Fee | Opportunity" [ref=e208] [cursor=pointer]:
+                - img [ref=e210]
+                - generic [ref=e213]: Close John Doe827 - HACC - Ballarat - Low Fee | Opportunity
+              - status [ref=e214] [cursor=pointer]
+        - generic [ref=e216]:
+          - button "Split view mode" [ref=e220] [cursor=pointer]:
+            - img [ref=e222]
+            - generic [ref=e225]: Split view mode
+          - main [ref=e226]:
+            - tabpanel [ref=e227]:
+              - tabpanel [ref=e230]:
+                - generic [ref=e245]:
+                  - generic [ref=e247]:
+                    - paragraph [ref=e267]:
+                      - strong [ref=e268]: "No further updates are allowed on this Opportunity. Please refer to the Service Agreement record here:"
+                      - link "John Doe827 - HACC - Ballarat - Low Fee" [ref=e269] [cursor=pointer]:
+                        - /url: https://mecwacare--uat.sandbox.my.salesforce.com/a18AD0000069AvxYAE
+                        - strong [ref=e270]: John Doe827 - HACC - Ballarat - Low Fee
+                    - generic [ref=e278]:
+                      - heading "Opportunity John Doe827 - HACC - Ballarat - Low Fee" [level=1] [ref=e286]:
+                        - generic [ref=e288]: Opportunity
+                        - generic [ref=e289]: John Doe827 - HACC - Ballarat - Low Fee
+                      - generic [ref=e291]:
+                        - generic [ref=e293]:
+                          - paragraph [ref=e294]: Account Name
+                          - paragraph [ref=e295]:
+                            - generic [ref=e300]:
+                              - link "John Doe827" [ref=e301] [cursor=pointer]:
+                                - /url: /lightning/r/Account/001AD000011vXeDYAU/view
+                                - generic [ref=e305]: John Doe827
+                              - button "Open John Doe827 Preview" [ref=e307] [cursor=pointer]:
+                                - img [ref=e309]
+                                - generic [ref=e312]: Open John Doe827 Preview
+                        - generic [ref=e314]:
+                          - paragraph [ref=e315]: Opportunity Record Type
+                          - paragraph [ref=e316]:
+                            - generic [ref=e319]: Home Care
+                        - generic [ref=e321]:
+                          - paragraph [ref=e322]: Funding Type
+                          - paragraph [ref=e323]:
+                            - generic [ref=e324]: HACC-PYP
+                    - article [ref=e330]:
+                      - generic [ref=e331]:
+                        - heading "Path" [level=2] [ref=e332]
+                        - generic [ref=e335]:
+                          - button "Show Key Fields and/or Guidance for Success Details" [ref=e336] [cursor=pointer]:
+                            - generic [ref=e337]: Show Key Fields and/or Guidance for Success Details
+                            - img [ref=e341]
+                          - listbox "Path Options" [ref=e348]:
+                            - option "stage complete New" [ref=e349] [cursor=pointer]:
+                              - generic [ref=e352]:
+                                - img [ref=e354]
+                                - generic [ref=e357]: stage complete
+                              - generic [ref=e358]: New
+                            - option "stage complete In Progress" [ref=e359] [cursor=pointer]:
+                              - generic [ref=e362]:
+                                - img [ref=e364]
+                                - generic [ref=e367]: stage complete
+                              - generic [ref=e368]: In Progress
+                            - option "stage complete Agreement" [ref=e369] [cursor=pointer]:
+                              - generic [ref=e372]:
+                                - img [ref=e374]
+                                - generic [ref=e377]: stage complete
+                              - generic [ref=e378]: Agreement
+                            - option "Closed Won" [selected] [ref=e379] [cursor=pointer]:
+                              - generic [ref=e380]: Closed Won
+                  - generic [ref=e381]:
+                    - generic [ref=e387]:
+                      - heading "Tabs" [level=2] [ref=e388]
+                      - generic "Tabs" [ref=e389]:
+                        - generic [ref=e390]:
+                          - heading "Tabs" [level=2] [ref=e391]
+                          - tablist "Tabs" [ref=e393]:
+                            - tab "Details" [selected] [ref=e394] [cursor=pointer]
+                            - tab "Related" [ref=e395] [cursor=pointer]
+                          - tabpanel "Details" [ref=e398]:
+                            - generic [ref=e399]:
+                              - generic [ref=e405]:
+                                - heading "Opportunity Information" [level=3] [ref=e406]:
+                                  - button "Opportunity Information" [expanded] [ref=e407] [cursor=pointer]:
+                                    - img [ref=e411]
+                                    - generic "Opportunity Information" [ref=e414]
+                                - list [ref=e417]:
+                                  - generic [ref=e418]:
+                                    - generic [ref=e421]:
+                                      - listitem [ref=e424]:
+                                        - generic [ref=e426]:
+                                          - generic [ref=e427]: Opportunity Name
+                                          - generic [ref=e432]: John Doe827 - HACC - Ballarat - Low Fee
+                                      - listitem [ref=e435]:
+                                        - generic [ref=e437]:
+                                          - generic [ref=e438]: Account Name
+                                          - generic [ref=e445]:
+                                            - link "John Doe827" [ref=e446] [cursor=pointer]:
+                                              - /url: /lightning/r/Account/001AD000011vXeDYAU/view
+                                              - generic [ref=e450]: John Doe827
+                                            - button "Open John Doe827 Preview" [ref=e452] [cursor=pointer]:
+                                              - img [ref=e454]
+                                              - generic [ref=e457]: Open John Doe827 Preview
+                                      - listitem [ref=e460]:
+                                        - generic [ref=e462]:
+                                          - generic [ref=e463]: Opportunity Owner
+                                          - generic [ref=e468]:
+                                            - generic [ref=e475]:
+                                              - link "Vineeth Paduri" [ref=e476] [cursor=pointer]:
+                                                - /url: /lightning/r/User/005AD00000KNa8xYAD/view
+                                                - generic [ref=e480]: Vineeth Paduri
+                                              - button "Open Vineeth Paduri Preview" [ref=e482] [cursor=pointer]:
+                                                - img [ref=e484]
+                                                - generic [ref=e487]: Open Vineeth Paduri Preview
+                                            - button "Change Owner" [ref=e489] [cursor=pointer]:
+                                              - img [ref=e491]
+                                              - generic [ref=e494]: Change Owner
+                                      - listitem [ref=e497]:
+                                        - generic [ref=e499]:
+                                          - generic [ref=e500]: Opportunity Record Type
+                                          - generic [ref=e505]: Home Care
+                                      - listitem [ref=e508]:
+                                        - generic [ref=e510]:
+                                          - generic [ref=e511]: Lead Source
+                                          - generic [ref=e514]: Company Website
+                                    - generic [ref=e517]:
+                                      - listitem [ref=e520]:
+                                        - generic [ref=e522]:
+                                          - generic [ref=e523]: Probability (%)
+                                          - generic [ref=e528]: 100%
+                                      - listitem [ref=e531]:
+                                        - generic [ref=e533]:
+                                          - generic [ref=e534]: Close Date
+                                          - generic [ref=e539]: 19/5/2026
+                                      - listitem [ref=e542]:
+                                        - generic [ref=e545]: Description
+                              - generic [ref=e552]:
+                                - heading "Service Agreement Information" [level=3] [ref=e553]:
+                                  - button "Service Agreement Information" [expanded] [ref=e554] [cursor=pointer]:
+                                    - img [ref=e558]
+                                    - generic "Service Agreement Information" [ref=e561]
+                                - list [ref=e564]:
+                                  - generic [ref=e565]:
+                                    - generic [ref=e568]:
+                                      - listitem [ref=e571]:
+                                        - generic [ref=e573]:
+                                          - generic [ref=e574]: Agreement Start Date
+                                          - generic [ref=e577]: 19/5/2026
+                                      - listitem [ref=e580]:
+                                        - generic [ref=e582]:
+                                          - generic [ref=e583]: Agreement End Date
+                                          - generic [ref=e586]: 18/6/2026
+                                      - listitem [ref=e589]:
+                                        - generic [ref=e591]:
+                                          - generic [ref=e592]: Next review date
+                                          - generic [ref=e597]: 19/5/2028
+                                    - generic [ref=e600]:
+                                      - listitem [ref=e603]:
+                                        - generic [ref=e605]:
+                                          - generic [ref=e606]: Stage
+                                          - generic [ref=e611]: Closed Won
+                                      - listitem [ref=e614]:
+                                        - generic [ref=e616]:
+                                          - generic [ref=e617]: Status
+                                          - generic [ref=e620]: Closed Won
+                              - heading "Referrer Details" [level=3] [ref=e627]:
+                                - button "Referrer Details" [expanded] [ref=e628] [cursor=pointer]:
+                                  - img [ref=e632]
+                                  - generic "Referrer Details" [ref=e635]
+                              - heading "Funding Details" [level=3] [ref=e645]:
+                                - button "Funding Details" [expanded] [ref=e646] [cursor=pointer]:
+                                  - img [ref=e650]
+                                  - generic "Funding Details" [ref=e653]
+                              - heading "Additional Information" [level=3] [ref=e663]:
+                                - button "Additional Information" [expanded] [ref=e664] [cursor=pointer]:
+                                  - img [ref=e668]
+                                  - generic "Additional Information" [ref=e671]
+                              - heading "System Information" [level=3] [ref=e681]:
+                                - button "System Information" [expanded] [ref=e682] [cursor=pointer]:
+                                  - img [ref=e686]
+                                  - generic "System Information" [ref=e689]
+                    - generic [ref=e698]:
+                      - heading "Tabs" [level=2] [ref=e699]
+                      - generic "Tabs" [ref=e700]:
+                        - generic [ref=e701]:
+                          - heading "Tabs" [level=2] [ref=e702]
+                          - tablist "Tabs" [ref=e704]:
+                            - tab "Activity" [selected] [ref=e705] [cursor=pointer]
+                            - tab "Chatter" [ref=e706] [cursor=pointer]
+                          - tabpanel "Activity" [ref=e709]:
+                            - generic [ref=e715]:
+                              - heading "Activity Publisher" [level=2] [ref=e716]
+                              - generic [ref=e717]:
+                                - group [ref=e718]:
+                                  - generic [ref=e720]:
+                                    - button "New Task" [ref=e721] [cursor=pointer]:
+                                      - generic [ref=e723]:
+                                        - img [ref=e725]
+                                        - generic [ref=e728]: New Task
+                                      - generic: New Task
+                                    - generic [ref=e729]:
+                                      - button "No Additional New Task Actions" [disabled]:
+                                        - generic:
+                                          - img
+                                        - generic: No Additional New Task Actions
+                                - group [ref=e730]:
+                                  - generic [ref=e732]:
+                                    - button "New Event" [ref=e733] [cursor=pointer]:
+                                      - generic [ref=e735]:
+                                        - img [ref=e737]
+                                        - generic [ref=e740]: New Event
+                                      - generic: New Event
+                                    - button "More New Event Actions" [ref=e742] [cursor=pointer]:
+                                      - img [ref=e744]
+                                      - generic [ref=e747]: More New Event Actions
+                                - group [ref=e748]:
+                                  - generic [ref=e750]:
+                                    - button "Email" [ref=e751] [cursor=pointer]:
+                                      - generic [ref=e753]:
+                                        - img [ref=e755]
+                                        - generic [ref=e758]: Email
+                                      - generic: Email
+                                    - button "More Email Actions" [ref=e760] [cursor=pointer]:
+                                      - img [ref=e762]
+                                      - generic [ref=e765]: More Email Actions
+                              - heading "Activity Timeline" [level=2] [ref=e766]
+                              - generic [ref=e768]:
+                                - link "Skip to the bottom of the activity timeline" [ref=e769] [cursor=pointer]:
+                                  - /url: javascript:void(0);
+                                - generic [ref=e771]:
+                                  - generic [ref=e773]: "Filters: Within 2 months • All activities • All types"
+                                  - button "Timeline Settings" [ref=e774] [cursor=pointer]:
+                                    - img [ref=e776]
+                                    - generic [ref=e779]: Timeline Settings
+                                - generic [ref=e782]:
+                                  - button "Refresh" [ref=e783] [cursor=pointer]
+                                  - text: •
+                                  - button "Expand All. Show details for activities in the timeline." [ref=e784] [cursor=pointer]: Expand All
+                                  - text: •
+                                  - button "View All" [ref=e785] [cursor=pointer]
+                                - generic [ref=e787]:
+                                  - heading "Upcoming & Overdue" [level=3] [ref=e788]:
+                                    - button "Upcoming & Overdue" [expanded] [ref=e789] [cursor=pointer]:
+                                      - img [ref=e791]
+                                      - text: Upcoming & Overdue
+                                  - list [ref=e796]:
+                                    - listitem [ref=e797]:
+                                      - generic [ref=e799]:
+                                        - 'button "Show details for Home Care Onboarding for : John Doe827" [ref=e802] [cursor=pointer]':
+                                          - 'generic "Details for Home Care Onboarding for : John Doe827" [ref=e803]':
+                                            - generic [ref=e804]:
+                                              - img [ref=e806]
+                                              - generic [ref=e809]: Details for
+                                        - generic [ref=e810]:
+                                          - img "Task" [ref=e815]
+                                          - generic [ref=e816]:
+                                            - generic [ref=e817]:
+                                              - generic [ref=e819]:
+                                                - generic [ref=e823]:
+                                                  - 'checkbox "Home Care Onboarding for : John Doe827" [ref=e824]'
+                                                  - generic [ref=e826]: "Home Care Onboarding for : John Doe827"
+                                                - 'link "Home Care Onboarding for : John Doe827" [ref=e830] [cursor=pointer]':
+                                                  - /url: /lightning/r/00TAD00000GTz3i2AD/view
+                                              - generic [ref=e832]:
+                                                - generic [ref=e833]: 18 Jun
+                                                - 'button "Show more actions - Home Care Onboarding for : John Doe827" [ref=e836] [cursor=pointer]':
+                                                  - generic [ref=e837]:
+                                                    - generic [ref=e838]:
+                                                      - img
+                                                    - generic [ref=e839]: "Show more actions - Home Care Onboarding for : John Doe827"
+                                            - generic [ref=e844]:
+                                              - text: You have an upcoming task with
+                                              - link "John Doe827" [ref=e846] [cursor=pointer]:
+                                                - /url: /lightning/r/003AD00000umRc7YAE/view
+                                - generic [ref=e851]:
+                                  - heading "May • 2026 This Month" [level=3] [ref=e852]:
+                                    - button "May • 2026 This Month" [expanded] [ref=e853] [cursor=pointer]:
+                                      - img [ref=e855]
+                                      - generic [ref=e858]: May • 2026
+                                      - generic [ref=e859]: This Month
+                                  - list [ref=e861]:
+                                    - listitem [ref=e862]:
+                                      - generic [ref=e864]:
+                                        - button "Show details for A new Service Request - John Doe827 - Block Funding" [ref=e867] [cursor=pointer]:
+                                          - generic "Details for A new Service Request - John Doe827 - Block Funding" [ref=e868]:
+                                            - generic [ref=e869]:
+                                              - img [ref=e871]
+                                              - generic [ref=e874]: Details for
+                                        - generic [ref=e875]:
+                                          - img "Email" [ref=e880]
+                                          - generic [ref=e881]:
+                                            - generic [ref=e882]:
+                                              - link "A new Service Request - John Doe827 - Block Funding" [ref=e888] [cursor=pointer]:
+                                                - /url: /lightning/r/02sAD000009bMFhYAM/view
+                                              - generic [ref=e890]:
+                                                - generic [ref=e891]: 11:02 PM | Today
+                                                - button "Show more actions - A new Service Request - John Doe827 - Block Funding" [ref=e894] [cursor=pointer]:
+                                                  - generic [ref=e895]:
+                                                    - generic [ref=e896]:
+                                                      - img
+                                                    - generic [ref=e897]: Show more actions - A new Service Request - John Doe827 - Block Funding
+                                            - generic [ref=e902]:
+                                              - link "noreply@mecwacare.org.au" [ref=e903] [cursor=pointer]:
+                                                - /url: mailto:noreply@mecwacare.org.au
+                                              - text: sent an email to
+                                              - link "padurivineeth.reddy@mecwacare.org.au" [ref=e904] [cursor=pointer]:
+                                                - /url: mailto:padurivineeth.reddy@mecwacare.org.au
+                                    - listitem [ref=e905]:
+                                      - generic [ref=e907]:
+                                        - button "Show details for Thank You for Your Enquiry" [ref=e910] [cursor=pointer]:
+                                          - generic "Details for Thank You for Your Enquiry" [ref=e911]:
+                                            - generic [ref=e912]:
+                                              - img [ref=e914]
+                                              - generic [ref=e917]: Details for
+                                        - generic [ref=e918]:
+                                          - img "Email" [ref=e923]
+                                          - generic [ref=e924]:
+                                            - generic [ref=e925]:
+                                              - link "Thank You for Your Enquiry" [ref=e931] [cursor=pointer]:
+                                                - /url: /lightning/r/02sAD000009bLY9YAM/view
+                                              - generic [ref=e933]:
+                                                - generic [ref=e934]: 10:43 PM | Today
+                                                - button "Show more actions - Thank You for Your Enquiry" [ref=e937] [cursor=pointer]:
+                                                  - generic [ref=e938]:
+                                                    - generic [ref=e939]:
+                                                      - img
+                                                    - generic [ref=e940]: Show more actions - Thank You for Your Enquiry
+                                            - generic [ref=e945]:
+                                              - link "padurivineeth.reddy@mecwacare.org.au" [ref=e946] [cursor=pointer]:
+                                                - /url: mailto:padurivineeth.reddy@mecwacare.org.au
+                                              - text: sent an email to
+                                              - link "John Doe827" [ref=e948] [cursor=pointer]:
+                                                - /url: /lightning/r/00QAD00000PVreX2AT/view
+                                            - generic "Unopened" [ref=e952]:
+                                              - img [ref=e955]
+                                              - text: Unopened
+                                - status [ref=e957]:
+                                  - generic [ref=e959]:
+                                    - img [ref=e963]
+                                    - generic [ref=e966]: information
+                                  - paragraph [ref=e968]: To change what's shown, try changing your filters.
+                                - button "Show All Activities" [ref=e970] [cursor=pointer]
+                                - link "Skip to the top of the activity timeline" [ref=e971] [cursor=pointer]:
+                                  - /url: javascript:void(0);
+    - generic:
+      - contentinfo "Utility Bar":
+        - list [ref=e976]:
+          - listitem [ref=e977]:
+            - button "Omni-Channel" [ref=e980] [cursor=pointer]:
+              - img [ref=e984]
+              - generic [ref=e988]: Omni-Channel
+  - generic:
+    - status
+```

@@ -20,14 +20,14 @@ test('Open Appointment object and record scaffold', async ({ page }) => {
 
   await homePage.verifyHomePage();
   await homePage.selectObjectFromDropdown('Appointments');
-  await appointmentPage.selectListView('All');
+  await appointmentPage.selectListView('Recently Viewed');
   await appointmentPage.hardRefreshPageWithRetry();
   await appointmentPage.searchAndOpenFirstRecordByName(appointment.username);
   await appointmentPage.verifyRecordOpened();
   await appointmentPage.clickonConfirm();
   await appointmentPage.refreshPage();
   await homePage.selectObjectFromDropdown('Appointments');
-  await appointmentPage.selectListView('All');
+  await appointmentPage.selectListView('Recently Viewed');
   await appointmentPage.hardRefreshPageWithRetry();
   await appointmentPage.searchAndOpenFirstRecordByName(appointment.username);
   await appointmentPage.verifyCompletedClinicTravelBracketAndDeliveryActivities();

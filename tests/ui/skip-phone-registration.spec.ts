@@ -3,9 +3,9 @@ import { Logger } from '../../src/utils/Logger';
 import PropertyReader from '../../src/utils/PropertyReader';
 
 test.describe('Salesforce Skip Phone Registration - High Speed Batch', () => {
-  const BASE_EMAIL = 'msouser';
-  const DOMAIN = '@mecwacare.org.au.nft';
-  const CURRENT_PASSWORD = 'Ptexecution1';
+  const BASE_EMAIL = 'situser';
+  const DOMAIN = '@mecwacare.org.au.sit';
+  const CURRENT_PASSWORD = 'Ptexecution3';
   
   const LOGIN_URL = (process.env.SF_LOGIN_URL || PropertyReader.getBaseUrl())
     .replace('.lightning.force.com', '.my.salesforce.com');
@@ -38,7 +38,7 @@ test.describe('Salesforce Skip Phone Registration - High Speed Batch', () => {
     const page = await context.newPage();
 
     for (let i = START_USER; i <= END_USER; i++) {
-      const username = `${BASE_EMAIL}${i.toString().padStart(3, '0')}${DOMAIN}`;
+      const username = `${BASE_EMAIL}${i}${DOMAIN}`;
       
       try {
         Logger.info(`>>> Processing User ${i}: ${username}`);

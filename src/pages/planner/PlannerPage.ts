@@ -213,7 +213,7 @@ await this.safeAction(async () => {
     Logger.step('Perform double Check-In and double Check-Out');
 
     const checkInButton = this.page.getByRole('button', { name: 'Check-In' }).first();
-    const secondcheckInButton = this.page.getByRole('button', { name: 'Check-In' }).last();
+    const secondcheckInButton = this.page.getByRole('button', { name: 'Check In' }).last();
     
     await this.waitForVisible(checkInButton, 15000);
     await checkInButton.scrollIntoViewIfNeeded();

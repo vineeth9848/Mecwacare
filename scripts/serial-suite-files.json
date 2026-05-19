@@ -8,5 +8,6 @@
     ]
   },
   "tests/ui/case.spec.ts",
-  "tests/ui/planner.spec.ts"
+  "tests/ui/planner.spec.ts",
+  "tests/ui/account-forms.spec.ts"
 ]

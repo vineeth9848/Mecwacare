@@ -3,10 +3,10 @@ import { Logger } from '../../src/utils/Logger';
 import PropertyReader from '../../src/utils/PropertyReader';
 
 test.describe('Salesforce Password Update - Batch Users 5-500', () => {
-  const BASE_EMAIL = 'dcwuser';
-  const DOMAIN = '@mecwacare.org.au.nft';
-  const CURRENT_PASSWORD = 'Ptexecution1';//Nft@2026_Test!
-  const NEW_PASSWORD = 'Ptexecution1';
+  const BASE_EMAIL = 'situser';
+  const DOMAIN = '@mecwacare.org.au.sit';
+  const CURRENT_PASSWORD = 'Ptexecution2';//Nft@2026_Test!
+  const NEW_PASSWORD = 'Ptexecution3';
   const SECURITY_ANSWER = 'hyderabadi';
   
   const LOGIN_URL = (process.env.SF_LOGIN_URL || PropertyReader.getBaseUrl())
@@ -30,7 +30,7 @@ test.describe('Salesforce Password Update - Batch Users 5-500', () => {
   }
 
   async function updatePasswordForUser(page: Page, userNumber: number): Promise<boolean> {
-    const username = `${BASE_EMAIL}${userNumber.toString().padStart(3, '0')}${DOMAIN}`;
+    const username = `${BASE_EMAIL}${userNumber}${DOMAIN}`;
     await page.goto(LOGIN_URL, { waitUntil: 'networkidle' });
 
     // Login logic
