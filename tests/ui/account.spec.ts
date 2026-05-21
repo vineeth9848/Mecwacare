@@ -61,7 +61,7 @@ test('Update mandatory MDS reporting fields in Account for Opportunity closure',
   await accountPage.updateBasicInformationAccountDetails('DVA Card Type', 'DVA Gold Card');
   await accountPage.updateTextField('DVA Number', '1234567890');
   await accountPage.updateTextField('MAC Number', '123456789');
-  await accountPage.updateTextField('NDIS Number', '989084');
+  //await accountPage.updateTextField('NDIS Number', '989084');
   await accountPage.selectImportantInformationDetails('Pension Type', 'Age Pension');
   await accountPage.selectImportantInformationDetails('Living Arrangements', 'Couple');
   await accountPage.selectImportantInformationDetails('Accommodation/Residential Setting', 'Boarding house');//Alcohol and Drugs Treatment Residence

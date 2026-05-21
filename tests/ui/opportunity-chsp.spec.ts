@@ -1,6 +1,7 @@
 import { test } from '../../src/fixtures/testFixtures';
 import { Logger } from '../../src/utils/Logger';
 import { HomePage } from '../../src/pages/homepage/HomePage';
+import { LeadPage } from '../../src/pages/leads/LeadPage';
 import { OpportunityPage } from '../../src/pages/opportunities/OpportunityPage';
 import { TestDataHelper } from '../../src/utils/TestDataHelper';
 
@@ -164,11 +165,13 @@ test('Verify Generate Quote functionality and verify Files on Opportunity', asyn
 
 test('Generate Send For Signature functionality on Opportunity', async ({ page }) => {
   const homePage = new HomePage(page);
+  const leadPage = new LeadPage(page);
   const opportunityPage = new OpportunityPage(page);
   const { leadCreate } = TestDataHelper.readJsonFile<{ leadCreate: Array<Record<string, string>> }>('leads.json');
   const lead = leadCreate[0];
 
   Logger.info('Starting sending for signature validation test');
+  const expectedEmail = leadPage.getEmailWithRunNumber(lead.email);
   await opportunityPage.refreshPage();
   await homePage.verifyHomePage();
   await opportunityPage.hardRefreshPageWithRetry();  // Hard refresh before clicking dropdown
@@ -179,7 +182,7 @@ test('Generate Send For Signature functionality on Opportunity', async ({ page }
   await opportunityPage.selectOpportunitiesListView('My Opportunities');
   await opportunityPage.searchAndOpenOpportunityByLeadName(lead.firstName, lead.lastName);
   await opportunityPage.clickSignaturevisible();
-  await opportunityPage.configureSignature();
+  await opportunityPage.configureSignature(lead.firstName, lead.lastName, expectedEmail);
   Logger.pass('Send for signature functionality on opportunity validated successfully');
   
 });

@@ -23,7 +23,7 @@ test('Create New Appointment', async ({ page }) => {
   await plannerPage.createNewAppointment(planner.username, planner.resourceName);
   await plannerPage.setStartTimePlusTenMinutes();
 
-  await plannerPage.selectAppointmentServiceAndClickNext(planner.NDISappointmentService);
+  await plannerPage.selectAppointmentServiceAndClickNext(planner.CHSPappointmentService);
   await plannerPage.navigationToNextPages(
     planner.appointmentType,
     planner.appointmentStatus,
