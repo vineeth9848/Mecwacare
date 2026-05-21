@@ -67,4 +67,10 @@ export const OpportunityLocators = {
   headerFundingTypeValue: "xpath=(//*[normalize-space()='Funding Type'])[1]/following::*[self::lightning-formatted-text or self::p][1]",
    listviewDropdownopp: "button[title='Select a List View: Opportunities']",
    listviewDropdownServiceAgreement: "button[title='Select a List View: Service Agreements']",
+   add_receipient_button: "button[data-qa='add-recipients-button']",
+   recipient_name: "input[data-qa='recipient-name']",
+   recipient_email: "input[data-qa='recipient-email']",
+   save_recipient_button: "button[data-qa='modal-confirm-btn']",
+
+
    } as const;

@@ -148,6 +148,98 @@ export class OpportunityPage extends BasePage {
     Logger.pass('Opportunity details tab opened');
   }
 
+  async selectNDISFundingSourceAndType(type: string): Promise<void> {
+    Logger.step('Update Funding Source to NDIS and set Funding Type');
+
+    const fundingDetailsSection = this.page
+      .locator(OpportunityLocators.fundingDetailsSection)
+      .first();
+    await this.waitForVisible(fundingDetailsSection, 30000);
+    await fundingDetailsSection.scrollIntoViewIfNeeded();
+    await this.staticWait(1000);
+
+    const fundingSourceLabelCandidates = this.page
+      .locator(OpportunityLocators.fundingSourceLabels)
+      .filter({ hasText: /^Funding Source$/ });
+
+    let visibleFundingSourceLabel: Locator | null = null;
+    const labelCount = await fundingSourceLabelCandidates.count();
+    for (let i = 0; i < labelCount; i++) {
+      const candidate = fundingSourceLabelCandidates.nth(i);
+      if (await candidate.isVisible().catch(() => false)) {
+        visibleFundingSourceLabel = candidate;
+        break;
+      }
+    }
+
+    if (!visibleFundingSourceLabel) {
+      throw new Error('Visible Funding Source label not found in details section');
+    }
+
+    await visibleFundingSourceLabel.scrollIntoViewIfNeeded();
+
+    const fundingSourceEditButton = visibleFundingSourceLabel
+      .locator(OpportunityLocators.fundingSourceEditInField)
+      .first();
+    await this.waitForVisible(fundingSourceEditButton, 30000);
+    await fundingSourceEditButton.click({ force: true });
+
+    const fundingSourceDropdown = this.page
+      .getByRole('combobox', { name: /Funding Source/i })
+      .first();
+    await this.waitForVisible(fundingSourceDropdown, 30000);
+    await fundingSourceDropdown.click({ force: true });
+    await this.staticWait(1200);
+
+    const listboxId = await fundingSourceDropdown.getAttribute('aria-controls');
+    let supportAtHomeOption = this.page.getByRole('option', { name: 'NDIS' }).first();
+
+    if (listboxId) {
+      supportAtHomeOption = this.page
+        .locator(`#${listboxId} [role='option'], #${listboxId} li, #${listboxId} span[title]`)
+        .filter({ hasText: 'NDIS' })
+        .first();
+    }
+
+    const optionVisible = await supportAtHomeOption.isVisible().catch(() => false);
+    if (!optionVisible) {
+      await fundingSourceDropdown.type('NDIS', { delay: 40 }).catch(() => {});
+      await this.staticWait(1000);
+    }
+
+    const matchingOption = this.page
+      .locator(OpportunityLocators.listboxOptions)
+      .filter({ hasText: 'NDIS' })
+      .first();
+
+    if (await matchingOption.isVisible().catch(() => false)) {
+      await matchingOption.scrollIntoViewIfNeeded().catch(() => {});
+      await matchingOption.click({ force: true });
+    } else if (await supportAtHomeOption.isVisible().catch(() => false)) {
+      await supportAtHomeOption.scrollIntoViewIfNeeded().catch(() => {});
+      await supportAtHomeOption.click({ force: true });
+    } else {
+      await fundingSourceDropdown.press('ArrowDown');
+      await fundingSourceDropdown.press('Enter');
+    }
+
+    await expect(fundingSourceDropdown).toContainText('NDIS', { timeout: 30000 });
+    Logger.pass('Funding Source updated to NDIS');
+
+    const fundingTypeDropdown = this.page.locator('button[aria-label="Funding Type"]');
+
+    await fundingTypeDropdown.click();
+
+    const option = this.page.getByRole('option', { name: type });
+    await option.waitFor({ state: 'visible' });
+    await option.click();
+    await expect(fundingTypeDropdown).toContainText(type, { timeout: 30000 });
+    await this.page.waitForTimeout(5000);
+
+    await this.staticWait(1200);
+    Logger.pass('Funding Type updated to ' + type);
+  }
+
   async selectBlockFundingForFundingSourceAndType(type: string): Promise<void> {
     Logger.step('Update Funding Source to Block Funding');
 
@@ -249,6 +341,7 @@ export class OpportunityPage extends BasePage {
     await this.staticWait(1200);
     Logger.pass('Funding Type updated to ' + type);
   }
+
 
   async clickSearchFundingAndAddNewFunding(): Promise<void> {
     Logger.step('Click Search Funding and select New Funding');
@@ -683,6 +776,7 @@ async fillDate(label: string, date: Date): Promise<void> {
       .first();
     await this.waitForVisible(fundingDetailsSection, 30000);
     await fundingDetailsSection.scrollIntoViewIfNeeded();
+    await this.page.mouse.wheel(0, 4000);
     await this.staticWait(1000);
    
     const fundingValue = this.page.getByRole('link', { name: /FUND - /i }).first();
@@ -910,6 +1004,35 @@ async fillDate(label: string, date: Date): Promise<void> {
       this.page.locator('table tbody tr', { hasText: 'Annual' }).first()
     ).toBeVisible();
     Logger.pass('Verified Annual text is present under Products section');
+
+    const generateQuoteButton = this.page.getByRole('button', { name: 'Generate Quote', exact: true }).first();
+    await this.scrollIntoView(generateQuoteButton);
+    await this.waitForVisible(generateQuoteButton, 30000);
+    await generateQuoteButton.click();
+
+    const generateQuoteDialogTitle = this.page.locator(OpportunityLocators.generateQuoteDialogTitle).last();
+    await this.waitForVisible(generateQuoteDialogTitle, 30000);
+
+    const generateQuoteDialogMessage = this.page.locator(OpportunityLocators.generateQuoteDialogMessage).first();
+    await this.waitForVisible(generateQuoteDialogMessage, 30000);
+    await expect(generateQuoteDialogMessage).toContainText('Please click on Generate button to generate the quote for this opportunity.', { timeout: 30000 });
+
+    const generateButton = this.page.locator(OpportunityLocators.generateQuoteDialogButton).first();
+    await this.waitForVisible(generateButton, 30000);
+    await generateButton.click();
+
+    Logger.pass('Generate Quote button clicked');
+  }
+
+  async verifyNDISProductsAndClickGenerateQuote(): Promise<void> {
+    Logger.step('Verify products section and click Generate Quote');
+    await this.page.mouse.wheel(0, 4000);
+    await this.page.waitForTimeout(2000);
+
+    await expect(
+      this.page.locator('table tbody tr', { hasText: 'Adaptive' }).first()
+    ).toBeVisible();
+    Logger.pass('Verified Adaptive text is present under Products section');
 
     const generateQuoteButton = this.page.getByRole('button', { name: 'Generate Quote', exact: true }).first();
     await this.scrollIntoView(generateQuoteButton);
@@ -1171,6 +1294,75 @@ async fillDate(label: string, date: Date): Promise<void> {
         Logger.pass(' CHSP Product Management configured Successfully');
       }
 
+      async configureNDISProductManagement(product: string): Promise<void> {
+    Logger.step('Select NDIS Product Management');
+    const moreActions = this.page.locator(OpportunityLocators.moreActionsButton).last();
+              await moreActions.waitFor({ state: 'visible', timeout: 30000 });
+              await moreActions.click({ force: true });
+
+              const ProductManagementOption = this.page.getByRole('menuitem', { name: 'Product Management' });
+
+              await expect(ProductManagementOption).toBeVisible({ timeout: 30000 });
+
+              await ProductManagementOption.click({ force: true });
+    await this.page.waitForTimeout(10000);
+
+    const addProductsButton = this.page.getByRole('button', { name: 'Add' });
+    await this.waitForVisible(addProductsButton, 90000);
+    await addProductsButton.click();
+    await this.page.waitForTimeout(5000);
+
+    const serviceDay = this.page.locator( "(//span[text()='Anytime'])[1]");
+    await this.waitForVisible(serviceDay, 90000);
+    await serviceDay.click();
+
+    await this.page.waitForTimeout(2000);
+
+    const serviceTime = this.page.locator( "(//span[text()='Anytime'])[2]");
+    await this.waitForVisible(serviceTime, 90000);
+    await serviceTime.click();
+
+    const availableFundingSection = this.page.locator(OpportunityLocators.availableFundingSection).first();
+    await this.waitForVisible(availableFundingSection, 90000);
+    await availableFundingSection.scrollIntoViewIfNeeded();
+
+    const supportItemsLabel = this.page.locator(OpportunityLocators.supportItemLabel).first();
+    await this.waitForVisible(supportItemsLabel, 90000);
+    await supportItemsLabel.scrollIntoViewIfNeeded();
+
+    const searchBox = this.page.locator(OpportunityLocators.searchSupportItemInput).first();
+    await this.waitForVisible(searchBox, 90000);
+    await this.page.waitForTimeout(5000);
+    await searchBox.fill(product);
+    await this.staticWait(1500);
+
+    const firstCheckbox = this.page.locator(OpportunityLocators.availableFundingFirstRowCheckbox).first();
+    await this.waitForVisible(firstCheckbox, 90000);
+    await firstCheckbox.scrollIntoViewIfNeeded();
+    try {
+      await firstCheckbox.check({ force: true });
+    } catch {
+      const firstCheckboxLabel = this.page.locator(OpportunityLocators.availableFundingFirstRowCheckboxLabel).first();
+      if (await firstCheckboxLabel.isVisible().catch(() => false)) {
+        await firstCheckboxLabel.click({ force: true });
+      }
+      await firstCheckbox.evaluate((node) => {
+        const input = node as HTMLInputElement;
+        input.checked = true;
+        input.dispatchEvent(new Event('input', { bubbles: true }));
+        input.dispatchEvent(new Event('change', { bubbles: true }));
+      });
+    }
+    await expect(firstCheckbox).toBeChecked({ timeout: 30000 });
+
+    await this.page.getByRole('button', { name: 'Add' }).click();
+
+    const Submit = this.page.getByRole('button', { name: 'Submit' });
+    await Submit.scrollIntoViewIfNeeded();
+    await Submit.isVisible({ timeout: 30000 });
+    await Submit.click();
+        Logger.pass(' NDIS Product Management configured Successfully');
+  }
 
       async configureStage(): Promise<void> {
         Logger.step('Select Stage as In-Progress');
@@ -1242,8 +1434,11 @@ async fillDate(label: string, date: Date): Promise<void> {
               Logger.pass('clicked signature option');
       }
 
-      async configureSignature(): Promise<void> {
+      async configureSignature(firstName: string, lastName: string, email: string): Promise<void> {
               Logger.step('Click on Next Button on Document screen');
+
+              const runNumber = PropertyReader.getRunNumber(1);
+    const fullNameWithRunNumber = `${firstName} ${lastName}${runNumber}`;
               
               // await this.page.waitForSelector('iframe[title="Send with Docusign"]');
 
@@ -1321,6 +1516,28 @@ const activeFrame = this.page.frameLocator('iframe[title="Send with Docusign"] >
 
 Logger.step('Attempting to click Footer Send Button');
 
+const add_recipient_button = activeFrame.locator(OpportunityLocators.add_receipient_button);
+await add_recipient_button.waitFor({ state: 'visible', timeout: 60000 });
+await add_recipient_button.click();
+
+const recipient_name = activeFrame.locator(OpportunityLocators.recipient_name);
+await recipient_name.waitFor({ state: 'visible', timeout: 60000 });
+await recipient_name.scrollIntoViewIfNeeded().catch(() => {});
+await recipient_name.clear();
+await recipient_name.fill(fullNameWithRunNumber);
+
+const recipient_email = activeFrame.locator(OpportunityLocators.recipient_email);
+await recipient_email.waitFor({ state: 'visible', timeout: 60000 });
+await recipient_email.scrollIntoViewIfNeeded().catch(() => {});
+await recipient_email.clear();
+await recipient_email.fill(email);
+
+const save_recipient_button = activeFrame.locator(OpportunityLocators.save_recipient_button);
+await save_recipient_button.waitFor({ state: 'visible', timeout: 60000 });
+await save_recipient_button.scrollIntoViewIfNeeded().catch(() => {});
+await save_recipient_button.click({ force: true});
+
+
 // 2. Click Footer Send Button
 const footerSendBtn = activeFrame.locator('[data-qa="footer-send-button"]');
 await footerSendBtn.waitFor({ state: 'visible', timeout: 60000 });
@@ -1337,7 +1554,6 @@ await sendWithoutFieldsBtn.click();
 // 4. Verify the Envelope was sent
 Logger.step('Verifying Envelope Sent status');
 
-// Note: We use the same 'activeFrame' because the success message is usually in the same frame
 const successLabel = activeFrame.locator('[data-id="envelopeSentLabel"]');
 
 await successLabel.waitFor({ state: 'visible', timeout: 60000 });

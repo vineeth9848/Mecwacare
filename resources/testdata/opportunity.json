@@ -3,14 +3,18 @@
     {
       "HACCfundingType": "HACC-PYP",
       "CHSPfundingType": "CHSP",
+      "NDISfundingType": "Self Managed",
       "HACCfundingProgram":"HACC - Ballarat",
       "CHSPfundingProgram":"CHSP - Rivendell",
       "HACCpriceBook": "HACC - Ballarat - Low Fee",
       "CHSPpriceBook": "CHSP - Rivendell - High Fee",
+      "NDISpriceBook": "NDIS VIC",
       "HACCproduct": "Annual review - Community Care",    
       "CHSPproduct": "Annual Review - Centre Based Respite",
+      "NDISproduct": "Adaptive software for a communication or information access disability need",
       "HACCserviceagreementListView":"All HACC Service Agreements",
-      "CHSPserviceagreementListView":"All CHSP Service Agreements"
+      "CHSPserviceagreementListView":"All CHSP Service Agreements",
+      "NDISserviceagreementListView":"All NDIS Service Agreements"
     }
   ]
 

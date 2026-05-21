@@ -4,10 +4,10 @@
   {
     "parallel": [
       "tests/ui/account.spec.ts",
-      "tests/ui/opportunity-hacc.spec.ts"
+      "tests/ui/opportunity-ndis.spec.ts"
     ]
   },
   "tests/ui/case.spec.ts",
-  "tests/ui/planner.spec.ts",
-  "tests/ui/account-forms.spec.ts"
+  "tests/ui/account-forms.spec.ts",
+  "tests/ui/planner.spec.ts"
 ]

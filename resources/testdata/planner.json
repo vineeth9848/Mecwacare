@@ -6,6 +6,7 @@
       "resourceName": "Automation QA DCW",
       "HACCappointmentService": "Annual review - Community Care",  
       "CHSPappointmentService": "Annual Review - Centre Based Respite",
+      "NDISappointmentService": "Adaptive software for a communication or information access disability need",
       "appointmentType": "Clinic",
       "appointmentStatus": "Scheduled",
       "titlePrefix": "TestUser",
